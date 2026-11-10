@@ -7,5 +7,5 @@
     "slow_actual_key_phases/results.json": "5b880df281d06cefe7a852275cc3c6c65bc7aab3f6e6d712a5eb9899c9ceed11"
   },
   "quantization_results": "Recorded original float32 MPS/eager runs; not new measurements. Four previously used prose excerpts, 7,168 targets.",
-  "low_r_example": "Zero-based L2 KV0, shared by query heads 0\u20135. All 2,379 saved prose keys \u00d7 64 pairs."
+  "low_r_example": "Zero-based layer 8, query head 3 (L8 H3). All 768 saved query-token observations \u00d7 64 pairs."
 }

@@ -32,11 +32,12 @@
     "large_constant_energy_fit": 0.999707763688563
   },
   "low_r_example": {
-    "layer": 2,
-    "head": 0,
-    "points": 152256,
-    "retained": 123165,
-    "fraction": 0.8089336380832283,
+    "kind": "queries",
+    "layer": 8,
+    "head": 3,
+    "points": 49152,
+    "retained": 38649,
+    "fraction": 0.78631591796875,
     "r_window": [
       0,
       2.5

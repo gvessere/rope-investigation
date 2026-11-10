@@ -127,7 +127,7 @@ percentile arithmetic on the saved float32 values. These checks run in CI.
 
 ## Observations, pair phases, and recorded quantization experiments
 
-`python code/observations.py` regenerates the L2 KV0 low-radius scatter/density
+`python code/observations.py` regenerates the L8 H3 query low-radius scatter/density
 figure, the two bias-cloud examples, the quantization-results chart, density-bin
 arrays, and all numerical observations in `data/analysis/observations-summary.json`.
 The source is the existing per-layer activation data, the unmodified projection

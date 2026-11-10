@@ -52,11 +52,11 @@ def main():
   np.testing.assert_allclose(stats[kind]['large_bias_energy_fit'],ref['share_heldout_energy_explained_by_projection_bias_alone'],rtol=1e-7)
 
  # A specific observed head, restricted transparently to the low-r region.
- a,p=load('keys',2);r=a[0].ravel();phi=p[0].ravel();mask=r<2.5
- stats['low_r_example']={'layer':2,'head':0,'points':int(r.size),'retained':int(mask.sum()),'fraction':float(mask.mean()),'r_window':[0,2.5]}
+ a,p=load('queries',8);r=a[3].ravel();phi=p[3].ravel();mask=r<2.5
+ stats['low_r_example']={'kind':'queries','layer':8,'head':3,'points':int(r.size),'retained':int(mask.sum()),'fraction':float(mask.mean()),'r_window':[0,2.5]}
  fig,axs=plt.subplots(2,1,figsize=(9,7.5),sharex=True)
  pair=np.tile(np.arange(64),a.shape[1]);axs[0].scatter(phi[mask],r[mask],c=pair[mask],cmap='turbo',vmin=0,vmax=63,s=.55,alpha=.22,rasterized=True,linewidths=0)
- axs[0].set_title('L2 KV0 → query heads 0–5 · saved pre-RoPE pairs',loc='left')
+ axs[0].set_title('L8 H3 · saved pre-RoPE query pairs',loc='left')
  bins=[np.linspace(0,2*np.pi,145),np.linspace(0,2.5,81)]
  counts,xe,ye=np.histogram2d(phi[mask],r[mask],bins=bins)
  mesh=axs[1].pcolormesh(xe,ye,np.ma.masked_equal(counts.T,0),norm=LogNorm(vmin=1,vmax=max(2,counts.max())),cmap='YlGnBu',shading='auto',rasterized=True)
@@ -65,8 +65,8 @@ def main():
  cb=fig.colorbar(mesh,cax=fig.add_axes([.87,.12,.025,.364]));cb.set_label('Points per bin')
  for ax in axs:guides(ax);ax.set_ylim(0,2.5);ax.set_ylabel('Radius r')
  axs[-1].set_xlabel('Pre-RoPE phase φ (radians)')
- save(fig,'low-r-L2-KV0.png')
- np.savez_compressed(A/'L2-KV0-density.npz',counts=counts,phase_edges=xe,radius_edges=ye)
+ save(fig,'low-r-L8-H3.png')
+ np.savez_compressed(A/'L8-H3-density.npz',counts=counts,phase_edges=xe,radius_edges=ye)
 
  # One strongly bias-dominated cloud and a counterexample: do not generalize to all.
  fig,axs=plt.subplots(1,2,figsize=(10,5))
