@@ -1,0 +1,116 @@
+{
+  "queries": {
+    "train_passage_ids": [
+      0,
+      1,
+      4,
+      5,
+      8,
+      9,
+      12,
+      13
+    ],
+    "test_passage_ids": [
+      2,
+      3,
+      6,
+      7,
+      10,
+      11,
+      14,
+      15
+    ],
+    "train_tokens_per_head": 384,
+    "test_tokens_per_head": 384,
+    "grouping": "Discovery mean amplitude for each fixed layer/head/frequency pair. Groups are not selected on test tokens.",
+    "fit_definition": "1 - sum |heldout z - discovery mean z|\u00b2 / sum |heldout z|\u00b2. This is relative to predicting zero, not variance explained around a mean.",
+    "bands": [
+      {
+        "group": "mean r < 1",
+        "head_pairs": 8330,
+        "share_heldout_energy_explained_by_constant": 0.27562311871653056,
+        "median_head_pair_constant_fit": 0.22445789590052934,
+        "median_train_mean_amplitude": 0.7427492564068718,
+        "share_heldout_energy_explained_by_projection_bias_alone": -0.1462992704638637,
+        "median_bias_amplitude": 0.28808826208114624
+      },
+      {
+        "group": "1 \u2264 mean r \u2264 5",
+        "head_pairs": 12255,
+        "share_heldout_energy_explained_by_constant": 0.6007302073497629,
+        "median_head_pair_constant_fit": 0.49503431628352734,
+        "median_train_mean_amplitude": 1.4791043188112478,
+        "share_heldout_energy_explained_by_projection_bias_alone": 0.40510216244681607,
+        "median_bias_amplitude": 0.6469090580940247
+      },
+      {
+        "group": "mean r > 5",
+        "head_pairs": 919,
+        "share_heldout_energy_explained_by_constant": 0.8296889423221658,
+        "median_head_pair_constant_fit": 0.9700111596252972,
+        "median_train_mean_amplitude": 8.32414217789968,
+        "share_heldout_energy_explained_by_projection_bias_alone": 0.724524546953309,
+        "median_bias_amplitude": 7.406326770782471
+      }
+    ],
+    "all_pairs_constant_fit": 0.752449133821947,
+    "projection_biases_found": true
+  },
+  "keys": {
+    "train_passage_ids": [
+      0,
+      1,
+      4,
+      5,
+      8,
+      9,
+      12,
+      13
+    ],
+    "test_passage_ids": [
+      2,
+      3,
+      6,
+      7,
+      10,
+      11,
+      14,
+      15
+    ],
+    "train_tokens_per_head": 1157,
+    "test_tokens_per_head": 1222,
+    "grouping": "Discovery mean amplitude for each fixed layer/head/frequency pair. Groups are not selected on test tokens.",
+    "fit_definition": "1 - sum |heldout z - discovery mean z|\u00b2 / sum |heldout z|\u00b2. This is relative to predicting zero, not variance explained around a mean.",
+    "bands": [
+      {
+        "group": "mean r < 1",
+        "head_pairs": 470,
+        "share_heldout_energy_explained_by_constant": 0.30575594693246533,
+        "median_head_pair_constant_fit": 0.2920181029911363,
+        "median_train_mean_amplitude": 0.8322420166966376,
+        "share_heldout_energy_explained_by_projection_bias_alone": 0.13099566116362915,
+        "median_bias_amplitude": 0.28070688247680664
+      },
+      {
+        "group": "1 \u2264 mean r \u2264 5",
+        "head_pairs": 2975,
+        "share_heldout_energy_explained_by_constant": 0.5543114723676519,
+        "median_head_pair_constant_fit": 0.4206271160526348,
+        "median_train_mean_amplitude": 1.6325474874717776,
+        "share_heldout_energy_explained_by_projection_bias_alone": 0.35135911963566135,
+        "median_bias_amplitude": 0.4691567122936249
+      },
+      {
+        "group": "mean r > 5",
+        "head_pairs": 139,
+        "share_heldout_energy_explained_by_constant": 0.999707763688563,
+        "median_head_pair_constant_fit": 0.9787265373860768,
+        "median_train_mean_amplitude": 8.83765716890683,
+        "share_heldout_energy_explained_by_projection_bias_alone": 0.9986075569369322,
+        "median_bias_amplitude": 5.55918550491333
+      }
+    ],
+    "all_pairs_constant_fit": 0.9944172352151072,
+    "projection_biases_found": true
+  }
+}

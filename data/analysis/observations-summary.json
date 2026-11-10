@@ -1,0 +1,67 @@
+{
+  "queries": {
+    "points": 16515072,
+    "fractions_below": {
+      "1": 0.44888063461061506,
+      "2.5": 0.8403936719137525,
+      "5": 0.9525503128293961
+    },
+    "counts_below": {
+      "1": 7413296,
+      "2.5": 13879162,
+      "5": 15731437
+    },
+    "large_mean_pairs": 919,
+    "large_bias_energy_fit": 0.724524546953309,
+    "large_constant_energy_fit": 0.8296889423221658
+  },
+  "keys": {
+    "points": 8526336,
+    "fractions_below": {
+      "1": 0.28875087728187115,
+      "2.5": 0.7549192290803459,
+      "5": 0.9494305643127364
+    },
+    "counts_below": {
+      "1": 2461987,
+      "2.5": 6436695,
+      "5": 8095164
+    },
+    "large_mean_pairs": 139,
+    "large_bias_energy_fit": 0.9986075569369322,
+    "large_constant_energy_fit": 0.999707763688563
+  },
+  "low_r_example": {
+    "layer": 2,
+    "head": 0,
+    "points": 152256,
+    "retained": 123165,
+    "fraction": 0.8089336380832283,
+    "r_window": [
+      0,
+      2.5
+    ]
+  },
+  "bias_examples": [
+    {
+      "layer": 13,
+      "head": 4,
+      "pair": 52,
+      "bias_real": -28.375,
+      "bias_imag": -5.78125,
+      "mean_real": -28.948157302710133,
+      "mean_imag": -5.65206483067067,
+      "bias_energy_fit_all_tokens": 0.9987145011383229
+    },
+    {
+      "layer": 15,
+      "head": 7,
+      "pair": 63,
+      "bias_real": 8.5,
+      "bias_imag": -25.375,
+      "mean_real": -18.402379497750236,
+      "mean_imag": 5.676563415940372,
+      "bias_energy_fit_all_tokens": -1.648597216305744
+    }
+  ]
+}

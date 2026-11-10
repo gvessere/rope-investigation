@@ -63,10 +63,60 @@
   const svg = document.getElementById('shift-plot');
   const original = document.getElementById('shift-original');
   const shifted = document.getElementById('shift-moved');
+  const pairSvg = document.getElementById('phase-pairs');
+  const play = document.getElementById('shift-play');
+  const wheels = [];
+  let playing = false, frameId = 0, animationStart = null, startPhase = 0, lastDraw = 0;
+  function svgElement(tag, attrs = {}) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k, String(v)));
+    return el;
+  }
+  function buildPairs(data) {
+    pairSvg.replaceChildren();
+    const defs = svgElement('defs'), marker = svgElement('marker', {id:'pair-arrowhead',viewBox:'0 0 10 10',refX:8,refY:5,markerWidth:4,markerHeight:4,orient:'auto-start-reverse'});
+    marker.append(svgElement('path',{d:'M0 0L10 5L0 10Z',fill:'#176452'}));defs.append(marker);pairSvg.append(defs);
+    data.omega.forEach((omega,j) => {
+      const g=svgElement('g',{transform:`translate(${j%8*90},${Math.floor(j/8)*90})`});
+      const label=svgElement('text',{x:45,y:12,'text-anchor':'middle','font-size':11});label.textContent=`Pair ${j}`;
+      g.append(label,svgElement('circle',{cx:45,cy:41,r:23,fill:'none',stroke:'#ccd4c9','stroke-width':1}));
+      g.append(svgElement('path',{d:'M22 41H68M45 18V64',stroke:'#e0e4db','stroke-width':.7}));
+      const base=svgElement('line',{x1:45,y1:41,stroke:'#8c958d','stroke-width':1.3,'stroke-dasharray':'3 2'});
+      const line=svgElement('line',{x1:45,y1:41,stroke:'#176452','stroke-width':1.8,'marker-end':'url(#pair-arrowhead)',class:'pair-rotated','data-pair':j,'data-omega':omega});
+      const delta=svgElement('text',{x:45,y:76,'text-anchor':'middle','font-size':9,fill:'#586a64'});
+      const frequency=svgElement('text',{x:45,y:88,'text-anchor':'middle','font-size':9.5,fill:'#586a64'});frequency.textContent=`ω=${omega.toPrecision(2)}`;
+      const title=svgElement('title');g.append(base,line,delta,frequency,title);pairSvg.append(g);wheels.push({base,line,delta,title});
+    });
+    pairSvg.removeAttribute('hidden');
+  }
+  function stop(reason='button') {
+    play.dataset.stopReason=reason;
+    playing=false;cancelAnimationFrame(frameId);play.textContent='Play phase movement';play.dataset.playing='false';
+  }
+  function start(data) {
+    playing=true;animationStart=null;lastDraw=0;startPhase=Math.asin(Number(slider.value)/32);
+    play.textContent='Pause phase movement';play.dataset.playing='true';
+    function frame(now) {
+      if(!playing)return;
+      if(animationStart===null)animationStart=now;
+      if(now-lastDraw>=1000/30){slider.value=(32*Math.sin(startPhase+(now-animationStart)/2500)).toFixed(1);render(data);lastDraw=now;}
+      frameId=requestAnimationFrame(frame);
+    }
+    frameId=requestAnimationFrame(frame);
+  }
   function render(data) {
     const coeff = data.examples[Number(choice.value)].coefficients;
     const t = Number(slider.value), J = data.omega.length;
-    output.textContent = `${t > 0 ? '+' : ''}${t} tokens`;
+    output.textContent = `${t > 0 ? '+' : ''}${Number(t.toFixed(1))} tokens`;
+    data.omega.forEach((omega,j)=>{
+      const phi=Math.atan2(-coeff[J+j],coeff[j]), angle=phi-omega*t, w=wheels[j];
+      w.base.setAttribute('x2',45+21*Math.cos(phi));w.base.setAttribute('y2',41-21*Math.sin(phi));
+      w.line.setAttribute('x2',45+21*Math.cos(angle));w.line.setAttribute('y2',41-21*Math.sin(angle));
+      w.line.dataset.angle=angle;w.line.dataset.base=phi;w.line.dataset.shift=t;
+      w.delta.textContent=`Δφ=${(-omega*t).toPrecision(2)}`;
+      w.title.textContent=`Pair ${j}: ω=${omega}, amplitude=${Math.hypot(coeff[j],coeff[J+j])}, phase change=${-omega*t} radians. Unit arrow; not a measured activation.`;
+    });
+    pairSvg.setAttribute('aria-label',`64 constructed pair phases at shift ${t} tokens; phase changes are minus frequency times the shared shift.`);
     function path(shift) {
       const result = [];
       let drawing = false;
@@ -93,8 +143,11 @@
     data.examples.forEach((entry, i) => {
       const option = document.createElement('option'); option.value = i; option.textContent = entry.name; choice.append(option);
     });
-    slider.addEventListener('input', () => render(data));
-    choice.addEventListener('change', () => render(data));
+    buildPairs(data);
+    slider.addEventListener('input', () => {stop('slider');render(data);});
+    choice.addEventListener('change', () => {stop('shape');render(data);});
+    play.addEventListener('click',()=>playing?stop():start(data));
+
     document.getElementById('shift-controls').hidden = false;
     document.getElementById('shift-unavailable').hidden = true;
     svg.removeAttribute('hidden');

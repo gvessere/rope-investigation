@@ -1,0 +1,11 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "bias_fields": "Unmodified q_proj.bias and k_proj.bias, grouped as (j,j+64); extracted from original saved projection_bias arrays.",
+  "source_hashes": {
+    "static_pair_component_test/queries_fit.npz": "8fe620928735d21c2a0284efef4e90a4be69eb73febb8ea9ce59f79bd0f9ae4a",
+    "static_pair_component_test/keys_fit.npz": "eee1398bee675bccdf99834d8dfcfc7dcb67f3ac15032a3aa9b416d3dd368bc7",
+    "slow_actual_key_phases/results.json": "5b880df281d06cefe7a852275cc3c6c65bc7aab3f6e6d712a5eb9899c9ceed11"
+  },
+  "quantization_results": "Recorded original float32 MPS/eager runs; not new measurements. Four previously used prose excerpts, 7,168 targets.",
+  "low_r_example": "Zero-based L2 KV0, shared by query heads 0\u20135. All 2,379 saved prose keys \u00d7 64 pairs."
+}

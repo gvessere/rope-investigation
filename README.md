@@ -124,3 +124,47 @@ exported by `code/reproduce_observations.py`.
 and manual ranges, and phase-window counts against independent NumPy reference
 values for every first-layer query and key head. The fixtures use float64
 percentile arithmetic on the saved float32 values. These checks run in CI.
+
+## Observations, pair phases, and recorded quantization experiments
+
+`python code/observations.py` regenerates the L2 KV0 low-radius scatter/density
+figure, the two bias-cloud examples, the quantization-results chart, density-bin
+arrays, and all numerical observations in `data/analysis/observations-summary.json`.
+The source is the existing per-layer activation data, the unmodified projection
+bias vectors extracted from the original checkpoint, and the original recorded
+quantization results. No inference is needed to rebuild these article figures.
+Provenance and source hashes are in `data/analysis/provenance.json`.
+The recomputed held-out bias fits are checked against the original experiment.
+
+The 64 dials in the shape-shift widget show unit phasors of the fitted score
+coefficients, not captured activations. Their initial phase is atan2(-b_j,a_j)
+and their displacement-dependent phase is phi_j - omega_j*t. The common slider
+and explicit play/pause button drive the score curve and all dials together.
+Lengths are normalized; each tooltip reports the actual coefficient amplitude.
+Playback does not start automatically; the same button pauses it. Browsers normally suspend animation frames in background tabs.
+
+To rerun the model intervention (separate from regenerating the article figures):
+
+```sh
+python -m pip install -r requirements-model.txt
+python code/run_phase_quantization.py --device mps --output rerun-results.json
+# For the first weight download, add --allow-download.
+# For the protected-prefix control, add --protect-prefix 14.
+```
+
+The model revision is pinned to 989aa7980e4cf806f80c7fef2b1adb7bc71aa306.
+The runner consumes the saved public-prose token IDs, checks projection biases
+against the saved checkpoint, and applies the intervention before RoPE in every
+layer. It evaluates all 7,168 target positions and checks an identity roundtrip.
+CPU and CUDA are also selectable. Reference results were float32, eager attention,
+MPS, PyTorch 2.8.0, Transformers 4.57.6. Backend differences can change outputs.
+The new portable runner has not been used to produce new benchmark numbers here;
+the article explicitly presents the original recorded runs. Its intervention
+implementation was tested for radius, scope, and prefix preservation, and the
+Torch implementation was compared with the independent NumPy implementation.
+The regular site dependencies do not require downloading model weights.
+
+Bias conclusions distinguish a constant additive bias from an input-dependent
+query/key vector. Density figures and phase rounding do not establish universal
+preferred angles. The related direct-pair PolarQuant paper is Wu et al.,
+arXiv:2502.00527; the distinct preconditioned PolarQuant paper is arXiv:2502.02617.
