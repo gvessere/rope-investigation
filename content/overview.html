@@ -1,35 +1,45 @@
-<p class="lead">Word order changes meaning. Positional encodings give attention a way to distinguish where information occurs; rotary embeddings make that information part of the query–key comparison.</p>
-<p>These notes start with the geometry and then ask a less familiar question: what shapes can an attention head build as a function of position? The answer is useful for understanding both retrieval and compression.</p>
-<h2 id="position">Why position belongs in attention</h2>
-<p>An attention head forms a query for the current token and keys and values for candidate tokens. Queries compare with keys; the resulting weights mix the values. Without positional information or other order-dependent structure, this comparison cannot distinguish arbitrary reorderings. A causal mask supplies an ordering constraint, but it does not by itself encode a particular relative distance.</p>
-<p>Absolute position embeddings add a position vector to a token representation. Relative biases add a distance-dependent term to attention scores. RoPE instead rotates query and key coordinates before taking their dot product. These are different ways of supplying useful position information, with different behavior when the context length changes.</p>
-<h2 id="geometry">RoPE in two dimensions</h2>
-<p>Group an even-dimensional head into coordinate pairs. Write the unrotated pair as \(q_j=(q_{jx},q_{jy})\), and similarly for \(k_j\). A rotation by angle \(\phi\) is</p>
+<p class="lead">I wanted to understand how a transformer knows where to look. RoPE seemed like a good place to start. The more I looked at it, the more it began to resemble another familiar idea: building a shape out of waves.</p>
+<p>The usual explanation is that RoPE rotates query and key vectors so their similarity depends on the distance between them. That explains the mechanism. What I wanted to know was what the mechanism could <em>do</em>.</p>
+<p>Could a head look for something eighty tokens ago? Could it prefer a whole neighborhood rather than one position? Could it avoid a region? And if all of that was possible, did trained models actually use it?</p>
+<p>Those questions became this exploration. I’ll begin with a single pair of numbers, work up to the Fourier connection, and then turn to the measurements. The code and experimental details are there to follow further, but the pictures and the questions are the main thread.</p>
+<h2 id="position">Start with the problem: the same words, in a different order</h2>
+<p>“The dog followed the child” and “The child followed the dog” contain the same words. To distinguish them, a model needs more than a collection of token identities. It needs some way to use their arrangement.</p>
+<p>Attention gives each token a query and compares it with keys from the other tokens. The scores determine how their value vectors are mixed together. Positional encodings give those comparisons information about where the tokens occur.</p>
+<p>There are several ways to do this. We can add position vectors to token representations, or add a distance bias to attention scores. RoPE takes a geometric approach: it rotates the queries and keys before comparing them.</p>
+<h2 id="geometry">Follow just one rotating pair</h2>
+<p>A whole attention head has many coordinates. For now, keep only two. Think of the query as an arrow in a plane and the key as another arrow. Their dot product is largest when they point the same way, zero when they are perpendicular, and negative when they point in opposite directions.</p>
+<p>Now let position rotate each arrow. At position 10, an arrow has turned ten times as far as it had at position 1. If both arrows move forward by the same number of positions, both turn by the same extra angle. Their angle <em>relative to each other</em> stays the same.</p>
+<p>That is the useful trick. The comparison remembers the separation between the positions, without depending on which position we happened to call zero.</p>
+<p>Here it is in one equation. A query at position \(m\) and a key at position \(n\) are compared as</p>
+\[(R(m\omega)q)^\top R(n\omega)k=q^\top R((n-m)\omega)k.\]
+<p>\(R\) is an ordinary two-dimensional rotation; \(\omega\) is how far it turns per token. The absolute positions have become the relative displacement \(n-m\). This is the central construction in <a href="https://arxiv.org/html/2104.09864v5">RoFormer</a>.</p>
+<details><summary>The rotation, written out</summary>
 \[R(\phi)=\begin{pmatrix}\cos\phi&-\sin\phi\\\sin\phi&\cos\phi\end{pmatrix}.\]
-<p>At query position \(m\), rotate pair \(j\) by \(m\omega_j\); at key position \(n\), rotate by \(n\omega_j\). The dot product becomes</p>
-\[(R(m\omega_j)q_j)^\top R(n\omega_j)k_j=q_j^\top R((n-m)\omega_j)k_j.\]
-<p>Only the relative displacement remains in the rotation. The unrotated vectors still depend on token content and earlier layers. This construction and the standard frequency schedule come from <a href="https://arxiv.org/html/2104.09864v5">Su et al., RoFormer</a>.</p>
-<h2 id="frequencies">A geometric ladder of frequencies</h2>
-\[\omega_j=B^{-2j/d},\qquad j=0,\ldots,d/2-1.\]
-<p>Here \(d\) is head dimension and \(B\) is the frequency base. Adjacent frequencies have the constant ratio \(B^{-2/d}\). Their wavelengths, \(2\pi/\omega_j\), grow geometrically. High frequencies rotate quickly over nearby tokens; low frequencies change slowly over the same window. Calling a pair “slow” always depends on the distances under discussion.</p>
-<figure><a href="assets/figures/rope_frequency_schedule/frequency_schedule.png"><img src="assets/figures/rope_frequency_schedule/frequency_schedule.png" alt="Original investigation plot of RoPE frequencies and neighboring frequency gaps against pair index" loading="lazy"></a><figcaption>Original investigation figure for Qwen2.5-1.5B-Instruct, base 1,000,000: angular frequencies and neighboring gaps, with a 32,768-point DFT spacing reference. The underlying <a href="data/rope_frequency_schedule/frequency_schedule.csv">frequency table</a> is included; the model-specific schedule should not be confused with every RoPE model’s configuration.</figcaption></figure>
-<p>The examples below use adjacent pair notation for readability. Qwen2.5’s actual 128-dimensional head uses split-half pairs \((j,j+64)\). A change in memory layout is harmless only if the model’s projections and rotations use the same pairing.</p>
-<h2 id="score">A finite sinusoidal score family</h2>
-<p>Set \(\Delta=n-m\). Expanding the rotation gives</p>
-\[s(\Delta)=\frac{1}{\sqrt d}\sum_j\left[A_j\cos(\omega_j\Delta)+B_j\sin(\omega_j\Delta)\right],\]
+<p>For the calculations in these notes, positive displacement means key position minus query position. In causal attention, earlier keys therefore have negative displacement. When I discuss a positive “age,” I mean distance into the past instead.</p>
+</details>
+<h2 id="one-wave">Move the key, and a wave appears</h2>
+<p>Hold the query and key content fixed, and imagine sliding the key through different positions. Its rotated arrow turns. Sometimes the arrows align; a little later they are perpendicular; later still they oppose each other.</p>
+<p>The resulting score is a sinusoid. One rotating pair gives us one wave:</p>
+\[s_j(\Delta)=r_j\cos(\omega_j\Delta-\theta_j).\]
+<p>The frequency \(\omega_j\) tells us how quickly the score changes with distance. The phase \(\theta_j\) shifts the wave sideways. The amplitude \(r_j\) tells us how much that pair can contribute.</p>
+<p>Changing the phase moves this preference. A phase of zero puts a maximum at the reference point; π puts a minimum there. At π/2 the contribution at that point is zero, but the wave still has preferences elsewhere. A negative contribution can discourage a match without excluding it from attention.</p>
+<p>So one pair can prefer some distances and discourage others. But it repeats. It cannot, by itself, mean “look around eighty tokens back, and nowhere else.” That would need a different shape.</p>
+<h2 id="frequencies">Give the head more than one wave</h2>
+<p>RoPE uses many coordinate pairs, each rotating at a different speed. Some turn quickly; others barely change over a short stretch of text. The head adds their contributions.</p>
+<p>The standard schedule spaces the speeds geometrically: each frequency is the previous one multiplied by the same ratio. In the usual notation,</p>
+\[\omega_j=B^{-2j/d}.\]
+<p>\(B\) sets the range of scales and \(d\) is the head dimension. The picture below uses the schedule from our Qwen model. Notice how the frequencies form a straight line on a logarithmic vertical axis. There are fast and slow scales, rather than one common positional clock.</p>
+<figure><a href="assets/figures/rope_frequency_schedule/frequency_schedule.png"><img src="assets/figures/rope_frequency_schedule/frequency_schedule.png" alt="RoPE frequencies span many scales; their neighboring gaps cross the spacing of a 32k DFT grid" loading="lazy"></a><figcaption>The original frequency-schedule picture from the investigation. This model uses base 1,000,000. On the right, the dashed line compares the gaps with a 32,768-point DFT grid; it does not say that RoPE is that DFT.</figcaption></figure>
+<p>And this was the connection that interested me: <em>if the score is a sum of waves, could those waves combine into a useful positional shape?</em></p>
+<h2 id="fourier">That sounds like a Fourier transform</h2>
+<p>A Fourier transform takes a sampled shape and describes it using sinusoidal components. Reverse the process—add the components back together—and the shape returns. A peak, a plateau, or an irregular outline can all be assembled from waves.</p>
+<p>RoPE gives attention a related set of ingredients. Its query and key vectors determine how strongly each wave contributes and where it sits. That suggests a way to think about a head’s positional score: as a shape that its components can build together.</p>
+<p>There is a catch worth keeping in mind as we explore. The complete DFT has a carefully chosen frequency grid that can reconstruct any sequence of samples on its window. RoPE uses a different grid, with a limited number of components. Sharing the ingredients does not give it the same reconstruction guarantee.</p>
+<p>Rather than leave the connection as an analogy, the next step is to draw a target and try to build it. That lets us see both the possibilities and the restrictions.</p>
+<details><summary>How the waves come out of the dot product</summary>
+<p>With \(\Delta=n-m\), expanding each rotation gives</p>
+\[s(\Delta)=\frac1{\sqrt d}\sum_j[A_j\cos(\omega_j\Delta)+B_j\sin(\omega_j\Delta)],\]
 \[A_j=q_{jx}k_{jx}+q_{jy}k_{jy},\qquad B_j=q_{jy}k_{jx}-q_{jx}k_{jy}.\]
-<p>The sine sign follows this particular rotation and displacement convention. Reversing displacement reverses the sine coefficient. The <a href="code/rope.py">implementation</a> is tested against direct rotations, including a two-dimensional example that catches this sign error.</p>
-<p>For fixed content, every pair supplies one sinusoid. Across actual token pairs, the coefficients change: a trained head is not generally one fixed distance-only function.</p>
-<h2 id="phases">What do 0, π/2, and π mean?</h2>
-<p>Write one term as \(r\cos(\omega\Delta-\theta)\), with \(r=\sqrt{A^2+B^2}\) and \(\theta=\operatorname{atan2}(B,A)\). This \(r\) is a query–key product amplitude. It differs from the radius of a key alone, which appears in the compression experiments.</p>
-<div class="table-wrap"><table><thead><tr><th>Phase offset</th><th>Contribution</th><th>Interpretation</th></tr></thead><tbody>
-<tr><td>0</td><td>\(r\cos(\omega\Delta)\)</td><td>A local maximum at zero displacement; symmetric in either direction.</td></tr>
-<tr><td>π/2</td><td>\(r\sin(\omega\Delta)\)</td><td>Zero at the reference point, but directional and position-dependent elsewhere.</td></tr>
-<tr><td>π</td><td>\(-r\cos(\omega\Delta)\)</td><td>A local minimum at zero displacement; finite suppression, not exclusion.</td></tr>
-</tbody></table></div>
-<p>“No preference at π/2” is therefore only a statement about the contribution at one point. A phase is not a global switch between attraction, indifference, and rejection. A causal mask also determines which directions are available.</p>
-<h2 id="mixer">Softmax mixes information</h2>
-\[p_i=\frac{e^{s_i/T}}{\sum_k e^{s_k/T}},\qquad o=\sum_i p_i v_i.\]
-<p>This is weighted aggregation, as in <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>. A head need not classify one key as the winner. With two scores 2.0 and 1.9 at temperature one, weights are about 52.5% and 47.5%; both values contribute. Other heads can behave like sharp selectors. The task and value vectors decide which distribution is useful.</p>
-<p>Adding a constant to every score changes nothing. Finite logits receive positive weights in exact arithmetic, so negative scores do not implement a hard mask. A small best-versus-runner-up margin is not inherently a failure.</p>
-<p class="next">Next: <a href="fourier.html">RoPE through the Fourier lens →</a></p>
+<p>The coefficients depend on the query and key content. These are therefore fixed-content distance sweeps, rather than a claim that every real token pair shares one positional function. The sign convention is checked against direct rotations in <a href="code/rope.py">the code</a>. Qwen’s actual pairs use split-half coordinates \((j,j+64)\).</p>
+</details>
+<p class="next"><a href="fourier.html">Continue: can we build a preference for a particular distance? →</a></p>
