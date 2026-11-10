@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ROPE exploration</title>
   <meta name="description" content="A personal exploration of RoPE through its connection to Fourier transforms, with reproducible examples of the positional patterns it can express.">
-  <link rel="stylesheet" href="style.css?v=2026-11-10-dft">
+  <link rel="stylesheet" href="style.css?v=2026-11-10-explorers">
 </head>
 <body>
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
@@ -56,7 +56,8 @@
       <p>The usual attention scaling is included in these coefficients. This uses an ordinary counterclockwise rotation and Δ = <var>m</var> − <var>n</var>. The posted tests check the expansion against explicitly rotated vectors.</p>
     </details>
 
-    <h2>Can we ask it for a particular shape?</h2>
+    <h2 id="function-approximator">ROPE in the same way as DFT is a universal function approximator</h2>
+    <p>This is the intuition I wanted to explore: combine frequencies to build a desired positional shape. “Universal” needs a qualification here: a fixed RoPE head has a finite set of frequencies, so it cannot approximate every function arbitrarily well. The examples test what it can express on a chosen interval.</p>
     <p>Now I can turn the original question into a small experiment. Choose a desired score at each of 256 displacements, then fit the sine and cosine coefficients using RoPE’s frequencies. I used a 128-dimensional head: 64 frequencies and 128 real coefficients.</p>
     <p>The first three targets are a peak eighty tokens away, a broad neighborhood, and two separate regions. The last is deliberately harder: a spike at a single token.</p>
     <figure id="rope-examples">
@@ -67,15 +68,68 @@
     <p>I used a small penalty on coefficient size to avoid fitting through enormous coefficients that cancel one another. In symbols, the fit minimizes:</p>
     <div class="equation"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munderover><mo>∑</mo><mrow><mi mathvariant="normal">Δ</mi><mo>=</mo><mn>0</mn></mrow><mn>255</mn></munderover><msup><mrow><mo fence="true">[</mo><mi>s</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">)</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup><munder><mo>∑</mo><mi>j</mi></munder><mo stretchy="false">(</mo><msubsup><mi>a</mi><mi>j</mi><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>b</mi><mi>j</mi><mn>2</mn></msubsup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum_{\Delta=0}^{255}\left[s(\Delta)-f(\Delta)\right]^2+10^{-3}\sum_j(a_j^2+b_j^2)</annotation></semantics></math></span></div>
     <p>There is an important qualification to “RoPE approximates what a DFT represents exactly.” A complete DFT is a basis for the sampled sequence. Here I chose fewer real coefficients than target samples, geometrically spaced frequencies, and a penalty on coefficient size. Those choices make this an approximation. <strong>Non-uniform spacing alone does not forbid exact interpolation</strong>: a non-uniform system with enough independent columns can also match finite samples exactly, although it may be poorly conditioned.</p>
-    <p>For me, these examples make the question more concrete. RoPE supplies a vocabulary of positional shapes; the query and key supply the coefficients. The next question is which of these shapes trained models actually choose. These fits establish possibilities on one interval, rather than evidence of learned behavior or a promise about longer contexts. In a real sequence, token content changes the coefficients from one comparison to the next.</p>
+    <h3>Combine the frequencies, then shift the shape</h3>
+    <p>First, we combine the specific frequencies RoPE gives us. Their amplitudes determine how strongly each contributes; their phases determine where its peaks and troughs fall. Adding them lets some parts reinforce one another and other parts cancel. That is how we obtain the peak, broad neighborhood, and two-region examples above.</p>
+    <p>Once we have a shape, we can move it. Write each contribution as an amplitude times a phase-shifted cosine:</p>
+    <div class="equation"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>A</mi><mi>j</mi></msub><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>ω</mi><mi>j</mi></msub><mi mathvariant="normal">Δ</mi><mo>+</mo><msub><mi>ϕ</mi><mi>j</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">s(\Delta)=\sum_j A_j\cos(\omega_j\Delta+\phi_j)</annotation></semantics></math></span></div>
+    <p>To translate the entire shape by <var>t</var> tokens, keep those amplitudes and change each phase by an amount proportional to its frequency:</p>
+    <div class="equation"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>s</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mo>−</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><msubsup><mi>ϕ</mi><mi>j</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mo>=</mo><msub><mi>ϕ</mi><mi>j</mi></msub><mo>−</mo><msub><mi>ω</mi><mi>j</mi></msub><mi>t</mi></mrow><annotation encoding="application/x-tex">s_t(\Delta)=s(\Delta-t),\qquad \phi&#x27;_j=\phi_j-\omega_j t</annotation></semantics></math></span></div>
+    <p>The shifts must be coordinated: each frequency gets its own phase change. Giving every frequency the same angle would generally change the shape instead of simply moving it. Try moving the fitted examples below. A positive shift moves the preference farther into the past.</p>
+    <div class="interactive-block">
+      <div id="shift-controls" class="controls" hidden>
+        <label>Shape <select id="shape-choice"></select></label>
+        <label class="shift-slider">Shift <input id="shape-shift" type="range" min="-32" max="32" value="0" step="1"><output id="shift-value" for="shape-shift">0 tokens</output></label>
+      </div>
+      <p id="shift-unavailable">Enable JavaScript to move the examples interactively. The static curves above show the unshifted examples.</p>
+      <svg id="shift-plot" viewBox="0 0 710 300" role="img" aria-label="A fitted score translated by coordinated frequency-dependent phase shifts" hidden>
+        <defs><clipPath id="shift-clip"><rect x="48" y="35" width="620" height="230"/></clipPath></defs>
+        <path d="M48 35V265H668M48 235H668" fill="none" stroke="#bdc8be"/>
+        <g fill="currentColor" font-size="13"><text x="32" y="240">0</text><text x="32" y="90">1</text><text x="48" y="284">0</text><text x="352" y="284">128</text><text x="644" y="284">255</text><text x="180" y="20">Dashed: original</text><text x="355" y="20" fill="#176452">Green: shifted</text><text x="250" y="299">Displacement Δ (tokens into the past)</text></g>
+        <g clip-path="url(#shift-clip)" fill="none"><path id="shift-original" stroke="#78867c" stroke-width="2" stroke-dasharray="5 4"/><path id="shift-moved" stroke="#176452" stroke-width="2.5"/></g>
+      </svg>
+      <p class="caption">Same fitted coefficients and geometric frequencies as above; the phase shift is computed directly, without refitting. The shifted line is shown only where it samples the original 0–255 fitting interval. The displayed window crops the translated shape at its edges.</p>
+    </div>
+
+    <h2 id="looking-in-models">Looking for this mechanism in a model</h2>
+    <p>I went digging for evidence that trained models use this mechanism: combining frequencies to shape a positional preference, then changing phases to move it. Finding exact, irrefutable evidence is somewhat difficult. The query and key both change with the text, and a clean-looking attention pattern does not by itself tell us why the model produced it. But along the way, I discovered a few things about RoPE.</p>
+    <p>One of my first steps was simply to look at the query and key coordinate pairs. These are the plots from that investigation, using <strong>Qwen2.5-1.5B-Instruct</strong>: all 28 layers, with 12 query heads and two shared key heads per layer. Each shared key head serves six query heads. The query plots contain 768 sampled tokens from 16 prose excerpts; the key plots contain all 2,379 prose tokens from those excerpts, excluding the chat prefix.</p>
+    <p>There are two ways to look at the same pairs. The Cartesian view shows the two coordinates directly; the other shows their amplitude and angle. In both, the known positional rotation has been removed to show the coordinates before RoPE. These are individual query or key angles, not the relative query–key angle of an attention score.</p>
+    <div class="interactive-block" id="observations">
+      <div id="observation-controls" class="controls" hidden>
+        <label>Vectors <select id="plot-kind"><option value="queries">Queries</option><option value="keys">Keys</option></select></label>
+        <label>View <select id="plot-view"><option value="xy">Cartesian x/y · full range</option><option value="phase">Phase / amplitude · 0–40</option></select></label>
+        <label>Layers <select id="plot-page"></select></label>
+        <div class="page-buttons"><button id="plot-previous" type="button">← Previous</button><button id="plot-next" type="button">Next →</button></div>
+        <label class="zoom-label"><input id="plot-zoom" type="checkbox"> Enlarge plots (scroll sideways)</label>
+      </div>
+      <p id="observation-status" class="viewer-status" aria-live="polite">Layer 0 · 12 query heads · page 1 of 28</p>
+      <figure class="observation-figure">
+        <div class="plot-frame" id="observation-frame" tabindex="0" aria-label="Plot image; scroll horizontally when enlarged">
+          <img id="observation-image" src="figures/observations/queries_xy_layers_00_00.png" width="2040" height="1560" loading="lazy" alt="Original Cartesian query-pair plots for the twelve heads in layer zero. Each panel has its own full range and equal x/y scales; color indicates frequency-pair index.">
+        </div>
+        <figcaption id="observation-caption">Original Cartesian plot. Each panel has its own full range with equal x/y units and no clipping. Color indicates pair index, from 0 (highest frequency) to 63 (lowest).</figcaption>
+      </figure>
+      <p class="viewer-links"><a id="observation-full" href="figures/observations/queries_xy_layers_00_00.png" target="_blank" rel="noopener">Open full-size page ↗</a> · <a id="observation-pdf" href="documents/queries_xy_dynamic.pdf">Download selected PDF</a></p>
+      <details><summary>All four original PDFs</summary>
+        <ul><li><a href="documents/queries_xy_dynamic.pdf">Queries: Cartesian coordinates</a></li><li><a href="documents/keys_xy_dynamic.pdf">Keys: Cartesian coordinates</a></li><li><a href="documents/queries_all_layers_y40.pdf">Queries: phase and amplitude, 0–40</a></li><li><a href="documents/keys_all_layers_y40.pdf">Keys: phase and amplitude, 0–40</a></li></ul>
+      </details>
+      <noscript><p>The controls need JavaScript. All plots remain available in the four PDFs above.</p></noscript>
+    </div>
+    <p>What caught my eye was how different the heads look: some clouds stay close to the origin, while others have long rays or compact groups far away from it. Colors help trace those groups to their frequency pairs. This gave me something concrete to investigate, but these pictures alone do not establish that a model builds and shifts a particular retrieval shape. They show the ingredients, before the query and key are combined.</p>
 
     <h2>Reproduce the figures</h2>
-    <p>Every figure above comes from <a href="code/figures.py">this Python script</a>. It defines the target functions, fits the coefficients, and saves the figures together with <a href="figures/results.json">the numerical errors</a> and <a href="figures/examples.npz">all plotted samples and coefficients</a>. No model downloads or external data are needed.</p>
+    <p>The constructed DFT and RoPE examples come from <a href="code/figures.py">this Python script</a>. It defines the target functions, fits the coefficients, and saves the figures together with <a href="figures/results.json">the numerical errors</a> and <a href="figures/examples.npz">all plotted samples and coefficients</a>. No model downloads or external data are needed for these constructed examples.</p>
     <pre><code>python -m pip install -r requirements.txt
 python code/figures.py
 python -m unittest discover -s code -p 'test_*.py'</code></pre>
+    <p>The model plots use the <a href="data/observations/manifest.json">original saved activation data</a>, split losslessly by layer. <a href="code/reproduce_observations.py">This reproduction script</a> regenerates all 70 plot pages and all four PDFs. The original point counts, sampled token positions, and file hashes are included. The online viewer reuses the original plot images.</p>
+    <pre><code>python code/reproduce_observations.py --verify
+python code/reproduce_observations.py --kind queries --view xy --page 0
+# Regenerate all 70 pages and all four PDFs:
+python code/reproduce_observations.py --pdf</code></pre>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source and editing on GitHub</a> · References: <a href="https://arxiv.org/abs/2104.09864">RoFormer</a>; <a href="https://proceedings.mlr.press/v267/hua25b.html">Fourier Position Embedding</a> (<a href="https://arxiv.org/html/2412.17739v4#S2.SS2">§2.2</a>); <a href="https://numpy.org/doc/stable/reference/routines.fft.html">NumPy DFT conventions</a>.</p>
   </main>
   <footer>Gery Vessere · ROPE exploration</footer>
+  <script src="explorers.js?v=2026-11-10"></script>
 </body>
 </html>

@@ -144,6 +144,11 @@ def main():
     arrays["rope_x"] = x
     fig.tight_layout(h_pad=1.2)
     save(fig, "rope-shapes.svg")
+    shift_examples = {"omega": omega.tolist(), "examples": [
+        {"name": name, "coefficients": arrays[f"rope_coeff_{i}"].tolist()}
+        for i, name in enumerate(results["rope_examples"])]}
+    (ROOT / "figures" / "shift-examples.json").write_text(
+        json.dumps(shift_examples, separators=(",", ":")) + "\n")
     np.savez(ROOT / "figures" / "examples.npz", **arrays)
     (ROOT / "figures" / "results.json").write_text(json.dumps(results, indent=2) + "\n")
     print(json.dumps(results, indent=2))

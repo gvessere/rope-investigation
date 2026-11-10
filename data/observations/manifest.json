@@ -1,0 +1,575 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "layers": 28,
+  "pairs": 64,
+  "indexing": "Layers, heads, and pair indices are zero-based. Qwen split-half pair: (j,j+64).",
+  "coordinates": "Native activations with known positional RoPE rotation removed; learned projection bias retained. No centering.",
+  "source_chat": {
+    "title": "ROPE investigation",
+    "id": "01a15f24-929d-77a3-9610-0068124672c0",
+    "xy_turn": "01a17f34-61e4-76b3-be88-492e94684a18",
+    "phase_turn": "01a17f26-8bcd-7131-b97a-af0ffc67ca2a"
+  },
+  "data": {
+    "queries": {
+      "shape": [
+        28,
+        12,
+        768,
+        64
+      ],
+      "dtype": "float32",
+      "points": 16515072,
+      "above_40": 4582,
+      "fraction_above_40": 0.00027744353763640875,
+      "original_file": "query_amplitude_phase_scatter/points.npz",
+      "original_sha256": "b0ed2f1d7df81d98bcf35a90274777257137ea61f803570afbf605a26ecf9e35",
+      "layers": [
+        {
+          "file": "data/observations/queries_layer_00.npz",
+          "sha256": "473af060c8e559d1a98a6101c0e8d63e05b77b966633717d41a6c95ae979608b"
+        },
+        {
+          "file": "data/observations/queries_layer_01.npz",
+          "sha256": "a9c411eae690491a5a5451ca79af4527a9f8a341f9018a29fbcc154011e94ea2"
+        },
+        {
+          "file": "data/observations/queries_layer_02.npz",
+          "sha256": "df74078ad7b8a4031626b96af8d4285da0de21ef42779eea9d6faadf3c0e2c65"
+        },
+        {
+          "file": "data/observations/queries_layer_03.npz",
+          "sha256": "f95197fda2ec07b2b11fd5389e0805e8f4f4061f5f67a6993272a543d7808320"
+        },
+        {
+          "file": "data/observations/queries_layer_04.npz",
+          "sha256": "8c64d81387039ea1101759434da0653c667cdd44a2effcd65eb3e0f5fb236095"
+        },
+        {
+          "file": "data/observations/queries_layer_05.npz",
+          "sha256": "f540924efcc60657403509dc65528d0637b8b26ecb7e8afdeff915dbb907d40d"
+        },
+        {
+          "file": "data/observations/queries_layer_06.npz",
+          "sha256": "c1172695f4b782ad4183993ecfcce2ed2b8561d1d220373c010496ab9b716169"
+        },
+        {
+          "file": "data/observations/queries_layer_07.npz",
+          "sha256": "bd69aebcdf4e584aa8646af5766bbf093c5001db5f581b5e0aa61c12995f6d54"
+        },
+        {
+          "file": "data/observations/queries_layer_08.npz",
+          "sha256": "950b3db0fa83a9d1f8d85280a4018deb0626e0770423cc48ba0e10b555696c4a"
+        },
+        {
+          "file": "data/observations/queries_layer_09.npz",
+          "sha256": "471602b82302700a0fe19152715a9047d4c65f28ab63139fae065e5453e44755"
+        },
+        {
+          "file": "data/observations/queries_layer_10.npz",
+          "sha256": "b01d35aecad82027b170e3c7de7104cfc5fe70df701a06f45cd6e4c323be2b34"
+        },
+        {
+          "file": "data/observations/queries_layer_11.npz",
+          "sha256": "5451b75dc7f395c34aa7225522ecae1cd055be1ac6a5b555be9f740f0b14801a"
+        },
+        {
+          "file": "data/observations/queries_layer_12.npz",
+          "sha256": "5a21d3620352e1562989f258d2ea3068afbb96ecacbbe5a553dc2e67b25453be"
+        },
+        {
+          "file": "data/observations/queries_layer_13.npz",
+          "sha256": "c4fd8c01343590ddff7272c2f8c38255cd774a46cd3bb4ab13ce81163aaea300"
+        },
+        {
+          "file": "data/observations/queries_layer_14.npz",
+          "sha256": "0d9f8ffcbac5b58d2d3d2be89a154b237dc26a03184f7bc93a005b11b8634a7a"
+        },
+        {
+          "file": "data/observations/queries_layer_15.npz",
+          "sha256": "9951d5d2a86164093e0107ec900a42df66fadd176ddaade450eb1e0433c4ad9f"
+        },
+        {
+          "file": "data/observations/queries_layer_16.npz",
+          "sha256": "bf34709a4c211afc422b681d484959c41618548b2f5b3eca33229c37630e8720"
+        },
+        {
+          "file": "data/observations/queries_layer_17.npz",
+          "sha256": "9ad761a0c96eb7b2de6a8e8ca8bbf17456269251a434b88d6c115942e4ee6198"
+        },
+        {
+          "file": "data/observations/queries_layer_18.npz",
+          "sha256": "f55363cd0e3524f21f78628f8bdfaad13e05fda75094288ee8ac90391a43f837"
+        },
+        {
+          "file": "data/observations/queries_layer_19.npz",
+          "sha256": "4359a66647ebf04c232883018c9949b4098b04c1bddd08baf6a63d6e120164bf"
+        },
+        {
+          "file": "data/observations/queries_layer_20.npz",
+          "sha256": "961137bcdbd552171ec002456bedb3a71cad607a3952160f0fa6f5b8f84ff43a"
+        },
+        {
+          "file": "data/observations/queries_layer_21.npz",
+          "sha256": "be9e758743257ba62b476cb295f06a760872dbed424f8dd0d3e48c0c58d78522"
+        },
+        {
+          "file": "data/observations/queries_layer_22.npz",
+          "sha256": "b560439da8126e1baa18fff89760fd0980202eaa3fb42fecf6d3eaa56a03d88d"
+        },
+        {
+          "file": "data/observations/queries_layer_23.npz",
+          "sha256": "79eecee0af46c40cede192ddbc9361b80cb80dfc035bc68760feb9b075a0ab63"
+        },
+        {
+          "file": "data/observations/queries_layer_24.npz",
+          "sha256": "d24ff923f506a9e1a87b7c4586aa7898239e3c30e004183649a155b983c04295"
+        },
+        {
+          "file": "data/observations/queries_layer_25.npz",
+          "sha256": "dfe9496c116b52ff3e534824bfc8773a598e293f353e750d2d12eebad6938f77"
+        },
+        {
+          "file": "data/observations/queries_layer_26.npz",
+          "sha256": "2782f563263fc453f71f5e1c06241d9dfb0f85e23b287c8bbceda3452f85332b"
+        },
+        {
+          "file": "data/observations/queries_layer_27.npz",
+          "sha256": "f8fee800662a8f9af043c9bdbf24dd5a396bb59044122c73be5d8918694571cf"
+        }
+      ]
+    },
+    "keys": {
+      "shape": [
+        28,
+        2,
+        2379,
+        64
+      ],
+      "dtype": "float32",
+      "points": 8526336,
+      "above_40": 61854,
+      "fraction_above_40": 0.007254464285714286,
+      "original_file": "query_key_amplitude_phase_y40/key_points.npz",
+      "original_sha256": "1102c8b05b352d8ceb5bcb020e3b1b7885bd48585e0036b187527de45cac34b3",
+      "layers": [
+        {
+          "file": "data/observations/keys_layer_00.npz",
+          "sha256": "4b5c4541e0a4b1093221da6614c8ac545dbf2c7ce121d97d4e270dccfa9149af"
+        },
+        {
+          "file": "data/observations/keys_layer_01.npz",
+          "sha256": "f6fbd39f1687b8bab0aaca0acdcdb9e59e13e4f0c157d1ab10457d98fa6510f8"
+        },
+        {
+          "file": "data/observations/keys_layer_02.npz",
+          "sha256": "39598a9dcedcc2859f8993415e8283e2295d27fdb8b28bfa909a78254b011c8b"
+        },
+        {
+          "file": "data/observations/keys_layer_03.npz",
+          "sha256": "604c716ebf0cb91a8c324fd5b325f71995554e4a815f80c2e618a74e5760416a"
+        },
+        {
+          "file": "data/observations/keys_layer_04.npz",
+          "sha256": "3c8a2247ef013de24c89861c88a361ad34461427d40aff7c2861c0ff45749d94"
+        },
+        {
+          "file": "data/observations/keys_layer_05.npz",
+          "sha256": "9ca6b53a22c1ae229def399d24b53242b7a801b513637170c8bd30dcfed51cbd"
+        },
+        {
+          "file": "data/observations/keys_layer_06.npz",
+          "sha256": "a6af45f34e4c57959f24b5da4560ad0bcdaba67d485a5a3d91c36286dff7aee2"
+        },
+        {
+          "file": "data/observations/keys_layer_07.npz",
+          "sha256": "3d59b01d6d7608c56a950d925f81cdd5ed77e70bc6860dd373aaa7f39af84151"
+        },
+        {
+          "file": "data/observations/keys_layer_08.npz",
+          "sha256": "7911028f948e81d6c009facfcdd7d8c4dcdb750b5b70371d9787205b5e519ad9"
+        },
+        {
+          "file": "data/observations/keys_layer_09.npz",
+          "sha256": "5c90c4c4b3efdeedc3ea72694f536c61c2703a6dde479665fcccf9db332aadc7"
+        },
+        {
+          "file": "data/observations/keys_layer_10.npz",
+          "sha256": "cd7a706086ca98d9cd683a686478fc881d7d6328c4f573baa10e74384d20baea"
+        },
+        {
+          "file": "data/observations/keys_layer_11.npz",
+          "sha256": "1e7f41052f1ee2bc0141d0e61f4c76bc3b45af79590f42d28b8411d87c34644c"
+        },
+        {
+          "file": "data/observations/keys_layer_12.npz",
+          "sha256": "4b6afe02095062a9b09048a5a357c9e9a150999e102bfa4adbe7787280059928"
+        },
+        {
+          "file": "data/observations/keys_layer_13.npz",
+          "sha256": "e0bbcfc96c1fc5c7461709fe3d5dc745e6569f46fe3352c70c1810871c17b4f8"
+        },
+        {
+          "file": "data/observations/keys_layer_14.npz",
+          "sha256": "36004d60ceb517143a25a1ef82101bdcedeb83def7436ed373d95a82d3b21105"
+        },
+        {
+          "file": "data/observations/keys_layer_15.npz",
+          "sha256": "ecbbe63a7be8b7717d26b4fb2a2cffdc593c975715bbc5753023bc8b5d93fe2d"
+        },
+        {
+          "file": "data/observations/keys_layer_16.npz",
+          "sha256": "ff63e21bb5888d8f2324afd469d4e760660f2661cd6afb01cc28d49eb335efc6"
+        },
+        {
+          "file": "data/observations/keys_layer_17.npz",
+          "sha256": "7f784c6c8bf8385f6504563a168b54c6fc31a6cf4e13e970d6d35a3555594efd"
+        },
+        {
+          "file": "data/observations/keys_layer_18.npz",
+          "sha256": "95cb7bce666f0d2563b25b6b5aea7e2340cafe2735a23ab60a45f1446d7a20e9"
+        },
+        {
+          "file": "data/observations/keys_layer_19.npz",
+          "sha256": "7bb69f188daad0066559fda75bd8cd70ccbf4d48b57031c9d2c6f24c3b660881"
+        },
+        {
+          "file": "data/observations/keys_layer_20.npz",
+          "sha256": "64444a77e6f18309ed7c94f1f34bf0770f30de0d288bbb9040512fdf15d9c08a"
+        },
+        {
+          "file": "data/observations/keys_layer_21.npz",
+          "sha256": "13464ca118fa30b2442d4d50177782d208548880bdd5f324449081d7026dbba5"
+        },
+        {
+          "file": "data/observations/keys_layer_22.npz",
+          "sha256": "b106aee77b87952029ad8ee4c7827c0f33d8b458264217139e0584600db4c2a8"
+        },
+        {
+          "file": "data/observations/keys_layer_23.npz",
+          "sha256": "8c502f7eb4a310400c61bfe5d2ed1d248d31cbce9bd43e53ca318c8a18d79776"
+        },
+        {
+          "file": "data/observations/keys_layer_24.npz",
+          "sha256": "71253458b1358d181118d638da682aabcffb93102610daae40548b96958e6fab"
+        },
+        {
+          "file": "data/observations/keys_layer_25.npz",
+          "sha256": "4ae726ce0e509eda04e7d2f453980eb2ff0a17ff8364939210c4431bf3ff4796"
+        },
+        {
+          "file": "data/observations/keys_layer_26.npz",
+          "sha256": "ce908a5abed0540d6c9c6a4f5ab6197afa600c1ec6b8fdf1837473cb00766241"
+        },
+        {
+          "file": "data/observations/keys_layer_27.npz",
+          "sha256": "9c08e92086cc6f4107858b6d6b3787f72b53c3eb466a245d216651cdf8e73c2b"
+        }
+      ]
+    }
+  },
+  "figures": {
+    "queries_xy_layers_25_25.png": {
+      "path": "figures/observations/queries_xy_layers_25_25.png",
+      "sha256": "685a1ebe8995f2dfe119fe4da582fc69bfcb2b777d4a0267b0d4e18fb0709d43"
+    },
+    "queries_xy_layers_16_16.png": {
+      "path": "figures/observations/queries_xy_layers_16_16.png",
+      "sha256": "e1322568e92cc2d617ed75ae7adc1a0aa0fa7d1ff3dfb36b3249964358618b7d"
+    },
+    "queries_xy_layers_06_06.png": {
+      "path": "figures/observations/queries_xy_layers_06_06.png",
+      "sha256": "5af0ec63657fbbceb2efbc0bb408423a8676bf3f1df1871722096285c5858f43"
+    },
+    "queries_xy_layers_27_27.png": {
+      "path": "figures/observations/queries_xy_layers_27_27.png",
+      "sha256": "e12207bdf7eb5e734345a9e8a8576ad9c6ef544b2577b29082c39159311c7482"
+    },
+    "keys_xy_layers_08_11.png": {
+      "path": "figures/observations/keys_xy_layers_08_11.png",
+      "sha256": "5a0488120f048f0fe2b47dda73e755cdbf8f7559607ae748a0747afa41aa2874"
+    },
+    "keys_xy_layers_04_07.png": {
+      "path": "figures/observations/keys_xy_layers_04_07.png",
+      "sha256": "432e7becd1ad88d9334a5b730d8f25a0fc12a330b9fbe59e266b874d830d198f"
+    },
+    "queries_xy_layers_04_04.png": {
+      "path": "figures/observations/queries_xy_layers_04_04.png",
+      "sha256": "188d74402df9ca097f33e51fcab0448299c42c0c863e1bc1ca6fb7446d5c8891"
+    },
+    "queries_xy_layers_14_14.png": {
+      "path": "figures/observations/queries_xy_layers_14_14.png",
+      "sha256": "f5e76eefaa5589d7329657f8bbabd6569b76ba83eb6fef4657f54c50305ad551"
+    },
+    "queries_xy_layers_12_12.png": {
+      "path": "figures/observations/queries_xy_layers_12_12.png",
+      "sha256": "11847612cb471239dbca11fc62b2795b9a30e25e30df4f48b1265f223bf268fd"
+    },
+    "queries_xy_layers_02_02.png": {
+      "path": "figures/observations/queries_xy_layers_02_02.png",
+      "sha256": "4987826ba4aa2c9b73e168852e02489b295649a0219f1c0afea101fba60bfce3"
+    },
+    "queries_xy_layers_09_09.png": {
+      "path": "figures/observations/queries_xy_layers_09_09.png",
+      "sha256": "5d2e1f4ac99f6f80bd9531ecb2fefcda666751825c706c4e86f8e0393ce169cd"
+    },
+    "queries_xy_layers_19_19.png": {
+      "path": "figures/observations/queries_xy_layers_19_19.png",
+      "sha256": "ca86804ae80bb6caebe36ee05bdd5ce021cf647cf70689055ce993cb99796a47"
+    },
+    "queries_xy_layers_21_21.png": {
+      "path": "figures/observations/queries_xy_layers_21_21.png",
+      "sha256": "2f8325cd5f14ec6d926dc9458a98c2f415cb9f447b2abec979bc0b9b1e9d74fb"
+    },
+    "keys_xy_layers_00_03.png": {
+      "path": "figures/observations/keys_xy_layers_00_03.png",
+      "sha256": "3e077ce8b18c182e079f2c04495ed2300dcebe58b81d7a4dff55636f2bee5a53"
+    },
+    "queries_xy_layers_00_00.png": {
+      "path": "figures/observations/queries_xy_layers_00_00.png",
+      "sha256": "78b504a132a97d8ebe87039883f8b65d17efb786e8b6b375902331606cb2a8ff"
+    },
+    "queries_xy_layers_10_10.png": {
+      "path": "figures/observations/queries_xy_layers_10_10.png",
+      "sha256": "0b2f96c5621d92496c58fed82e618ac387d5b57db10150429130504631b51598"
+    },
+    "queries_xy_layers_23_23.png": {
+      "path": "figures/observations/queries_xy_layers_23_23.png",
+      "sha256": "4753f2f6b884556e77ca720eb32d34340b331c961d51c9449b9ced00adce2f4e"
+    },
+    "keys_xy_layers_12_15.png": {
+      "path": "figures/observations/keys_xy_layers_12_15.png",
+      "sha256": "e1d26dfdc8dd33be4959f29721c6003922b00713bc639366e519b45bed53ad23"
+    },
+    "queries_xy_layers_17_17.png": {
+      "path": "figures/observations/queries_xy_layers_17_17.png",
+      "sha256": "a24357dd07271d469b8f174c1a926ef2c4c7c0cd567b1c4686b58d650cb09880"
+    },
+    "queries_xy_layers_07_07.png": {
+      "path": "figures/observations/queries_xy_layers_07_07.png",
+      "sha256": "844afabed09d24d7206ceb12b01d68fcbc24de53ac4d7e222761321660254883"
+    },
+    "keys_xy_layers_24_27.png": {
+      "path": "figures/observations/keys_xy_layers_24_27.png",
+      "sha256": "d8b9cd8d45850acaed5f5e81fe52d5430b285002235de989c41e2e5121498d67"
+    },
+    "queries_xy_layers_24_24.png": {
+      "path": "figures/observations/queries_xy_layers_24_24.png",
+      "sha256": "6578b8f498c9c83448c031744245c51af00a97a45b70d27e35ce3c727a1f4a53"
+    },
+    "queries_xy_layers_05_05.png": {
+      "path": "figures/observations/queries_xy_layers_05_05.png",
+      "sha256": "01b8ef5c11bd3f6d56bded99b6b47b0ac09e24393e7399c8a8813c007529cdc4"
+    },
+    "queries_xy_layers_15_15.png": {
+      "path": "figures/observations/queries_xy_layers_15_15.png",
+      "sha256": "4e91a7da56d0cf3a1909f785fd10da8c8cdedf285dc77bf16f98540075c6fa61"
+    },
+    "queries_xy_layers_26_26.png": {
+      "path": "figures/observations/queries_xy_layers_26_26.png",
+      "sha256": "ea0d6d9ebb220622b44611678d8b22dc2ad1708ba4e108b914dde4ab88e5c2ad"
+    },
+    "queries_xy_layers_08_08.png": {
+      "path": "figures/observations/queries_xy_layers_08_08.png",
+      "sha256": "3caa401b101b9362a43012802fe73a4016b2a6a689b25027dc56c2833510cb42"
+    },
+    "keys_xy_layers_20_23.png": {
+      "path": "figures/observations/keys_xy_layers_20_23.png",
+      "sha256": "2c35191a0be597d6d23a68357a0c6b951be3fa907698cb313cc02a8ac418ae47"
+    },
+    "queries_xy_layers_18_18.png": {
+      "path": "figures/observations/queries_xy_layers_18_18.png",
+      "sha256": "791d3490eb008b241a57e1cfa1dd00c8f0ec76aff3895d81bfaaf1b32b9887c1"
+    },
+    "queries_xy_layers_20_20.png": {
+      "path": "figures/observations/queries_xy_layers_20_20.png",
+      "sha256": "e072dc9d019685257e2483486413134a56784758d4d865ee258badaf9e42762d"
+    },
+    "queries_xy_layers_13_13.png": {
+      "path": "figures/observations/queries_xy_layers_13_13.png",
+      "sha256": "6d1968b4259b2f84f555ec8dda3a31fec8aaa89be438121b19523e8078fdd5bd"
+    },
+    "queries_xy_layers_03_03.png": {
+      "path": "figures/observations/queries_xy_layers_03_03.png",
+      "sha256": "433a49389ed8a801c639fe237384a3ad537d308bcdca68aa8d0662365570a352"
+    },
+    "keys_xy_layers_16_19.png": {
+      "path": "figures/observations/keys_xy_layers_16_19.png",
+      "sha256": "ff966c6ae87476f2827100eba076383f495113eb007e2705b007492a26fadd1f"
+    },
+    "queries_xy_layers_22_22.png": {
+      "path": "figures/observations/queries_xy_layers_22_22.png",
+      "sha256": "94573bc3cc25efa7701d7801e81432f05c630d0f151db10344e0d40c8111e835"
+    },
+    "queries_xy_layers_01_01.png": {
+      "path": "figures/observations/queries_xy_layers_01_01.png",
+      "sha256": "95fa6e43ef02ca4e3019a7a2bf166523fd301883a87ed5a149ba0e941f49de5f"
+    },
+    "queries_xy_layers_11_11.png": {
+      "path": "figures/observations/queries_xy_layers_11_11.png",
+      "sha256": "f1c841637c7d9afc6e117a5616c8f5b92474ce8cbd36a17c55afd9944fc2d992"
+    },
+    "queries_layers_03_03_y40.png": {
+      "path": "figures/observations/queries_layers_03_03_y40.png",
+      "sha256": "c6b70095f3887afda93c1012ffa0188838ed08dec16b56a2cef7fbab3d4dbd19"
+    },
+    "queries_layers_10_10_y40.png": {
+      "path": "figures/observations/queries_layers_10_10_y40.png",
+      "sha256": "84d0e19ecd7f1cea00ba03723ff3f54f3899a00a8aa603563a45ff6d51e944a6"
+    },
+    "queries_layers_25_25_y40.png": {
+      "path": "figures/observations/queries_layers_25_25_y40.png",
+      "sha256": "465c8316ba36fdd94d264c45d3b55e1eba456850c79345b37613ee59bd73b6e3"
+    },
+    "queries_layers_18_18_y40.png": {
+      "path": "figures/observations/queries_layers_18_18_y40.png",
+      "sha256": "e7363b3f88098daa02849927684e76770fca9d26db2e59ba37bea14069603281"
+    },
+    "keys_layers_16_19_y40.png": {
+      "path": "figures/observations/keys_layers_16_19_y40.png",
+      "sha256": "efec05a23a1eb64027ed10c5e68cfe0c8bb021e6da7ab538939bc19ac8544f73"
+    },
+    "keys_layers_24_27_y40.png": {
+      "path": "figures/observations/keys_layers_24_27_y40.png",
+      "sha256": "e78d4b241f5e76b6b5dc69456696fd21ab282bdbcad56177d35ec86563ff67a1"
+    },
+    "keys_layers_00_03_y40.png": {
+      "path": "figures/observations/keys_layers_00_03_y40.png",
+      "sha256": "acc5293a71535c194ab891449a5a6e866985ea63280c6fd662e3156f1f5088ad"
+    },
+    "queries_layers_09_09_y40.png": {
+      "path": "figures/observations/queries_layers_09_09_y40.png",
+      "sha256": "24f992a4fc57391b7287a003abd9d12658b9108e0d6b9311714444e81597e7bd"
+    },
+    "queries_layers_12_12_y40.png": {
+      "path": "figures/observations/queries_layers_12_12_y40.png",
+      "sha256": "664cf25ce680f7d1a29fb33c877905b09d970718f33610ace784b581d805e315"
+    },
+    "queries_layers_01_01_y40.png": {
+      "path": "figures/observations/queries_layers_01_01_y40.png",
+      "sha256": "57ee9b65b7504e77be1f93eb5310bcf58d2081de23b3b8727d0b37f09d81c54c"
+    },
+    "queries_layers_27_27_y40.png": {
+      "path": "figures/observations/queries_layers_27_27_y40.png",
+      "sha256": "f420e6b1c7ae3699feb8c03856e3aabb0a9702892946ae830ce640a379f66339"
+    },
+    "keys_layers_20_23_y40.png": {
+      "path": "figures/observations/keys_layers_20_23_y40.png",
+      "sha256": "0768171ed80f57a371466b2b2d705350dc6802ff09b2f025ab6e64d569e12e27"
+    },
+    "queries_layers_21_21_y40.png": {
+      "path": "figures/observations/queries_layers_21_21_y40.png",
+      "sha256": "9aab782ee0ae08163c68a484f266b09e950078ceb41e476b4d81b6f8ad8a0133"
+    },
+    "queries_layers_14_14_y40.png": {
+      "path": "figures/observations/queries_layers_14_14_y40.png",
+      "sha256": "87aadbf23e6b5fdadfc5f0104aa09d046ba1917b4c1ed0897da08f6f683ab7e9"
+    },
+    "queries_layers_07_07_y40.png": {
+      "path": "figures/observations/queries_layers_07_07_y40.png",
+      "sha256": "b94ff904e2e45a96383d9ff4f368f2682b018f0bafb694f6705fa147c93b47f9"
+    },
+    "queries_layers_23_23_y40.png": {
+      "path": "figures/observations/queries_layers_23_23_y40.png",
+      "sha256": "e62e2ea2a669c16e99e033090276d3455a8fcd081215a95145f12978c35bdd5a"
+    },
+    "queries_layers_05_05_y40.png": {
+      "path": "figures/observations/queries_layers_05_05_y40.png",
+      "sha256": "264a7f8ae4116bf425f5de897b07faf67ada195f9a7d26b3eedbd1c15170002d"
+    },
+    "queries_layers_16_16_y40.png": {
+      "path": "figures/observations/queries_layers_16_16_y40.png",
+      "sha256": "8ef23b8a72216f8d2e9a695c9ec3e1fb5c7e5814e6c5c6a61ad117886dca783c"
+    },
+    "keys_layers_12_15_y40.png": {
+      "path": "figures/observations/keys_layers_12_15_y40.png",
+      "sha256": "a2b71fc7893471103fc7c34ab50f2f67eb5608eaf55f48ca5447c6fd76e31061"
+    },
+    "keys_layers_04_07_y40.png": {
+      "path": "figures/observations/keys_layers_04_07_y40.png",
+      "sha256": "e1827c083cdc3cdabbe1cff9a24ae7d8b97906332df80086bacaa0c5d5f796b3"
+    },
+    "keys_layers_08_11_y40.png": {
+      "path": "figures/observations/keys_layers_08_11_y40.png",
+      "sha256": "2698b64dff448ab1c626d2c5240bf46a048a8fffe9bb953f14ed5374f382f195"
+    },
+    "queries_layers_19_19_y40.png": {
+      "path": "figures/observations/queries_layers_19_19_y40.png",
+      "sha256": "3da237a0e8984a925cee5ec7573f0005e89901dcf4d7380bdb60fa7de54dcd78"
+    },
+    "queries_layers_02_02_y40.png": {
+      "path": "figures/observations/queries_layers_02_02_y40.png",
+      "sha256": "d95f3a978aaa12e21073b339ce5a8937351b958eba1574ec91bd44e3a907858d"
+    },
+    "queries_layers_11_11_y40.png": {
+      "path": "figures/observations/queries_layers_11_11_y40.png",
+      "sha256": "8fe777eb7654e3631f3fbcb76e6c0b18a8921790634768e69343b1a435a4b7e5"
+    },
+    "queries_layers_24_24_y40.png": {
+      "path": "figures/observations/queries_layers_24_24_y40.png",
+      "sha256": "dfa3908cf5a69896a2c16f19f7b128eba452af28b58f41b15caaea4ca12af864"
+    },
+    "queries_layers_13_13_y40.png": {
+      "path": "figures/observations/queries_layers_13_13_y40.png",
+      "sha256": "8eb3e42f263da676a9c97be3dd5d420d4729520404ca7c836453e88e0d530ea5"
+    },
+    "queries_layers_00_00_y40.png": {
+      "path": "figures/observations/queries_layers_00_00_y40.png",
+      "sha256": "9ce809ad843f90640e9d3d7597c7596e1c427b6dfa5a471085b938b986d11fed"
+    },
+    "queries_layers_26_26_y40.png": {
+      "path": "figures/observations/queries_layers_26_26_y40.png",
+      "sha256": "2a213ea2fe21f79ebddaf444078a266c4db3f903700852e73d2a45541255dccb"
+    },
+    "queries_layers_08_08_y40.png": {
+      "path": "figures/observations/queries_layers_08_08_y40.png",
+      "sha256": "26c47d702476a89cfe032968a5572b1b6b9ac3cccd1fe696b05d6dbd3621bd18"
+    },
+    "queries_layers_20_20_y40.png": {
+      "path": "figures/observations/queries_layers_20_20_y40.png",
+      "sha256": "1a2b6b16cc2cf15598bad3bf2965dad54de81e1392354aa2f476299efd4457d4"
+    },
+    "queries_layers_15_15_y40.png": {
+      "path": "figures/observations/queries_layers_15_15_y40.png",
+      "sha256": "92268d35648703c28656218f229148655cb453cdec67882360ed6334d7fc5167"
+    },
+    "queries_layers_06_06_y40.png": {
+      "path": "figures/observations/queries_layers_06_06_y40.png",
+      "sha256": "a0357290a42cb80543698da80281229c197e6534603a3f55d493b3f34a87fb45"
+    },
+    "queries_layers_22_22_y40.png": {
+      "path": "figures/observations/queries_layers_22_22_y40.png",
+      "sha256": "976960aa78628ba2270bf0053190b8be4b5856dea1cd9f0e29ef59b2c397604f"
+    },
+    "queries_layers_04_04_y40.png": {
+      "path": "figures/observations/queries_layers_04_04_y40.png",
+      "sha256": "d416adf6e945f12c3a439dd95bdab88503d0c64dea7dbdc39b3668cfc9b457f2"
+    },
+    "queries_layers_17_17_y40.png": {
+      "path": "figures/observations/queries_layers_17_17_y40.png",
+      "sha256": "dc681d8644c970817f4cc2cba3e042d2af8b995443a8cca6edd75d2e64f90fb9"
+    }
+  },
+  "original_pdfs": {
+    "keys_xy_dynamic.pdf": {
+      "path": "documents/keys_xy_dynamic.pdf",
+      "sha256": "a781e5a33c014d8d043cc583bf6e81481709d02eb7762deaff3ac17239750c05",
+      "pages": 7
+    },
+    "queries_xy_dynamic.pdf": {
+      "path": "documents/queries_xy_dynamic.pdf",
+      "sha256": "27d841ac96d384706e78f96dc4fa2a3d228a7a51b1f982238ac8f12060c8a297",
+      "pages": 28
+    },
+    "queries_all_layers_y40.pdf": {
+      "path": "documents/queries_all_layers_y40.pdf",
+      "sha256": "10a3d0d1b090d14a522d3e16141b12515a1418dfddaccd7958f930d61593076c",
+      "pages": 28
+    },
+    "keys_all_layers_y40.pdf": {
+      "path": "documents/keys_all_layers_y40.pdf",
+      "sha256": "682e315cbe388820127f9aee2947eb73d8865b6c00811b2723c340277fd4c18f",
+      "pages": 7
+    }
+  }
+}

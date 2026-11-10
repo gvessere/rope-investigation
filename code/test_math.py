@@ -26,6 +26,18 @@ class FourierChecks(unittest.TestCase):
             actual = np.sum(basis([m - n], omega)[0] * np.r_[a, b]) / np.sqrt(128)
             self.assertAlmostEqual(actual, expected, places=12)
 
+    def test_coordinated_phases_translate_the_whole_score(self):
+        rng = np.random.default_rng(12)
+        omega = frequencies()
+        a, b = rng.normal(size=(2, len(omega)))
+        positions = np.arange(256)
+        for shift in (-32, 0, 17, 32):
+            c, s = np.cos(omega * shift), np.sin(omega * shift)
+            shifted_coeff = np.r_[a*c-b*s, a*s+b*c]
+            direct = np.einsum("ij,j->i", basis(positions-shift, omega), np.r_[a,b])
+            rephased = np.einsum("ij,j->i", basis(positions, omega), shifted_coeff)
+            np.testing.assert_allclose(rephased, direct, atol=1e-12)
+
     def test_frequency_ratio_and_regularized_fit(self):
         omega = frequencies()
         np.testing.assert_allclose(omega[1:] / omega[:-1], 10000**(-2/128))
