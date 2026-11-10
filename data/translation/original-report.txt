@@ -1,0 +1,62 @@
+PHASE CHANGES THAT TRANSLATE IMPLICIT SEMANTIC RETRIEVAL — 2026-10-22
+
+Result and defensible claim
+We found evidence for a PARTIAL translation-like component of learned query phase in Qwen2.5-1.5B-Instruct, at layer23 head4, pairs16–31. The same semantic question is asked while its item list moves 20 or 40 tokens and the query token stays at exactly the same absolute position. On fresh confirmation, the actual phase-updated score profile matches the geometrically translated source profile better than the unchanged profile. A norm-preserving geometric phase correction also slightly improves the full model's target-versus-other-label margin. Accuracy is unchanged. Do not claim a rigid translation of the entire attention distribution or that the highest frequencies dominate.
+
+Task geometry and behavioral gate
+Four random-label records cover the 2x2 red/blue x round/square combinations. Query all four combinations. Example items are "red round : H"; the request is "Return the label for red round." Keep record order, labels, attributes and the question identical across a triplet. Move neutral weather sentences from after to before the whole list, preserving total token count. Every record-label position shifts by exactly 0/20/40 tokens; question-shape and assistant-prefix query positions stay fixed. Label token identities are unchanged. No row number, first/last instruction or explicit distance request is used. Semantic criteria are literal attributes, not abstract category generalization or a grammatical role.
+
+Pilot: 140/144 (97.2%). Initial discovery 187/192 (97.4%), initial heldout 544/576 (94.4%). Fresh confirmation 355/384 (92.4%). By relocation: 0 tokens 125/128, 20 tokens 117/128, 40 tokens 113/128. The 40-token confirmation condition is 88.3%, below 90%; pooled confirmation passes the predeclared overall 90% gate. Keep all failures. Query-to-target distances are 57–72, 37–52 and 17–32 tokens respectively.
+
+Capture both the final shape word of the question and the final assistant-prefix token, across all 28 layers x12 heads. Thus 672 readouts are inspected. The confirmed candidate is the assistant-prefix query, immediately before answer generation. RoPE pairs are split-half coordinates (j,j+64); all indices are zero-based.
+
+Geometric prediction
+For fixed query position m, translating key positions n by +delta rotates keys by +omega_j*delta. A compensating learned query phase change is therefore
+
+  delta_phi_query,j approximately +omega_j*delta.
+
+Query magnitudes need not change. This is not the trivial change of the query's own RoPE phase: m is held fixed. If source keys retain their learned content, a band contrast profile F(t) after phase compensation becomes F(t-delta). It is crucial to compare this prediction with an UNCHANGED profile, rather than merely showing that some phase intervention affects attention.
+
+Study sequence and candidate selection
+The primary high-band test (pairs0–15) failed: even the best eligible discovery candidate, L19H3 assistant-prefix, had heldout correlation .127 with the translated profile versus .849 with the unchanged profile. The study does not support coordinated highest-band translation here.
+
+Pairs16–31 showed an exploratory positive signal. We selected L23H4 on ORIGINAL DISCOVERY data by maximizing translated-profile correlation advantage among readouts with positive native semantic target-vs-other-label margin and >=.05 total attention to four label keys. We then froze that head, band, query position and a phase-shift scale fitted on discovery (lambda=0.95) before collecting 32 entirely new confirmation tables (seed2026102216), four semantic questions, three relocations per table. This fresh confirmation addresses the adaptive choice of the middle band after observing the first experiment. Nothing is selected on confirmation outcomes.
+
+Metrics (query norms always preserved)
+1. Profile geometry. Freeze source query magnitudes and source keys; transplant phases from the actual moved-context query. Evaluate the band's target-label-minus-mean-other-label logit contribution for synthetic key shifts t=-64..64. Compare actual donor-phase profile with the source profile translated by the true displacement and with the unchanged source profile. This comparison is sensitive to phase-coordinated shape translation, not just stronger target scoring.
+
+2. Translation-specific causal rescue. Freeze learned source keys and synthetically move their RoPE positions by delta. Measure donor phase benefit on these translated keys, subtract the same donor phase benefit on unshifted keys. This double difference removes generic content-matching benefit of donor phases. Compare a wrong-sign displacement as a control. Target-versus-sum-of-other-label log attention odds excludes prefix/body-gating effects. Interventions are local at the attention score unless explicitly labelled full-model below.
+
+Confirmation results: mean [95% table-bootstrap interval]
+  Correlation(actual, predicted translated profile): 0.89044 [0.86689, 0.91307]
+  Correlation(actual, unchanged source profile): 0.75493 [0.71261, 0.79540]
+  Paired profile-correlation advantage: 0.13551 [0.10137, 0.17011]
+  Translation-specific donor-phase rescue: 0.00845 [0.00687, 0.01009]
+  Wrong-sign translation rescue: -0.00652 [-0.00764, -0.00539]
+  Correct-minus-wrong rescue: 0.01496 [0.01227, 0.01770]
+  Weighted angular-law improvement over no phase update: 0.03238 [0.02783, 0.03682]
+
+Bootstrap 32 independent tables, keeping their four semantic queries, three relocations and six ordered transfers clustered; 3000 resamples. Source/destination transfers include both displacement signs and sizes. On the 113/128 query triplets answered correctly in all three positions, profile advantage is 0.13246, rescue 0.00914. These are robustness subsets, not the primary analysis.
+
+Phase-law fit on confirmation: lambda=0.885, bootstrap interval 0.830–0.945; discovery-frozen prediction lambda=.95. Identity phase error 0.08396; frozen geometric prediction error 0.05318; improvement 0.03078 [0.02678, 0.03463]. Weighted circular error uses natural query times target-minus-mean-foil-key coefficient magnitudes, without changing or zeroing magnitudes. Phase-by-pair plot explicitly shows departures from the rigid law; aggregate fit does not imply every pair obeys it.
+
+Key-content control
+Actual keys can change learned content because background text moves. After undoing known RoPE rotations, mean target-key cosine is 0.98105 over all128 coordinates and 0.98675 within the tested band. They are similar, not identical. Synthetic-score tests freeze source key content to isolate geometry; these tests cannot remove all contextual confounds in the actual model by themselves.
+
+Full-model forward intervention
+On the 256 moved confirmation prompts, freeze the original-location source query phase at L23H4 pairs16–31, keep the native destination query magnitudes and actual destination keys, and compare: source phase; source phase + .95*omega*delta; source phase - .95*omega*delta; native destination phase. Recompute all subsequent layers and first-answer-token logits.
+  Corrected-minus-source TARGET VS OTHER THREE LABELS log odds: 0.00569 [0.00437, 0.00698]
+  Corrected-minus-wrong-direction label log odds: 0.01202 [0.00924, 0.01485]
+  Corrected-minus-native label log odds: -0.00304 [-0.00398, -0.00217]
+  Corrected-minus-source FULL-VOCABULARY target log probability: -0.00039 [-0.00100, 0.00013]
+  First-token accuracy: native/source/corrected/wrong are all 230/256 (89.8%). These are the moved subset, not all384 confirmation prompts.
+The geometric correction improves label discrimination slightly (about .006 natural-log odds) but does not measurably improve full-vocabulary target probability or accuracy. Native phase remains slightly better than reconstructed phase. This is evidence of a small causal contribution to label selection, not recovery of an entire retrieval circuit or a large behavioral effect. Full greedy generations were used for native task qualification; interventions here evaluate the first-token distribution only.
+
+What the result establishes
+A same-meaning retrieval query can change phase in a direction consistent with compensating the implicit relocation of its semantic target. We observe this component in a middle-frequency band and verify a small causal effect on target-versus-distractor output scores. It is partial and head-specific. The result does not establish an exactly translated attention window, a universal semantic role per pair, generalization to other semantic tasks, or high-frequency dominance. Literal semantic matching and implicit positional compensation are tested; explicit ordinal retrieval is not required.
+
+Numerical checks
+Within-triplet query positions and rigid label translations asserted for every capture. Ideal predicted score profile equals explicitly shifted source profile with maximum error 5.55e-17. Local pair magnitude error 2.13e-14; full-model float32 pair magnitude error 2.38e-07. All native and patched Q/K amplitudes remain present; no amplitude-zeroing probes.
+
+Reproduction
+Scripts and compact results are in reproduce.zip. Full captures remain under research/outputs/implicit_semantic_translation/ and confirmation/. Run implicit_semantic_translation.py pilot/capture, analyze_implicit_semantic_translation.py, freeze the documented confirmation choice, implicit_semantic_translation.py confirm, analyze_implicit_semantic_translation.py --confirmation --compute-only, implicit_translation_end_to_end.py, report_implicit_semantic_translation.py. Local cache/runtime paths are in balanced_rope.py. The confirmation lock is a recorded research decision, not an automatic rule that selects on confirmation. Saved examples include complete prompts, expected labels, answers, positions and displacements.

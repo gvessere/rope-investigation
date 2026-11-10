@@ -168,3 +168,32 @@ Bias conclusions distinguish a constant additive bias from an input-dependent
 query/key vector. Density figures and phase rounding do not establish universal
 preferred angles. The related direct-pair PolarQuant paper is Wu et al.,
 arXiv:2502.00527; the distinct preconditioned PolarQuant paper is arXiv:2502.02617.
+
+## Translation evidence: L23 H4, pairs 16–31
+
+Run `python code/translation.py` to regenerate the three translation figures.
+This independently recomputes diagnostic profile correlations, local phase-rescue
+metrics, the phase-scale fit, and table-bootstrap intervals from the posted
+`data/translation/L23-H4-captures.npz` and prompts. It verifies agreement with the
+original saved metrics and summary, verifies fixed query positions and rigid key
+relocations, and checks the geometric translation identity and preserved pair radii.
+Output-effect intervals are recomputed from the original per-prompt intervention
+measurements. This requires only the main requirements, with no model download.
+
+The captures are a lossless extraction of layer 23, head 4, final assistant-prefix
+query from the original 2026-10-22 confirmation run. Q/K are post-RoPE, split-half
+coordinates `(j,j+64)`. The query position is held fixed across placements, so its
+known positional rotation cannot explain the phase differences. The candidate and
+discovery-fitted correction scale were frozen before 32 new confirmation tables.
+The highest-band exploratory failure is retained in the article and original report.
+The source was selected after an exploratory search; this is not a preregistered
+initial candidate or evidence for universal natural attention translation.
+
+`data/translation/provenance.json` records hashes and array layouts;
+`locked-selection.json` records the frozen choice; `prompts.json` contains all
+384 prompts and native answers; `output-interventions.json` contains the 1,024
+first-token measurements (256 moved prompts × four modes). The figures are
+reanalyses of these saved measurements, not fresh inference. No inference runner
+for this original experiment is implied by the lightweight plotting command.
+Full-vocabulary target probability and first-token accuracy did not improve, and
+the geometric correction was worse than the native phase on target-label log odds.

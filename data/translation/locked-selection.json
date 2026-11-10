@@ -1,0 +1,22 @@
+{
+  "layer": 23,
+  "anchor": 1,
+  "anchor_name": "assistant_prefix",
+  "head": 4,
+  "band": [
+    16,
+    32
+  ],
+  "discovery_profile_advantage": 0.19595941943110912,
+  "phase_shift_scale": 0.9500000000000002,
+  "phase_scale_grid": [
+    -2,
+    2,
+    0.005
+  ],
+  "discovery_loss_fitted": 0.05286662359951359,
+  "discovery_loss_identity": 0.086848004762514,
+  "discovery_loss_full_translation": 0.0529548022699594,
+  "selection": "Middle-band follow-up motivated by exploratory study; candidate selected on original discovery only. Independent confirmation seed2026102216, 32 new tables x four questions x three relocations. Freeze before confirmation capture.",
+  "tests": "Confirmation native accuracy >=90%; translated-profile correlation advantage>0; translation-specific donor-phase benefit>0; right-minus-wrong geometric shift benefit>0. Table-bootstrap intervals. Partial phase-shift scale fitted on discovery only, not confirmation."
+}

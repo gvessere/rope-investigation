@@ -1,0 +1,29 @@
+{
+  "source": "Original implicit_semantic_translation/confirmation experiment, 2026-10-22; extracted losslessly from original layer/head captures. No new model run.",
+  "selection": {
+    "layer": 23,
+    "head": 4,
+    "query_anchor": 1,
+    "query": "final assistant-prefix token",
+    "pairs_zero_based_inclusive": [
+      16,
+      31
+    ]
+  },
+  "capture_layout": {
+    "q": "[128 query triplets, 3 placements, 128 coordinates]",
+    "k": "[128 query triplets, 3 placements, 4 label keys, 128 coordinates]",
+    "scores": "[128 query triplets, 3 placements, 4 label scores]",
+    "coordinates": "post-RoPE split-half pairs (j,j+64); FP32 captured values"
+  },
+  "files_sha256": {
+    "locked-selection.json": "07a5582bcc5fbc3d00c769000f63f7554e513848c72360aaf149a8582e3a305d",
+    "candidate-metrics.npz": "80d1d5ba8dd806ff85e8df6de629faddb2ad48b961906a81c457960f7e861609",
+    "original-summary.json": "ba535d6cd9c0ab4f627931a6f9dd2c313db0fa7d8efc1eb9545949b814668050",
+    "original-report.txt": "6a019f5cd3b4b330aa081cb961119b9a78294c50ce44d229c25c552ff9fe306d",
+    "L23-H4-captures.npz": "b7c8c32303e2dfcc414f216a7ae438f3ef6b753dd723fb3bc53b27e459407c19",
+    "output-summary.json": "af53879e36c5c35ad683b103f54916abbffadd0c5611055aacb42bc872792f87",
+    "output-interventions.json": "52fd320d76807d44328888e64f9be9b4a522db2ce6326a5ad6587526c7284bbd",
+    "prompts.json": "22add4e771ec441e2041a003acc75fc2c15881eabcad9083d8f57fdf3835de0c"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "target_logodds": {
+    "corrected_minus_source": {
+      "mean": 0.0056924344075852005,
+      "table_bootstrap95": [
+        0.0043686288722963006,
+        0.006976146006826189
+      ]
+    },
+    "corrected_minus_wrong": {
+      "mean": 0.012021643916523784,
+      "table_bootstrap95": [
+        0.009239310324530708,
+        0.014851517072380126
+      ]
+    },
+    "corrected_minus_native": {
+      "mean": -0.0030440203308413306,
+      "table_bootstrap95": [
+        -0.003984033210467271,
+        -0.002174866282621762
+      ]
+    }
+  },
+  "target_logprob": {
+    "corrected_minus_source": {
+      "mean": -0.0003878185918184128,
+      "table_bootstrap95": [
+        -0.001003180756540272,
+        0.00013444024638630008
+      ]
+    },
+    "corrected_minus_wrong": {
+      "mean": -0.0006572580071663176,
+      "table_bootstrap95": [
+        -0.0019180251710360333,
+        0.000466837474962339
+      ]
+    },
+    "corrected_minus_native": {
+      "mean": -1.3106944111408728e-06,
+      "table_bootstrap95": [
+        -0.00014705083229952978,
+        0.00013707179914626303
+      ]
+    }
+  },
+  "first_token_accuracy": {
+    "native": {
+      "correct": 230,
+      "n": 256
+    },
+    "source_phase": {
+      "correct": 230,
+      "n": 256
+    },
+    "translated_phase": {
+      "correct": 230,
+      "n": 256
+    },
+    "wrong_direction": {
+      "correct": 230,
+      "n": 256
+    }
+  },
+  "intervention": {
+    "layer": 23,
+    "head": 4,
+    "pairs": [
+      16,
+      31
+    ],
+    "query": "last assistant-prefix token",
+    "source": "same semantic question, list at original location",
+    "scale": 0.9500000000000002,
+    "frozen_on": "original discovery; new confirmation tables",
+    "max_pair_magnitude_error": 2.384185791015625e-07,
+    "scope": "Full-model forward to first answer-token distribution, not full greedy-answer generation. Native destination magnitudes preserved, actual destination keys fixed. Compare source phase, source phase + lambda*omega*delta, source phase - lambda*omega*delta, and native."
+  }
+}
