@@ -18,6 +18,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install figure dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check the math
+        run: python -m unittest discover -s code -p 'test_*.py'
+      - name: Regenerate all published figures
+        run: python code/figures.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

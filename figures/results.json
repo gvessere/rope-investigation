@@ -1,0 +1,32 @@
+{
+  "d": 128,
+  "base": 10000,
+  "ridge": 0.001,
+  "fit_interval": [
+    0,
+    255
+  ],
+  "dft_full_max_error": 2.671474153004283e-16,
+  "rope_examples": {
+    "A peak eighty tokens away": {
+      "rmse": 0.006879895327295626,
+      "max_error": 0.016703539557337443,
+      "coefficient_norm": 1.24419865930333
+    },
+    "A broad neighborhood": {
+      "rmse": 0.0010776711188205622,
+      "max_error": 0.0024621655901494455,
+      "coefficient_norm": 0.2978046550272763
+    },
+    "Two separate regions": {
+      "rmse": 0.007366059555002345,
+      "max_error": 0.019711070677350024,
+      "coefficient_norm": 0.9170154632799021
+    },
+    "A one-token spike": {
+      "rmse": 0.057106033103005015,
+      "max_error": 0.8354405444816212,
+      "coefficient_norm": 0.7740776386619529
+    }
+  }
+}
