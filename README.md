@@ -211,3 +211,15 @@ exact dense prefill excluded. Larger microbenchmark batches repeat three real
 contexts. The 4+4-bit compact-scoring prototype retains full original K/V and
 is distinct from the small, slow-pair phase-only intervention. It is not an
 official PolarQuant reproduction. Run-to-run timing variation is substantial.
+
+## Slow-frequency explanation
+
+`python code/slow_frequencies.py` regenerates the period/basis figure and
+`data/analysis/slow-frequencies.json` from the posted Qwen config at revision
+989aa7980e4cf806f80c7fef2b1adb7bc71aa306. It verifies the geometric schedule,
+counts the last five pairs below 0.1 radians per configured window, and checks
+the uniform cosine score-change bound numerically across phases and offsets.
+This is an analytic illustration, not measured model attention. Small positional
+rotation does not imply that setting a learned content phase to zero is harmless.
+The constructed approximation examples intentionally retain their B=10,000
+setting; the new illustration uses the actual model's B=1,000,000.

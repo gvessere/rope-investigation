@@ -1,0 +1,461 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "config_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "config_source": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json",
+  "base": 1000000.0,
+  "head_dimension": 128,
+  "context_tokens": 32768,
+  "max_displacement": 32767,
+  "pairs": [
+    {
+      "pair": 0,
+      "omega": 1.0,
+      "period_tokens": 6.283185307179586,
+      "rotation_over_window_radians": 32767.0,
+      "rotation_over_256_tokens": 256.0
+    },
+    {
+      "pair": 1,
+      "omega": 0.8058421877614819,
+      "period_tokens": 7.79704190547954,
+      "rotation_over_window_radians": 26405.030966380476,
+      "rotation_over_256_tokens": 206.29560006693936
+    },
+    {
+      "pair": 2,
+      "omega": 0.6493816315762113,
+      "period_tokens": 9.675643722673103,
+      "rotation_over_window_radians": 21278.287921857715,
+      "rotation_over_256_tokens": 166.2416976835101
+    },
+    {
+      "pair": 3,
+      "omega": 0.5232991146814947,
+      "period_tokens": 12.00687165504539,
+      "rotation_over_window_radians": 17146.942090768538,
+      "rotation_over_256_tokens": 133.96457335846264
+    },
+    {
+      "pair": 4,
+      "omega": 0.4216965034285822,
+      "period_tokens": 14.899780425245321,
+      "rotation_over_window_radians": 13817.729327844354,
+      "rotation_over_256_tokens": 107.95430487771705
+    },
+    {
+      "pair": 5,
+      "omega": 0.33982083289425596,
+      "period_tokens": 18.489700156596232,
+      "rotation_over_window_radians": 11134.909231446085,
+      "rotation_over_256_tokens": 86.99413322092953
+    },
+    {
+      "pair": 6,
+      "omega": 0.27384196342643613,
+      "period_tokens": 22.944567109297246,
+      "rotation_over_window_radians": 8972.979615594033,
+      "rotation_over_256_tokens": 70.10354263716765
+    },
+    {
+      "pair": 7,
+      "omega": 0.220673406908459,
+      "period_tokens": 28.47277973002888,
+      "rotation_over_window_radians": 7230.805524169476,
+      "rotation_over_256_tokens": 56.4923921685655
+    },
+    {
+      "pair": 8,
+      "omega": 0.1778279410038923,
+      "period_tokens": 35.33294752055899,
+      "rotation_over_window_radians": 5826.888142874539,
+      "rotation_over_256_tokens": 45.52395289699643
+    },
+    {
+      "pair": 9,
+      "omega": 0.14330125702369628,
+      "period_tokens": 43.84598877692049,
+      "rotation_over_window_radians": 4695.5522888954565,
+      "rotation_over_256_tokens": 36.68512179806625
+    },
+    {
+      "pair": 10,
+      "omega": 0.11547819846894582,
+      "period_tokens": 54.410143130776746,
+      "rotation_over_window_radians": 3783.874129231948,
+      "rotation_over_256_tokens": 29.56241880805013
+    },
+    {
+      "pair": 11,
+      "omega": 0.0930572040929699,
+      "period_tokens": 67.51960117888665,
+      "rotation_over_window_radians": 3049.2054065143448,
+      "rotation_over_256_tokens": 23.822644247800294
+    },
+    {
+      "pair": 12,
+      "omega": 0.07498942093324558,
+      "period_tokens": 83.78762269377677,
+      "rotation_over_window_radians": 2457.1783557196577,
+      "rotation_over_256_tokens": 19.19729175891087
+    },
+    {
+      "pair": 13,
+      "omega": 0.060429639023813285,
+      "period_tokens": 103.9752248843253,
+      "rotation_over_window_radians": 1980.09798189329,
+      "rotation_over_256_tokens": 15.469987590096201
+    },
+    {
+      "pair": 14,
+      "omega": 0.04869675251658631,
+      "period_tokens": 129.0267827416111,
+      "rotation_over_window_radians": 1595.6464897109836,
+      "rotation_over_256_tokens": 12.466368644246096
+    },
+    {
+      "pair": 15,
+      "omega": 0.03924189758484536,
+      "period_tokens": 160.1142068523735,
+      "rotation_over_window_radians": 1285.8392581626279,
+      "rotation_over_256_tokens": 10.045925781720412
+    },
+    {
+      "pair": 16,
+      "omega": 0.03162277660168379,
+      "period_tokens": 198.69176531592203,
+      "rotation_over_window_radians": 1036.183520907373,
+      "rotation_over_256_tokens": 8.09543081003105
+    },
+    {
+      "pair": 17,
+      "omega": 0.025482967479793464,
+      "period_tokens": 246.56411433094647,
+      "rotation_over_window_radians": 835.0003954103925,
+      "rotation_over_256_tokens": 6.523639674827127
+    },
+    {
+      "pair": 18,
+      "omega": 0.02053525026457146,
+      "period_tokens": 305.9707199195757,
+      "rotation_over_window_radians": 672.8785454192131,
+      "rotation_over_256_tokens": 5.257024067730294
+    },
+    {
+      "pair": 19,
+      "omega": 0.016548170999431813,
+      "period_tokens": 379.69062003258983,
+      "rotation_over_window_radians": 542.2339191383822,
+      "rotation_over_256_tokens": 4.236331775854544
+    },
+    {
+      "pair": 20,
+      "omega": 0.01333521432163324,
+      "period_tokens": 471.1724278016739,
+      "rotation_over_window_radians": 436.9549676769564,
+      "rotation_over_256_tokens": 3.4138148663381096
+    },
+    {
+      "pair": 21,
+      "omega": 0.010746078283213174,
+      "period_tokens": 584.6956574841605,
+      "rotation_over_window_radians": 352.1167471060461,
+      "rotation_over_256_tokens": 2.7509960405025726
+    },
+    {
+      "pair": 22,
+      "omega": 0.008659643233600654,
+      "period_tokens": 725.5709199196485,
+      "rotation_over_window_radians": 283.7505298353926,
+      "rotation_over_256_tokens": 2.2168686678017675
+    },
+    {
+      "pair": 23,
+      "omega": 0.006978305848598663,
+      "period_tokens": 900.3883526316539,
+      "rotation_over_window_radians": 228.6581477410324,
+      "rotation_over_256_tokens": 1.7864462972412578
+    },
+    {
+      "pair": 24,
+      "omega": 0.005623413251903491,
+      "period_tokens": 1117.3259061216543,
+      "rotation_over_window_radians": 184.2623820251217,
+      "rotation_over_256_tokens": 1.4395937924872937
+    },
+    {
+      "pair": 25,
+      "omega": 0.004531583637600818,
+      "period_tokens": 1386.5319079724916,
+      "rotation_over_window_radians": 148.486401053266,
+      "rotation_over_256_tokens": 1.1600854112258094
+    },
+    {
+      "pair": 26,
+      "omega": 0.003651741272548377,
+      "period_tokens": 1720.599801090193,
+      "rotation_over_window_radians": 119.65660627759267,
+      "rotation_over_256_tokens": 0.9348457657723845
+    },
+    {
+      "pair": 27,
+      "omega": 0.002942727176209282,
+      "period_tokens": 2135.1572643147183,
+      "rotation_over_window_radians": 96.42434138284955,
+      "rotation_over_256_tokens": 0.7533381571095762
+    },
+    {
+      "pair": 28,
+      "omega": 0.0023713737056616554,
+      "period_tokens": 2649.597274431474,
+      "rotation_over_window_radians": 77.70280221341547,
+      "rotation_over_256_tokens": 0.6070716686493838
+    },
+    {
+      "pair": 29,
+      "omega": 0.0019109529749704406,
+      "period_tokens": 3287.9853086268527,
+      "rotation_over_window_radians": 62.61619613085643,
+      "rotation_over_256_tokens": 0.4892039615924328
+    },
+    {
+      "pair": 30,
+      "omega": 0.001539926526059492,
+      "period_tokens": 4080.185126271958,
+      "rotation_over_window_radians": 50.45877247939138,
+      "rotation_over_256_tokens": 0.39422119067122996
+    },
+    {
+      "pair": 31,
+      "omega": 0.0012409377607517195,
+      "period_tokens": 5063.255794048396,
+      "rotation_over_window_radians": 40.6618076065516,
+      "rotation_over_256_tokens": 0.3176800667524402
+    },
+    {
+      "pair": 32,
+      "omega": 0.001,
+      "period_tokens": 6283.185307179586,
+      "rotation_over_window_radians": 32.767,
+      "rotation_over_256_tokens": 0.256
+    },
+    {
+      "pair": 33,
+      "omega": 0.0008058421877614818,
+      "period_tokens": 7797.041905479541,
+      "rotation_over_window_radians": 26.405030966380473,
+      "rotation_over_256_tokens": 0.20629560006693934
+    },
+    {
+      "pair": 34,
+      "omega": 0.0006493816315762113,
+      "period_tokens": 9675.643722673101,
+      "rotation_over_window_radians": 21.278287921857718,
+      "rotation_over_256_tokens": 0.1662416976835101
+    },
+    {
+      "pair": 35,
+      "omega": 0.0005232991146814947,
+      "period_tokens": 12006.87165504539,
+      "rotation_over_window_radians": 17.146942090768537,
+      "rotation_over_256_tokens": 0.13396457335846265
+    },
+    {
+      "pair": 36,
+      "omega": 0.00042169650342858224,
+      "period_tokens": 14899.78042524532,
+      "rotation_over_window_radians": 13.817729327844354,
+      "rotation_over_256_tokens": 0.10795430487771705
+    },
+    {
+      "pair": 37,
+      "omega": 0.00033982083289425596,
+      "period_tokens": 18489.70015659623,
+      "rotation_over_window_radians": 11.134909231446086,
+      "rotation_over_256_tokens": 0.08699413322092953
+    },
+    {
+      "pair": 38,
+      "omega": 0.0002738419634264361,
+      "period_tokens": 22944.567109297248,
+      "rotation_over_window_radians": 8.972979615594031,
+      "rotation_over_256_tokens": 0.07010354263716764
+    },
+    {
+      "pair": 39,
+      "omega": 0.00022067340690845897,
+      "period_tokens": 28472.779730028884,
+      "rotation_over_window_radians": 7.230805524169475,
+      "rotation_over_256_tokens": 0.0564923921685655
+    },
+    {
+      "pair": 40,
+      "omega": 0.00017782794100389227,
+      "period_tokens": 35332.94752055899,
+      "rotation_over_window_radians": 5.826888142874538,
+      "rotation_over_256_tokens": 0.04552395289699642
+    },
+    {
+      "pair": 41,
+      "omega": 0.00014330125702369627,
+      "period_tokens": 43845.988776920494,
+      "rotation_over_window_radians": 4.695552288895456,
+      "rotation_over_256_tokens": 0.036685121798066246
+    },
+    {
+      "pair": 42,
+      "omega": 0.00011547819846894582,
+      "period_tokens": 54410.14313077675,
+      "rotation_over_window_radians": 3.7838741292319478,
+      "rotation_over_256_tokens": 0.02956241880805013
+    },
+    {
+      "pair": 43,
+      "omega": 9.30572040929699e-05,
+      "period_tokens": 67519.60117888665,
+      "rotation_over_window_radians": 3.0492054065143446,
+      "rotation_over_256_tokens": 0.023822644247800295
+    },
+    {
+      "pair": 44,
+      "omega": 7.498942093324559e-05,
+      "period_tokens": 83787.62269377676,
+      "rotation_over_window_radians": 2.457178355719658,
+      "rotation_over_256_tokens": 0.01919729175891087
+    },
+    {
+      "pair": 45,
+      "omega": 6.042963902381328e-05,
+      "period_tokens": 103975.2248843253,
+      "rotation_over_window_radians": 1.9800979818932898,
+      "rotation_over_256_tokens": 0.0154699875900962
+    },
+    {
+      "pair": 46,
+      "omega": 4.869675251658631e-05,
+      "period_tokens": 129026.78274161111,
+      "rotation_over_window_radians": 1.5956464897109837,
+      "rotation_over_256_tokens": 0.012466368644246096
+    },
+    {
+      "pair": 47,
+      "omega": 3.924189758484536e-05,
+      "period_tokens": 160114.20685237352,
+      "rotation_over_window_radians": 1.285839258162628,
+      "rotation_over_256_tokens": 0.010045925781720411
+    },
+    {
+      "pair": 48,
+      "omega": 3.1622776601683795e-05,
+      "period_tokens": 198691.765315922,
+      "rotation_over_window_radians": 1.0361835209073729,
+      "rotation_over_256_tokens": 0.008095430810031052
+    },
+    {
+      "pair": 49,
+      "omega": 2.5482967479793464e-05,
+      "period_tokens": 246564.11433094647,
+      "rotation_over_window_radians": 0.8350003954103924,
+      "rotation_over_256_tokens": 0.006523639674827127
+    },
+    {
+      "pair": 50,
+      "omega": 2.0535250264571462e-05,
+      "period_tokens": 305970.7199195756,
+      "rotation_over_window_radians": 0.6728785454192131,
+      "rotation_over_256_tokens": 0.005257024067730294
+    },
+    {
+      "pair": 51,
+      "omega": 1.6548170999431813e-05,
+      "period_tokens": 379690.6200325898,
+      "rotation_over_window_radians": 0.5422339191383823,
+      "rotation_over_256_tokens": 0.004236331775854544
+    },
+    {
+      "pair": 52,
+      "omega": 1.333521432163324e-05,
+      "period_tokens": 471172.42780167394,
+      "rotation_over_window_radians": 0.4369549676769564,
+      "rotation_over_256_tokens": 0.0034138148663381096
+    },
+    {
+      "pair": 53,
+      "omega": 1.0746078283213176e-05,
+      "period_tokens": 584695.6574841605,
+      "rotation_over_window_radians": 0.3521167471060461,
+      "rotation_over_256_tokens": 0.002750996040502573
+    },
+    {
+      "pair": 54,
+      "omega": 8.659643233600654e-06,
+      "period_tokens": 725570.9199196486,
+      "rotation_over_window_radians": 0.2837505298353926,
+      "rotation_over_256_tokens": 0.0022168686678017673
+    },
+    {
+      "pair": 55,
+      "omega": 6.978305848598663e-06,
+      "period_tokens": 900388.3526316539,
+      "rotation_over_window_radians": 0.2286581477410324,
+      "rotation_over_256_tokens": 0.0017864462972412578
+    },
+    {
+      "pair": 56,
+      "omega": 5.623413251903491e-06,
+      "period_tokens": 1117325.9061216542,
+      "rotation_over_window_radians": 0.18426238202512168,
+      "rotation_over_256_tokens": 0.0014395937924872937
+    },
+    {
+      "pair": 57,
+      "omega": 4.531583637600818e-06,
+      "period_tokens": 1386531.9079724916,
+      "rotation_over_window_radians": 0.148486401053266,
+      "rotation_over_256_tokens": 0.0011600854112258094
+    },
+    {
+      "pair": 58,
+      "omega": 3.651741272548377e-06,
+      "period_tokens": 1720599.801090193,
+      "rotation_over_window_radians": 0.11965660627759267,
+      "rotation_over_256_tokens": 0.0009348457657723845
+    },
+    {
+      "pair": 59,
+      "omega": 2.9427271762092816e-06,
+      "period_tokens": 2135157.2643147185,
+      "rotation_over_window_radians": 0.09642434138284953,
+      "rotation_over_256_tokens": 0.0007533381571095761
+    },
+    {
+      "pair": 60,
+      "omega": 2.3713737056616552e-06,
+      "period_tokens": 2649597.274431474,
+      "rotation_over_window_radians": 0.07770280221341545,
+      "rotation_over_256_tokens": 0.0006070716686493837
+    },
+    {
+      "pair": 61,
+      "omega": 1.9109529749704404e-06,
+      "period_tokens": 3287985.308626853,
+      "rotation_over_window_radians": 0.06261619613085642,
+      "rotation_over_256_tokens": 0.0004892039615924328
+    },
+    {
+      "pair": 62,
+      "omega": 1.539926526059492e-06,
+      "period_tokens": 4080185.1262719585,
+      "rotation_over_window_radians": 0.05045877247939137,
+      "rotation_over_256_tokens": 0.00039422119067122994
+    },
+    {
+      "pair": 63,
+      "omega": 1.2409377607517195e-06,
+      "period_tokens": 5063255.794048396,
+      "rotation_over_window_radians": 0.040661807606551595,
+      "rotation_over_256_tokens": 0.0003176800667524402
+    }
+  ],
+  "pairs_under_one_cycle": 24,
+  "pairs_under_point_one_radian": 5
+}
