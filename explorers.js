@@ -35,15 +35,15 @@
       : `${kind.value}_layers_${pad(currentLayer)}_${pad(end)}_y40.png`;
     const pdf = view.value === 'xy' ? `${kind.value}_xy_dynamic.pdf` : `${kind.value}_all_layers_y40.pdf`;
     const layer = q ? `Layer ${currentLayer}` : `Layers ${currentLayer}–${end}`;
-    image.src = `figures/observations/${file}`;
+    image.src = `figures/observations/${file}?v=pi-guides-1`;
     image.alt = `${layer}, ${q ? 'twelve query heads' : 'two shared key heads per layer'}: ${view.value === 'xy' ? 'pre-RoPE Cartesian coordinates, full range, equal x/y scales in each panel' : 'pre-RoPE phase versus amplitude, amplitude capped at 40'}. Color indicates frequency-pair index.`;
     image.width = view.value === 'xy' ? (q ? 2040 : 1320) : (q ? 1920 : 1440);
     image.height = view.value === 'xy' ? (q ? 1560 : 1920) : (q ? 1320 : 1680);
     status.textContent = `${layer} · ${q ? '12 query heads' : '8 shared-key panels'} · page ${page.selectedIndex+1} of ${page.options.length}`;
     caption.textContent = view.value === 'xy'
-      ? 'Original Cartesian plot. Each panel has its own full range, with equal x/y units and no clipping. Compare tick values across heads. Color: pair 0 (highest frequency) → pair 63 (lowest).'
-      : `Original phase/amplitude plot. Phase spans 0–2π; amplitude is capped at 40, hiding ${q ? '4,582 points (0.0277%)' : '61,854 points (0.7254%)'} across the complete ${kind.value} collection. Switch to Cartesian coordinates to see the full range.`;
-    download.href = `documents/${pdf}`;
+      ? 'Cartesian plot with dotted gray guides at multiples of π/4 and π/3. Each panel has its own full range, with equal x/y units and no clipping. Compare tick values across heads. Color: pair 0 (highest frequency) → pair 63 (lowest).'
+      : `Phase/amplitude plot with dotted gray guides at multiples of π/4 and π/3. Phase spans 0–2π; amplitude is capped at 40, hiding ${q ? '4,582 points (0.0277%)' : '61,854 points (0.7254%)'} across the complete ${kind.value} collection. Switch to Cartesian coordinates to see the full range.`;
+    download.href = `documents/${pdf}?v=pi-guides-1`;
     full.href = image.src;
     previous.disabled = page.selectedIndex === 0;
     next.disabled = page.selectedIndex === page.options.length - 1;

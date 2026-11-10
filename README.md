@@ -50,11 +50,14 @@ Earlier articles and experiments remain available in Git history.
 
 ## Original model plots and the dynamic viewer
 
-The viewer in `index.html` and `explorers.js` displays all 70 original PNG pages
+The viewer in `index.html` and `explorers.js` displays all 70 plot pages based on the original data
 from the four requested investigation PDFs, with query/key, view, and layer
-selectors, previous/next controls, enlargement, and original PDF downloads.
-Images are reused unchanged from the investigation (SHA-256 recorded in
-`data/observations/manifest.json`). The CSS preserves each image's aspect ratio.
+selectors, previous/next controls, enlargement, and PDF downloads.
+Dotted gray angular guides have been added at the union of multiples of π/4
+and π/3 (including π/4, π/3, π/2, 2π/3, 3π/4 and their continuations around
+the circle). Cartesian guides are labeled rays; phase guides are labeled
+vertical lines. Original source hashes and current rendered-file hashes are
+recorded separately in `data/observations/manifest.json`. The CSS preserves each image's aspect ratio.
 
 The 56 NPZ files in `data/observations/` are **lossless layer splits** of the
 original float32 amplitude/phase arrays: no token subsampling, rounding,
@@ -70,8 +73,8 @@ python code/reproduce_observations.py --pdf
 
 The last command regenerates all 70 PNG pages and all four PDFs. PDF metadata
 (e.g. creation dates) may differ; plot data and rendering instructions are
-preserved. Local verification with the pinned packages reproduced representative
-query-Cartesian and key-phase pages pixel for pixel. `--verify` checks every data
+preserved. Before angular guides were added, local verification with the pinned packages
+reproduced representative query-Cartesian and key-phase pages pixel for pixel. `--verify` checks every data
 chunk hash, shape, finite values, phase range, point count and amplitude-cap
 count. The full dataset is about 170 MB and every file is below GitHub's 100 MB
 limit. All original plot pages include every saved point; only the phase view's

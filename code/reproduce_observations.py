@@ -2,9 +2,10 @@
 
 Run: python code/reproduce_observations.py --kind queries --view xy --page 0
 Omit filters to regenerate all pages. Add --pdf to also regenerate all four PDFs.
-The published PNGs/PDFs are the original investigation files, not replacements.
+The original data and layouts are retained; dotted gray angle guides are added.
 """
 from pathlib import Path
+from fractions import Fraction
 import argparse
 import json
 import hashlib
@@ -21,6 +22,38 @@ PLOTS=ROOT/'figures/observations'
 COLORS=plt.get_cmap('turbo')(np.arange(64)/63)
 plt.rcParams.update({'font.size':9})
 SM=plt.cm.ScalarMappable(norm=Normalize(0,63),cmap='turbo')
+
+# Union of quarter-turn and third-turn subdivisions, without duplicate angles.
+ANGLE_FRACTIONS=sorted(set(Fraction(k,4) for k in range(8)) |
+                       set(Fraction(k,3) for k in range(6)))
+
+
+def pi_label(fraction):
+    if fraction==0:return '0'
+    numerator='π' if fraction.numerator==1 else f'{fraction.numerator}π'
+    return numerator if fraction.denominator==1 else f'{numerator}/{fraction.denominator}'
+
+
+def angle_guides(ax,view,limit=None):
+    for fraction in ANGLE_FRACTIONS:
+        angle=float(fraction)*np.pi
+        if view=='xy':
+            c,s=np.cos(angle),np.sin(angle)
+            radius=limit/max(abs(c),abs(s))
+            ax.plot([0,radius*c],[0,radius*s],color='0.60',lw=.65,
+                    linestyle=(0,(1,2.5)),zorder=.5)
+            ax.text(.88*radius*c,.88*radius*s,pi_label(fraction),
+                    ha='center',va='center',fontsize=6,color='0.40',zorder=4,
+                    bbox=dict(facecolor='white',edgecolor='none',alpha=.72,pad=.35))
+        else:
+            ax.axvline(angle,color='0.60',lw=.65,linestyle=(0,(1,2.5)),zorder=.5)
+    if view=='phase':
+        minor=[f for f in ANGLE_FRACTIONS if f not in (0,1)]
+        ax.set_xticks([float(f)*np.pi for f in minor],minor=True)
+        ax.set_xticklabels([pi_label(f) for f in minor],minor=True,
+                           rotation=60,ha='right',fontsize=6)
+        ax.tick_params(axis='x',which='minor',length=2,pad=2)
+
 
 
 def load_layer(kind,layer):
@@ -48,13 +81,14 @@ def page_figure(kind,view,page):
                 ax.scatter(x[h].ravel(),y[h].ravel(),c=np.tile(COLORS,(a.shape[1],1)),s=.55,alpha=.30,linewidths=0,rasterized=True)
                 lim=max(np.abs(x[h]).max(),np.abs(y[h]).max())*1.04
                 ax.set_xlim(-lim,lim);ax.set_ylim(-lim,lim);ax.set_aspect('equal',adjustable='box')
-                ax.axhline(0,color='0.75',lw=.5,zorder=0);ax.axvline(0,color='0.75',lw=.5,zorder=0)
+                angle_guides(ax,'xy',lim)
                 ax.set_xlabel('x = coordinate j (before RoPE)');ax.set_ylabel('y = coordinate j + 64 (before RoPE)')
                 ax.set_title(title,fontsize=10)
             else:
                 ax.scatter(phase[h].ravel(),a[h].ravel(),c=np.tile(COLORS,(a.shape[1],1)),s=.55,alpha=.28,linewidths=0,rasterized=True)
                 ax.set_xlim(0,2*np.pi);ax.set_ylim(0,40)
                 ax.set_xticks([0,np.pi,2*np.pi],['0','π','2π']);ax.set_yticks([0,10,20,30,40])
+                angle_guides(ax,'phase')
                 ax.set_xlabel('Phase φ before RoPE (rad)');ax.set_ylabel('Pair amplitude a = √(x² + y²)')
                 ax.set_title(title,fontsize=11)
             ax.tick_params(labelsize=8)
@@ -64,14 +98,14 @@ def page_figure(kind,view,page):
         fig.suptitle(f'Qwen {kind} · {layer_label} · axes fitted separately for each head',fontsize=14)
         fig.subplots_adjust(left=.07,right=.90,bottom=.10,top=.93,wspace=.40,hspace=.55)
         fig.colorbar(SM,cax=fig.add_axes([.93,.25,.012,.5]),label='Pair index: 0 = highest frequency; 63 = lowest')
-        fig.text(.5,.025,f'Each point = one token × one RoPE pair. {tokens}; 64 pairs per head.\nKnown positional rotation removed. Linear axes; no clipping; full range fitted per head.\nWithin each panel, x and y have the same scale. Axis limits differ between panels; compare tick values.',ha='center',fontsize=9)
+        fig.text(.5,.025,f'Each point = one token × one RoPE pair. {tokens}; 64 pairs per head.\nKnown positional rotation removed. Linear axes; no clipping; full range fitted per head.\nWithin each panel, x and y have the same scale. Axis limits differ between panels; compare tick values.\nGray dotted guides mark multiples of π/4 and π/3.',ha='center',fontsize=9)
         name=f'{kind}_xy_layers_{start:02d}_{end:02d}.png'
     else:
         tokens='768 sampled query tokens' if kind=='queries' else '2,379 prose key tokens (chat-prefix keys excluded)'
         fig.suptitle(f'Qwen {kind} · {layer_label} · amplitude axis 0–40',fontsize=14)
-        fig.subplots_adjust(left=.07,right=.9,bottom=.10,top=.94,wspace=.35,hspace=.55)
+        fig.subplots_adjust(left=.07,right=.9,bottom=.14,top=.94,wspace=.35,hspace=.55)
         fig.colorbar(SM,cax=fig.add_axes([.93,.25,.015,.5]),label='Pair index: 0 = highest frequency; 63 = lowest')
-        fig.text(.5,.025,f'Every point = one token × one RoPE pair. {tokens}, 64 pairs per head.\nKnown positional rotation removed. Linear axes; points above amplitude 40 are clipped.\n'+('Two shared key heads per layer: KV0 serves Q heads 0–5; KV1 serves Q heads 6–11.' if kind=='keys' else 'Native query vectors only; no key or margin enters this plot.'),ha='center',fontsize=9)
+        fig.text(.5,.025,f'Every point = one token × one RoPE pair. {tokens}, 64 pairs per head.\nKnown positional rotation removed. Linear axes; points above amplitude 40 are clipped.\n'+('Two shared key heads per layer: KV0 serves Q heads 0–5; KV1 serves Q heads 6–11.' if kind=='keys' else 'Native query vectors only; no key or margin enters this plot.')+'\nGray dotted guides mark multiples of π/4 and π/3.',ha='center',fontsize=9)
         name=f'{kind}_layers_{start:02d}_{end:02d}_y40.png'
     return fig,name
 
