@@ -29,7 +29,7 @@
 {{codec_table}}
 <figure><a href="assets/figures/key_quantization_small_radius/quality_vs_bytes_zoom.png"><img src="assets/figures/key_quantization_small_radius/quality_vs_bytes_zoom.png" alt="Original quality-versus-bytes comparison of hybrid and centered key codecs" loading="lazy"></a><figcaption>Original codec frontier. <a href="data/key_quantization_small_radius/comparison.json">Every explored codec</a> · <a href="data/key_quantization_small_radius/locked_configs.json">Frozen configurations</a>. Byte accounting includes selection flags, offsets, codebooks, and the protected prefix.</figcaption></figure>
 <p>The three-bit shortcut is promising as a phase-only intervention, but the tested full codec did not beat the earlier centered 6-phase/4-radius-bit codec at essentially equal storage. Values remain uncompressed. A reported K-only compression factor is therefore not a full-KV memory reduction, and neither implies a measured speedup.</p>
-<p>The independently tested bound explains why radius can help: for a key pair rotated by phase error \(\epsilon\),</p>
+<p>The geometric bound explains why radius can help: for a key pair rotated by phase error \(\epsilon\),</p>
 \[\|k'-k\|_2=2r_k|\sin(\epsilon/2)|\le r_k|\epsilon|,\qquad |\delta s_j|\le\frac{\|q_j\|_2r_k|\epsilon|}{\sqrt d}.\]
 <p>For a small logit perturbation at temperature one, \(\delta o\approx\sum_i p_i\epsilon_i(v_i-o)\). Errors depend jointly on queries, keys, attention mass, and values. Radius alone is not a complete importance metric.</p>
 <h2 id="related">How this relates to published compression work</h2>
