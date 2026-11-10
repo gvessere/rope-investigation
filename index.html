@@ -19,20 +19,6 @@
     <p>An attention head compares a <em>query</em> from one token with <em>keys</em> from the tokens it can attend to. A high dot product gives a key a higher attention score. Those scores become weights for combining information from the corresponding value vectors.</p>
     <p>The words themselves are not enough to describe their relationship. “The dog followed the child” and “The child followed the dog” contain the same words, but their positions change the meaning.</p>
     <p>RoPE—short for <strong>Rotary Position Embedding</strong>—brings position into the query–key comparison by rotating the vectors before taking their dot product.</p>
-    <h2>Imagine two arrows</h2>
-    <p>Take just two coordinates of a query and draw them as an arrow in a plane. Do the same with a key. With their lengths fixed, their dot product is greatest when the arrows point in the same direction. It is zero when they are perpendicular, and negative when they point in opposite directions.</p>
-    <p>RoPE turns each arrow by an angle proportional to its token’s position. For a pair whose rotation speed is <math><mi>ω</mi></math>, position <math><mi>m</mi></math> produces a rotation of <math><mi>m</mi><mi>ω</mi></math> radians.</p>
-    <p>Now move both tokens forward by the same number of positions. Both arrows receive the same extra rotation, so the angle <em>between</em> them stays the same. Their comparison depends on their separation, rather than where we chose to start counting.</p>
-    <div class="equation" aria-label="A rotated query and key have a dot product depending on their relative displacement">
-      <math display="block"><mrow><msup><mrow><mo>(</mo><mi>R</mi><mo>(</mo><mi>m</mi><mi>ω</mi><mo>)</mo><mi>q</mi><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup><mi>R</mi><mo>(</mo><mi>n</mi><mi>ω</mi><mo>)</mo><mi>k</mi><mo>=</mo><msup><mi>q</mi><mi mathvariant="normal">T</mi></msup><mi>R</mi><mo>(</mo><mo>(</mo><mi>n</mi><mo>−</mo><mi>m</mi><mo>)</mo><mi>ω</mi><mo>)</mo><mi>k</mi></mrow></math>
-    </div>
-    <p>Here <math><mi>R</mi></math> is an ordinary two-dimensional rotation. The important part is <math><mi>n</mi><mo>−</mo><mi>m</mi></math>: the absolute query and key positions have become a relative displacement.</p>
-    <h2>Many pairs, turning at different speeds</h2>
-    <p>A real head has more than two coordinates. RoPE groups them into pairs and gives each pair its own rotation speed. Some pairs turn quickly as we move through the sequence; others turn slowly.</p>
-    <p>The usual frequency schedule is geometric:</p>
-    <div class="equation"><math display="block"><msub><mi>ω</mi><mi>j</mi></msub><mo>=</mo><msup><mi>B</mi><mrow><mo>−</mo><mn>2</mn><mi>j</mi><mo>/</mo><mi>d</mi></mrow></msup><mo>,</mo><mspace width="1em"/><mi>j</mi><mo>=</mo><mn>0</mn><mo>,</mo><mo>…</mo><mo>,</mo><mi>d</mi><mo>/</mo><mn>2</mn><mo>−</mo><mn>1</mn></math></div>
-    <p><math><mi>d</mi></math> is the head dimension, and <math><mi>B</mi></math> controls the range of rotation speeds. Adjacent frequencies differ by the same ratio. This gives the head several positional scales to work with.</p>
-    <p>For now, that is the picture to keep: the query and key still carry information about the tokens, while their rotations make the comparison sensitive to relative position.</p>
     <p class="source">Original paper: <a href="https://arxiv.org/abs/2104.09864">RoFormer: Enhanced Transformer with Rotary Position Embedding</a>.</p>
   </main>
   <footer>Gery Vessere · ROPE exploration</footer>
