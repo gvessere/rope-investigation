@@ -89,7 +89,8 @@ def main():
  for ax,field,factor,title in [(axs[0],'loss_increase',1,'Mean loss increase (nats/token)'),(axs[1],'changed_prediction_fraction',100,'Next-token choices changed (%)')]:
   vals=[results[n][field]*factor for n in names];ax.bar(range(3),vals,color=['#be6338','#8d9e78',GREEN]);ax.set_xticks(range(3),['0 bits\nphase → 0','2 bits\nnearest π/2','3 bits\nnearest π/4']);ax.set_title(title,loc='left',fontsize=11);ax.set_ylim(0,max(vals)*1.22)
   for i,v in enumerate(vals):ax.text(i,v+max(vals)*.04,f'{v:.4f}' if field=='loss_increase' else f'{v:.2f}%',ha='center',fontsize=9)
- fig.tight_layout();save(fig,'phase-rounding.png')
+ fig.suptitle('Only key pairs 49–63 with pre-RoPE r < 2.5',fontsize=12)
+ fig.tight_layout(rect=[0,0,1,.91]);save(fig,'phase-rounding.png')
  (A/'observations-summary.json').write_text(json.dumps(stats,indent=2)+'\n')
  print(json.dumps(stats,indent=2))
 
