@@ -11,7 +11,10 @@
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
   <main>
     <h1>ROPE exploration</h1>
-    <p class="lead">I wanted to understand how a transformer uses the position of a word when deciding which other words to pay attention to. RoPE is one way of giving it that information. Let’s start with what it does.</p>
+    <p class="lead">I wanted to understand how a transformer knows where to look. RoPE seemed like a good place to start. The more I looked at it, the more it began to resemble another familiar idea: building a shape out of waves.</p>
+    <p>The usual explanation is that RoPE rotates query and key vectors so their similarity depends on the distance between them. That explains the mechanism. What I wanted to know was what the mechanism could <em>do</em>.</p>
+    <p>Could a head look for something eighty tokens ago? Could it prefer a whole neighborhood rather than one position? Could it avoid a region? And if all of that was possible, did trained models actually use it?</p>
+    <p>Before trying to answer those questions, let’s start with what RoPE actually does.</p>
     <h2>Position enters the comparison</h2>
     <p>An attention head compares a <em>query</em> from one token with <em>keys</em> from the tokens it can attend to. A high dot product gives a key a higher attention score. Those scores become weights for combining information from the corresponding value vectors.</p>
     <p>The words themselves are not enough to describe their relationship. “The dog followed the child” and “The child followed the dog” contain the same words, but their positions change the meaning.</p>
