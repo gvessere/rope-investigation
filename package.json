@@ -1,0 +1,13 @@
+{
+  "name": "gery-vessere-research",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "python3 -m http.server 8771 --directory dist"
+  },
+  "dependencies": {
+    "katex": "0.19.1"
+  }
+}

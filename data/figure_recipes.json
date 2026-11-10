@@ -1,0 +1,105 @@
+[
+  {
+    "original": "assets/figures/rope_frequency_schedule/frequency_schedule.png",
+    "regenerated": "generated_figures/rope_frequency_schedule/frequency_schedule.png",
+    "inputs": [
+      "data/rope_frequency_schedule/frequency_schedule.csv"
+    ],
+    "code": "code/figures.py",
+    "function": "frequency_schedule"
+  },
+  {
+    "original": "assets/figures/rope_post_examples/range_constructions.png",
+    "regenerated": "generated_figures/rope_post_examples/range_constructions.png",
+    "inputs": [
+      "data/rope_post_examples/vectors_and_profiles.npz",
+      "data/rope_post_examples/constructions.json"
+    ],
+    "code": "code/figures.py",
+    "function": "range_constructions"
+  },
+  {
+    "original": "assets/figures/rope_post_examples/content_plus_range.png",
+    "regenerated": "generated_figures/rope_post_examples/content_plus_range.png",
+    "inputs": [
+      "data/rope_post_examples/vectors_and_profiles.npz",
+      "data/rope_post_examples/constructions.json"
+    ],
+    "code": "code/figures.py",
+    "function": "range_constructions"
+  },
+  {
+    "original": "assets/figures/fast_phase_amplitude_association/keys_phase_by_amplitude.png",
+    "regenerated": "generated_figures/fast_phase_amplitude_association/keys_phase_by_amplitude.png",
+    "inputs": [
+      "data/fast_phase_amplitude_association/keys_histograms.npz"
+    ],
+    "code": "code/figures.py",
+    "function": "phase_histograms"
+  },
+  {
+    "original": "assets/figures/slow_phase_amplitude_association/keys_phase_by_amplitude.png",
+    "regenerated": "generated_figures/slow_phase_amplitude_association/keys_phase_by_amplitude.png",
+    "inputs": [
+      "data/slow_phase_amplitude_association/keys_histograms.npz"
+    ],
+    "code": "code/figures.py",
+    "function": "phase_histograms"
+  },
+  {
+    "original": "assets/figures/native_margin_angle_density/angle_density.png",
+    "regenerated": "generated_figures/native_margin_angle_density/angle_density.png",
+    "inputs": [
+      "data/native_margin_angle_density/pooled_histograms.npz"
+    ],
+    "code": "code/figures.py",
+    "function": "margin_density"
+  },
+  {
+    "original": "assets/figures/slow_actual_key_phases/slow_phase_effect.png",
+    "regenerated": "generated_figures/slow_actual_key_phases/slow_phase_effect.png",
+    "inputs": [
+      "data/slow_actual_key_phases/results.json"
+    ],
+    "code": "code/figures.py",
+    "function": "slow_phase_effect"
+  },
+  {
+    "original": "assets/figures/key_quantization_small_radius/quality_vs_bytes_zoom.png",
+    "regenerated": "generated_figures/key_quantization_small_radius/quality_vs_bytes_zoom.png",
+    "inputs": [
+      "data/key_quantization_small_radius/comparison.json"
+    ],
+    "code": "code/figures.py",
+    "function": "codec_frontier"
+  },
+  {
+    "original": "assets/figures/inverse_distance_attention/inverse_distance_substantial_example.png",
+    "regenerated": "generated_figures/inverse_distance_attention/inverse_distance_substantial_example.png",
+    "inputs": [
+      "data/inverse_distance_attention/fit_arrays.npz",
+      "data/inverse_distance_attention/dense_query_means.npz"
+    ],
+    "code": "code/figures.py",
+    "function": "decay"
+  },
+  {
+    "original": "assets/figures/inverse_distance_attention/exponent_head_maps.png",
+    "regenerated": "generated_figures/inverse_distance_attention/exponent_head_maps.png",
+    "inputs": [
+      "data/inverse_distance_attention/fit_arrays.npz",
+      "data/inverse_distance_attention/dense_query_means.npz"
+    ],
+    "code": "code/figures.py",
+    "function": "decay"
+  },
+  {
+    "original": "assets/illustrations/dft_rope.png",
+    "regenerated": "generated_figures/illustrations/dft_rope.png",
+    "inputs": [
+      "code/reproduce.py"
+    ],
+    "code": "code/reproduce.py",
+    "function": "main"
+  }
+]

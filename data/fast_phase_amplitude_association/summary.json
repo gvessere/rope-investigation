@@ -1,0 +1,766 @@
+{
+  "queries": {
+    "pairs": [
+      {
+        "pair": 0,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 172108,
+            "largest_phase_bin_percent": 1.5281102563506634,
+            "circular_resultant_pooled": 0.011044526472687721
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 71624,
+            "largest_phase_bin_percent": 1.9155590304925725,
+            "circular_resultant_pooled": 0.021725250408053398
+          },
+          {
+            "band": "r > 5",
+            "count": 14316,
+            "largest_phase_bin_percent": 8.675607711651299,
+            "circular_resultant_pooled": 0.1299601048231125
+          }
+        ]
+      },
+      {
+        "pair": 1,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 164943,
+            "largest_phase_bin_percent": 1.485361609768223,
+            "circular_resultant_pooled": 0.01792874187231064
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 87661,
+            "largest_phase_bin_percent": 1.9712300795108428,
+            "circular_resultant_pooled": 0.09629344195127487
+          },
+          {
+            "band": "r > 5",
+            "count": 5444,
+            "largest_phase_bin_percent": 11.976487876561352,
+            "circular_resultant_pooled": 0.28776872158050537
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 161942,
+            "largest_phase_bin_percent": 1.6036605698336444,
+            "circular_resultant_pooled": 0.04725397750735283
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 88170,
+            "largest_phase_bin_percent": 1.9950096404672792,
+            "circular_resultant_pooled": 0.06286358088254929
+          },
+          {
+            "band": "r > 5",
+            "count": 7936,
+            "largest_phase_bin_percent": 10.735887096774194,
+            "circular_resultant_pooled": 0.07241330295801163
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 160385,
+            "largest_phase_bin_percent": 1.6186052311625152,
+            "circular_resultant_pooled": 0.03834588825702667
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 91715,
+            "largest_phase_bin_percent": 1.7270893528866598,
+            "circular_resultant_pooled": 0.006969476118683815
+          },
+          {
+            "band": "r > 5",
+            "count": 5948,
+            "largest_phase_bin_percent": 6.87626092804304,
+            "circular_resultant_pooled": 0.5017728805541992
+          }
+        ]
+      },
+      {
+        "pair": 4,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 155974,
+            "largest_phase_bin_percent": 1.7586264377396232,
+            "circular_resultant_pooled": 0.06362603604793549
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 95028,
+            "largest_phase_bin_percent": 2.106747484951804,
+            "circular_resultant_pooled": 0.08990119397640228
+          },
+          {
+            "band": "r > 5",
+            "count": 7046,
+            "largest_phase_bin_percent": 10.516605166051662,
+            "circular_resultant_pooled": 0.24583372473716736
+          }
+        ]
+      },
+      {
+        "pair": 5,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 153928,
+            "largest_phase_bin_percent": 1.533834000311834,
+            "circular_resultant_pooled": 0.0427253283560276
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 98517,
+            "largest_phase_bin_percent": 1.9286011551305864,
+            "circular_resultant_pooled": 0.07326304167509079
+          },
+          {
+            "band": "r > 5",
+            "count": 5603,
+            "largest_phase_bin_percent": 5.925397108691772,
+            "circular_resultant_pooled": 0.1746779829263687
+          }
+        ]
+      },
+      {
+        "pair": 6,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 145374,
+            "largest_phase_bin_percent": 1.527095629204672,
+            "circular_resultant_pooled": 0.020748458802700043
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 105941,
+            "largest_phase_bin_percent": 2.112496578284139,
+            "circular_resultant_pooled": 0.1792754828929901
+          },
+          {
+            "band": "r > 5",
+            "count": 6733,
+            "largest_phase_bin_percent": 8.391504529927223,
+            "circular_resultant_pooled": 0.3552192747592926
+          }
+        ]
+      },
+      {
+        "pair": 7,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 145061,
+            "largest_phase_bin_percent": 1.6234549603270347,
+            "circular_resultant_pooled": 0.04423338547348976
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 107268,
+            "largest_phase_bin_percent": 1.8766081217138384,
+            "circular_resultant_pooled": 0.08749747276306152
+          },
+          {
+            "band": "r > 5",
+            "count": 5719,
+            "largest_phase_bin_percent": 7.134114355656583,
+            "circular_resultant_pooled": 0.2351817935705185
+          }
+        ]
+      },
+      {
+        "pair": 8,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 139891,
+            "largest_phase_bin_percent": 1.6441372211221594,
+            "circular_resultant_pooled": 0.0472843237221241
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 113569,
+            "largest_phase_bin_percent": 2.1748892743618415,
+            "circular_resultant_pooled": 0.136178657412529
+          },
+          {
+            "band": "r > 5",
+            "count": 4588,
+            "largest_phase_bin_percent": 6.734960767218831,
+            "circular_resultant_pooled": 0.11086840182542801
+          }
+        ]
+      },
+      {
+        "pair": 9,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 137407,
+            "largest_phase_bin_percent": 1.7335361371691398,
+            "circular_resultant_pooled": 0.04940088465809822
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 114228,
+            "largest_phase_bin_percent": 2.112441783100466,
+            "circular_resultant_pooled": 0.12892398238182068
+          },
+          {
+            "band": "r > 5",
+            "count": 6413,
+            "largest_phase_bin_percent": 6.64275690004678,
+            "circular_resultant_pooled": 0.2701869606971741
+          }
+        ]
+      },
+      {
+        "pair": 10,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 131394,
+            "largest_phase_bin_percent": 1.6210785880633818,
+            "circular_resultant_pooled": 0.02072199247777462
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 122081,
+            "largest_phase_bin_percent": 1.7242650371474675,
+            "circular_resultant_pooled": 0.04137998819351196
+          },
+          {
+            "band": "r > 5",
+            "count": 4573,
+            "largest_phase_bin_percent": 5.007653619068445,
+            "circular_resultant_pooled": 0.29225125908851624
+          }
+        ]
+      },
+      {
+        "pair": 11,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 126181,
+            "largest_phase_bin_percent": 1.5216236992891163,
+            "circular_resultant_pooled": 0.0186335276812315
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 129713,
+            "largest_phase_bin_percent": 1.9388958701132502,
+            "circular_resultant_pooled": 0.03903784230351448
+          },
+          {
+            "band": "r > 5",
+            "count": 2154,
+            "largest_phase_bin_percent": 5.10677808727948,
+            "circular_resultant_pooled": 0.22075240314006805
+          }
+        ]
+      },
+      {
+        "pair": 12,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 123461,
+            "largest_phase_bin_percent": 1.7373907549752554,
+            "circular_resultant_pooled": 0.07753803580999374
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 127243,
+            "largest_phase_bin_percent": 2.374197401821711,
+            "circular_resultant_pooled": 0.17857451736927032
+          },
+          {
+            "band": "r > 5",
+            "count": 7344,
+            "largest_phase_bin_percent": 7.652505446623094,
+            "circular_resultant_pooled": 0.5774410963058472
+          }
+        ]
+      },
+      {
+        "pair": 13,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 117247,
+            "largest_phase_bin_percent": 1.5957764377766595,
+            "circular_resultant_pooled": 0.0207576435059309
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 135106,
+            "largest_phase_bin_percent": 2.09539176646485,
+            "circular_resultant_pooled": 0.08153796941041946
+          },
+          {
+            "band": "r > 5",
+            "count": 5695,
+            "largest_phase_bin_percent": 7.023705004389816,
+            "circular_resultant_pooled": 0.4880508482456207
+          }
+        ]
+      },
+      {
+        "pair": 14,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 114735,
+            "largest_phase_bin_percent": 1.654246742493572,
+            "circular_resultant_pooled": 0.01919080689549446
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 140611,
+            "largest_phase_bin_percent": 1.817780970194366,
+            "circular_resultant_pooled": 0.02631659433245659
+          },
+          {
+            "band": "r > 5",
+            "count": 2702,
+            "largest_phase_bin_percent": 4.293116210214656,
+            "circular_resultant_pooled": 0.19847676157951355
+          }
+        ]
+      },
+      {
+        "pair": 15,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 123067,
+            "largest_phase_bin_percent": 1.605629453874719,
+            "circular_resultant_pooled": 0.04587223008275032
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 131648,
+            "largest_phase_bin_percent": 1.9734443364122507,
+            "circular_resultant_pooled": 0.12521310150623322
+          },
+          {
+            "band": "r > 5",
+            "count": 3333,
+            "largest_phase_bin_percent": 9.960996099609961,
+            "circular_resultant_pooled": 0.25188207626342773
+          }
+        ]
+      }
+    ],
+    "within_head_pair_large_phase_concentration": {
+      "eligible_head_pairs": 319,
+      "eligibility": "at least 20 tokens with r>5 and 20 with r<=5",
+      "mean_observed_resultant": 0.9662940787866133,
+      "mean_permuted_resultant": 0.9104625500827539,
+      "mean_excess_concentration": 0.055831528703859656,
+      "fraction_with_positive_excess": 0.9341692789968652,
+      "null": "40 shuffles of phase-to-amplitude correspondence within each same layer/head/pair; preserves amplitude and phase marginals",
+      "resultant_definition": "abs(mean(exp(i*phase))); 0=spread around circle, 1=same angle"
+    }
+  },
+  "keys": {
+    "pairs": [
+      {
+        "pair": 0,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 44770,
+            "largest_phase_bin_percent": 2.2604422604422605,
+            "circular_resultant_pooled": 0.13074034452438354
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 84313,
+            "largest_phase_bin_percent": 3.121701279755198,
+            "circular_resultant_pooled": 0.15748322010040283
+          },
+          {
+            "band": "r > 5",
+            "count": 4141,
+            "largest_phase_bin_percent": 32.166143443612654,
+            "circular_resultant_pooled": 0.919323205947876
+          }
+        ]
+      },
+      {
+        "pair": 1,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 53365,
+            "largest_phase_bin_percent": 1.8945001405415534,
+            "circular_resultant_pooled": 0.09464193135499954
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 79691,
+            "largest_phase_bin_percent": 2.206020755166832,
+            "circular_resultant_pooled": 0.09705585986375809
+          },
+          {
+            "band": "r > 5",
+            "count": 168,
+            "largest_phase_bin_percent": 19.047619047619047,
+            "circular_resultant_pooled": 0.213421031832695
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 53719,
+            "largest_phase_bin_percent": 1.8745695191645415,
+            "circular_resultant_pooled": 0.05910428240895271
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 79297,
+            "largest_phase_bin_percent": 2.87400532176501,
+            "circular_resultant_pooled": 0.07599801570177078
+          },
+          {
+            "band": "r > 5",
+            "count": 208,
+            "largest_phase_bin_percent": 25.0,
+            "circular_resultant_pooled": 0.808517575263977
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 56784,
+            "largest_phase_bin_percent": 1.7945195829811214,
+            "circular_resultant_pooled": 0.05344934016466141
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 76379,
+            "largest_phase_bin_percent": 2.520326267691381,
+            "circular_resultant_pooled": 0.09238813817501068
+          },
+          {
+            "band": "r > 5",
+            "count": 61,
+            "largest_phase_bin_percent": 26.229508196721312,
+            "circular_resultant_pooled": 0.9219979643821716
+          }
+        ]
+      },
+      {
+        "pair": 4,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 52288,
+            "largest_phase_bin_percent": 2.249082007343941,
+            "circular_resultant_pooled": 0.10068992525339127
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 80872,
+            "largest_phase_bin_percent": 2.2999307547729746,
+            "circular_resultant_pooled": 0.028073010966181755
+          },
+          {
+            "band": "r > 5",
+            "count": 64,
+            "largest_phase_bin_percent": 18.75,
+            "circular_resultant_pooled": 0.7854359745979309
+          }
+        ]
+      },
+      {
+        "pair": 5,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 58130,
+            "largest_phase_bin_percent": 1.9800447273352828,
+            "circular_resultant_pooled": 0.12173721939325333
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 75092,
+            "largest_phase_bin_percent": 2.9443882171203324,
+            "circular_resultant_pooled": 0.07475496828556061
+          },
+          {
+            "band": "r > 5",
+            "count": 2,
+            "largest_phase_bin_percent": 50.0,
+            "circular_resultant_pooled": 0.8847429156303406
+          }
+        ]
+      },
+      {
+        "pair": 6,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 53136,
+            "largest_phase_bin_percent": 2.088979223125565,
+            "circular_resultant_pooled": 0.08974018692970276
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 80075,
+            "largest_phase_bin_percent": 3.4342803621604743,
+            "circular_resultant_pooled": 0.17011168599128723
+          },
+          {
+            "band": "r > 5",
+            "count": 13,
+            "largest_phase_bin_percent": 30.76923076923077,
+            "circular_resultant_pooled": 0.07336762547492981
+          }
+        ]
+      },
+      {
+        "pair": 7,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 51766,
+            "largest_phase_bin_percent": 2.092106788239385,
+            "circular_resultant_pooled": 0.11600134521722794
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 81403,
+            "largest_phase_bin_percent": 3.6165743277274793,
+            "circular_resultant_pooled": 0.1428871750831604
+          },
+          {
+            "band": "r > 5",
+            "count": 55,
+            "largest_phase_bin_percent": 18.181818181818183,
+            "circular_resultant_pooled": 0.7744067907333374
+          }
+        ]
+      },
+      {
+        "pair": 8,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 54325,
+            "largest_phase_bin_percent": 2.13529682466636,
+            "circular_resultant_pooled": 0.0829283818602562
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 78874,
+            "largest_phase_bin_percent": 2.427923016456627,
+            "circular_resultant_pooled": 0.15269213914871216
+          },
+          {
+            "band": "r > 5",
+            "count": 25,
+            "largest_phase_bin_percent": 24.0,
+            "circular_resultant_pooled": 0.5389925241470337
+          }
+        ]
+      },
+      {
+        "pair": 9,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 48948,
+            "largest_phase_bin_percent": 2.0531993135572444,
+            "circular_resultant_pooled": 0.07177935540676117
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 84258,
+            "largest_phase_bin_percent": 3.038287165610387,
+            "circular_resultant_pooled": 0.07286671549081802
+          },
+          {
+            "band": "r > 5",
+            "count": 18,
+            "largest_phase_bin_percent": 27.77777777777778,
+            "circular_resultant_pooled": 0.9661977291107178
+          }
+        ]
+      },
+      {
+        "pair": 10,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 51414,
+            "largest_phase_bin_percent": 2.011125374411639,
+            "circular_resultant_pooled": 0.07664299011230469
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 81775,
+            "largest_phase_bin_percent": 2.3845918679302964,
+            "circular_resultant_pooled": 0.16873259842395782
+          },
+          {
+            "band": "r > 5",
+            "count": 35,
+            "largest_phase_bin_percent": 17.142857142857142,
+            "circular_resultant_pooled": 0.47691312432289124
+          }
+        ]
+      },
+      {
+        "pair": 11,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 47471,
+            "largest_phase_bin_percent": 1.8010996187145836,
+            "circular_resultant_pooled": 0.058491192758083344
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 85511,
+            "largest_phase_bin_percent": 2.4184023108138133,
+            "circular_resultant_pooled": 0.08257127553224564
+          },
+          {
+            "band": "r > 5",
+            "count": 242,
+            "largest_phase_bin_percent": 21.487603305785125,
+            "circular_resultant_pooled": 0.7267739772796631
+          }
+        ]
+      },
+      {
+        "pair": 12,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 43835,
+            "largest_phase_bin_percent": 2.194593361469146,
+            "circular_resultant_pooled": 0.16986802220344543
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 89252,
+            "largest_phase_bin_percent": 3.8688208667592887,
+            "circular_resultant_pooled": 0.2154320627450943
+          },
+          {
+            "band": "r > 5",
+            "count": 137,
+            "largest_phase_bin_percent": 80.2919708029197,
+            "circular_resultant_pooled": 0.9160377383232117
+          }
+        ]
+      },
+      {
+        "pair": 13,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 39419,
+            "largest_phase_bin_percent": 2.3389735914153076,
+            "circular_resultant_pooled": 0.1560865193605423
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 93155,
+            "largest_phase_bin_percent": 3.10987064569803,
+            "circular_resultant_pooled": 0.10614056885242462
+          },
+          {
+            "band": "r > 5",
+            "count": 650,
+            "largest_phase_bin_percent": 23.53846153846154,
+            "circular_resultant_pooled": 0.7481910586357117
+          }
+        ]
+      },
+      {
+        "pair": 14,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 43536,
+            "largest_phase_bin_percent": 1.6652884968761483,
+            "circular_resultant_pooled": 0.06192971020936966
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 89476,
+            "largest_phase_bin_percent": 2.4107023112342976,
+            "circular_resultant_pooled": 0.03875011205673218
+          },
+          {
+            "band": "r > 5",
+            "count": 212,
+            "largest_phase_bin_percent": 11.320754716981133,
+            "circular_resultant_pooled": 0.4356495440006256
+          }
+        ]
+      },
+      {
+        "pair": 15,
+        "bands": [
+          {
+            "band": "r < 1",
+            "count": 41201,
+            "largest_phase_bin_percent": 1.8688866775078274,
+            "circular_resultant_pooled": 0.08949309587478638
+          },
+          {
+            "band": "1 \u2264 r \u2264 5",
+            "count": 91950,
+            "largest_phase_bin_percent": 2.5481239804241436,
+            "circular_resultant_pooled": 0.09076593071222305
+          },
+          {
+            "band": "r > 5",
+            "count": 73,
+            "largest_phase_bin_percent": 53.42465753424658,
+            "circular_resultant_pooled": 0.8563183546066284
+          }
+        ]
+      }
+    ],
+    "within_head_pair_large_phase_concentration": {
+      "eligible_head_pairs": 30,
+      "eligibility": "at least 20 tokens with r>5 and 20 with r<=5",
+      "mean_observed_resultant": 0.9892139160898078,
+      "mean_permuted_resultant": 0.96015491960422,
+      "mean_excess_concentration": 0.029058996485587497,
+      "fraction_with_positive_excess": 0.9333333333333333,
+      "null": "40 shuffles of phase-to-amplitude correspondence within each same layer/head/pair; preserves amplitude and phase marginals",
+      "resultant_definition": "abs(mean(exp(i*phase))); 0=spread around circle, 1=same angle"
+    }
+  }
+}

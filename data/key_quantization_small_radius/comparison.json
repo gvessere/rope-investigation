@@ -1,0 +1,512 @@
+[
+  {
+    "name": "raw_uniform_p8r6",
+    "label": "Origin: uniform phase8, radius6",
+    "family": "Origin",
+    "tokens": 7168,
+    "loss_increase": 0.2268245965242386,
+    "changed_prediction_fraction": 0.21358816964285715,
+    "per_document_loss_increase": [
+      0.19034306704998016,
+      0.2168857753276825,
+      0.2819049060344696,
+      0.21816465258598328
+    ],
+    "stored_K_bytes_per_key": 118.93889427740058,
+    "key_compression_vs_fp16": 2.152365729943079,
+    "full_KV_compression_if_V_fp16": 1.3655558487383654,
+    "small_fraction": 0.7131125245775495,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 20937075,
+      "total_key_records": 458752,
+      "packed_body_bytes": 51380224,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2385,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 245252,
+      "bytes_per_key": 118.93889427740058,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "raw_small3_large8_r6",
+    "label": "Origin: phase3/8, radius6",
+    "family": "Origin",
+    "tokens": 7168,
+    "loss_increase": 0.2508258819580078,
+    "changed_prediction_fraction": 0.2265625,
+    "per_document_loss_increase": [
+      0.2225881665945053,
+      0.22492554783821106,
+      0.31069129705429077,
+      0.24509850144386292
+    ],
+    "stored_K_bytes_per_key": 99.04784926215879,
+    "key_compression_vs_fp16": 2.5846093772558545,
+    "full_KV_compression_if_V_fp16": 1.4420591507989997,
+    "small_fraction": 0.7116026878356934,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 20892746,
+      "total_key_records": 458752,
+      "packed_body_bytes": 42192789,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2592,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 214222,
+      "bytes_per_key": 103.89039767216295,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "raw_small3_large8_r8",
+    "label": "Origin: phase3/8, radius8",
+    "family": "Origin",
+    "tokens": 7168,
+    "loss_increase": 0.1778372973203659,
+    "changed_prediction_fraction": 0.15248325892857142,
+    "per_document_loss_increase": [
+      0.17886224389076233,
+      0.1895463466644287,
+      0.24236784875392914,
+      0.10057280212640762
+    ],
+    "stored_K_bytes_per_key": 114.75143324788694,
+    "key_compression_vs_fp16": 2.2309089547229166,
+    "full_KV_compression_if_V_fp16": 1.380979152298174,
+    "small_fraction": 0.7163465023040771,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 21032025,
+      "total_key_records": 458752,
+      "packed_body_bytes": 49446086,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 1854,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 246990,
+      "bytes_per_key": 119.78176527643065,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "raw_slow_small3_large8_r6",
+    "label": "Origin: slow-only phase3/8, radius6",
+    "family": "Origin",
+    "tokens": 7168,
+    "loss_increase": 0.2312547117471695,
+    "changed_prediction_fraction": 0.21470424107142858,
+    "per_document_loss_increase": [
+      0.1926920861005783,
+      0.22192570567131042,
+      0.29093247652053833,
+      0.21946851909160614
+    ],
+    "stored_K_bytes_per_key": 116.38385496050991,
+    "key_compression_vs_fp16": 2.1996178085599856,
+    "full_KV_compression_if_V_fp16": 1.374925344317884,
+    "small_fraction": 0.12229101998465401,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 3590480,
+      "total_key_records": 458752,
+      "packed_body_bytes": 50200082,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2400,
+      "eligible_gate_pairs": 6881280
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 246880,
+      "bytes_per_key": 119.72841901066926,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "mean_small3_large6_r6",
+    "label": "Centered: phase3/6, radius6",
+    "family": "Centered",
+    "tokens": 7168,
+    "loss_increase": 0.02252836711704731,
+    "changed_prediction_fraction": 0.09654017857142858,
+    "per_document_loss_increase": [
+      0.029046738520264626,
+      0.018578989431262016,
+      0.014455558732151985,
+      0.028032179921865463
+    ],
+    "stored_K_bytes_per_key": 89.70114400027713,
+    "key_compression_vs_fp16": 2.8539212387214272,
+    "full_KV_compression_if_V_fp16": 1.4810480349454371,
+    "small_fraction": 0.9216894081660679,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 27060919,
+      "total_key_records": 458752,
+      "packed_body_bytes": 37760970,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2370,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 184850,
+      "bytes_per_key": 89.64597478176528,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "mean_small3_large6_r4",
+    "label": "Centered: phase3/6, radius4",
+    "family": "Centered",
+    "tokens": 7168,
+    "loss_increase": 0.026532888412475586,
+    "changed_prediction_fraction": 0.10002790178571429,
+    "per_document_loss_increase": [
+      0.03211955353617668,
+      0.018067214637994766,
+      0.02289864979684353,
+      0.03304613381624222
+    ],
+    "stored_K_bytes_per_key": 73.81095633573507,
+    "key_compression_vs_fp16": 3.468319782168428,
+    "full_KV_compression_if_V_fp16": 1.5524044612963173,
+    "small_fraction": 0.9216277939932687,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 27059110,
+      "total_key_records": 458752,
+      "packed_body_bytes": 30421483,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2437,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 152082,
+      "bytes_per_key": 73.75460717749758,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "mean_small4_large6_r6",
+    "label": "Centered: phase4/6, radius6",
+    "family": "Centered",
+    "tokens": 7168,
+    "loss_increase": 0.007948016747832298,
+    "changed_prediction_fraction": 0.04966517857142857,
+    "per_document_loss_increase": [
+      0.005516089964658022,
+      0.011975602246820927,
+      0.008134785108268261,
+      0.006165590602904558
+    ],
+    "stored_K_bytes_per_key": 96.96601990092836,
+    "key_compression_vs_fp16": 2.6401001119934495,
+    "full_KV_compression_if_V_fp16": 1.450564561834337,
+    "small_fraction": 0.9215310982295445,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 27056271,
+      "total_key_records": 458752,
+      "packed_body_bytes": 41116529,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2290,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 199917,
+      "bytes_per_key": 96.95295829291949,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "mean_small4_large6_r4",
+    "label": "Centered: phase4/6, radius4",
+    "family": "Centered",
+    "tokens": 7168,
+    "loss_increase": 0.007111729588359594,
+    "changed_prediction_fraction": 0.05998883928571429,
+    "per_document_loss_increase": [
+      0.010436536744236946,
+      0.004380758386105299,
+      0.007114622741937637,
+      0.0065150014124810696
+    ],
+    "stored_K_bytes_per_key": 81.07332513509769,
+    "key_compression_vs_fp16": 3.1576353822100027,
+    "full_KV_compression_if_V_fp16": 1.5189573360478537,
+    "small_fraction": 0.9216313021523612,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 27059213,
+      "total_key_records": 458752,
+      "packed_body_bytes": 33775884,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2240,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 167149,
+      "bytes_per_key": 81.06159068865179,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "mean_rawgate_small3_large6_r6",
+    "label": "Centered: raw-radius gate, phase3/6, radius6",
+    "family": "Centered",
+    "tokens": 7168,
+    "loss_increase": 0.00726265087723732,
+    "changed_prediction_fraction": 0.05329241071428571,
+    "per_document_loss_increase": [
+      0.008066278882324696,
+      0.015758151188492775,
+      0.004503939300775528,
+      0.0007222340209409595
+    ],
+    "stored_K_bytes_per_key": 94.62312941665512,
+    "key_compression_vs_fp16": 2.705469599010536,
+    "full_KV_compression_if_V_fp16": 1.460257344835846,
+    "small_fraction": 0.7153856413705009,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 21003814,
+      "total_key_records": 458752,
+      "packed_body_bytes": 40034376,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2372,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 201389,
+      "bytes_per_key": 97.66682832201747,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "hybrid_smallp3r4_largep6r6",
+    "label": "Hybrid: small origin3/4, large centered6/6",
+    "family": "Hybrid",
+    "tokens": 7168,
+    "loss_increase": 0.00972530897706747,
+    "changed_prediction_fraction": 0.05817522321428571,
+    "per_document_loss_increase": [
+      0.017702149227261543,
+      0.005195620469748974,
+      0.011339275166392326,
+      0.004664190579205751
+    ],
+    "stored_K_bytes_per_key": 83.27246865040875,
+    "key_compression_vs_fp16": 3.07424535562563,
+    "full_KV_compression_if_V_fp16": 1.5091115469424434,
+    "small_fraction": 0.7149429321289062,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 20990816,
+      "total_key_records": 458752,
+      "packed_body_bytes": 34791642,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2366,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 181966,
+      "bytes_per_key": 88.24733268671193,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "hybrid_smallp3r6_largep6r6",
+    "label": "Hybrid: small origin3/6, large centered6/6",
+    "family": "Hybrid",
+    "tokens": 7168,
+    "loss_increase": 0.009074936620891094,
+    "changed_prediction_fraction": 0.05817522321428571,
+    "per_document_loss_increase": [
+      0.017305901274085045,
+      0.006204639095813036,
+      0.012677659280598164,
+      0.00011154916137456894
+    ],
+    "stored_K_bytes_per_key": 94.63213159900235,
+    "key_compression_vs_fp16": 2.7052122326144334,
+    "full_KV_compression_if_V_fp16": 1.4602198539680462,
+    "small_fraction": 0.7150009019034249,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 20992518,
+      "total_key_records": 458752,
+      "packed_body_bytes": 40038534,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2334,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 201389,
+      "bytes_per_key": 97.66682832201747,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "hybrid_smallp4r4_largep6r6",
+    "label": "Hybrid: small origin4/4, large centered6/6",
+    "family": "Hybrid",
+    "tokens": 7168,
+    "loss_increase": 0.004106615670025349,
+    "changed_prediction_fraction": 0.03627232142857143,
+    "per_document_loss_increase": [
+      0.0055952672846615314,
+      0.004663295112550259,
+      0.002444655867293477,
+      0.0037232455797493458
+    ],
+    "stored_K_bytes_per_key": 88.73783038312318,
+    "key_compression_vs_fp16": 2.884902627151542,
+    "full_KV_compression_if_V_fp16": 1.4851865820208665,
+    "small_fraction": 0.7158301217215401,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 21016864,
+      "total_key_records": 458752,
+      "packed_body_bytes": 37316027,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2298,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 191259,
+      "bytes_per_key": 92.75412221144519,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "hybrid_smallp4r6_largep6r6",
+    "label": "Hybrid: small origin4/6, large centered6/6",
+    "family": "Hybrid",
+    "tokens": 7168,
+    "loss_increase": 0.0023403880186378956,
+    "changed_prediction_fraction": 0.03236607142857143,
+    "per_document_loss_increase": [
+      0.0027740425430238247,
+      0.0030935611575841904,
+      0.0033928954508155584,
+      0.0001010531559586525
+    ],
+    "stored_K_bytes_per_key": 100.237256650963,
+    "key_compression_vs_fp16": 2.5539406060505003,
+    "full_KV_compression_if_V_fp16": 1.4372443938441046,
+    "small_fraction": 0.7158533505031041,
+    "stats": {
+      "body_pairs": 29360128,
+      "small_pairs": 21017546,
+      "total_key_records": 458752,
+      "packed_body_bytes": 42627474,
+      "prefix_bytes": 1605632,
+      "clipped_radius_pairs": 2312,
+      "eligible_gate_pairs": 29360128
+    },
+    "packed_example": {
+      "body_keys": 2048,
+      "bytes": 210828,
+      "bytes_per_key": 102.24442289039767,
+      "codes_verified": true,
+      "layout": "14 nativeFP32 keys; codebook; uint32 offsets; byte-aligned variable phase/radius records; global codec metadata in locked_configs.json"
+    }
+  },
+  {
+    "name": "prefix14_p4r4",
+    "label": "Previous centered uniform 4/4",
+    "family": "Previous uniform",
+    "stored_K_bytes_per_key": 67.53831231813773,
+    "key_compression_vs_fp16": 3.7904411764705883,
+    "full_KV_compression_if_V_fp16": 1.5825019186492708,
+    "loss_increase": 0.01375565119087696,
+    "changed_prediction_fraction": 0.08384486607142858,
+    "small_fraction": null,
+    "per_document_loss_increase": [
+      0.016677210107445717,
+      0.0026266726199537516,
+      0.01724076084792614,
+      0.01847795955836773
+    ]
+  },
+  {
+    "name": "prefix14_p6r4",
+    "label": "Previous centered uniform 6/4",
+    "family": "Previous uniform",
+    "stored_K_bytes_per_key": 83.42967992240543,
+    "key_compression_vs_fp16": 3.068452380952381,
+    "full_KV_compression_if_V_fp16": 1.508412582297001,
+    "loss_increase": 0.0020748155657202005,
+    "changed_prediction_fraction": 0.03989955357142857,
+    "small_fraction": null,
+    "per_document_loss_increase": [
+      0.002609607996419072,
+      0.0035981088876724243,
+      -0.0003430470824241638,
+      0.002434592926874757
+    ]
+  },
+  {
+    "name": "prefix14_p6r6",
+    "label": "Previous centered uniform 6/6",
+    "family": "Previous uniform",
+    "stored_K_bytes_per_key": 99.32104752667313,
+    "key_compression_vs_fp16": 2.5775,
+    "full_KV_compression_if_V_fp16": 1.440950384346611,
+    "loss_increase": 0.00042228554957546294,
+    "changed_prediction_fraction": 0.023158482142857144,
+    "small_fraction": null,
+    "per_document_loss_increase": [
+      -0.0006131096160970628,
+      0.0023487922735512257,
+      0.0014442814281210303,
+      -0.0014908220618963242
+    ]
+  },
+  {
+    "name": "prefix14_p8r8",
+    "label": "Previous centered uniform 8/8",
+    "family": "Previous uniform",
+    "stored_K_bytes_per_key": 131.10378273520854,
+    "key_compression_vs_fp16": 1.9526515151515151,
+    "full_KV_compression_if_V_fp16": 1.3226427196921102,
+    "loss_increase": 0.00028991358703933656,
+    "changed_prediction_fraction": 0.006138392857142857,
+    "small_fraction": null,
+    "per_document_loss_increase": [
+      -0.00031643587863072753,
+      0.0005273707793094218,
+      0.00031131008290685713,
+      0.0006374094518832862
+    ]
+  }
+]

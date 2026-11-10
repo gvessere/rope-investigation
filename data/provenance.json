@@ -1,0 +1,956 @@
+{
+  "recovered": "2026-11-09",
+  "source_chat": "ROPE investigation",
+  "thread_id": "01a15f24-929d-77a3-9610-0068124672c0",
+  "files": [
+    {
+      "path": "data/rope_frequency_schedule/frequency_schedule.csv",
+      "original": "research/outputs/rope_frequency_schedule/frequency_schedule.csv",
+      "sha256": "587635a0b65e14c03127eb41c5f3811a490f0840db85004b7da96c3f2b498b23",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/rope_frequency_schedule/frequency_schedule.png",
+      "original": "research/outputs/rope_frequency_schedule/frequency_schedule.png",
+      "sha256": "67135411de0df81a49f454821ff9e1ad67d465ee8797096cd5080f6317e698cc",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/rope_post_examples/constructions.json",
+      "original": "research/outputs/rope_post_examples/constructions.json",
+      "sha256": "c5682f30a31853c20b4675f9003030b30e64f0cf5e72cf0c82a36a60483f38e4",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/rope_post_examples/vectors_and_profiles.npz",
+      "original": "research/outputs/rope_post_examples/vectors_and_profiles.npz",
+      "sha256": "375f19f44543395598a84fc2928f1287f3f062835a300ca43ca7176a1f0dd05c",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/rope_post_examples/range_constructions.png",
+      "original": "research/outputs/rope_post_examples/range_constructions.png",
+      "sha256": "0e7c1733b369f5bc54df070f7f54a48333a1fbefb9e28b0540d71060d0a1559f",
+      "kind": "original figure"
+    },
+    {
+      "path": "assets/figures/rope_post_examples/content_plus_range.png",
+      "original": "research/outputs/rope_post_examples/content_plus_range.png",
+      "sha256": "9068ff92d49c381c979862508b113aedf0a2e3664fd9a1690b3f3d4c682fe5ff",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/fast_phase_amplitude_association/summary.json",
+      "original": "research/outputs/fast_phase_amplitude_association/summary.json",
+      "sha256": "6754537b320cf1c7c8ec2e2a5ff000d20a4a1089cdb4fcb6cd7b3694e1188dd7",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/fast_phase_amplitude_association/keys_histograms.npz",
+      "original": "research/outputs/fast_phase_amplitude_association/keys_histograms.npz",
+      "sha256": "7b6bb14e660d19db51f676f5920ecc478273fe13c3b002825ba4bc8c571c26aa",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/fast_phase_amplitude_association/queries_histograms.npz",
+      "original": "research/outputs/fast_phase_amplitude_association/queries_histograms.npz",
+      "sha256": "e5dac3deb8e89ae187f942613a1207a8a2681380650b415d250ed7ca62315482",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/fast_phase_amplitude_association/keys_phase_by_amplitude.png",
+      "original": "research/outputs/fast_phase_amplitude_association/keys_phase_by_amplitude.png",
+      "sha256": "f1674887b6a9fd993f4a2644e88efde594afb44aa7f3ce7fe659e681659813cc",
+      "kind": "original figure"
+    },
+    {
+      "path": "assets/figures/fast_phase_amplitude_association/queries_phase_by_amplitude.png",
+      "original": "research/outputs/fast_phase_amplitude_association/queries_phase_by_amplitude.png",
+      "sha256": "267974869b36a034ff605fde79dc5cf64f8b9281c4025d108e62e87ac360d95b",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/slow_phase_amplitude_association/summary.json",
+      "original": "research/outputs/slow_phase_amplitude_association/summary.json",
+      "sha256": "33fb64b94a5cb06eb79962317fb5722cbb6fe22aa3865178988a31c526049c21",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/slow_phase_amplitude_association/keys_histograms.npz",
+      "original": "research/outputs/slow_phase_amplitude_association/keys_histograms.npz",
+      "sha256": "71f0ac22ebbb4e7c86c8c76276c0b53387d4620b043a51e9cff9c6c3235fb5a2",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/slow_phase_amplitude_association/queries_histograms.npz",
+      "original": "research/outputs/slow_phase_amplitude_association/queries_histograms.npz",
+      "sha256": "98d86c95912966b89fd7a5e8b9fc7efe13e69001df5df3643361193b24bc6daa",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/slow_phase_amplitude_association/keys_phase_by_amplitude.png",
+      "original": "research/outputs/slow_phase_amplitude_association/keys_phase_by_amplitude.png",
+      "sha256": "63b2678d6eca8c022f2537abfa1666cf37aa8b3fd02a7ab1771f5a6f0fdb50ed",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/native_margin_angle_density/summary.json",
+      "original": "research/outputs/native_margin_angle_density/summary.json",
+      "sha256": "a95d12717844ade18a8664212f1d36339a4223bc4f75381d15c5049971981303",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/native_margin_angle_density/head_summary.csv",
+      "original": "research/outputs/native_margin_angle_density/head_summary.csv",
+      "sha256": "a0c57bf4d20537add42b4618a60e7ee787e67681c5405ce509105c0e328263e1",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/native_margin_angle_density/angle_density.png",
+      "original": "research/outputs/native_margin_angle_density/angle_density.png",
+      "sha256": "8fcef4e62a1714859b26d5b00f997dd25c65ea3238172aa9849569681ba8b6f0",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/slow_actual_key_phases/results.json",
+      "original": "research/outputs/slow_actual_key_phases/results.json",
+      "sha256": "5b880df281d06cefe7a852275cc3c6c65bc7aab3f6e6d712a5eb9899c9ceed11",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/slow_actual_key_phases/slow_phase_effect.png",
+      "original": "research/outputs/slow_actual_key_phases/slow_phase_effect.png",
+      "sha256": "e9a9cbf54bda21de14d373c91a2ee71b077a60153a22853bd10e44fbc41d3196",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/snap_low_bias_phases/prediction_summary.json",
+      "original": "research/outputs/snap_low_bias_phases/prediction_summary.json",
+      "sha256": "377f9e0636564b3b49e15b9a043314d67ae6704bdfcf1052290f5ba610002c9f",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/snap_low_bias_phases/prediction_effect.png",
+      "original": "research/outputs/snap_low_bias_phases/prediction_effect.png",
+      "sha256": "2dd54cc3e86293f35b3e813bd6a69c50afc70e74d15857ed5b6f9bd7d6ff81de",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/zero_small_key_biases/prediction_summary.json",
+      "original": "research/outputs/zero_small_key_biases/prediction_summary.json",
+      "sha256": "d67febdf41434e922ba5e0c1f96b6f0b22de7b5e555762fc24e34652008d2a06",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/zero_small_key_biases/prediction_effect.png",
+      "original": "research/outputs/zero_small_key_biases/prediction_effect.png",
+      "sha256": "f08fe803a90ed70f1fd307bc5bef9539b1ca94d06e729470c4665e51c8f77c2c",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/quantize_actual_key_phases_lt2p5_pi4/prediction_summary.json",
+      "original": "research/outputs/quantize_actual_key_phases_lt2p5_pi4/prediction_summary.json",
+      "sha256": "c0f4a50c42ec1955950c10d47f3eac73cbd063b1fb0287d3f853c5bd6770b818",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/quantize_actual_key_phases_lt2p5_pi4/prediction_effect.png",
+      "original": "research/outputs/quantize_actual_key_phases_lt2p5_pi4/prediction_effect.png",
+      "sha256": "44525943b8e568542203e61e502ad702662cbea9543d2db89ec9eef209c7a1e2",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/key_quantization_small_radius/results.json",
+      "original": "research/outputs/key_quantization_small_radius/results.json",
+      "sha256": "179606e2a8b43ac781f3b23ccf29d39a7645e095d6f18449f0137449ef623a5a",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/key_quantization_small_radius/comparison.json",
+      "original": "research/outputs/key_quantization_small_radius/comparison.json",
+      "sha256": "0f231134dd7199ff84751941aaa32a63c3c644e792f51541fc78e1e637877711",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/key_quantization_small_radius/locked_configs.json",
+      "original": "research/outputs/key_quantization_small_radius/locked_configs.json",
+      "sha256": "93c9f398f8145fecead629380d4387e1f99c5f1959abd106cb8683aae99b1108",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/key_quantization_small_radius/quality_vs_bytes.png",
+      "original": "research/outputs/key_quantization_small_radius/quality_vs_bytes.png",
+      "sha256": "2c43471b5457b02f35b3083a81941ce4bfcb8a20acbd979be3f5ef3f6636a107",
+      "kind": "original figure"
+    },
+    {
+      "path": "assets/figures/key_quantization_small_radius/quality_vs_bytes_zoom.png",
+      "original": "research/outputs/key_quantization_small_radius/quality_vs_bytes_zoom.png",
+      "sha256": "f6755d7642b10839992204c897a8bac965360a1c802b6d5ca5e25e38c370a326",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/key_quantization_frontier_report/summary.json",
+      "original": "research/outputs/key_quantization_frontier_report/summary.json",
+      "sha256": "60b4777f74df7cc725a641b8790be898de6f18f8a977953ba76e8b62e3e2b3b5",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/inverse_distance_attention/summary.json",
+      "original": "research/outputs/inverse_distance_attention/summary.json",
+      "sha256": "abba37e8f6d4f8b294a1ee8994d16efb2f511885108e1329a38ca72a18027186",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/inverse_distance_attention/head_decay_fits.csv",
+      "original": "research/outputs/inverse_distance_attention/head_decay_fits.csv",
+      "sha256": "874a3703b2b7a0e08f011ed21d74d98bfdf92a152140bd6fcb93c120296acd67",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "data/inverse_distance_attention/fit_arrays.npz",
+      "original": "research/outputs/inverse_distance_attention/fit_arrays.npz",
+      "sha256": "5908ca038d7abb1055c398cb28c4a2e407c821317314300b08f0f82b5d6efe8e",
+      "kind": "archived measurement"
+    },
+    {
+      "path": "assets/figures/inverse_distance_attention/inverse_distance_substantial_example.png",
+      "original": "research/outputs/inverse_distance_attention/inverse_distance_substantial_example.png",
+      "sha256": "3c7b80b21feb34bc7d95989d33a4c652422521093b566ed958d1a7b602fc0114",
+      "kind": "original figure"
+    },
+    {
+      "path": "assets/figures/inverse_distance_attention/inverse_distance_measurement.png",
+      "original": "research/outputs/inverse_distance_attention/inverse_distance_measurement.png",
+      "sha256": "033e29c166740232997b92f80e7060514c6bdd1bb91f70bab2eff4753e054eee",
+      "kind": "original figure"
+    },
+    {
+      "path": "assets/figures/inverse_distance_attention/exponent_head_maps.png",
+      "original": "research/outputs/inverse_distance_attention/exponent_head_maps.png",
+      "sha256": "2c3e782ae7862056b2fb8e47e6e404d562fcf7025570b4a75321a332292da852",
+      "kind": "original figure"
+    },
+    {
+      "path": "data/slow_actual_key_phases/identity_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/identity_doc0.npz",
+      "sha256": "c4d35c26dd78ce3c1a5a7a0d6e60ae41a5a8f349ae3f3b53a95a977db5054556",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/identity_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/identity_doc1.npz",
+      "sha256": "d93ea61ccf46dd86d1bb05fa4cf15a9010596271491ab438dc42cf41a6bd3f13",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/identity_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/identity_doc2.npz",
+      "sha256": "6b74cef2eea8bf7ae86afcde8c61441ec4e331a491637b6c4223d466b3a6cc55",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/identity_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/identity_doc3.npz",
+      "sha256": "a2869a8f077a7bd5afc030a6dae4174ca4f06acb7a3e257b8a13aa3447083e07",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/native_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/native_doc0.npz",
+      "sha256": "1d29cf5ad89cbd6700092ceae6c8d9f639b14430e1c22fb86c2c9645592861f6",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/native_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/native_doc1.npz",
+      "sha256": "be45d4af36cb826000ffa5b282ef3948dd18d109345aa4a0c939619e1bf4f92b",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/native_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/native_doc2.npz",
+      "sha256": "990f38c57043dbe3db4a36c53ac2a64494e69e25e112e87cb0c8531feeda95fc",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/native_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/native_doc3.npz",
+      "sha256": "5e8a90b0406d921d6f81ebcc340a08fff09b871eb37dc2d4db612f81102f190d",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_doc0.npz",
+      "sha256": "e2b8ba4e5856154e24feb2be9b481f2d563578bf0132d068a14be172522546e6",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_doc1.npz",
+      "sha256": "3cf5774f37f766375ccca8abdad3ffeb1f9836dfc786ba3f114020277f42ac1a",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_doc2.npz",
+      "sha256": "ea9fdf6cf199ffe9be0a7be7dc9361334ad6ca3db1de0441507969f2b722516b",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_doc3.npz",
+      "sha256": "60ee2e3dcfedc3c946a0ef91ddb7c763e6928c89696e9d4a7052eaf796311f8b",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_prefix14_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_prefix14_doc0.npz",
+      "sha256": "831b89154d64761b18b91dc1eaa1429f3dd8a8bef043d95b431dc494adb8456e",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_prefix14_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_prefix14_doc1.npz",
+      "sha256": "53e511122d01eff77ecb006408d321fa728c2f0c0104375cad0ab9ea5aabe9e2",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_prefix14_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_prefix14_doc2.npz",
+      "sha256": "3d8abe1e3e499cc026b6b2e98feb108cb8ff57480eee7581ef538de2f7766142",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_all_prefix14_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_all_prefix14_doc3.npz",
+      "sha256": "b2784fb2f417e5316c2ab61aeeb21182b5dd7b9cfb4d31c0815b90ef27c774a1",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_doc0.npz",
+      "sha256": "ac836fddc23e0d924f93527bbcdcf865f84b895d70e456a61c9fa5e02a136aea",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_doc1.npz",
+      "sha256": "c7f4f204d0c650f022b183dbd84f782920ba664c3d7e6477da1bd50bfe503f57",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_doc2.npz",
+      "sha256": "87c0b355c5499e7ef139d1e8dd63394f2baa8dea9c68589701b2478655d629e6",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_doc3.npz",
+      "sha256": "4401571932ea2fec0ec905ab88a029117771e169a83f146de6e7dcb52214da15",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_prefix14_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_prefix14_doc0.npz",
+      "sha256": "8320feb03cbc31c22e282689be7249f85ceecfdf4db5f755aea0c6e27055e4e8",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_prefix14_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_prefix14_doc1.npz",
+      "sha256": "d112ca4ec9ba49f789a0e09b51888d8aad0fe411cc714374a3c485b4d67db7ae",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_prefix14_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_prefix14_doc2.npz",
+      "sha256": "952cefc2f2ea88f228b352dad70764ce2f198b495c5a014aca5df2ebf9049f35",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi2_small_prefix14_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi2_small_prefix14_doc3.npz",
+      "sha256": "346fe994ac540dee6613862477bb051534aaed81f0376aabecea4376159818db",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_doc0.npz",
+      "sha256": "a3b05590380b52209b05af8ccf2d7ed96f1be8ebdf5a2b827e85ce788888e65a",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_doc1.npz",
+      "sha256": "f57895909a1460099b366d20146b04f57771255807d820885eb4302699043232",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_doc2.npz",
+      "sha256": "016e54f2a2fed2ec2461dbfe21576b1b23c1a64b40fca21d92116b13c5dad15e",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_doc3.npz",
+      "sha256": "71f63526f1f0b751d225bccecf7abf8b33f6c7fde34fe52ac5f9740c82cc88c8",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_prefix14_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_prefix14_doc0.npz",
+      "sha256": "b3e4ffb7bc7e13021f3130b7f36e995bab97f15313855239fbba3586d11461d0",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_prefix14_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_prefix14_doc1.npz",
+      "sha256": "c447fab52c05ac77d39ef6df517f08b74d6030c7fb49684498be6aa670feab40",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_prefix14_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_prefix14_doc2.npz",
+      "sha256": "8d105644e235c9160c3217cce806d4f6b07e2b7d87138da874fa0e18955bbf2f",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_all_prefix14_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_all_prefix14_doc3.npz",
+      "sha256": "6470f6f3cc96229ae71c31eb03ba4023d2d7b067e0b566020e14fb2281a2ccf7",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_doc0.npz",
+      "sha256": "4458573f59c400df6867e5dfbf06286f77e39f668a1f5860c46dd1b6cd14a7aa",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_doc1.npz",
+      "sha256": "f6a720905dc6265409b731a445aa8c678ddf14bb6d41e383256dab28ee47b5ee",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_doc2.npz",
+      "sha256": "b15b62821bb7857966568e50cfe567c30b2aceed135435671092ffc3ff0a5ced",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_doc3.npz",
+      "sha256": "d1fd2526711c467b4949b8ca6c4b2d1b34cff820a04d401de3a3bf1f214d01de",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_prefix14_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_prefix14_doc0.npz",
+      "sha256": "afe836d234ba3faf3174c5dbd4f49cf0c35406003ccaec065a3bf76b26ad3f8f",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_prefix14_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_prefix14_doc1.npz",
+      "sha256": "e08338c24d5881460a8ae691563bcd57da59bac88f7dc10ea14a2e67c4eb6d87",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_prefix14_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_prefix14_doc2.npz",
+      "sha256": "5e00d9371c46658ac5d5c2ea04be2727a8b810ecc934b6d53c262658d996b8cc",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/pi4_small_prefix14_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/pi4_small_prefix14_doc3.npz",
+      "sha256": "e89c2f1de93376bc46fde13c3046b59eb54fc723d94d96e3ef5d8733aabbf9e3",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_doc0.npz",
+      "sha256": "c27c06524e47b7f3c10885abd9a5c8bef2d19bb8f726789c5438e8c9a4422c95",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_doc1.npz",
+      "sha256": "4e9a7eabe316eaa62ee4f78de136d82cecdb6553a0eaa9842582a2eb536c62ec",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_doc2.npz",
+      "sha256": "09e0e92cfbe77de97253122bce29315d39178a1081a72076e24b95f277171fb7",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_doc3.npz",
+      "sha256": "90e6a39c2f6eb95a24219d340291e167480608775a2b879ededb77113155c21d",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_prefix14_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_prefix14_doc0.npz",
+      "sha256": "7ea0b77aa742d73de086c40d6de18ea9241e48ebf50cc66e9148b552c7e62717",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_prefix14_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_prefix14_doc1.npz",
+      "sha256": "78884c06e37b0c8d596a9c9ea56c7a4f94588118277b8086a95bfb582e49d9ad",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_prefix14_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_prefix14_doc2.npz",
+      "sha256": "085dc422adcb64f5e1049c63207ecd5a49ba12df4578b939c87564bca500a8b7",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_all_prefix14_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_all_prefix14_doc3.npz",
+      "sha256": "6142451c82e9d3a22b8c34417608e9d506786f09ef5ff90b5106ea5fc0d6d3fe",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_doc0.npz",
+      "sha256": "1403f737a9daf90f9c23933f4f4ac2ec9a2f75e7e2e7fbb6381705b23f51a3ea",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_doc1.npz",
+      "sha256": "52aa928916a222faaacdc789c6b50be9571ae94d48e0359c1575db7a6f5a0654",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_doc2.npz",
+      "sha256": "caf4b80e06ab0cbcacd40ae7b19a36e885628efb76b08208042c26e2eba8c652",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_doc3.npz",
+      "sha256": "0adbc39662b3d92399c91aa8ae12a191a6a9cddacf1925cefc44e300786be056",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_prefix14_doc0.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_prefix14_doc0.npz",
+      "sha256": "101913b82b9723ad5ce2ac2ff8e4fc84cd8a0576b743f31cd261a90cc95c8c14",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_prefix14_doc1.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_prefix14_doc1.npz",
+      "sha256": "ecaa1f7ead18b77e7d4c06e0f8cd25338b8cdcd00210456c29b1f1e2817412ef",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_prefix14_doc2.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_prefix14_doc2.npz",
+      "sha256": "ebf796adfc36b0d9bd4a4cd3405c8100fa2c0e6f7b6a5c645187c36af27f68fe",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/slow_actual_key_phases/zero_small_prefix14_doc3.npz",
+      "original": "research/outputs/slow_actual_key_phases/zero_small_prefix14_doc3.npz",
+      "sha256": "d23fb19dad2e098cdba92705723eca931ec7cc59948e6af6855c4f446e11cd9d",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc0.npz",
+      "sha256": "990682cb82f0f05d4a5e029d8fb46b1f659325ea0ea402d7223fcddd0d8a7690",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc1.npz",
+      "sha256": "938f45deb123cb4583d645e9c69e2df5fc027f35ee9cf368b1b45227ead02540",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc2.npz",
+      "sha256": "0c8895f25dc7db9379ac8e848a714414517c8783089a3959cc10575852d3c99e",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r4_largep6r6_doc3.npz",
+      "sha256": "dc024cdeca96bbd4e31184026d800be4c01e57f6d55378dff4aecfd696d1864b",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc0.npz",
+      "sha256": "f6bd3f94ec3420caebf70d11de2b8abd95d075c83ac258ff1b39736f0e15eef7",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc1.npz",
+      "sha256": "91ec14312969d881c2418c90524e7a8af518cfd615ab7c0cb61fbbc6c73a9bee",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc2.npz",
+      "sha256": "d7ef9ff075fbfb63a009eb3452af79a8eb18233ad277767ca7257f1458443294",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp3r6_largep6r6_doc3.npz",
+      "sha256": "dbb7aa1695d0ab4cfbfc69f2769a9b3d94118c5e6a14d15311803a91ab181f11",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc0.npz",
+      "sha256": "6c2f1fd4d587c5cc514fc2521837480aca9aadd2b2824f373484c531782e1f08",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc1.npz",
+      "sha256": "438c9d8a081d8ca6f667874f98834efd1965cbeb1dc9ffc9ecf890b2a7d5e047",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc2.npz",
+      "sha256": "76a916c0f5f58020e6b520d4f241f31ee4b1323f98ac6003e7c50f23030067fb",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r4_largep6r6_doc3.npz",
+      "sha256": "5c1e04102b04fa9c63843cc7c6385c39487070ba3599dd13e4053a833e220129",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc0.npz",
+      "sha256": "6402f321f346ca2e5bb88026b91105227c851baed0c80ddc78f87167b4dc7d7d",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc1.npz",
+      "sha256": "81de30a4dc108bfac5a82d6a0929bb04c7ee35864718d13b40c510e9345999bc",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc2.npz",
+      "sha256": "fc65cb420817d7409a50ecde604463f6454721f48fa3ff9724a596a0f3cbc0be",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/hybrid_smallp4r6_largep6r6_doc3.npz",
+      "sha256": "77e682fb1945f14df5cbc895d2d8027098517505f5fa94959ccaf4834538ce6d",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc0.npz",
+      "sha256": "6543a89e2e5403fe4901d23db21a454483b6ca77b7af258110506daf7cd5f846",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc1.npz",
+      "sha256": "8e3816f6ed82cd223a075dc02fa54ffb48816cb58415c0252c0c4e4d482650a7",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc2.npz",
+      "sha256": "0382889346fc2103e0a2cb30952beb935f40a2308261962d14e0bb318028b789",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_rawgate_small3_large6_r6_doc3.npz",
+      "sha256": "9556d6a5a74cdeb584d68bedf7577988b011d9f42d28de52506367f857bd541e",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r4_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r4_doc0.npz",
+      "sha256": "4bdcec0aa80f108d730c4ce9e0804ea0cfc323d91f196ce9a0059798e0ade91f",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r4_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r4_doc1.npz",
+      "sha256": "c5fa4e20017f89cc34a8567ac80719c593e6c51cc9fb20a826112928699280ca",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r4_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r4_doc2.npz",
+      "sha256": "defbdd1dbc2b126df1988ce04f463e629742f7a7dd79de24fa162025230047c6",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r4_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r4_doc3.npz",
+      "sha256": "fa47862535fc740abf24bf31b9f747560fe4a2c12fcc763f6ff68ea0f52ebb89",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r6_doc0.npz",
+      "sha256": "6cbdfd93eec1f4b2ed40ae16bb6767d6367e13e55b1b446972048afc4e95c765",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r6_doc1.npz",
+      "sha256": "cc6decbf9ceb96630a56983cdbc6720a265e2c8faae445e7b0fd63ee42c47034",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r6_doc2.npz",
+      "sha256": "5b776eac7e454a59cd62d358da12eab01f9a7b1f6de1fc248ed36d2a4ade4d5c",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small3_large6_r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small3_large6_r6_doc3.npz",
+      "sha256": "4259018e358f4b03eed370966705cce7a56301004e3bd196109965287f110672",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r4_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r4_doc0.npz",
+      "sha256": "8545307137bde70abf45b70ad13b36004704fe16f863e7599065464c57520b96",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r4_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r4_doc1.npz",
+      "sha256": "a1388c82fff37d442b6fc54bf47981b4720fbb41e723ce8f057966da92e73742",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r4_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r4_doc2.npz",
+      "sha256": "acb0cb18bc01df4e1fd3f4fe2c23bd6258258a29999a6280a65123321f83f6ff",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r4_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r4_doc3.npz",
+      "sha256": "e58fc787562aee02b29930f59ad6f0b9f6bf8eb81ef58e78e152ce3cd8d5e5ba",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r6_doc0.npz",
+      "sha256": "c7e88a2cd9e2366ebb4eb9e0f3e45f95efce7a35c4caed78ed20c35fc816c18f",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r6_doc1.npz",
+      "sha256": "c857f3d0f9c70cb7bb477daa45fcdb71d1346199331ff6ac469be5aef2c04857",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r6_doc2.npz",
+      "sha256": "dcae8439079e1f198350bbff88c5107d52211d7be5abc1eccada4f81bf6008cf",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/mean_small4_large6_r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/mean_small4_large6_r6_doc3.npz",
+      "sha256": "87a544f7fc52861b0339aff6aca8186de51051da33d00518064e7c7b646008e9",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/native_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/native_doc0.npz",
+      "sha256": "1d29cf5ad89cbd6700092ceae6c8d9f639b14430e1c22fb86c2c9645592861f6",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/native_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/native_doc1.npz",
+      "sha256": "be45d4af36cb826000ffa5b282ef3948dd18d109345aa4a0c939619e1bf4f92b",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/native_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/native_doc2.npz",
+      "sha256": "990f38c57043dbe3db4a36c53ac2a64494e69e25e112e87cb0c8531feeda95fc",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/native_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/native_doc3.npz",
+      "sha256": "5e8a90b0406d921d6f81ebcc340a08fff09b871eb37dc2d4db612f81102f190d",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_slow_small3_large8_r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_slow_small3_large8_r6_doc0.npz",
+      "sha256": "38338c9032798e7c4bf1040bf2384b4bc9ceaa06fe9b4b27970d5dc9a1347079",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_slow_small3_large8_r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_slow_small3_large8_r6_doc1.npz",
+      "sha256": "e6de4e66001f84eac4a0a1349c856df2e4129638aa98f71ff6754894f83d46b7",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_slow_small3_large8_r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_slow_small3_large8_r6_doc2.npz",
+      "sha256": "bc596dffd5e15cbf8a058b16b5c95c36c0a9eb5bc233114fea573a8818c96a7a",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_slow_small3_large8_r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_slow_small3_large8_r6_doc3.npz",
+      "sha256": "ffd7c8a5d20e550372bd39224c0607450100000fbb2bed1f0f8f64b4932f07e9",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r6_doc0.npz",
+      "sha256": "6c55919663b6d638f6dd704c2ac71f26ac13a68eb29e29741545702b63c4488e",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r6_doc1.npz",
+      "sha256": "fcb09b9408b1dbf41db656385d949a2b709597b384760a1148f36f83efeeb6bd",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r6_doc2.npz",
+      "sha256": "e5b93c32285a697784e7771dde2a70e64d0d2d27d981f5959aac0cdf6f31bea2",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r6_doc3.npz",
+      "sha256": "a2dc4ef913a09044914fc85663cd35b816a55b5f32addb342f974aefc72738c4",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r8_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r8_doc0.npz",
+      "sha256": "7c16b26dbdef68b2e947760e6cd08f415e01a8efdf6364ac6fa6fc0d457c0492",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r8_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r8_doc1.npz",
+      "sha256": "f4638b42cbb945506ec9bb72d929043ec19f0756d8cdaebc4192e744598a54e0",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r8_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r8_doc2.npz",
+      "sha256": "5368a3da5bca28da51de39932e681e48d863de036cc81a0353733bf24c0f3200",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_small3_large8_r8_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_small3_large8_r8_doc3.npz",
+      "sha256": "d48e4dd24a4bb04e06fe265a1cdac755efa65d99b8f865d506497af1163263e1",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_uniform_p8r6_doc0.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_uniform_p8r6_doc0.npz",
+      "sha256": "24514fbd44af02da8a82d4273ae7395ea258578a191c3a986efa5a6fab263a4e",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_uniform_p8r6_doc1.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_uniform_p8r6_doc1.npz",
+      "sha256": "c6d526622d33ffdbf259f973905320f3ea80971489ec1caf40e34c23832e31dd",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_uniform_p8r6_doc2.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_uniform_p8r6_doc2.npz",
+      "sha256": "27e0cd162408fb0f6e1a0212875a064a0a508eabc09a918b1f4b9cead911c64b",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "data/key_quantization_small_radius/raw_uniform_p8r6_doc3.npz",
+      "original": "research/outputs/key_quantization_small_radius/raw_uniform_p8r6_doc3.npz",
+      "sha256": "41f674274086a39b2dcc9a4ae53a6dcd88968eb14b205783a29b7806741244fd",
+      "kind": "numeric per-token output"
+    },
+    {
+      "path": "code/archive/evaluate_slow_actual_key_phases.py",
+      "original": "research/work/evaluate_slow_actual_key_phases.py",
+      "sha256": "f260c0655dc8ce6fda1451937ffa3441a79370d6aaff77d1352f23a755e952ae",
+      "kind": "archival script; depends on original research workspace"
+    },
+    {
+      "path": "code/archive/key_quantization_small_radius.py",
+      "original": "research/work/key_quantization_small_radius.py",
+      "sha256": "d9429d0c783546ab34863091e9b4c5538d20483e41f449e9a6f3ae1f4cb58e4a",
+      "kind": "archival script; depends on original research workspace"
+    },
+    {
+      "path": "code/archive/measure_inverse_distance_attention.py",
+      "original": "research/work/measure_inverse_distance_attention.py",
+      "sha256": "89afe5cce6637d3071e591bfe61332479fab5f4cd59c8175d6bc52c04f16e002",
+      "kind": "archival script; depends on original research workspace"
+    },
+    {
+      "path": "code/archive/rope_post_examples.py",
+      "original": "research/work/rope_post_examples.py",
+      "sha256": "2100b3a165fe2cee816cc5423d628f6c5baac57c6c9e4a12c2be5de5c307b856",
+      "kind": "archival script; depends on original research workspace"
+    },
+    {
+      "path": "code/archive/fast_phase_amplitude_association.py",
+      "original": "research/work/fast_phase_amplitude_association.py",
+      "sha256": "a7edaaddecff6aef8e9d0f7844b3f3c0cdb9520c520dc7623d75523e1558fe92",
+      "kind": "archival script; depends on original research workspace"
+    },
+    {
+      "path": "data/native_margin_angle_density/pooled_histograms.npz",
+      "kind": "processed plot input: sum of original head histograms",
+      "original": "research/outputs/native_margin_angle_density/densities.npz",
+      "source_sha256": "aa84f56ea880304176a405641b340fdab5143fd1b5f32e61c7589b6ae6e5b870",
+      "sha256": "8ceca2bfd2d658b0ef856f07a3dbc5dc080a1a1f61a6e4b80c7453ba165273fc"
+    },
+    {
+      "path": "data/inverse_distance_attention/dense_query_means.npz",
+      "kind": "processed plot input: means over 128 query positions per text",
+      "original": "research/outputs/inverse_distance_attention/dense_{0..3}.npz",
+      "source_sha256": [
+        "db67e95212f70421f6ecdf5bada7bad76fb9dd8b2d920c4bc0f593d06767a744",
+        "0bf3e88ec0156abf7414942028c481916b2949c84ab1513a88a56c2ce9f5e29b",
+        "607000f0bbe483798ad9c2ce05d69f987543abc5db2b4190b621c3c1bf0a7355",
+        "ae48a4d24e5ff97eee3ac6d71fd61452899d47d6b3253ced5c948ff53972cd24"
+      ],
+      "sha256": "7c53921d2896af6e4d43434a8ea30568468ebabed03f7c0388db6c7568cd317c"
+    }
+  ]
+}

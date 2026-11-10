@@ -1,0 +1,71 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "intervention": "ACTUAL keys, immediately after k_proj and before RoPE: Across all 64 pairs, only pairs with CURRENT activation amplitude r<2.5 round their phase to nearest pi/4. Larger pairs remain bitwise unchanged. Current pair amplitudes preserved. Every input token including chat prefix; both shared key heads; all 28 layers. Full downstream recomputation. No parameter edits.",
+  "unchanged": "Projection weights and biases, query and value parameters, and RoPE schedule. Only actual key activations altered.",
+  "passages": 16,
+  "scored_tokens": 2251,
+  "checks": {
+    "max_relative_radius_squared_error": 4.184618092040182e-07,
+    "max_identity_component_error": 7.152557373046875e-07,
+    "max_snap_phase_error_radians": 1.7484555314695172e-07,
+    "pair_instances": 9329152,
+    "selected_pair_instances": 7063368,
+    "maximum_selected_amplitude": 2.4999983310699463,
+    "changed_pairs_with_r_ge2p5": 0
+  },
+  "hooks_removed": true,
+  "conditions": {
+    "baseline": {
+      "mean_nll": 2.875887652811926,
+      "perplexity": 17.741165129266992,
+      "top1_accuracy": 0.4055975122167925,
+      "loss_increase": 0.0,
+      "loss_increase_ci95": [
+        0.0,
+        0.0
+      ],
+      "accuracy_change_pp": 0.0,
+      "accuracy_change_pp_ci95": [
+        0.0,
+        0.0
+      ],
+      "changed_top1_fraction": 0.0,
+      "paragraphs_loss_worse": 0
+    },
+    "identity": {
+      "mean_nll": 2.875887944612541,
+      "perplexity": 17.741170306150646,
+      "top1_accuracy": 0.4055975122167925,
+      "loss_increase": 2.9180061547081507e-07,
+      "loss_increase_ci95": [
+        -2.1044613840716315e-07,
+        8.232276094533041e-07
+      ],
+      "accuracy_change_pp": 0.0,
+      "accuracy_change_pp_ci95": [
+        0.0,
+        0.0
+      ],
+      "changed_top1_fraction": 0.0,
+      "paragraphs_loss_worse": 7
+    },
+    "snap_all": {
+      "mean_nll": 2.889828109995411,
+      "perplexity": 17.99021699728183,
+      "top1_accuracy": 0.4038205242114616,
+      "loss_increase": 0.0139404571834854,
+      "loss_increase_ci95": [
+        0.0052678571122827525,
+        0.02179752802407645
+      ],
+      "accuracy_change_pp": -0.17769880053309686,
+      "accuracy_change_pp_ci95": [
+        -0.7269856296080208,
+        0.3576338210346134
+      ],
+      "changed_top1_fraction": 0.07685473123056419,
+      "paragraphs_loss_worse": 12
+    }
+  },
+  "selected_fraction": 0.7571286221941715
+}

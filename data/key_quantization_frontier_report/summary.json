@@ -1,0 +1,1873 @@
+{
+  "protocol": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "calibration": "4 separate 2062-token book excerpts; codebooks and head ranking fitted only here.",
+    "validation": "4 different excerpts, same four books; 7168 teacher-forced next-token targets after a 256-token warmup. Each codec tested with full downstream recomputation.",
+    "quantization": "Actual keys immediately after k_proj and before RoPE. Fixed mean center per layer/KV head/component, uniform circular phase bins, per-pair log-companded radius levels. Decode and restore center before native RoPE. No attention shortlist; every causal key remains available.",
+    "prefix_protection": "Protected family fits center/scales to calibration body keys excluding first14 tokens, and leaves first14 or32 pre-RoPE keys in native float32. Unprotected family fits to all calibration keys. These two changes are not separately isolated.",
+    "scope": "K-only quantize/dequantize simulation. Queries and values not independently quantized. The effect propagates through all layers. No physical packed-cache implementation, runtime speedup, or 32k quality test is claimed.",
+    "memory": "Packed payload estimates vs FP16 K (256B/key for D128). Prefix charged at FP32 (512B/key). Center + median + maximum codebook charged 1024B per KV head per cache, amortized over N2062. Potential full-KV ratio assumes V stays FP16; quality simulation retains native float32 V.",
+    "head_units": "28 layers \u00d72 KV heads =56 storage groups; each serves six query heads. Sensitivity interventions alter exactly one KV head at a time; errors are not additive.",
+    "uncertainty": "95% intervals resample four held-out excerpts. They do not establish robustness across other data domains. Changed-choice rate is disagreement with native model, not error rate against ground truth."
+  },
+  "validation_points": [
+    {
+      "split": "validation",
+      "condition": "p1r1",
+      "tokens": 7168,
+      "nll": 8.637370109558105,
+      "loss_increase": 6.201048851013184,
+      "perplexity_ratio": 493.2661437988281,
+      "changed_prediction_fraction": 0.9606584821428571,
+      "accuracy": 0.029994419642857144,
+      "per_document_loss_increase": [
+        6.83121919631958,
+        6.210612773895264,
+        5.850394248962402,
+        5.91196870803833
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 1,
+      "radius_bits": 1,
+      "mean_bits_per_pair": 2,
+      "nominal_key_bytes": 16,
+      "mean_key_bytes_including_prefix_and_codebook": 16.496605237633364,
+      "key_compression_vs_fp16": 15.518344308560678,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.8789224898912238,
+      "doc_bootstrap_ci95": [
+        5.881181478500366,
+        6.601406574249268
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p2r2",
+      "tokens": 7168,
+      "nll": 3.3084425926208496,
+      "loss_increase": 0.872121274471283,
+      "perplexity_ratio": 2.391979455947876,
+      "changed_prediction_fraction": 0.4859095982142857,
+      "accuracy": 0.33077566964285715,
+      "per_document_loss_increase": [
+        0.8312338590621948,
+        0.8427392244338989,
+        0.8739030957221985,
+        0.9406088590621948
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 2,
+      "radius_bits": 2,
+      "mean_bits_per_pair": 4,
+      "nominal_key_bytes": 32,
+      "mean_key_bytes_including_prefix_and_codebook": 32.49660523763337,
+      "key_compression_vs_fp16": 7.877745940783189,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.7747175901022054,
+      "doc_bootstrap_ci95": [
+        0.8369865417480469,
+        0.9161414504051208
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p3r2",
+      "tokens": 7168,
+      "nll": 3.254671812057495,
+      "loss_increase": 0.8183504939079285,
+      "perplexity_ratio": 2.2667577266693115,
+      "changed_prediction_fraction": 0.4702845982142857,
+      "accuracy": 0.34263392857142855,
+      "per_document_loss_increase": [
+        0.7713086009025574,
+        0.8563004732131958,
+        0.8130980730056763,
+        0.8326947093009949
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 3,
+      "radius_bits": 2,
+      "mean_bits_per_pair": 5,
+      "nominal_key_bytes": 40,
+      "mean_key_bytes_including_prefix_and_codebook": 40.49660523763337,
+      "key_compression_vs_fp16": 6.321517532094271,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.7268325874748107,
+      "doc_bootstrap_ci95": [
+        0.7866551280021667,
+        0.8454998731613159
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p2r3",
+      "tokens": 7168,
+      "nll": 3.2341744899749756,
+      "loss_increase": 0.7978530526161194,
+      "perplexity_ratio": 2.2207679748535156,
+      "changed_prediction_fraction": 0.46107700892857145,
+      "accuracy": 0.341796875,
+      "per_document_loss_increase": [
+        0.8136266469955444,
+        0.8513180613517761,
+        0.7101430892944336,
+        0.8163245320320129
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 2,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 5,
+      "nominal_key_bytes": 40,
+      "mean_key_bytes_including_prefix_and_codebook": 40.49660523763337,
+      "key_compression_vs_fp16": 6.321517532094271,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.7268325874748107,
+      "doc_bootstrap_ci95": [
+        0.7366884499788284,
+        0.8418952077627182
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p3r3",
+      "tokens": 7168,
+      "nll": 3.126769542694092,
+      "loss_increase": 0.6904483437538147,
+      "perplexity_ratio": 1.9946095943450928,
+      "changed_prediction_fraction": 0.4437779017857143,
+      "accuracy": 0.35574776785714285,
+      "per_document_loss_increase": [
+        0.669937252998352,
+        0.6967656016349792,
+        0.680971086025238,
+        0.7141196131706238
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 3,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 6,
+      "nominal_key_bytes": 48,
+      "mean_key_bytes_including_prefix_and_codebook": 48.49660523763337,
+      "key_compression_vs_fp16": 5.27872,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6814637378319146,
+      "doc_bootstrap_ci95": [
+        0.675454169511795,
+        0.7058324813842773
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p4r3",
+      "tokens": 7168,
+      "nll": 2.6911590099334717,
+      "loss_increase": 0.25483787059783936,
+      "perplexity_ratio": 1.290252447128296,
+      "changed_prediction_fraction": 0.2798549107142857,
+      "accuracy": 0.41671316964285715,
+      "per_document_loss_increase": [
+        0.2602882385253906,
+        0.22823786735534668,
+        0.2574046552181244,
+        0.2734207212924957
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 4,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 7,
+      "nominal_key_bytes": 56,
+      "mean_key_bytes_including_prefix_and_codebook": 56.49660523763337,
+      "key_compression_vs_fp16": 4.531245708007142,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6384177985250663,
+      "doc_bootstrap_ci95": [
+        0.23625046014785767,
+        0.2694167047739029
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p3r4",
+      "tokens": 7168,
+      "nll": 2.99997878074646,
+      "loss_increase": 0.5636574625968933,
+      "perplexity_ratio": 1.757087230682373,
+      "changed_prediction_fraction": 0.40262276785714285,
+      "accuracy": 0.37081473214285715,
+      "per_document_loss_increase": [
+        0.5332479476928711,
+        0.5779026746749878,
+        0.5689697861671448,
+        0.5745096206665039
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 3,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 7,
+      "nominal_key_bytes": 56,
+      "mean_key_bytes_including_prefix_and_codebook": 56.49660523763337,
+      "key_compression_vs_fp16": 4.531245708007142,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6384177985250663,
+      "doc_bootstrap_ci95": [
+        0.5435633659362793,
+        0.5762061476707458
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p4r4",
+      "tokens": 7168,
+      "nll": 2.615039348602295,
+      "loss_increase": 0.17871809005737305,
+      "perplexity_ratio": 1.1956835985183716,
+      "changed_prediction_fraction": 0.23186383928571427,
+      "accuracy": 0.42452566964285715,
+      "per_document_loss_increase": [
+        0.1925349235534668,
+        0.15311165153980255,
+        0.15455181896686554,
+        0.21467392146587372
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 4,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 8,
+      "nominal_key_bytes": 64,
+      "mean_key_bytes_including_prefix_and_codebook": 64.49660523763336,
+      "key_compression_vs_fp16": 3.9692011549566892,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5975208212279681,
+      "doc_bootstrap_ci95": [
+        0.15383173525333405,
+        0.20360442250967026
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p5r4",
+      "tokens": 7168,
+      "nll": 2.478996753692627,
+      "loss_increase": 0.042675476521253586,
+      "perplexity_ratio": 1.0435991287231445,
+      "changed_prediction_fraction": 0.12583705357142858,
+      "accuracy": 0.44921875,
+      "per_document_loss_increase": [
+        0.04437496140599251,
+        0.02617619000375271,
+        0.05422991141676903,
+        0.04592086747288704
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 5,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 9,
+      "nominal_key_bytes": 72,
+      "mean_key_bytes_including_prefix_and_codebook": 72.49660523763336,
+      "key_compression_vs_fp16": 3.5311998287487962,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5586158025274595,
+      "doc_bootstrap_ci95": [
+        0.03111235937103629,
+        0.0517661739140749
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p4r5",
+      "tokens": 7168,
+      "nll": 2.5632479190826416,
+      "loss_increase": 0.12692654132843018,
+      "perplexity_ratio": 1.1353336572647095,
+      "changed_prediction_fraction": 0.19907924107142858,
+      "accuracy": 0.4340122767857143,
+      "per_document_loss_increase": [
+        0.15165889263153076,
+        0.11771779507398605,
+        0.11429868638515472,
+        0.12403079122304916
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 4,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 9,
+      "nominal_key_bytes": 72,
+      "mean_key_bytes_including_prefix_and_codebook": 72.49660523763336,
+      "key_compression_vs_fp16": 3.5311998287487962,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5586158025274595,
+      "doc_bootstrap_ci95": [
+        0.11600824072957039,
+        0.14317361824214458
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p5r5",
+      "tokens": 7168,
+      "nll": 2.497636556625366,
+      "loss_increase": 0.061315443366765976,
+      "perplexity_ratio": 1.0632342100143433,
+      "changed_prediction_fraction": 0.13588169642857142,
+      "accuracy": 0.44921875,
+      "per_document_loss_increase": [
+        0.07648889720439911,
+        0.041372962296009064,
+        0.06104841083288193,
+        0.0663514956831932
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 5,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 10,
+      "nominal_key_bytes": 80,
+      "mean_key_bytes_including_prefix_and_codebook": 80.49660523763336,
+      "key_compression_vs_fp16": 3.180258338153075,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5215606696490338,
+      "doc_bootstrap_ci95": [
+        0.0476175956428051,
+        0.07262877561151981
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p6r6",
+      "tokens": 7168,
+      "nll": 2.4401495456695557,
+      "loss_increase": 0.003828322282060981,
+      "perplexity_ratio": 1.003835678100586,
+      "changed_prediction_fraction": 0.0625,
+      "accuracy": 0.4525669642857143,
+      "per_document_loss_increase": [
+        0.0020202489104121923,
+        0.008180028758943081,
+        0.005370743107050657,
+        -0.0002577310078777373
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 6,
+      "radius_bits": 6,
+      "mean_bits_per_pair": 12,
+      "nominal_key_bytes": 96,
+      "mean_key_bytes_including_prefix_and_codebook": 96.49660523763336,
+      "key_compression_vs_fp16": 2.6529430685107753,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.4524962578145637,
+      "doc_bootstrap_ci95": [
+        0.0008812589512672275,
+        0.006775385932996869
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "p8r8",
+      "tokens": 7168,
+      "nll": 2.436894655227661,
+      "loss_increase": 0.0005731252022087574,
+      "perplexity_ratio": 1.0005732774734497,
+      "changed_prediction_fraction": 0.016322544642857144,
+      "accuracy": 0.4560546875,
+      "per_document_loss_increase": [
+        0.001595245092175901,
+        0.00010475776070961729,
+        0.0013118656352162361,
+        -0.0007193677010945976
+      ],
+      "family": "unprotected",
+      "prefix_tokens": 0,
+      "phase_bits": 8,
+      "radius_bits": 8,
+      "mean_bits_per_pair": 16,
+      "nominal_key_bytes": 128,
+      "mean_key_bytes_including_prefix_and_codebook": 128.49660523763336,
+      "key_compression_vs_fp16": 1.9922705314009663,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.3316112366806587,
+      "doc_bootstrap_ci95": [
+        -0.00030730497019249015,
+        0.0014535553636960685
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p2r2",
+      "tokens": 7168,
+      "nll": 2.756099224090576,
+      "loss_increase": 0.31977781653404236,
+      "perplexity_ratio": 1.3768218755722046,
+      "changed_prediction_fraction": 0.3232421875,
+      "accuracy": 0.40234375,
+      "per_document_loss_increase": [
+        0.37904295325279236,
+        0.29118913412094116,
+        0.2528245747089386,
+        0.3560546934604645
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 2,
+      "radius_bits": 2,
+      "mean_bits_per_pair": 4,
+      "nominal_key_bytes": 32,
+      "mean_key_bytes_including_prefix_and_codebook": 35.75557710960233,
+      "key_compression_vs_fp16": 7.159722222222222,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.7548936170212768,
+      "doc_bootstrap_ci95": [
+        0.2720068544149399,
+        0.3675488233566284
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p3r3",
+      "tokens": 7168,
+      "nll": 2.5379550457000732,
+      "loss_increase": 0.10163392126560211,
+      "perplexity_ratio": 1.106978178024292,
+      "changed_prediction_fraction": 0.16978236607142858,
+      "accuracy": 0.4375,
+      "per_document_loss_increase": [
+        0.1311597377061844,
+        0.08738216012716293,
+        0.0725625678896904,
+        0.11543122678995132
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 3,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 6,
+      "nominal_key_bytes": 48,
+      "mean_key_bytes_including_prefix_and_codebook": 51.64694471387003,
+      "key_compression_vs_fp16": 4.956730769230769,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6642453591606134,
+      "doc_bootstrap_ci95": [
+        0.07997236400842667,
+        0.12329548224806786
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p4r3",
+      "tokens": 7168,
+      "nll": 2.4576754570007324,
+      "loss_increase": 0.021354181692004204,
+      "perplexity_ratio": 1.0215837955474854,
+      "changed_prediction_fraction": 0.09612165178571429,
+      "accuracy": 0.45298549107142855,
+      "per_document_loss_increase": [
+        0.02660427801311016,
+        0.010130847804248333,
+        0.03112623281776905,
+        0.017555367201566696
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 4,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 7,
+      "nominal_key_bytes": 56,
+      "mean_key_bytes_including_prefix_and_codebook": 59.59262851600388,
+      "key_compression_vs_fp16": 4.295833333333333,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6223446105428798,
+      "doc_bootstrap_ci95": [
+        0.013843107502907515,
+        0.028865255415439606
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p3r4",
+      "tokens": 7168,
+      "nll": 2.5110039710998535,
+      "loss_increase": 0.07468272000551224,
+      "perplexity_ratio": 1.0775421857833862,
+      "changed_prediction_fraction": 0.15541294642857142,
+      "accuracy": 0.44321986607142855,
+      "per_document_loss_increase": [
+        0.07998885214328766,
+        0.07716001570224762,
+        0.0716949924826622,
+        0.06988700479269028
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 3,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 7,
+      "nominal_key_bytes": 56,
+      "mean_key_bytes_including_prefix_and_codebook": 59.59262851600388,
+      "key_compression_vs_fp16": 4.295833333333333,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6223446105428798,
+      "doc_bootstrap_ci95": [
+        0.07079099863767624,
+        0.07857443392276764
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p4r4",
+      "tokens": 7168,
+      "nll": 2.4500770568847656,
+      "loss_increase": 0.01375565119087696,
+      "perplexity_ratio": 1.0138506889343262,
+      "changed_prediction_fraction": 0.08384486607142858,
+      "accuracy": 0.45340401785714285,
+      "per_document_loss_increase": [
+        0.016677210107445717,
+        0.0026266726199537516,
+        0.01724076084792614,
+        0.01847795955836773
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 4,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 8,
+      "nominal_key_bytes": 64,
+      "mean_key_bytes_including_prefix_and_codebook": 67.53831231813773,
+      "key_compression_vs_fp16": 3.7904411764705883,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5825019186492708,
+      "doc_bootstrap_ci95": [
+        0.006280194676946849,
+        0.018027772195637226
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p5r4",
+      "tokens": 7168,
+      "nll": 2.4442386627197266,
+      "loss_increase": 0.007917395792901516,
+      "perplexity_ratio": 1.007948875427246,
+      "changed_prediction_fraction": 0.04603794642857143,
+      "accuracy": 0.4546595982142857,
+      "per_document_loss_increase": [
+        0.007111152168363333,
+        0.008238916285336018,
+        0.009499737061560154,
+        0.00681977579370141
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 5,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 9,
+      "nominal_key_bytes": 72,
+      "mean_key_bytes_including_prefix_and_codebook": 75.48399612027158,
+      "key_compression_vs_fp16": 3.3914473684210527,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5445692883895132,
+      "doc_bootstrap_ci95": [
+        0.0069654639810323715,
+        0.008902590838260949
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p4r5",
+      "tokens": 7168,
+      "nll": 2.448690176010132,
+      "loss_increase": 0.012368696741759777,
+      "perplexity_ratio": 1.0124454498291016,
+      "changed_prediction_fraction": 0.07575334821428571,
+      "accuracy": 0.4535435267857143,
+      "per_document_loss_increase": [
+        0.015986783429980278,
+        0.001894267275929451,
+        0.020286325365304947,
+        0.011307411827147007
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 4,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 9,
+      "nominal_key_bytes": 72,
+      "mean_key_bytes_including_prefix_and_codebook": 75.48399612027158,
+      "key_compression_vs_fp16": 3.3914473684210527,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5445692883895132,
+      "doc_bootstrap_ci95": [
+        0.005417396314442158,
+        0.018136554397642612
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p5r5",
+      "tokens": 7168,
+      "nll": 2.4390065670013428,
+      "loss_increase": 0.0026852525770664215,
+      "perplexity_ratio": 1.0026888847351074,
+      "changed_prediction_fraction": 0.038783482142857144,
+      "accuracy": 0.45535714285714285,
+      "per_document_loss_increase": [
+        0.00442085275426507,
+        0.0053669544868171215,
+        0.0039740921929478645,
+        -0.0030208879616111517
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 5,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 10,
+      "nominal_key_bytes": 80,
+      "mean_key_bytes_including_prefix_and_codebook": 83.42967992240543,
+      "key_compression_vs_fp16": 3.068452380952381,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.508412582297001,
+      "doc_bootstrap_ci95": [
+        -0.0011604527826420963,
+        0.005018738913349807
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p6r6",
+      "tokens": 7168,
+      "nll": 2.4367434978485107,
+      "loss_increase": 0.00042228554957546294,
+      "perplexity_ratio": 1.0004223585128784,
+      "changed_prediction_fraction": 0.023158482142857144,
+      "accuracy": 0.455078125,
+      "per_document_loss_increase": [
+        -0.0006131096160970628,
+        0.0023487922735512257,
+        0.0014442814281210303,
+        -0.0014908220618963242
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 6,
+      "radius_bits": 6,
+      "mean_bits_per_pair": 12,
+      "nominal_key_bytes": 96,
+      "mean_key_bytes_including_prefix_and_codebook": 99.32104752667313,
+      "key_compression_vs_fp16": 2.5775,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.440950384346611,
+      "doc_bootstrap_ci95": [
+        -0.0010519658389966935,
+        0.001896536850836128
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p8r8",
+      "tokens": 7168,
+      "nll": 2.4366111755371094,
+      "loss_increase": 0.00028991358703933656,
+      "perplexity_ratio": 1.0002899169921875,
+      "changed_prediction_fraction": 0.006138392857142857,
+      "accuracy": 0.45577566964285715,
+      "per_document_loss_increase": [
+        -0.00031643587863072753,
+        0.0005273707793094218,
+        0.00031131008290685713,
+        0.0006374094518832862
+      ],
+      "family": "protected",
+      "prefix_tokens": 14,
+      "phase_bits": 8,
+      "radius_bits": 8,
+      "mean_bits_per_pair": 16,
+      "nominal_key_bytes": 128,
+      "mean_key_bytes_including_prefix_and_codebook": 131.10378273520854,
+      "key_compression_vs_fp16": 1.9526515151515151,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.3226427196921102,
+      "doc_bootstrap_ci95": [
+        -0.0001054842141456902,
+        0.000582390115596354
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p2r2",
+      "tokens": 7168,
+      "nll": 2.765944242477417,
+      "loss_increase": 0.3296230137348175,
+      "perplexity_ratio": 1.3904438018798828,
+      "changed_prediction_fraction": 0.32296316964285715,
+      "accuracy": 0.4017857142857143,
+      "per_document_loss_increase": [
+        0.3807072639465332,
+        0.32714006304740906,
+        0.2752228379249573,
+        0.3354218304157257
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 2,
+      "radius_bits": 2,
+      "mean_bits_per_pair": 4,
+      "nominal_key_bytes": 32,
+      "mean_key_bytes_including_prefix_and_codebook": 39.94568380213385,
+      "key_compression_vs_fp16": 6.408702408702409,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.7300471945464082,
+      "doc_bootstrap_ci95": [
+        0.2902725860476494,
+        0.36731546372175217
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p3r3",
+      "tokens": 7168,
+      "nll": 2.5175118446350098,
+      "loss_increase": 0.08119066804647446,
+      "perplexity_ratio": 1.0845776796340942,
+      "changed_prediction_fraction": 0.16545758928571427,
+      "accuracy": 0.4408482142857143,
+      "per_document_loss_increase": [
+        0.09342348575592041,
+        0.06904607266187668,
+        0.05185288190841675,
+        0.11044025421142578
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 3,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 6,
+      "nominal_key_bytes": 48,
+      "mean_key_bytes_including_prefix_and_codebook": 55.69738118331717,
+      "key_compression_vs_fp16": 4.596266369462246,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6426188698033357,
+      "doc_bootstrap_ci95": [
+        0.06044947728514671,
+        0.1019318699836731
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p4r3",
+      "tokens": 7168,
+      "nll": 2.462968111038208,
+      "loss_increase": 0.026646817103028297,
+      "perplexity_ratio": 1.0270050764083862,
+      "changed_prediction_fraction": 0.09514508928571429,
+      "accuracy": 0.44893973214285715,
+      "per_document_loss_increase": [
+        0.03277457505464554,
+        0.02118450403213501,
+        0.03513072803616524,
+        0.017497455701231956
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 4,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 7,
+      "nominal_key_bytes": 56,
+      "mean_key_bytes_including_prefix_and_codebook": 63.57322987390883,
+      "key_compression_vs_fp16": 4.026852190894666,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6021367002549471,
+      "doc_bootstrap_ci95": [
+        0.019340979866683483,
+        0.03395265154540539
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p3r4",
+      "tokens": 7168,
+      "nll": 2.5117242336273193,
+      "loss_increase": 0.0754028707742691,
+      "perplexity_ratio": 1.078318476676941,
+      "changed_prediction_fraction": 0.15066964285714285,
+      "accuracy": 0.4447544642857143,
+      "per_document_loss_increase": [
+        0.09410588443279266,
+        0.05914638563990593,
+        0.06523328274488449,
+        0.08312594145536423
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 3,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 7,
+      "nominal_key_bytes": 56,
+      "mean_key_bytes_including_prefix_and_codebook": 63.57322987390883,
+      "key_compression_vs_fp16": 4.026852190894666,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.6021367002549471,
+      "doc_bootstrap_ci95": [
+        0.06218983419239521,
+        0.08861591294407845
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p4r4",
+      "tokens": 7168,
+      "nll": 2.452439785003662,
+      "loss_increase": 0.016118446364998817,
+      "perplexity_ratio": 1.0162490606307983,
+      "changed_prediction_fraction": 0.08063616071428571,
+      "accuracy": 0.45284598214285715,
+      "per_document_loss_increase": [
+        0.015193937346339226,
+        0.01662338338792324,
+        0.02037835121154785,
+        0.012278114445507526
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 4,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 8,
+      "nominal_key_bytes": 64,
+      "mean_key_bytes_including_prefix_and_codebook": 71.44907856450048,
+      "key_compression_vs_fp16": 3.5829713292788883,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5636018957345972,
+      "doc_bootstrap_ci95": [
+        0.013364431681111455,
+        0.019082247745245695
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p5r4",
+      "tokens": 7168,
+      "nll": 2.4452106952667236,
+      "loss_increase": 0.008889233693480492,
+      "perplexity_ratio": 1.008928894996643,
+      "changed_prediction_fraction": 0.04673549107142857,
+      "accuracy": 0.45591517857142855,
+      "per_document_loss_increase": [
+        0.009349286556243896,
+        0.005641091614961624,
+        0.009000852704048157,
+        0.011565705761313438
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 5,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 9,
+      "nominal_key_bytes": 72,
+      "mean_key_bytes_including_prefix_and_codebook": 79.32492725509215,
+      "key_compression_vs_fp16": 3.2272327105546315,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5268772416984844,
+      "doc_bootstrap_ci95": [
+        0.006568140350282192,
+        0.010924492496997118
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p4r5",
+      "tokens": 7168,
+      "nll": 2.4473512172698975,
+      "loss_increase": 0.011029960587620735,
+      "perplexity_ratio": 1.0110909938812256,
+      "changed_prediction_fraction": 0.07366071428571429,
+      "accuracy": 0.45396205357142855,
+      "per_document_loss_increase": [
+        0.013914686627686024,
+        0.011669955216348171,
+        0.013237467035651207,
+        0.005297734867781401
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 4,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 9,
+      "nominal_key_bytes": 72,
+      "mean_key_bytes_including_prefix_and_codebook": 79.32492725509215,
+      "key_compression_vs_fp16": 3.2272327105546315,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5268772416984844,
+      "doc_bootstrap_ci95": [
+        0.007282667909748852,
+        0.013576076831668615
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p5r5",
+      "tokens": 7168,
+      "nll": 2.4410641193389893,
+      "loss_increase": 0.004742552991956472,
+      "perplexity_ratio": 1.004753828048706,
+      "changed_prediction_fraction": 0.03794642857142857,
+      "accuracy": 0.45577566964285715,
+      "per_document_loss_increase": [
+        0.010732647962868214,
+        0.004161309916526079,
+        0.0074766152538359165,
+        -0.003400360466912389
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 5,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 10,
+      "nominal_key_bytes": 80,
+      "mean_key_bytes_including_prefix_and_codebook": 87.2007759456838,
+      "key_compression_vs_fp16": 2.9357536928279053,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.4918381189238075,
+      "doc_bootstrap_ci95": [
+        -0.0006811165367253125,
+        0.009104631608352065
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p6r6",
+      "tokens": 7168,
+      "nll": 2.436113119125366,
+      "loss_increase": -0.00020830986613873392,
+      "perplexity_ratio": 0.9997917413711548,
+      "changed_prediction_fraction": 0.023018973214285716,
+      "accuracy": 0.45438058035714285,
+      "per_document_loss_increase": [
+        -0.00123984448146075,
+        0.0003820345154963434,
+        0.0009669743594713509,
+        -0.0009424038580618799
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 6,
+      "radius_bits": 6,
+      "mean_bits_per_pair": 12,
+      "nominal_key_bytes": 96,
+      "mean_key_bytes_including_prefix_and_codebook": 102.95247332686712,
+      "key_compression_vs_fp16": 2.486584262888152,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.4263726761781237,
+      "doc_bootstrap_ci95": [
+        -0.001091124169761315,
+        0.0006745044374838471
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix32_p8r8",
+      "tokens": 7168,
+      "nll": 2.436432123184204,
+      "loss_increase": 0.00011090112820966169,
+      "perplexity_ratio": 1.0001108646392822,
+      "changed_prediction_fraction": 0.005859375,
+      "accuracy": 0.45535714285714285,
+      "per_document_loss_increase": [
+        -0.0003270202432759106,
+        0.0005448196898214519,
+        0.00023266075004357845,
+        -6.8556651058315765e-06
+      ],
+      "family": "protected",
+      "prefix_tokens": 32,
+      "phase_bits": 8,
+      "radius_bits": 8,
+      "mean_bits_per_pair": 16,
+      "nominal_key_bytes": 128,
+      "mean_key_bytes_including_prefix_and_codebook": 134.45586808923375,
+      "key_compression_vs_fp16": 1.9039704524469068,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.311287758346582,
+      "doc_bootstrap_ci95": [
+        -0.00018709999494603835,
+        0.00040690085108963103
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p6r3",
+      "tokens": 7168,
+      "nll": 2.450080633163452,
+      "loss_increase": 0.01375932339578867,
+      "perplexity_ratio": 1.0138543844223022,
+      "changed_prediction_fraction": 0.07017299107142858,
+      "accuracy": 0.45326450892857145,
+      "per_document_loss_increase": [
+        0.016728278249502182,
+        0.007580791600048542,
+        0.008694292046129704,
+        0.02203393168747425
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 6,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 9,
+      "nominal_key_bytes": 72,
+      "mean_key_bytes_including_prefix_and_codebook": 75.48399612027158,
+      "key_compression_vs_fp16": 3.3914473684210527,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5445692883895132,
+      "doc_bootstrap_ci95": [
+        0.008137541823089123,
+        0.019381104968488216
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p6r4",
+      "tokens": 7168,
+      "nll": 2.4383959770202637,
+      "loss_increase": 0.0020748155657202005,
+      "perplexity_ratio": 1.0020769834518433,
+      "changed_prediction_fraction": 0.03989955357142857,
+      "accuracy": 0.45228794642857145,
+      "per_document_loss_increase": [
+        0.002609607996419072,
+        0.0035981088876724243,
+        -0.0003430470824241638,
+        0.002434592926874757
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 6,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 10,
+      "nominal_key_bytes": 80,
+      "mean_key_bytes_including_prefix_and_codebook": 83.42967992240543,
+      "key_compression_vs_fp16": 3.068452380952381,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.508412582297001,
+      "doc_bootstrap_ci95": [
+        0.0003951166872866452,
+        0.0033072298974730074
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p6r5",
+      "tokens": 7168,
+      "nll": 2.437859058380127,
+      "loss_increase": 0.001538024633191526,
+      "perplexity_ratio": 1.0015392303466797,
+      "changed_prediction_fraction": 0.024832589285714284,
+      "accuracy": 0.453125,
+      "per_document_loss_increase": [
+        0.0036544608883559704,
+        0.0024097845889627934,
+        0.0008985818712972105,
+        -0.0008107291650958359
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 6,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 11,
+      "nominal_key_bytes": 88,
+      "mean_key_bytes_including_prefix_and_codebook": 91.37536372453928,
+      "key_compression_vs_fp16": 2.801630434782609,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.4739099356683345,
+      "doc_bootstrap_ci95": [
+        -5.6007265811786056e-06,
+        0.003032122738659382
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p7r3",
+      "tokens": 7168,
+      "nll": 2.4483816623687744,
+      "loss_increase": 0.012060528621077538,
+      "perplexity_ratio": 1.0121335983276367,
+      "changed_prediction_fraction": 0.06877790178571429,
+      "accuracy": 0.45479910714285715,
+      "per_document_loss_increase": [
+        0.015421758405864239,
+        0.0020392138976603746,
+        0.009840885177254677,
+        0.020940255373716354
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 7,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 10,
+      "nominal_key_bytes": 80,
+      "mean_key_bytes_including_prefix_and_codebook": 83.42967992240543,
+      "key_compression_vs_fp16": 3.068452380952381,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.508412582297001,
+      "doc_bootstrap_ci95": [
+        0.005384850024711341,
+        0.018181006889790297
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p7r4",
+      "tokens": 7168,
+      "nll": 2.4386019706726074,
+      "loss_increase": 0.002280588960275054,
+      "perplexity_ratio": 1.0022832155227661,
+      "changed_prediction_fraction": 0.03236607142857143,
+      "accuracy": 0.45577566964285715,
+      "per_document_loss_increase": [
+        0.003481026738882065,
+        0.0014600317226722836,
+        0.00020159946870990098,
+        0.003979697823524475
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 7,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 11,
+      "nominal_key_bytes": 88,
+      "mean_key_bytes_including_prefix_and_codebook": 91.37536372453928,
+      "key_compression_vs_fp16": 2.801630434782609,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.4739099356683345,
+      "doc_bootstrap_ci95": [
+        0.0008308155956910923,
+        0.00373036228120327
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p7r5",
+      "tokens": 7168,
+      "nll": 2.4383533000946045,
+      "loss_increase": 0.002032022923231125,
+      "perplexity_ratio": 1.002034068107605,
+      "changed_prediction_fraction": 0.017857142857142856,
+      "accuracy": 0.45535714285714285,
+      "per_document_loss_increase": [
+        0.007820077240467072,
+        0.00016586655692663044,
+        0.001082530478015542,
+        -0.0009403821895830333
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 7,
+      "radius_bits": 5,
+      "mean_bits_per_pair": 12,
+      "nominal_key_bytes": 96,
+      "mean_key_bytes_including_prefix_and_codebook": 99.32104752667313,
+      "key_compression_vs_fp16": 2.5775,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.440950384346611,
+      "doc_bootstrap_ci95": [
+        -0.0004346540226833895,
+        0.005906524569581961
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p8r3",
+      "tokens": 7168,
+      "nll": 2.452589511871338,
+      "loss_increase": 0.016268299892544746,
+      "perplexity_ratio": 1.0164012908935547,
+      "changed_prediction_fraction": 0.06877790178571429,
+      "accuracy": 0.45047433035714285,
+      "per_document_loss_increase": [
+        0.015101639553904533,
+        0.010443384759128094,
+        0.005807047244161367,
+        0.03372112661600113
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 8,
+      "radius_bits": 3,
+      "mean_bits_per_pair": 11,
+      "nominal_key_bytes": 88,
+      "mean_key_bytes_including_prefix_and_codebook": 91.37536372453928,
+      "key_compression_vs_fp16": 2.801630434782609,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.4739099356683345,
+      "doc_bootstrap_ci95": [
+        0.00812521600164473,
+        0.02790169115178287
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p8r4",
+      "tokens": 7168,
+      "nll": 2.4392127990722656,
+      "loss_increase": 0.002891559386625886,
+      "perplexity_ratio": 1.002895712852478,
+      "changed_prediction_fraction": 0.030831473214285716,
+      "accuracy": 0.45689174107142855,
+      "per_document_loss_increase": [
+        0.010226751677691936,
+        0.0017286267830058932,
+        -0.0015246783150359988,
+        0.001135537400841713
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 8,
+      "radius_bits": 4,
+      "mean_bits_per_pair": 12,
+      "nominal_key_bytes": 96,
+      "mean_key_bytes_including_prefix_and_codebook": 99.32104752667313,
+      "key_compression_vs_fp16": 2.5775,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.440950384346611,
+      "doc_bootstrap_ci95": [
+        -0.0007113520405255258,
+        0.00795394810847938
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "prefix14_p10r10",
+      "tokens": 7168,
+      "nll": 2.4362754821777344,
+      "loss_increase": -4.591884862747975e-05,
+      "perplexity_ratio": 0.999954104423523,
+      "changed_prediction_fraction": 0.0016741071428571428,
+      "accuracy": 0.45577566964285715,
+      "per_document_loss_increase": [
+        -0.00014906316937413067,
+        -1.9410010281717405e-05,
+        0.00026138388784602284,
+        -0.00027658609906211495
+      ],
+      "family": "asymmetric",
+      "prefix_tokens": 14,
+      "phase_bits": 10,
+      "radius_bits": 10,
+      "mean_bits_per_pair": 20,
+      "nominal_key_bytes": 160,
+      "mean_key_bytes_including_prefix_and_codebook": 162.88651794374394,
+      "key_compression_vs_fp16": 1.5716463414634145,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.2222880853586249,
+      "doc_bootstrap_ci95": [
+        -0.0002128246342181228,
+        0.00015877212354098447
+      ],
+      "group_allocation": null
+    },
+    {
+      "split": "validation",
+      "condition": "protected_mixed_high07",
+      "tokens": 7168,
+      "nll": 2.446133852005005,
+      "loss_increase": 0.009812391363084316,
+      "perplexity_ratio": 1.009860634803772,
+      "changed_prediction_fraction": 0.07435825892857142,
+      "accuracy": 0.45382254464285715,
+      "per_document_loss_increase": [
+        0.01920277439057827,
+        -0.003406414994969964,
+        0.010914684273302555,
+        0.01253852155059576
+      ],
+      "family": "mixed",
+      "prefix_tokens": 14,
+      "phase_bits": null,
+      "radius_bits": null,
+      "mean_bits_per_pair": 9.0,
+      "nominal_key_bytes": 72.0,
+      "mean_key_bytes_including_prefix_and_codebook": 75.48399612027158,
+      "key_compression_vs_fp16": 3.3914473684210527,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5445692883895132,
+      "doc_bootstrap_ci95": [
+        0.0005798191414214671,
+        0.01713075186125934
+      ],
+      "group_allocation": {
+        "8": 49,
+        "16": 7
+      }
+    },
+    {
+      "split": "validation",
+      "condition": "protected_mixed_high42",
+      "tokens": 7168,
+      "nll": 2.440441370010376,
+      "loss_increase": 0.00412008399143815,
+      "perplexity_ratio": 1.0041285753250122,
+      "changed_prediction_fraction": 0.03208705357142857,
+      "accuracy": 0.45493861607142855,
+      "per_document_loss_increase": [
+        0.0042762733064591885,
+        0.006018612999469042,
+        0.0016344256000593305,
+        0.004551023710519075
+      ],
+      "family": "mixed",
+      "prefix_tokens": 14,
+      "phase_bits": null,
+      "radius_bits": null,
+      "mean_bits_per_pair": 14.0,
+      "nominal_key_bytes": 112.0,
+      "mean_key_bytes_including_prefix_and_codebook": 115.21241513094084,
+      "key_compression_vs_fp16": 2.2219827586206895,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.3792642140468228,
+      "doc_bootstrap_ci95": [
+        0.0023635751276742667,
+        0.0055830280762165785
+      ],
+      "group_allocation": {
+        "8": 14,
+        "16": 42
+      }
+    },
+    {
+      "split": "validation",
+      "condition": "matched_hi6_heads07",
+      "tokens": 7168,
+      "nll": 2.447911024093628,
+      "loss_increase": 0.01158990990370512,
+      "perplexity_ratio": 1.0116573572158813,
+      "changed_prediction_fraction": 0.07254464285714286,
+      "accuracy": 0.45298549107142855,
+      "per_document_loss_increase": [
+        0.01349291019141674,
+        0.005200255196541548,
+        0.012624816969037056,
+        0.015041655860841274
+      ],
+      "family": "matched",
+      "prefix_tokens": 14,
+      "phase_bits": null,
+      "radius_bits": null,
+      "mean_bits_per_pair": 8.5,
+      "nominal_key_bytes": 68.0,
+      "mean_key_bytes_including_prefix_and_codebook": 71.51115421920466,
+      "key_compression_vs_fp16": 3.579861111111111,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.5633055344958302,
+      "doc_bootstrap_ci95": [
+        0.007273418945260346,
+        0.01443744613789022
+      ],
+      "group_allocation": {
+        "8": 49,
+        "12": 7
+      }
+    },
+    {
+      "split": "validation",
+      "condition": "matched_hi6_heads28",
+      "tokens": 7168,
+      "nll": 2.4407308101654053,
+      "loss_increase": 0.004409487824887037,
+      "perplexity_ratio": 1.004419207572937,
+      "changed_prediction_fraction": 0.052455357142857144,
+      "accuracy": 0.4564732142857143,
+      "per_document_loss_increase": [
+        0.0009800804546102881,
+        0.00819245632737875,
+        0.0010003683855757117,
+        0.007465047296136618
+      ],
+      "family": "matched",
+      "prefix_tokens": 14,
+      "phase_bits": null,
+      "radius_bits": null,
+      "mean_bits_per_pair": 10.0,
+      "nominal_key_bytes": 80.0,
+      "mean_key_bytes_including_prefix_and_codebook": 83.42967992240543,
+      "key_compression_vs_fp16": 3.068452380952381,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.508412582297001,
+      "doc_bootstrap_ci95": [
+        0.000990224420093,
+        0.007828751811757684
+      ],
+      "group_allocation": {
+        "8": 28,
+        "12": 28
+      }
+    },
+    {
+      "split": "validation",
+      "condition": "matched_hi8_heads42",
+      "tokens": 7168,
+      "nll": 2.438781261444092,
+      "loss_increase": 0.0024597719311714172,
+      "perplexity_ratio": 1.0024627447128296,
+      "changed_prediction_fraction": 0.033900669642857144,
+      "accuracy": 0.45396205357142855,
+      "per_document_loss_increase": [
+        0.001014887122437358,
+        0.004345570225268602,
+        0.0025203058030456305,
+        0.001958324806764722
+      ],
+      "family": "matched",
+      "prefix_tokens": 14,
+      "phase_bits": null,
+      "radius_bits": null,
+      "mean_bits_per_pair": 14.0,
+      "nominal_key_bytes": 112.0,
+      "mean_key_bytes_including_prefix_and_codebook": 115.21241513094084,
+      "key_compression_vs_fp16": 2.2219827586206895,
+      "hypothetical_KV_compression_if_V_is_fp16": 1.3792642140468228,
+      "doc_bootstrap_ci95": [
+        0.001391241792589426,
+        0.0037487588706426322
+      ],
+      "group_allocation": {
+        "8": 14,
+        "16": 42
+      }
+    }
+  ],
+  "group_sensitivity": [
+    {
+      "layer": 0,
+      "kv_head": 0,
+      "delta_nll": -0.0007002833881415427,
+      "changed_choices": 0.007114955357142857,
+      "mean_abs_doc_delta": 0.0007002833808655851
+    },
+    {
+      "layer": 0,
+      "kv_head": 1,
+      "delta_nll": 0.0005005890852771699,
+      "changed_choices": 0.005161830357142857,
+      "mean_abs_doc_delta": 0.0005005890816391911
+    },
+    {
+      "layer": 1,
+      "kv_head": 0,
+      "delta_nll": -4.881022687186487e-05,
+      "changed_choices": 0.0030691964285714285,
+      "mean_abs_doc_delta": 0.0003537725751812104
+    },
+    {
+      "layer": 1,
+      "kv_head": 1,
+      "delta_nll": -0.00020895189663860947,
+      "changed_choices": 0.005859375,
+      "mean_abs_doc_delta": 0.00037399923166958615
+    },
+    {
+      "layer": 2,
+      "kv_head": 0,
+      "delta_nll": -0.0001641495618969202,
+      "changed_choices": 0.007254464285714286,
+      "mean_abs_doc_delta": 0.00045315505485632457
+    },
+    {
+      "layer": 2,
+      "kv_head": 1,
+      "delta_nll": -2.688564381969627e-05,
+      "changed_choices": 0.005022321428571429,
+      "mean_abs_doc_delta": 0.000195118562260177
+    },
+    {
+      "layer": 3,
+      "kv_head": 0,
+      "delta_nll": 0.00040142404031939805,
+      "changed_choices": 0.009347098214285714,
+      "mean_abs_doc_delta": 0.0004014240294054616
+    },
+    {
+      "layer": 3,
+      "kv_head": 1,
+      "delta_nll": -0.0007452081190422177,
+      "changed_choices": 0.009626116071428572,
+      "mean_abs_doc_delta": 0.0007682509685764671
+    },
+    {
+      "layer": 4,
+      "kv_head": 0,
+      "delta_nll": -0.0002551884390413761,
+      "changed_choices": 0.010184151785714286,
+      "mean_abs_doc_delta": 0.00040772940792521695
+    },
+    {
+      "layer": 4,
+      "kv_head": 1,
+      "delta_nll": 0.0006848614430055022,
+      "changed_choices": 0.009486607142857142,
+      "mean_abs_doc_delta": 0.0007379679154837504
+    },
+    {
+      "layer": 5,
+      "kv_head": 0,
+      "delta_nll": -9.017986303661019e-05,
+      "changed_choices": 0.0078125,
+      "mean_abs_doc_delta": 0.0009481440138188191
+    },
+    {
+      "layer": 5,
+      "kv_head": 1,
+      "delta_nll": -9.791787306312472e-05,
+      "changed_choices": 0.008091517857142858,
+      "mean_abs_doc_delta": 0.0007112457533366978
+    },
+    {
+      "layer": 6,
+      "kv_head": 0,
+      "delta_nll": 0.00038082891842350364,
+      "changed_choices": 0.009765625,
+      "mean_abs_doc_delta": 0.0006571971825906076
+    },
+    {
+      "layer": 6,
+      "kv_head": 1,
+      "delta_nll": -0.0009458264685235918,
+      "changed_choices": 0.010602678571428572,
+      "mean_abs_doc_delta": 0.0009458264539716765
+    },
+    {
+      "layer": 7,
+      "kv_head": 0,
+      "delta_nll": 0.00023708703520242125,
+      "changed_choices": 0.015764508928571428,
+      "mean_abs_doc_delta": 0.0005426503885246348
+    },
+    {
+      "layer": 7,
+      "kv_head": 1,
+      "delta_nll": -0.00016729893104638904,
+      "changed_choices": 0.005301339285714286,
+      "mean_abs_doc_delta": 0.00042768908679136075
+    },
+    {
+      "layer": 8,
+      "kv_head": 0,
+      "delta_nll": -0.000971469096839428,
+      "changed_choices": 0.012416294642857142,
+      "mean_abs_doc_delta": 0.0009714690131659154
+    },
+    {
+      "layer": 8,
+      "kv_head": 1,
+      "delta_nll": -0.00016003710334189236,
+      "changed_choices": 0.01171875,
+      "mean_abs_doc_delta": 0.0010441783379064873
+    },
+    {
+      "layer": 9,
+      "kv_head": 0,
+      "delta_nll": 0.0001068535348167643,
+      "changed_choices": 0.015625,
+      "mean_abs_doc_delta": 0.0007656146517547313
+    },
+    {
+      "layer": 9,
+      "kv_head": 1,
+      "delta_nll": -0.00018425377493258566,
+      "changed_choices": 0.010463169642857142,
+      "mean_abs_doc_delta": 0.0004464923495106632
+    },
+    {
+      "layer": 10,
+      "kv_head": 0,
+      "delta_nll": 1.3685062185686547e-05,
+      "changed_choices": 0.014508928571428572,
+      "mean_abs_doc_delta": 0.001341226205113344
+    },
+    {
+      "layer": 10,
+      "kv_head": 1,
+      "delta_nll": 0.00037532486021518707,
+      "changed_choices": 0.012416294642857142,
+      "mean_abs_doc_delta": 0.0005545745443669148
+    },
+    {
+      "layer": 11,
+      "kv_head": 0,
+      "delta_nll": 0.00012467156921047717,
+      "changed_choices": 0.015345982142857142,
+      "mean_abs_doc_delta": 0.000747723774111364
+    },
+    {
+      "layer": 11,
+      "kv_head": 1,
+      "delta_nll": -0.001655063359066844,
+      "changed_choices": 0.022042410714285716,
+      "mean_abs_doc_delta": 0.003393153048818931
+    },
+    {
+      "layer": 12,
+      "kv_head": 0,
+      "delta_nll": -0.0002488890022505075,
+      "changed_choices": 0.013950892857142858,
+      "mean_abs_doc_delta": 0.0004152554538450204
+    },
+    {
+      "layer": 12,
+      "kv_head": 1,
+      "delta_nll": 9.950534877134487e-05,
+      "changed_choices": 0.009626116071428572,
+      "mean_abs_doc_delta": 0.0004925422417727532
+    },
+    {
+      "layer": 13,
+      "kv_head": 0,
+      "delta_nll": 0.0015576690202578902,
+      "changed_choices": 0.011300223214285714,
+      "mean_abs_doc_delta": 0.0015576691075693816
+    },
+    {
+      "layer": 13,
+      "kv_head": 1,
+      "delta_nll": -0.00039024517172947526,
+      "changed_choices": 0.012974330357142858,
+      "mean_abs_doc_delta": 0.0011343586174916709
+    },
+    {
+      "layer": 14,
+      "kv_head": 0,
+      "delta_nll": -0.00022147608979139477,
+      "changed_choices": 0.011579241071428572,
+      "mean_abs_doc_delta": 0.0006674544856650755
+    },
+    {
+      "layer": 14,
+      "kv_head": 1,
+      "delta_nll": 0.00031286029843613505,
+      "changed_choices": 0.013113839285714286,
+      "mean_abs_doc_delta": 0.0006963917403481901
+    },
+    {
+      "layer": 15,
+      "kv_head": 0,
+      "delta_nll": 0.00022212027397472411,
+      "changed_choices": 0.015206473214285714,
+      "mean_abs_doc_delta": 0.0010102943488163874
+    },
+    {
+      "layer": 15,
+      "kv_head": 1,
+      "delta_nll": -0.0013702602591365576,
+      "changed_choices": 0.013811383928571428,
+      "mean_abs_doc_delta": 0.001370260193652939
+    },
+    {
+      "layer": 16,
+      "kv_head": 0,
+      "delta_nll": 0.00040454292320646346,
+      "changed_choices": 0.017857142857142856,
+      "mean_abs_doc_delta": 0.0006449826096286415
+    },
+    {
+      "layer": 16,
+      "kv_head": 1,
+      "delta_nll": 0.0006353051285259426,
+      "changed_choices": 0.012276785714285714,
+      "mean_abs_doc_delta": 0.0006353051649057306
+    },
+    {
+      "layer": 17,
+      "kv_head": 0,
+      "delta_nll": 0.00026263995096087456,
+      "changed_choices": 0.010881696428571428,
+      "mean_abs_doc_delta": 0.00032993957938742824
+    },
+    {
+      "layer": 17,
+      "kv_head": 1,
+      "delta_nll": 0.00016496282478328794,
+      "changed_choices": 0.009207589285714286,
+      "mean_abs_doc_delta": 0.00019747192709473893
+    },
+    {
+      "layer": 18,
+      "kv_head": 0,
+      "delta_nll": 0.0004800021124538034,
+      "changed_choices": 0.0126953125,
+      "mean_abs_doc_delta": 0.0012328596785664558
+    },
+    {
+      "layer": 18,
+      "kv_head": 1,
+      "delta_nll": 4.5076943933963776e-05,
+      "changed_choices": 0.013113839285714286,
+      "mean_abs_doc_delta": 0.00038187332393135875
+    },
+    {
+      "layer": 19,
+      "kv_head": 0,
+      "delta_nll": 0.0004615059297066182,
+      "changed_choices": 0.0078125,
+      "mean_abs_doc_delta": 0.0004615058933268301
+    },
+    {
+      "layer": 19,
+      "kv_head": 1,
+      "delta_nll": 0.0007236389792524278,
+      "changed_choices": 0.013811383928571428,
+      "mean_abs_doc_delta": 0.000723638993804343
+    },
+    {
+      "layer": 20,
+      "kv_head": 0,
+      "delta_nll": 0.0003951244580093771,
+      "changed_choices": 0.012974330357142858,
+      "mean_abs_doc_delta": 0.0006278827895584982
+    },
+    {
+      "layer": 20,
+      "kv_head": 1,
+      "delta_nll": 0.0016038157045841217,
+      "changed_choices": 0.017996651785714284,
+      "mean_abs_doc_delta": 0.00164306120495894
+    },
+    {
+      "layer": 21,
+      "kv_head": 0,
+      "delta_nll": 0.0012916518608108163,
+      "changed_choices": 0.010602678571428572,
+      "mean_abs_doc_delta": 0.0013751657570537645
+    },
+    {
+      "layer": 21,
+      "kv_head": 1,
+      "delta_nll": 0.0005542635335586965,
+      "changed_choices": 0.013811383928571428,
+      "mean_abs_doc_delta": 0.0006653336531599052
+    },
+    {
+      "layer": 22,
+      "kv_head": 0,
+      "delta_nll": 0.0004877218452747911,
+      "changed_choices": 0.004185267857142857,
+      "mean_abs_doc_delta": 0.00048772185618872754
+    },
+    {
+      "layer": 22,
+      "kv_head": 1,
+      "delta_nll": 0.0004288005002308637,
+      "changed_choices": 0.005580357142857143,
+      "mean_abs_doc_delta": 0.0006390410489984788
+    },
+    {
+      "layer": 23,
+      "kv_head": 0,
+      "delta_nll": 0.00012788390449713916,
+      "changed_choices": 0.008370535714285714,
+      "mean_abs_doc_delta": 0.00038578607427552924
+    },
+    {
+      "layer": 23,
+      "kv_head": 1,
+      "delta_nll": 0.0014451441820710897,
+      "changed_choices": 0.013392857142857142,
+      "mean_abs_doc_delta": 0.0014451441675191745
+    },
+    {
+      "layer": 24,
+      "kv_head": 0,
+      "delta_nll": 0.00039295171154662967,
+      "changed_choices": 0.006975446428571429,
+      "mean_abs_doc_delta": 0.00039295170063269325
+    },
+    {
+      "layer": 24,
+      "kv_head": 1,
+      "delta_nll": 5.4385098337661475e-05,
+      "changed_choices": 0.007672991071428571,
+      "mean_abs_doc_delta": 0.00022260623518377542
+    },
+    {
+      "layer": 25,
+      "kv_head": 0,
+      "delta_nll": -0.0001447154936613515,
+      "changed_choices": 0.006138392857142857,
+      "mean_abs_doc_delta": 0.00030368363150046207
+    },
+    {
+      "layer": 25,
+      "kv_head": 1,
+      "delta_nll": 0.00010504556848900393,
+      "changed_choices": 0.007114955357142857,
+      "mean_abs_doc_delta": 0.0006068157690606313
+    },
+    {
+      "layer": 26,
+      "kv_head": 0,
+      "delta_nll": 0.00034000392770394683,
+      "changed_choices": 0.005440848214285714,
+      "mean_abs_doc_delta": 0.00034000392452071537
+    },
+    {
+      "layer": 26,
+      "kv_head": 1,
+      "delta_nll": -6.670326547464356e-05,
+      "changed_choices": 0.005022321428571429,
+      "mean_abs_doc_delta": 0.00045497950486605987
+    },
+    {
+      "layer": 27,
+      "kv_head": 0,
+      "delta_nll": -0.00036603916669264436,
+      "changed_choices": 0.006556919642857143,
+      "mean_abs_doc_delta": 0.00046500178177666385
+    },
+    {
+      "layer": 27,
+      "kv_head": 1,
+      "delta_nll": 0.00039043539436534047,
+      "changed_choices": 0.0048828125,
+      "mean_abs_doc_delta": 0.0003904353952748352
+    }
+  ],
+  "locked_protected_policies": {
+    "selected": {
+      "loss_001": "protected_mixed_high42",
+      "loss_005": "protected_mixed_high07",
+      "loss_010": "protected_mixed_high07"
+    },
+    "criteria": "loss_001/005/010: calibration mean delta NLL <= .001/.005/.01 and worst excerpt <= .005/.015/.03. No held-out selection. Most conservative 42-high fallback always validated.",
+    "rank_source": "Mean absolute per-document loss change when one KV group uses 3+3 unprotected quantization; calibration data only, heuristic rather than optimal."
+  },
+  "locked_unprotected_policies": {
+    "criteria": {
+      "strict": {
+        "max_loss_increase": 0.001,
+        "max_changed_fraction": 0.01
+      },
+      "moderate": {
+        "max_loss_increase": 0.005,
+        "max_changed_fraction": 0.03
+      },
+      "loose": {
+        "max_loss_increase": 0.01,
+        "max_changed_fraction": 0.05
+      }
+    },
+    "selected": {
+      "strict": null,
+      "moderate": null,
+      "loose": null
+    }
+  },
+  "locked_matched_policies": {
+    "selected": {
+      "loss_001": null,
+      "loss_005": "matched_hi6_heads28",
+      "loss_010": "matched_hi6_heads07"
+    },
+    "criteria": "loss_001/005/010: mean delta NLL <= .001/.005/.01 and worst excerpt <= .005/.015/.03. Choice of policy locked before validation; most conservative hi8/42-head fallback also validated.",
+    "rank_source": "Mean absolute per-document loss change from matching protected 4+4 single-KV-head ablations; calibration only."
+  }
+}

@@ -1,0 +1,35 @@
+<p class="lead">Word order changes meaning. Positional encodings give attention a way to distinguish where information occurs; rotary embeddings make that information part of the query–key comparison.</p>
+<p>These notes start with the geometry and then ask a less familiar question: what shapes can an attention head build as a function of position? The answer is useful for understanding both retrieval and compression.</p>
+<h2 id="position">Why position belongs in attention</h2>
+<p>An attention head forms a query for the current token and keys and values for candidate tokens. Queries compare with keys; the resulting weights mix the values. Without positional information or other order-dependent structure, this comparison cannot distinguish arbitrary reorderings. A causal mask supplies an ordering constraint, but it does not by itself encode a particular relative distance.</p>
+<p>Absolute position embeddings add a position vector to a token representation. Relative biases add a distance-dependent term to attention scores. RoPE instead rotates query and key coordinates before taking their dot product. These are different ways of supplying useful position information, with different behavior when the context length changes.</p>
+<h2 id="geometry">RoPE in two dimensions</h2>
+<p>Group an even-dimensional head into coordinate pairs. Write the unrotated pair as \(q_j=(q_{jx},q_{jy})\), and similarly for \(k_j\). A rotation by angle \(\phi\) is</p>
+\[R(\phi)=\begin{pmatrix}\cos\phi&-\sin\phi\\\sin\phi&\cos\phi\end{pmatrix}.\]
+<p>At query position \(m\), rotate pair \(j\) by \(m\omega_j\); at key position \(n\), rotate by \(n\omega_j\). The dot product becomes</p>
+\[(R(m\omega_j)q_j)^\top R(n\omega_j)k_j=q_j^\top R((n-m)\omega_j)k_j.\]
+<p>Only the relative displacement remains in the rotation. The unrotated vectors still depend on token content and earlier layers. This construction and the standard frequency schedule come from <a href="https://arxiv.org/html/2104.09864v5">Su et al., RoFormer</a>.</p>
+<h2 id="frequencies">A geometric ladder of frequencies</h2>
+\[\omega_j=B^{-2j/d},\qquad j=0,\ldots,d/2-1.\]
+<p>Here \(d\) is head dimension and \(B\) is the frequency base. Adjacent frequencies have the constant ratio \(B^{-2/d}\). Their wavelengths, \(2\pi/\omega_j\), grow geometrically. High frequencies rotate quickly over nearby tokens; low frequencies change slowly over the same window. Calling a pair “slow” always depends on the distances under discussion.</p>
+<figure><a href="assets/figures/rope_frequency_schedule/frequency_schedule.png"><img src="assets/figures/rope_frequency_schedule/frequency_schedule.png" alt="Original investigation plot of RoPE frequencies and neighboring frequency gaps against pair index" loading="lazy"></a><figcaption>Original investigation figure for Qwen2.5-1.5B-Instruct, base 1,000,000: angular frequencies and neighboring gaps, with a 32,768-point DFT spacing reference. The underlying <a href="data/rope_frequency_schedule/frequency_schedule.csv">frequency table</a> is included; the model-specific schedule should not be confused with every RoPE model’s configuration.</figcaption></figure>
+<p>The examples below use adjacent pair notation for readability. Qwen2.5’s actual 128-dimensional head uses split-half pairs \((j,j+64)\). A change in memory layout is harmless only if the model’s projections and rotations use the same pairing.</p>
+<h2 id="score">A finite sinusoidal score family</h2>
+<p>Set \(\Delta=n-m\). Expanding the rotation gives</p>
+\[s(\Delta)=\frac{1}{\sqrt d}\sum_j\left[A_j\cos(\omega_j\Delta)+B_j\sin(\omega_j\Delta)\right],\]
+\[A_j=q_{jx}k_{jx}+q_{jy}k_{jy},\qquad B_j=q_{jy}k_{jx}-q_{jx}k_{jy}.\]
+<p>The sine sign follows this particular rotation and displacement convention. Reversing displacement reverses the sine coefficient. The <a href="code/rope.py">implementation</a> is tested against direct rotations, including a two-dimensional example that catches this sign error.</p>
+<p>For fixed content, every pair supplies one sinusoid. Across actual token pairs, the coefficients change: a trained head is not generally one fixed distance-only function.</p>
+<h2 id="phases">What do 0, π/2, and π mean?</h2>
+<p>Write one term as \(r\cos(\omega\Delta-\theta)\), with \(r=\sqrt{A^2+B^2}\) and \(\theta=\operatorname{atan2}(B,A)\). This \(r\) is a query–key product amplitude. It differs from the radius of a key alone, which appears in the compression experiments.</p>
+<div class="table-wrap"><table><thead><tr><th>Phase offset</th><th>Contribution</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>0</td><td>\(r\cos(\omega\Delta)\)</td><td>A local maximum at zero displacement; symmetric in either direction.</td></tr>
+<tr><td>π/2</td><td>\(r\sin(\omega\Delta)\)</td><td>Zero at the reference point, but directional and position-dependent elsewhere.</td></tr>
+<tr><td>π</td><td>\(-r\cos(\omega\Delta)\)</td><td>A local minimum at zero displacement; finite suppression, not exclusion.</td></tr>
+</tbody></table></div>
+<p>“No preference at π/2” is therefore only a statement about the contribution at one point. A phase is not a global switch between attraction, indifference, and rejection. A causal mask also determines which directions are available.</p>
+<h2 id="mixer">Softmax mixes information</h2>
+\[p_i=\frac{e^{s_i/T}}{\sum_k e^{s_k/T}},\qquad o=\sum_i p_i v_i.\]
+<p>This is weighted aggregation, as in <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>. A head need not classify one key as the winner. With two scores 2.0 and 1.9 at temperature one, weights are about 52.5% and 47.5%; both values contribute. Other heads can behave like sharp selectors. The task and value vectors decide which distribution is useful.</p>
+<p>Adding a constant to every score changes nothing. Finite logits receive positive weights in exact arithmetic, so negative scores do not implement a hard mask. A small best-versus-runner-up margin is not inherently a failure.</p>
+<p class="next">Next: <a href="fourier.html">RoPE through the Fourier lens →</a></p>
