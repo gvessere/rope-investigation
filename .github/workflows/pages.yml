@@ -39,6 +39,8 @@ jobs:
         run: python code/observations.py
       - name: Reanalyse translation confirmation and regenerate figures
         run: python code/translation.py
+      - name: Recompute recorded speed comparison tables
+        run: python code/speed_results.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

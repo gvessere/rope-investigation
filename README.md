@@ -197,3 +197,17 @@ reanalyses of these saved measurements, not fresh inference. No inference runner
 for this original experiment is implied by the lightweight plotting command.
 Full-vocabulary target probability and first-token accuracy did not improve, and
 the geometric correction was worse than the native phase on target-label log odds.
+
+## Recorded GPU speed comparison
+
+`python code/speed_results.py` verifies hashes, recomputes attention trial medians,
+whole-model counterbalanced decode medians, speed ratios against grouped dense
+attention, and paired quality deltas. It updates both article tables and
+`data/speed/recomputed-summary.json`. No new hardware measurement is performed.
+The original attention, repeated decode, and quality runs are posted under
+`data/speed/`. The attention comparison uses M5 Max float32 MPS, native 32k
+layer-10 K/V. The full-model comparison uses Qwen2.5-1.5B, batch 1, with shared
+exact dense prefill excluded. Larger microbenchmark batches repeat three real
+contexts. The 4+4-bit compact-scoring prototype retains full original K/V and
+is distinct from the small, slow-pair phase-only intervention. It is not an
+official PolarQuant reproduction. Run-to-run timing variation is substantial.

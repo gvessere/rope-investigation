@@ -1,0 +1,13 @@
+{
+  "source": "Original polar_vs_shortlist_32k experiment; recorded measurements, not a new benchmark.",
+  "hardware": "Apple M5 Max; float32 PyTorch MPS",
+  "attention": "Layer 10 native 32,000-token K/V; three contexts; B8/B32 repeat those contexts in independent memory. Median 7 trials \u00d7 20 calls.",
+  "decode": "Qwen2.5-1.5B-Instruct; batch 1; four counterbalanced 32-step runs on one native 32k context, discard 8 warmup steps per run, median of per-run means. Excludes shared exact prefill and index initialization.",
+  "quality": "Three contexts \u00d7 128 teacher-forced predictions, 384 total; distinct from timing subset.",
+  "sha256": {
+    "original-summary.json": "3f3dcc7b72783e48888cf64b1c6be14ea89bcf990dd824796582c484ef61b588",
+    "decode-quality.json": "18c0f0e02999ed70ae75414cfbccdc4b84b815aa40dedd830d85c6a99f054ed4",
+    "attention-benchmark.json": "4bda740ad08adceb07a836a90b9037fd22bd7fdf5d21a152ccef5388b8acafed",
+    "decode-timings.json": "79ed0ee6064f6d2877e772c96581a68b068e466bcc6fc960202b03c55b8756c2"
+  }
+}
