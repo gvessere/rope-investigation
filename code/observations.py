@@ -55,7 +55,7 @@ def main():
  a,p=load('queries',8);r=a[3].ravel();phi=p[3].ravel();mask=r<2.5
  stats['low_r_example']={'kind':'queries','layer':8,'head':3,'points':int(r.size),'retained':int(mask.sum()),'fraction':float(mask.mean()),'r_window':[0,2.5]}
  fig,axs=plt.subplots(2,1,figsize=(9,7.5),sharex=True)
- pair=np.tile(np.arange(64),a.shape[1]);axs[0].scatter(phi[mask],r[mask],c=pair[mask],cmap='turbo',vmin=0,vmax=63,s=.55,alpha=.22,rasterized=True,linewidths=0)
+ pair=np.tile(np.arange(64),a.shape[1]);scatter=axs[0].scatter(phi[mask],r[mask],c=pair[mask],cmap='turbo',vmin=0,vmax=63,s=3,alpha=.65,rasterized=True,linewidths=0)
  axs[0].set_title('L8 H3 · saved pre-RoPE query pairs',loc='left')
  bins=[np.linspace(0,2*np.pi,145),np.linspace(0,2.5,81)]
  counts,xe,ye=np.histogram2d(phi[mask],r[mask],bins=bins)
@@ -63,6 +63,7 @@ def main():
  axs[1].set_title('The same points as density counts · logarithmic color scale',loc='left')
  fig.subplots_adjust(left=.10,right=.84,bottom=.12,top=.94,hspace=.25)
  cb=fig.colorbar(mesh,cax=fig.add_axes([.87,.12,.025,.364]));cb.set_label('Points per bin')
+ pair_cb=fig.colorbar(scatter,cax=fig.add_axes([.87,.576,.025,.364]),ticks=[0,16,32,48,63]);pair_cb.set_label('Frequency-pair index')
  for ax in axs:guides(ax);ax.set_ylim(0,2.5);ax.set_ylabel('Radius r')
  axs[-1].set_xlabel('Pre-RoPE phase φ (radians)')
  save(fig,'low-r-L8-H3.png')
