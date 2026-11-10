@@ -24,6 +24,11 @@ jobs:
           cache: pip
       - name: Install figure dependencies
         run: python -m pip install -r requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check browser plot calculations
+        run: node code/test_viewer.mjs
       - name: Check the math
         run: python -m unittest discover -s code -p 'test_*.py'
       - name: Verify saved model-plot data

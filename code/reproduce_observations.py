@@ -127,6 +127,11 @@ def verify_data():
     print('All 56 data chunks, point counts and amplitude-cap counts verified.')
 
 
+def export_palette():
+    colors=['#'+''.join(f'{int(c):02x}' for c in rgb) for rgb in np.rint(COLORS[:,:3]*255)]
+    (DATA/'palette.json').write_text(json.dumps(colors)+'\n')
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--kind',choices=['queries','keys'])
@@ -135,6 +140,7 @@ def main():
     p.add_argument('--pdf',action='store_true',help='Regenerate PDFs too (requires all pages)')
     p.add_argument('--verify',action='store_true',help='Check saved data without plotting')
     args=p.parse_args()
+    export_palette()
     if args.verify:return verify_data()
     if args.pdf and args.page is not None:p.error('--pdf requires all pages')
     PLOTS.mkdir(exist_ok=True,parents=True)

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ROPE exploration</title>
   <meta name="description" content="A personal exploration of RoPE through its connection to Fourier transforms, with reproducible examples of the positional patterns it can express.">
-  <link rel="stylesheet" href="style.css?v=2026-11-10-explorers">
+  <link rel="stylesheet" href="style.css?v=2026-11-10-scales">
 </head>
 <body>
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
@@ -97,19 +97,34 @@
     <div class="interactive-block" id="observations">
       <div id="observation-controls" class="controls" hidden>
         <label>Vectors <select id="plot-kind"><option value="queries">Queries</option><option value="keys">Keys</option></select></label>
-        <label>View <select id="plot-view"><option value="xy">Cartesian x/y · full range</option><option value="phase">Phase / amplitude · 0–40</option></select></label>
+        <label>View <select id="plot-view"><option value="xy">Cartesian x/y</option><option value="phase">Phase / radius</option></select></label>
         <label>Layers <select id="plot-page"></select></label>
         <div class="page-buttons"><button id="plot-previous" type="button">← Previous</button><button id="plot-next" type="button">Next →</button></div>
+        <label>Head <select id="plot-head"><option value="all">All heads</option></select></label>
         <label>Plot size <select id="plot-zoom"><option value="fit">Fit page</option><option value="large">Enlarged · scroll sideways</option></select></label>
+        <fieldset class="scale-controls">
+          <legend>Data ranges</legend>
+          <label class="auto-label"><input id="scale-auto" type="checkbox" checked> Autoscale r to the 99th percentile per head</label>
+          <div class="scale-fields">
+            <label>r min <input id="scale-rmin" type="number" min="0" step="any" value="0"></label>
+            <label>r max <input id="scale-rmax" type="number" min="0" step="any" placeholder="Auto / full"></label>
+            <label>Phase from (×π) <input id="scale-pmin" type="number" min="0" max="2" step="0.08333333333333333" value="0"></label>
+            <label>Phase to (×π) <input id="scale-pmax" type="number" min="0" max="2" step="0.08333333333333333" value="2"></label>
+            <button id="scale-full" type="button">Show all points</button>
+          </div>
+          <p class="scale-help">Editing r switches to manual limits. An empty r max shows the full range. The 99th percentile uses every saved radius in that head, before phase-window filtering.</p>
+        </fieldset>
       </div>
+      <p id="scale-status" class="viewer-status" aria-live="polite">Loading the saved points for adjustable scales…</p>
       <p id="observation-status" class="viewer-status" aria-live="polite">Layer 0 · 12 query heads · page 1 of 28</p>
       <figure class="observation-figure">
         <div class="plot-frame" id="observation-frame" tabindex="0" aria-label="Plot image; scroll horizontally when enlarged">
+          <canvas id="observation-canvas" role="img" aria-label="Query/key plots with adjustable scales" hidden></canvas>
           <img id="observation-image" src="figures/observations/queries_xy_layers_00_00.png?v=pi-guides-1" width="2040" height="1560" loading="lazy" alt="Cartesian query-pair plots with dotted gray angular guides for the twelve heads in layer zero. Each panel has its own full range and equal x/y scales; color indicates frequency-pair index.">
         </div>
         <figcaption id="observation-caption">Cartesian plot with dotted gray guides at multiples of π/4 and π/3. Each panel has its own full range with equal x/y units and no clipping. Color indicates pair index, from 0 (highest frequency) to 63 (lowest).</figcaption>
       </figure>
-      <p class="viewer-links"><a id="observation-full" href="figures/observations/queries_xy_layers_00_00.png?v=pi-guides-1" target="_blank" rel="noopener">Open full-size page ↗</a> · <a id="observation-pdf" href="documents/queries_xy_dynamic.pdf?v=pi-guides-1">Download selected PDF</a></p>
+      <p class="viewer-links"><a id="observation-full" href="figures/observations/queries_xy_layers_00_00.png?v=pi-guides-1" target="_blank" rel="noopener">Open full-size page ↗</a> · <a id="observation-pdf" href="documents/queries_xy_dynamic.pdf?v=pi-guides-1">PDF archive (fixed scales)</a></p>
       <details><summary>All four plot PDFs</summary>
         <ul><li><a href="documents/queries_xy_dynamic.pdf?v=pi-guides-1">Queries: Cartesian coordinates</a></li><li><a href="documents/keys_xy_dynamic.pdf?v=pi-guides-1">Keys: Cartesian coordinates</a></li><li><a href="documents/queries_all_layers_y40.pdf?v=pi-guides-1">Queries: phase and amplitude, 0–40</a></li><li><a href="documents/keys_all_layers_y40.pdf?v=pi-guides-1">Keys: phase and amplitude, 0–40</a></li></ul>
       </details>
@@ -122,7 +137,7 @@
     <pre><code>python -m pip install -r requirements.txt
 python code/figures.py
 python -m unittest discover -s code -p 'test_*.py'</code></pre>
-    <p>The model plots use the <a href="data/observations/manifest.json">original saved activation data</a>, split losslessly by layer. <a href="code/reproduce_observations.py">This reproduction script</a> regenerates all 70 plot pages and all four PDFs. The original point counts, sampled token positions, and file hashes are included. The viewer and PDFs use the same saved points, with dotted gray angular guides.</p>
+    <p>The model plots use the <a href="data/observations/manifest.json">original saved activation data</a>, split losslessly by layer. <a href="code/reproduce_observations.py">This reproduction script</a> regenerates all 70 plot pages and all four PDFs. The original point counts, sampled token positions, and file hashes are included. The interactive viewer draws the saved points directly and lets you adjust r and phase ranges. The PDFs retain their fixed scales. Both include dotted gray angular guides. The plotting and NPZ-reading code is in <a href="scatter-viewer.mjs">scatter-viewer.mjs</a> and <a href="scatter-data.mjs">scatter-data.mjs</a>.</p>
     <pre><code>python code/reproduce_observations.py --verify
 python code/reproduce_observations.py --kind queries --view xy --page 0
 # Regenerate all 70 pages and all four PDFs:
@@ -130,6 +145,7 @@ python code/reproduce_observations.py --pdf</code></pre>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source and editing on GitHub</a> · References: <a href="https://arxiv.org/abs/2104.09864">RoFormer</a>; <a href="https://proceedings.mlr.press/v267/hua25b.html">Fourier Position Embedding</a> (<a href="https://arxiv.org/html/2412.17739v4#S2.SS2">§2.2</a>); <a href="https://numpy.org/doc/stable/reference/routines.fft.html">NumPy DFT conventions</a>.</p>
   </main>
   <footer>Gery Vessere · ROPE exploration</footer>
-  <script src="explorers.js?v=2026-11-10-pi-guides"></script>
+  <script src="explorers.js?v=2026-11-10-scales"></script>
+  <script type="module" src="scatter-viewer.mjs?v=2026-11-10"></script>
 </body>
 </html>
