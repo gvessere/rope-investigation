@@ -53,7 +53,7 @@
   page.addEventListener('change', update);
   previous.addEventListener('click', () => { page.selectedIndex--; update(); });
   next.addEventListener('click', () => { page.selectedIndex++; update(); });
-  zoom.addEventListener('change', () => document.getElementById('observation-frame').classList.toggle('enlarged', zoom.checked));
+  zoom.addEventListener('change', () => document.getElementById('observation-frame').classList.toggle('enlarged', zoom.value === 'large'));
   setPages(); update(); controls.hidden = false;
 
   // Translate a fitted score by t using phases phi'_j = phi_j - omega_j*t.

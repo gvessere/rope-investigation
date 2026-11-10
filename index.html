@@ -100,7 +100,7 @@
         <label>View <select id="plot-view"><option value="xy">Cartesian x/y · full range</option><option value="phase">Phase / amplitude · 0–40</option></select></label>
         <label>Layers <select id="plot-page"></select></label>
         <div class="page-buttons"><button id="plot-previous" type="button">← Previous</button><button id="plot-next" type="button">Next →</button></div>
-        <label class="zoom-label"><input id="plot-zoom" type="checkbox"> Enlarge plots (scroll sideways)</label>
+        <label>Plot size <select id="plot-zoom"><option value="fit">Fit page</option><option value="large">Enlarged · scroll sideways</option></select></label>
       </div>
       <p id="observation-status" class="viewer-status" aria-live="polite">Layer 0 · 12 query heads · page 1 of 28</p>
       <figure class="observation-figure">
@@ -130,6 +130,6 @@ python code/reproduce_observations.py --pdf</code></pre>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source and editing on GitHub</a> · References: <a href="https://arxiv.org/abs/2104.09864">RoFormer</a>; <a href="https://proceedings.mlr.press/v267/hua25b.html">Fourier Position Embedding</a> (<a href="https://arxiv.org/html/2412.17739v4#S2.SS2">§2.2</a>); <a href="https://numpy.org/doc/stable/reference/routines.fft.html">NumPy DFT conventions</a>.</p>
   </main>
   <footer>Gery Vessere · ROPE exploration</footer>
-  <script src="explorers.js?v=2026-11-10"></script>
+  <script src="explorers.js?v=2026-11-10-viewer2"></script>
 </body>
 </html>
