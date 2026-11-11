@@ -2,6 +2,7 @@
 (() => {
   'use strict';
   const controls = document.getElementById('observation-controls');
+  if (controls) {
   const kind = document.getElementById('plot-kind');
   const view = document.getElementById('plot-view');
   const page = document.getElementById('plot-page');
@@ -55,6 +56,9 @@
   next.addEventListener('click', () => { page.selectedIndex++; update(); });
   zoom.addEventListener('change', () => document.getElementById('observation-frame').classList.toggle('enlarged', zoom.value === 'large'));
   setPages(); update(); controls.hidden = false;
+  }
+
+  if (!document.getElementById('shape-choice')) return;
 
   // Translate a fitted score by t using phases phi'_j = phi_j - omega_j*t.
   const slider = document.getElementById('shape-shift');

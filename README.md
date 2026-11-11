@@ -6,7 +6,7 @@ A personal exploration of RoPE through its connection to Fourier transforms.
 
 ## Edit and preview
 
-Edit `index.html` for prose and equations; `style.css` controls presentation.
+Edit `index.html` for Part 1 and `rope-in-practice.html` for Part 2; `style.css` controls presentation.
 Equations use native MathML, with their LaTeX source in each annotation. The site uses local JavaScript files for the plot viewer and phase-shift example; it has no remote scripts, fonts, or rendering dependencies.
 
 Run `python3 -m http.server 8771` from this directory to preview locally.
@@ -50,7 +50,7 @@ Earlier articles and experiments remain available in Git history.
 
 ## Original model plots and the dynamic viewer
 
-The viewer in `index.html` and `explorers.js` displays all 70 plot pages based on the original data
+The viewer in `rope-in-practice.html` and `explorers.js` displays all 70 plot pages based on the original data
 from the four requested investigation PDFs, with query/key, view, and layer
 selectors, previous/next controls, enlargement, and PDF downloads.
 Dotted gray angular guides have been added at the union of multiples of π/4
@@ -228,3 +228,16 @@ The detailed L23 H4 translation experiment is presented in
 `appendix-translation.html`, linked from the main narrative's inconclusive-evidence
 summary. Both pages share root-relative-in-repository asset paths, so all figures,
 data, and reproduction-code links continue to resolve.
+
+## Attention and positional encodings series
+
+- `index.html`: Part 1, ROPE exploration; geometry, Fourier connection, coordinated
+  phase demo, and semantic-versus-positional matching.
+- `rope-in-practice.html`: Part 2, ROPE in practice; all empirical coordinate
+  plots, observations, bias analysis, quantization, and runtime results.
+- `appendix-translation.html`: detailed coordinated-phase investigation.
+
+`code/speed_results.py` updates the speed tables in Part 2. The shared
+`explorers.js` initializes only the controls present on each page. Part 1 loads
+`series-navigation.js` to preserve earlier observation/quantization hash links.
+All figures retain the same posted data and reproduction scripts.
