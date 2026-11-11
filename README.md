@@ -232,7 +232,7 @@ data, and reproduction-code links continue to resolve.
 
 - `index.html`: Part 1, ROPE exploration; geometry, Fourier connection, coordinated
   phase demo, and semantic-versus-positional matching.
-- `rope-in-practice.html`: Part 2, ROPE in practice; all empirical coordinate
+- `rope-in-practice.html`: Part 2, Deep dive in ROPE pair data; all empirical coordinate
   plots, observations, bias analysis, quantization, and runtime results.
 - `appendix-translation.html`: detailed coordinated-phase investigation.
 
