@@ -223,3 +223,8 @@ This is an analytic illustration, not measured model attention. Small positional
 rotation does not imply that setting a learned content phase to zero is harmless.
 The constructed approximation examples intentionally retain their B=10,000
 setting; the new illustration uses the actual model's B=1,000,000.
+
+The detailed L23 H4 translation experiment is presented in
+`appendix-translation.html`, linked from the main narrative's inconclusive-evidence
+summary. Both pages share root-relative-in-repository asset paths, so all figures,
+data, and reproduction-code links continue to resolve.

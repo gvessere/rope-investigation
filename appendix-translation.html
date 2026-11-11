@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Appendix: coordinated phase shifts · ROPE exploration</title>
+  <meta name="description" content="Detailed experiment on L23 H4 coordinated phase changes, with original results, figures, data, and limitations.">
+  <link rel="stylesheet" href="style.css?v=2026-11-10-observations">
+</head>
+<body>
+  <header><a href="index.html#looking-in-models" class="name">← Back to ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
+  <main>
+    <h1>Appendix: looking for coordinated phase shifts</h1>
+    <p class="lead">The evidence from this investigation remains inconclusive. This experiment found a partial translation-like phase component in one head, with no first-token accuracy gain under the tested intervention.</p>
+    <h2 id="translation-experiment">The closest case I found: one head, sixteen pairs</h2>
+    <p>The closest evidence I found was in <strong>layer 23, head 4 of Qwen2.5-1.5B-Instruct, using pairs 16–31</strong> (zero-based indices). This was a narrower result than the demonstration above: a translation-like component in one band of a head, rather than a whole attention pattern sliding intact.</p>
+    <p>I gave the model four items, each with a color, a shape, and a letter label, and asked a question such as “Return the label for red round.” Then I moved the same item list forward by 20 or 40 tokens, moving neutral background sentences to keep the question and final query token at exactly the same positions. The correct answer stayed the same. Could the query phases adjust to follow the relevant item, even though the query itself had not moved?</p>
+    <details><summary>See one actual prompt and what moved</summary>
+      <pre><code>Items:
+blue round : W
+blue square : E
+red round : S
+red square : Z
+
+Question:
+Return the label for red round.</code></pre>
+      <p>The expected answer is S. Eight copies of “The weather remains calm.” were split before and after the item list: 0/8, 4/4, or 8/0. This moved the label tokens by exactly 0, 20, or 40 tokens while keeping the final assistant-prefix query at token 104 in this example. The system instruction, chat formatting, full prompts, positions, and original answers are in the <a href="data/translation/prompts.json">saved experiment records</a>.</p>
+    </details>
+    <p>With fixed query position and unchanged key content, following a key moved forward by Δp predicts a query-phase change of approximately <strong>Δarg q<sub>j</sub> = λω<sub>j</sub>Δp</strong>. A rigid compensation would have λ = 1. Here the positive sign compensates a key moving forward in the sequence; the demo above instead defines a positive shift as moving a preference farther into the past.</p>
+    <p>I compared the query phases the model actually produced with that prediction. To isolate their contribution, I kept the original query magnitudes and original key vectors fixed, substituting only the moved-context query phases in pairs 16–31. The curves below measure this band’s score for the target label minus its mean score for the three other labels, as the frozen keys are synthetically shifted. <strong>They are diagnostic score curves, not the model’s full attention probabilities.</strong></p>
+    <figure>
+      <img id="translation-profiles" src="figures/analysis/translation-profiles.png" width="1390" height="1110" loading="lazy" alt="Two diagnostic score profiles for the first confirmation example, with the list moved 20 or 40 tokens. Actual moved-context query phases partially follow the ideally translated curve but depart from it.">
+      <figcaption>The first confirmation example, chosen before inspecting its fit. Gray: original phase. Orange: ideal geometric translation. Green: actual moved-context phase, with source magnitudes and source key content frozen. The departures from the ideal are part of the result.</figcaption>
+    </figure>
+    <p>The head and band were chosen after an exploratory search, so I froze that choice and tested <strong>32 fresh tables × four questions × three placements: 384 prompts</strong>. The unmodified model answered 355 correctly (92.4%). On these new tables, the actual phase-updated profiles correlated more strongly with a translated source profile (0.890) than with an unchanged one (0.755). The paired advantage was 0.136, with a 95% table-bootstrap interval of 0.101–0.170. A phase-law fit gave λ = 0.885, with interval 0.830–0.945: close to a translation, but not an exact rigid one.</p>
+    <p>I also tested a phase intervention in the full model. On the 256 moved prompts, I replaced this band’s query phase with the original-location phase, then added either the predicted correction or its opposite. The scale λ = 0.95 had been fitted on discovery data and frozen before confirmation. Destination query magnitudes and actual destination keys were preserved; subsequent layers were recomputed.</p>
+    <figure>
+      <img src="figures/analysis/translation-results.png" width="1390" height="1140" loading="lazy" alt="Confirmation profiles correlate 0.755 with unchanged and 0.890 with translated source. Full-model geometric correction improves target-versus-other-label log odds relative to source phase and wrong-sign phase, but performs worse than native phase.">
+      <figcaption>Intervals use 3,000 bootstrap resamples of the 32 tables, keeping each table’s questions and transfers together. The lower panel measures first-answer-token log odds against the other three label tokens, not accuracy or probability against the full vocabulary.</figcaption>
+    </figure>
+    <p>The geometric correction slightly improved target-versus-other-label log odds relative to frozen source phase (+0.00569) and wrong-sign correction (+0.01202). It was slightly worse than leaving the native phase alone (−0.00304). <strong>First-token accuracy was identical in all four conditions: 230/256.</strong> There was no measurable improvement in the target token’s full-vocabulary probability. This was a first-token forward-pass test, not a test of complete generated answers under intervention.</p>
+    <details><summary>How closely did the individual pairs follow the phase law?</summary>
+      <figure><img src="figures/analysis/translation-phases.png" width="1390" height="650" loading="lazy" alt="Observed weighted circular mean phase changes for pairs 16 through 31 depart from the ideal 40-token prediction."><figcaption>For the +40-token relocation, observed phase changes are averaged circularly, weighted by source-query × target-minus-mean-foil-key coefficient magnitudes. The aggregate fit does not mean that every pair obeys the law.</figcaption></figure>
+      <p>The initial highest-frequency-band test (pairs 0–15, L19 H3) failed: its held-out profiles matched the unchanged source much better than the translated source. The middle-band result above was a follow-up with an independent confirmation set. Full-head pre-RoPE target-key similarity was high (mean cosine 0.981), but key content was not perfectly invariant. These controls and the remaining caveats are recorded in the <a href="data/translation/original-report.txt">original experiment report</a>.</p>
+    </details>
+    <p>So this is the closest case I found, and I regard it as evidence for a <em>partial translation-like phase component</em> in this particular head and task. It does not prove that the model coordinates a general mechanism for sliding attention patterns by a few tokens. In particular, this experiment used 20- and 40-token relocations, a unique matching item, and a single sixteen-pair band.</p>
+    <p>The <a href="code/translation.py">analysis and figure code</a> recomputes the band metrics from the <a href="data/translation/L23-H4-captures.npz">original captured queries, keys, and scores</a>, checks them against the saved results, and regenerates every figure in this section. The <a href="data/translation/output-interventions.json">recorded full-model output interventions</a> are included too. This reproduces the analysis of the original run; it does not claim a fresh model evaluation.</p>
+    <p><a href="index.html#looking-in-models">← Return to the main exploration</a></p>
+  </main>
+  <footer>Gery Vessere · ROPE exploration · Experiment appendix</footer>
+</body>
+</html>
