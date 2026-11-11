@@ -20,6 +20,9 @@ class FourierChecks(unittest.TestCase):
         zq = q[:, 0] + 1j*q[:, 1]
         zk = k[:, 0] + 1j*k[:, 1]
         np.testing.assert_allclose(zq*np.conj(zk), a-1j*b, atol=1e-14)
+        theta = np.angle(zq)-np.angle(zk)
+        np.testing.assert_allclose(abs(zq)*abs(zk)*np.cos(theta), a, atol=1e-14)
+        np.testing.assert_allclose(-abs(zq)*abs(zk)*np.sin(theta), b, atol=1e-14)
         def rotate(v, p):
             c, s = np.cos(p * omega), np.sin(p * omega)
             return np.column_stack((c*v[:, 0] - s*v[:, 1],
