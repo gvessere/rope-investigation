@@ -11,6 +11,17 @@ class FourierChecks(unittest.TestCase):
         self.assertEqual(len(spectrum), 65)
         np.testing.assert_allclose(np.fft.irfft(spectrum, n=128), y, atol=1e-14)
 
+    def test_real_synthesis_retains_sine_and_cosine_coefficients(self):
+        rng = np.random.default_rng(11)
+        a, b = rng.normal(size=(2, 64))
+        x = rng.uniform(-np.pi, np.pi, (97, 64))
+        synthesized = np.real(np.sum((a-1j*b)*np.exp(1j*x), axis=1))
+        real_basis = np.sum(a*np.cos(x)+b*np.sin(x), axis=1)
+        np.testing.assert_allclose(synthesized, real_basis, atol=1e-13)
+        # Taking real coefficients first would drop a pure sine contribution.
+        np.testing.assert_allclose(np.real(-1j*np.exp(1j*x)), np.sin(x), atol=1e-15)
+        self.assertGreater(np.linalg.norm(np.sin(x)), 1)
+
     def test_rope_expansion_matches_rotated_dot_products(self):
         rng = np.random.default_rng(2)
         q, k = rng.normal(size=(2, 64, 2))
