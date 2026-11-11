@@ -129,6 +129,10 @@
     <details><summary>How small is the score change due to position?</summary>
       <p>For a fixed query–key content pair, write its scaled score contribution as s<sub>j</sub>(Δ) = A<sub>j</sub> cos(ω<sub>j</sub>Δ + φ<sub>j</sub>), where A<sub>j</sub> = ‖q<sub>j</sub>‖ ‖k<sub>j</sub>‖ / √d. Then |s<sub>j</sub>(Δ) − s<sub>j</sub>(0)| ≤ A<sub>j</sub> |ω<sub>j</sub>Δ|. This bounds the extra change caused by positional rotation, uniformly in the learned angle. Large amplitudes or contributions from many pairs can still matter after summation and softmax. It is not a bound saying that resetting φ<sub>j</sub> has little effect.</p>
     </details>
+    <h2 id="where-this-leaves-me">Where this leaves me</h2>
+    <p>Following the dot product led me to a useful picture of RoPE: the query and key set the amplitudes and phases of a collection of waves, and position turns those waves at different speeds. Their sum can build a positional preference, much as Fourier components build a shape. Coordinated changes to the content phases can translate that shape mathematically; the evidence that a trained model actually uses this mechanism remains inconclusive.</p>
+    <p>The slow frequencies add another possibility. With little rotation over the context window, they can preserve content matching across positions, while faster pairs contribute stronger positional preferences. A head can combine those contributions to look for both a relevant feature and a useful location. The learned content angles still matter, even when the positional rotation is tiny.</p>
+    <p>The next question is what these pairs actually look like in a trained model. In <a href="rope-in-practice.html">Part 2</a>, I explore the query and key clouds in Qwen, the patterns that suggested rounding their phases, and the effects of that quantization on predictions and runtime.</p>
     <nav class="series-nav" aria-label="Next page"><a href="rope-in-practice.html">Continue to Part 2: ROPE in practice →</a></nav>
 
     <h2>Reproduce the figures</h2>
