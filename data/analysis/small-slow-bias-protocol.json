@@ -1,0 +1,26 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "intervention": "Set both coordinates of learned key-bias pairs 49\u201363 to zero where original bias radius <2.5, in all layers and both KV heads. All token positions; W_K h, Q, V, and RoPE unchanged.",
+  "selected_bias_pairs": 707,
+  "eligible_bias_pairs": 840,
+  "passages": 16,
+  "scored_tokens": 2251,
+  "original_summary": {
+    "mean_nll": 2.875896793214653,
+    "perplexity": 17.741327291402236,
+    "top1_accuracy": 0.4051532652154598,
+    "loss_increase": 9.140402727368566e-06,
+    "loss_increase_ci95": [
+      -3.367018894671132e-06,
+      2.2938545120885033e-05
+    ],
+    "accuracy_change_pp": -0.04442470013327409,
+    "accuracy_change_pp_ci95": [
+      -0.1350150210878809,
+      0.0
+    ],
+    "changed_top1_fraction": 0.000444247001332741,
+    "paragraphs_loss_worse": 9
+  },
+  "source": "Original zero_small_key_biases experiment; not a full-key phase reset."
+}

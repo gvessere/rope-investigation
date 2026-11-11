@@ -149,7 +149,6 @@ To rerun the model intervention (separate from regenerating the article figures)
 python -m pip install -r requirements-model.txt
 python code/run_phase_quantization.py --device mps --output rerun-results.json
 # For the first weight download, add --allow-download.
-# For the protected-prefix control, add --protect-prefix 14.
 ```
 
 The model revision is pinned to 989aa7980e4cf806f80c7fef2b1adb7bc71aa306.
@@ -241,3 +240,18 @@ data, and reproduction-code links continue to resolve.
 `explorers.js` initializes only the controls present on each page. Part 1 loads
 `series-navigation.js` to preserve earlier observation/quantization hash links.
 All figures retain the same posted data and reproduction scripts.
+
+## All-position quantization and the separate bias-removal result
+
+Run `python code/recompute_phase_results.py` before `python code/observations.py`.
+It recomputes the two/three-bit comparison from `all-position-phase-evaluation.npz`
+(original per-token losses, predictions, and targets), and the separate bias-removal
+case from `small-slow-bias-evaluation.json`. Neither reanalysis performs inference.
+The phase comparison applies to all token positions. Historical control results
+remain in the source archives, but are not included in the article comparison.
+
+The low-impact zeroing case removes small learned key-bias vectors, not full-key
+phases. Its runnable experiment is `python code/run_small_bias_removal.py --device mps`;
+use `--allow-download` if the pinned checkpoint is not cached.
+The speed tables include only dense and compact/all-values paths, with every key
+participating. Original hardware records are retained unchanged for provenance.

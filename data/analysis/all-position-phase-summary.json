@@ -1,0 +1,29 @@
+{
+  "all_token_positions": true,
+  "results": {
+    "pi2_small": {
+      "tokens": 7168,
+      "loss_increase": 0.018243406258074617,
+      "changed_predictions": 547,
+      "changed_prediction_fraction": 0.07631138392857142,
+      "per_document_loss_increase": [
+        0.0258246507870081,
+        0.006870815369469747,
+        0.01820213140582792,
+        0.02207602746999271
+      ]
+    },
+    "pi4_small": {
+      "tokens": 7168,
+      "loss_increase": 0.0016968394719052426,
+      "changed_predictions": 229,
+      "changed_prediction_fraction": 0.031947544642857144,
+      "per_document_loss_increase": [
+        0.006469574546121086,
+        0.0002041584472693663,
+        0.002183997705477582,
+        -0.0020703728112470643
+      ]
+    }
+  }
+}

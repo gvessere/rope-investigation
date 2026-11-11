@@ -1,0 +1,9 @@
+{
+  "intervention": "Set both coordinates of learned key-bias pairs 49\u201363 to zero where original bias radius <2.5, in all layers and both KV heads. All token positions; W_K h, Q, V, and RoPE unchanged.",
+  "scored_tokens": 2251,
+  "loss_increase": 9.043843225587982e-06,
+  "changed_predictions": 1,
+  "changed_prediction_fraction": 0.000444247001332741,
+  "selected_bias_pairs": 707,
+  "eligible_bias_pairs": 840
+}

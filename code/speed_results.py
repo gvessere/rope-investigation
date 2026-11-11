@@ -19,13 +19,13 @@ def compute():
     for batch in [1,3,8,32]:
         rows={r['method']:r for r in micro if r['batch']==batch}
         base=rows['dense_grouped_matmul']['median_ms']
-        for method in ['dense_grouped_matmul','compact_all_values','shortlist64_plus22','shortlist128_plus22']:
+        for method in ['dense_grouped_matmul','compact_all_values']:
             r=rows[method]
             np.testing.assert_allclose(r['median_ms'],np.median(r['trial_ms']))
             attention.append(dict(batch=batch,method=method,ms=r['median_ms'],speedup=base/r['median_ms'],
                 speedup_vs_strided_sdpa=rows['dense_sdpa']['median_ms']/r['median_ms']))
     raw=read('decode-timings.json')['results'];quality=read('decode-quality.json')['results']
-    configs=[('dense',0),('all_values',0),('shortlist',64),('shortlist',128)]
+    configs=[('dense',0),('all_values',0)]
     base=statistics.median(r['mean_ms_per_token_after8warmup'] for r in raw if r['mode']=='dense')
     native={r['document']:r for r in quality if r['mode']=='dense'}
     full=[]
@@ -51,8 +51,8 @@ def compute():
     return dict(attention=attention,decode=full)
 
 def tables(x):
-    labels={'dense':'Dense grouped attention','all_values':'Compact scores, all values','shortlist64':'Compact shortlist, top 64 + 22 anchors','shortlist128':'Compact shortlist, top 128 + 22 anchors'}
-    out=['<div class="table-scroll"><table><caption>Attention only · 32,000 keys · milliseconds per layer</caption><thead><tr><th>Batch</th><th>Dense grouped</th><th>Compact / all values</th><th>Top 64 + anchors</th><th>Top 128 + anchors</th></tr></thead><tbody>']
+    labels={'dense':'Dense grouped attention','all_values':'Compact scores, all values'}
+    out=['<div class="table-scroll"><table><caption>Attention only · 32,000 keys · milliseconds per layer</caption><thead><tr><th>Batch</th><th>Dense grouped</th><th>Compact / all values</th></tr></thead><tbody>']
     for batch in [1,3,8,32]:
         rows=[r for r in x['attention'] if r['batch']==batch]
         out.append('<tr><td>'+str(batch)+'</td>'+''.join(f'<td>{r["ms"]:.3f} ms'+(f' · {r["speedup"]:.2f}×' if i else '')+'</td>' for i,r in enumerate(rows))+'</tr>')

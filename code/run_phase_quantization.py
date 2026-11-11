@@ -2,7 +2,7 @@
 
 Install requirements-model.txt first. Example, with already cached weights:
 python code/run_phase_quantization.py --device mps --output rerun-results.json
-Add --allow-download for first model download; --protect-prefix 14 for the control.
+Add --allow-download for first model download.
 Reference runs used float32, eager attention, MPS, and the pinned model revision.
 Hardware/library differences can alter numeric results. This script does not pack
 codes into a compressed cache or benchmark inference speed.
@@ -21,10 +21,8 @@ def main():
     p.add_argument('--revision',default=REVISION)
     p.add_argument('--device',choices=['cpu','mps','cuda'],default='mps')
     p.add_argument('--allow-download',action='store_true')
-    p.add_argument('--protect-prefix',type=int,default=0)
     p.add_argument('--output',type=Path,default=Path('rerun-results.json'))
     args=p.parse_args()
-    if args.protect_prefix<0:p.error('Prefix count must be nonnegative')
     import torch
     from transformers import AutoModelForCausalLM
     torch.set_num_threads(4)
@@ -40,14 +38,14 @@ def main():
     state={'bits':None,'selected':0,'eligible':0}
     def hook(module,inputs,output):
         if state['bits'] is None:return output
-        changed,n,total=round_keys_torch(output,state['bits'],args.protect_prefix)
+        changed,n,total=round_keys_torch(output,state['bits'])
         state['selected']+=n;state['eligible']+=total
         return changed
     hooks=[layer.self_attn.k_proj.register_forward_hook(hook) for layer in model.model.layers]
     baseline=[];results={}
     try:
         with torch.inference_mode():
-            for name,bits in [('native',None),('identity','identity'),('zero_small',0),('pi2_small',2),('pi4_small',3)]:
+            for name,bits in [('native',None),('identity','identity'),('pi2_small',2),('pi4_small',3)]:
                 state.update(bits=bits,selected=0,eligible=0);diffs=[];changes=[];perdoc=[]
                 for i,row in enumerate(rows):
                     ids=np.array(row['input_ids']);target=np.array(row['body'])[256:]
@@ -64,6 +62,6 @@ def main():
     finally:
         for hook in hooks:hook.remove()
     assert results['identity']['changed_prediction_fraction']==0 and abs(results['identity']['loss_increase'])<1e-4
-    args.output.write_text(json.dumps({'results':results,'protocol':{'model':args.model,'revision':args.revision,'dtype':'float32','attention':'eager','device':args.device,'protect_prefix':args.protect_prefix,'torch':torch.__version__,'description':'Actual pre-RoPE slow key pairs 49–63, small radius<2.5; full downstream recomputation. Not a packed-cache benchmark.'}},indent=2)+'\n')
+    args.output.write_text(json.dumps({'results':results,'protocol':{'model':args.model,'revision':args.revision,'dtype':'float32','attention':'eager','device':args.device,'all_token_positions':True,'torch':torch.__version__,'description':'Actual pre-RoPE slow key pairs 49–63, small radius<2.5; full downstream recomputation. Not a packed-cache benchmark.'}},indent=2)+'\n')
 
 if __name__=='__main__':main()

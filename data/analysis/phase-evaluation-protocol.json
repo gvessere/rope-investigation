@@ -1,0 +1,65 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "pairs": [
+    49,
+    63
+  ],
+  "radius_lt": 2.5,
+  "all_token_positions": true,
+  "layers": 28,
+  "kv_heads": 2,
+  "evaluation": "4 prose excerpts; 1792 scored targets each, after 256-token warmup; 7168 targets total",
+  "reference_results": {
+    "native": {
+      "tokens": 7168,
+      "loss_increase": 0.0,
+      "changed_prediction_fraction": 0.0,
+      "per_document_loss_increase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_fraction": 0.0
+    },
+    "pi2_small": {
+      "tokens": 7168,
+      "loss_increase": 0.01824340596795082,
+      "changed_prediction_fraction": 0.07631138392857142,
+      "per_document_loss_increase": [
+        0.0258246511220932,
+        0.006870814599096775,
+        0.018202129751443863,
+        0.02207602746784687
+      ],
+      "selected_fraction": 0.5240336762736132
+    },
+    "pi4_small": {
+      "tokens": 7168,
+      "loss_increase": 0.001696839346550405,
+      "changed_prediction_fraction": 0.031947544642857144,
+      "per_document_loss_increase": [
+        0.00646957429125905,
+        0.00020415855397004634,
+        0.0021839977707713842,
+        -0.0020703731570392847
+      ],
+      "selected_fraction": 0.5274708731698305
+    }
+  },
+  "selection_checks": {
+    "pi2_small": {
+      "selected": 3630673,
+      "eligible": 6928320,
+      "max_relative_radius_squared_error": 1.8810470692187664e-07,
+      "max_unselected_error": 0.0
+    },
+    "pi4_small": {
+      "selected": 3654487,
+      "eligible": 6928320,
+      "max_relative_radius_squared_error": 2.498268258932512e-07,
+      "max_unselected_error": 0.0
+    }
+  },
+  "source": "Original unsuffixed native/pi2_small/pi4_small NPZ evaluations; recomputed from saved outputs, not new inference."
+}
