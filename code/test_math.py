@@ -17,6 +17,9 @@ class FourierChecks(unittest.TestCase):
         omega = frequencies()
         a = np.sum(q * k, axis=1)
         b = q[:, 0] * k[:, 1] - q[:, 1] * k[:, 0]
+        zq = q[:, 0] + 1j*q[:, 1]
+        zk = k[:, 0] + 1j*k[:, 1]
+        np.testing.assert_allclose(zq*np.conj(zk), a-1j*b, atol=1e-14)
         def rotate(v, p):
             c, s = np.cos(p * omega), np.sin(p * omega)
             return np.column_stack((c*v[:, 0] - s*v[:, 1],
@@ -24,6 +27,8 @@ class FourierChecks(unittest.TestCase):
         for m, n in ((0, 0), (17, 97), (97, 17), (117, 197)):
             expected = np.sum(rotate(q, m) * rotate(k, n)) / np.sqrt(128)
             actual = np.sum(basis([m - n], omega)[0] * np.r_[a, b]) / np.sqrt(128)
+            complex_score = np.real(np.sum(zq*np.conj(zk)*np.exp(1j*omega*(m-n)))) / np.sqrt(128)
+            self.assertAlmostEqual(complex_score, expected, places=12)
             self.assertAlmostEqual(actual, expected, places=12)
 
     def test_coordinated_phases_translate_the_whole_score(self):
