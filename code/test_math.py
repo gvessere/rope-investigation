@@ -28,6 +28,8 @@ class FourierChecks(unittest.TestCase):
             expected = np.sum(rotate(q, m) * rotate(k, n)) / np.sqrt(128)
             actual = np.sum(basis([m - n], omega)[0] * np.r_[a, b]) / np.sqrt(128)
             complex_score = np.real(np.sum(zq*np.conj(zk)*np.exp(1j*omega*(m-n)))) / np.sqrt(128)
+            polar_score = np.sum(abs(zq)*abs(zk)*np.cos(np.angle(zq)-np.angle(zk)+omega*(m-n))) / np.sqrt(128)
+            self.assertAlmostEqual(polar_score, expected, places=12)
             self.assertAlmostEqual(complex_score, expected, places=12)
             self.assertAlmostEqual(actual, expected, places=12)
 
