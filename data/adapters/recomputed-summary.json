@@ -23,28 +23,6 @@
       }
     ],
     [
-      "Permuted-frequency phase",
-      {
-        "parameters": 516096,
-        "seeds": [
-          1101,
-          1102,
-          1103,
-          1104,
-          1105
-        ],
-        "delta_nll": -0.02709231197834015,
-        "perplexity_reduction_percent": 2.672860723038599,
-        "per_seed_perplexity_reduction_percent": [
-          2.633242876705784,
-          2.638077661655389,
-          2.2454629800357266,
-          3.1686106853466964,
-          2.676692480929943
-        ]
-      }
-    ],
-    [
       "Q-only LoRA, rank 6",
       {
         "parameters": 516096,

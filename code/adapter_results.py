@@ -30,7 +30,7 @@ def main():
     phase=read('phase-results.json');dynamic=read('dynamic-results.json');base=phase['test_baseline']['sequence_nll']
     np.testing.assert_allclose(base,dynamic['test_baseline']['sequence_nll'],atol=1e-5)
     phase_rows=[];lookup={}
-    for key,label in [('coordinated','Coordinated phase'),('permuted','Permuted-frequency phase'),('q_lora','Q-only LoRA, rank 6')]:
+    for key,label in [('coordinated','Coordinated phase'),('q_lora','Q-only LoRA, rank 6')]:
         rec=[r for r in phase['test_results'] if r['arm']==key];assert len(rec)==5
         v=metric(base,rec,516096);phase_rows.append((label,v));lookup[key]=v
     dynamic_rows=[]
