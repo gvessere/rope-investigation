@@ -101,7 +101,7 @@
     <p>At small r, the same angular change moves the vector less. That suggests a quantization experiment; it does not establish that the model can tolerate the change. Many small errors may combine, and a particular query may amplify one of them. The next section tests the effect on predictions.</p>
 
     <h2 id="quantization">From a pattern to a quantization experiment</h2>
-    <h3 id="bias-quantization">First I tried quantizing the query biases</h3>
+    <h3 id="bias-quantization">Query biases: how sensitive are they to quantization?</h3>
     <p>The obvious starting point was the <strong>large, slow-pair query biases</strong>: their phases visibly clustered near fractions of π. I rounded the phases of bias pairs 49–63 with r &gt; 2.5 to the nearest multiple of π/2, preserving their radii. Despite the apparent alignment, the result was poor.</p>
     <p>Surprisingly, the smaller biases were much more tolerant. Applying the same two-bit phase rounding to bias pairs with r ≤ 2.5 left average loss and next-token accuracy almost unchanged. These were edits to the learned query bias constants, not the full query vectors; the keys and projection weights were unchanged.</p>
     <!-- BIAS PHASE TABLE START -->
