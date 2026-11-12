@@ -1,0 +1,14 @@
+{
+  "k": {
+    "tokens": 2251,
+    "loss_increase": 0.0027132386738637575,
+    "changed_predictions": 97,
+    "changed_fraction": 0.04309195912927588
+  },
+  "fast": {
+    "tokens": 2251,
+    "loss_increase": 1.0276046292155632,
+    "changed_predictions": 1216,
+    "changed_fraction": 0.540204353620613
+  }
+}
