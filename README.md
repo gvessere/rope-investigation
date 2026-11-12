@@ -300,3 +300,14 @@ are in `data/analysis/query-bias-*-protocol.json` and
 Optional fresh inference: `python code/run_bias_phase_quantization.py --condition small --device mps`.
 Use `--condition large` for the complementary subset. This is separate from
 rounding each token’s actual key activation in `run_phase_quantization.py`.
+
+## Observation 4: shared-KV query-pair atlas
+
+`head-pair-viewer.mjs` draws the saved pre-RoPE query pairs directly from the
+existing per-layer NPZ files. Controls select any of 28 layers, four pair ranges,
+and both KV groups or one group. All 768 points per cell are drawn. Each pair
+uses its maximum across all 12 heads, padded by 3.5%, even when filtering to
+one group. No clipping or sampling is introduced. The default is layer 14,
+pairs 48–63. `python code/head_pair_atlas.py --layer 14 --start 48` regenerates
+the fallback sheet. `node code/test_head_pair.mjs` checks shared scales against
+NumPy fixtures from layers 0 and 14.

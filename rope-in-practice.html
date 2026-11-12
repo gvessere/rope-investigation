@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Deep dive in ROPE pair data · Attention and positional encodings, Part 2</title>
   <meta name="description" content="Query and key observations, phase quantization experiments, and measured attention and whole-model speed comparisons in Qwen2.5.">
-  <link rel="stylesheet" href="style.css?v=series-split-1">
+  <link rel="stylesheet" href="style.css?v=head-pair-atlas-1">
 </head>
 <body>
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
@@ -73,6 +73,24 @@
     <figure><img src="figures/analysis/bias-clouds.png" width="1700" height="850" loading="lazy" alt="A query cloud in L13 H4 pair 52 lies near its learned bias, while L15 H7 pair 63 has a large input-dependent spread and is not explained by its bias alone."><figcaption>Green points are the 768 saved query observations for one pair; orange crosses are the actual learned projection biases. Left: a strongly bias-dominated cloud. Right: a counterexample showing why large r alone does not establish input independence. Both panels preserve equal x/y scales.</figcaption></figure>
     <p>The large-offset clouds have different degrees of input dependence. Compact, roughly round clouds tend to vary little around a stable offset; they look largely input-independent on these samples. Stretched clouds show stronger input-dependent variation along a preferred direction, as in the right-hand example. The useful clue is the spread relative to the offset, as well as the shape.</p>
     <details><summary>What did the held-out bias check establish?</summary><p>For query pairs whose mean radius exceeded 5 on eight discovery excerpts, the bias-only predictor accounted for 72.5% of squared magnitude on eight other excerpts, relative to predicting zero. A fitted constant vector accounted for 83.0%. For large-mean key pairs, the bias-only result was 99.86%. These are energy-relative prediction fits, not variance explained around a mean. They support a substantial constant component, especially in the keys; they do not make every large query pair constant. <a href="data/analysis/observations-summary.json">Recomputed statistics</a> · <a href="data/analysis/original-static-summary.json">Original experiment summary</a>.</p></details>
+
+    <h3 id="shared-kv-structure">4. Query heads sharing a KV head have similar structure</h3>
+    <p>Query heads that share the same key/value head also seem to share recognizable structure in their query-pair embeddings. In this model, heads 0–5 use KV0 and heads 6–11 use KV1. That is not unexpected, but it is nice to see in the plots: compare the shapes within each group, then across the boundary.</p>
+    <div class="interactive-block">
+      <div class="controls" id="head-pair-controls" hidden>
+        <label>Layer <select id="head-pair-layer"></select></label>
+        <label>Pairs <select id="head-pair-range"><option value="0">0–15</option><option value="16">16–31</option><option value="32">32–47</option><option value="48" selected>48–63</option></select></label>
+        <label>Heads <select id="head-pair-group"><option value="all">Both KV groups</option><option value="0">H0–H5 · KV0</option><option value="1">H6–H11 · KV1</option></select></label>
+        <label>Plot width <select id="head-pair-size"><option value="detail" selected>Readable · scroll sideways</option><option value="fit">Fit whole sheet</option></select></label>
+        <button type="button" id="head-pair-save">Save PNG</button>
+      </div>
+      <p class="viewer-status" id="head-pair-status" role="status">Layer 14 · pairs 48–63 · original saved queries. Scroll sideways for individual pairs, or fit the whole sheet.</p>
+      <div class="head-pair-frame" tabindex="0" role="region" aria-label="Scrollable query-pair comparison across heads">
+        <img id="head-pair-fallback" src="figures/analysis/layer_14_pairs_48_63.png" width="2600" height="1900" loading="lazy" alt="Layer 14 query radius and phase, heads as rows and pairs 48–63 as columns. Rows H0–H5 share KV0; H6–H11 share KV1. Several pair-cloud shapes recur within each group.">
+        <canvas id="head-pair-canvas" hidden role="img" aria-label="Interactive query-pair matrix: heads in rows, pairs in columns, grouped by their shared KV head."></canvas>
+      </div>
+      <p class="caption">The dynamic version of <code>layer_14_pairs_48_63.png</code>, starting at that same layer and pair range. Every cell shows all 768 saved pre-RoPE query points. Compare vertically within a column: its radius scale is shared across all 12 heads; different columns have different ranges. Green and purple row bands identify the two KV groups. The model is the original checkpoint, without an amplitude adapter. <a href="code/head_pair_atlas.py">Regenerate the saved sheet</a> · <a href="head-pair-viewer.mjs">Interactive plotting code</a>.</p>
+    </div>
 
     <h3>Could we collapse nearby directions?</h3>
     <p>Given these observations, a natural question arises: could we round the angles of these short vectors to a few representative directions? A π/4 grid gives eight directions, requiring three phase bits; a π/2 grid gives four directions, requiring two. A π/3 grid would give six directions, still requiring three bits in a simple fixed-width code. I tested the first two grids rather than assuming the visible density determined the best codebook.</p>
@@ -142,6 +160,7 @@ python code/reproduce_observations.py --pdf</code></pre>
 python code/bias_phase_results.py
 python code/observations.py
 python code/slow_bias_phases.py
+python code/head_pair_atlas.py --layer 14 --start 48
 python code/speed_results.py</code></pre>
     <nav class="series-nav" aria-label="Previous page"><a href="index.html">← Part 1: ROPE exploration</a></nav>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source and editing on GitHub</a> · References: <a href="https://arxiv.org/abs/2104.09864">RoFormer</a>; <a href="https://proceedings.mlr.press/v267/hua25b.html">Fourier Position Embedding</a> (<a href="https://arxiv.org/html/2412.17739v4#S2.SS2">§2.2</a>); <a href="https://numpy.org/doc/stable/reference/routines.fft.html">NumPy DFT conventions</a>.</p>
@@ -149,5 +168,6 @@ python code/speed_results.py</code></pre>
   <footer>Gery Vessere · Attention and positional encodings · Part 2</footer>
   <script src="explorers.js?v=series-split-1"></script>
   <script type="module" src="scatter-viewer.mjs?v=2026-11-10"></script>
+  <script type="module" src="head-pair-viewer.mjs?v=1"></script>
 </body>
 </html>

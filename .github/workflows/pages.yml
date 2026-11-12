@@ -29,6 +29,8 @@ jobs:
           node-version: "22"
       - name: Check browser plot calculations
         run: node code/test_viewer.mjs
+      - name: Check shared query-pair scales
+        run: node code/test_head_pair.mjs
       - name: Check the math
         run: python -m unittest discover -s code -p 'test_*.py'
       - name: Verify saved model-plot data
@@ -43,6 +45,8 @@ jobs:
         run: python code/bias_phase_results.py
       - name: Regenerate observations figures
         run: python code/observations.py
+      - name: Regenerate shared-KV query-pair sheet
+        run: python code/head_pair_atlas.py --layer 14 --start 48
       - name: Regenerate original slow-pair bias phases
         run: python code/slow_bias_phases.py
       - name: Reproduce archived translation figures
