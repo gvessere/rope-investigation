@@ -1,0 +1,42 @@
+{
+  "phase-results.json": {
+    "source": "outputs/scalar_rope_multiseed/results.json",
+    "sha256": "99077938c6a386e8584c8cc34d2e6f8acd70ce8011bd74ada665cfe0be018e86"
+  },
+  "phase-protocol.json": {
+    "source": "outputs/scalar_rope_multiseed/protocol.json",
+    "sha256": "00f3e3f213e8238324276404eed86c4ecabec2cb1d6097b0e06477fd695386b8"
+  },
+  "dynamic-results.json": {
+    "source": "outputs/scalar_rope_dynamic_magnitude/results.json",
+    "sha256": "a71d3f4e5fd68eac42b89ae0f469b087598b1e5c412f5bc9eedd0194a9c1d8d5"
+  },
+  "dynamic-protocol.json": {
+    "source": "outputs/scalar_rope_dynamic_magnitude/protocol.json",
+    "sha256": "9063734d2432d51358b34b1a26a5cb3fbeceab791c6aad583cfabfb9d153dbc8"
+  },
+  "full-model-results.json": {
+    "source": "outputs/full_model_same_steps/results.json",
+    "sha256": "128ed418adaf4a0914c45b4c9b1dc918ad2f2bc339bc0fffbddedbdc96b3e109"
+  },
+  "wq-results.json": {
+    "source": "outputs/wq_matrices_only/results.json",
+    "sha256": "e2b26b3ab40b4a0297c000147f39115922e1b8538980a2d205908d21df291441"
+  },
+  "peak-interventions.json": {
+    "source": "outputs/amplitude_attention_peaks/results.json",
+    "sha256": "588efd52fa868e252ddfeeb00efa990414b9fc9123228c462d53c848e50a0b20"
+  },
+  "peak-protocol.json": {
+    "source": "outputs/amplitude_attention_peaks/protocol.json",
+    "sha256": "9fb9e170b7d846831275672228f45ac376134b6b9c4729d236770641278c2c5e"
+  },
+  "dataset.json": {
+    "source": "outputs/scalar_rope_multiseed/dataset.json",
+    "sha256": "133f24eea821ac2dbe8c3fe319d38cc48a13409fb4d962e5a9f2215520c4c7c1"
+  },
+  "peak-captures.npz": {
+    "source": "Lossless subset of outputs/amplitude_attention_peaks/diagnostics.npz: loss arrays unchanged; peak indices stored as uint8 (all 0\u2013127).",
+    "sha256": "7f2b970a48a9cfa5c167b2595616bb46f3817e3513f933c248c6abcc4a6dbc38"
+  }
+}

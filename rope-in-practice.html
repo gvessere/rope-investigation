@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Deep dive in ROPE pair data · Attention and positional encodings, Part 2</title>
+  <title>Deep dive in ROPE pair data · Attention and positional encodings, Part 3</title>
   <meta name="description" content="Query and key observations, phase quantization experiments, and measured attention and whole-model speed comparisons in Qwen2.5.">
   <link rel="stylesheet" href="style.css?v=series-split-1">
 </head>
 <body>
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
   <main>
-    <p class="series-label">Attention and positional encodings · Part 2</p>
-    <nav class="series-nav" aria-label="Series pages"><a href="index.html">← 1. ROPE exploration</a><a href="rope-in-practice.html" aria-current="page">2. Deep dive in ROPE pair data</a></nav>
+    <p class="series-label">Attention and positional encodings · Part 3</p>
+    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="appendix-translation.html">← 2. Attention displacement</a><a href="rope-in-practice.html" aria-current="page">3. Deep dive in ROPE pair data</a></nav>
     <h1>Deep dive in ROPE pair data</h1>
-    <p class="lead">The first page explored what RoPE can express. Here I look at the query and key pairs in a trained model, and how this led to rediscovering a quantization scheme for attention keys.</p>
+    <p class="lead">The previous pages explored what RoPE can express and searched for phase and amplitude modulation in a trained model. Here I look at the query and key pairs in a trained model, and how this led to rediscovering a quantization scheme for attention keys.</p>
     <h2 id="coordinate-pairs">Looking at the coordinate pairs</h2>
     <p>Along the way, I also looked directly at the query and key coordinate pairs. These are the plots from that investigation, using <strong>Qwen2.5-1.5B-Instruct</strong>: all 28 layers, with 12 query heads and two shared key heads per layer. Each shared key head serves six query heads. The query plots contain 768 sampled tokens from 16 prose excerpts; the key plots contain all 2,379 prose tokens from those excerpts, excluding the chat prefix.</p>
     <p>There are two ways to look at the same pairs. The Cartesian view shows the two coordinates directly; the other shows their amplitude and angle. In both, the known positional rotation has been removed to show the coordinates before RoPE. These are individual query or key angles, not the relative query–key angle of an attention score.</p>
@@ -129,10 +129,10 @@ python code/reproduce_observations.py --pdf</code></pre>
     <pre><code>python code/recompute_phase_results.py
 python code/observations.py
 python code/speed_results.py</code></pre>
-    <nav class="series-nav" aria-label="Previous page"><a href="index.html">← Part 1: ROPE exploration</a></nav>
+    <nav class="series-nav" aria-label="Previous page"><a href="appendix-translation.html">← Part 2: Looking for attention displacement</a></nav>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source and editing on GitHub</a> · References: <a href="https://arxiv.org/abs/2104.09864">RoFormer</a>; <a href="https://proceedings.mlr.press/v267/hua25b.html">Fourier Position Embedding</a> (<a href="https://arxiv.org/html/2412.17739v4#S2.SS2">§2.2</a>); <a href="https://numpy.org/doc/stable/reference/routines.fft.html">NumPy DFT conventions</a>.</p>
   </main>
-  <footer>Gery Vessere · Attention and positional encodings · Part 2</footer>
+  <footer>Gery Vessere · Attention and positional encodings · Part 3</footer>
   <script src="explorers.js?v=series-split-1"></script>
   <script type="module" src="scatter-viewer.mjs?v=2026-11-10"></script>
 </body>

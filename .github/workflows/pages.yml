@@ -43,6 +43,8 @@ jobs:
         run: python code/observations.py
       - name: Reanalyse translation confirmation and regenerate figures
         run: python code/translation.py
+      - name: Reanalyse adapter comparisons and regenerate Part 2
+        run: python code/adapter_results.py
       - name: Recompute recorded speed comparison tables
         run: python code/speed_results.py
       - name: Quantify slow frequencies and regenerate explanatory figure

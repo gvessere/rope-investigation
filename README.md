@@ -6,7 +6,7 @@ A personal exploration of RoPE through its connection to Fourier transforms.
 
 ## Edit and preview
 
-Edit `index.html` for Part 1 and `rope-in-practice.html` for Part 2; `style.css` controls presentation.
+Edit `index.html` for Part 1 and `appendix-translation.html` for Part 2 and `rope-in-practice.html` for Part 3; `style.css` controls presentation.
 Equations use native MathML, with their LaTeX source in each annotation. The site uses local JavaScript files for the plot viewer and phase-shift example; it has no remote scripts, fonts, or rendering dependencies.
 
 Run `python3 -m http.server 8771` from this directory to preview locally.
@@ -221,22 +221,21 @@ the uniform cosine score-change bound numerically across phases and offsets.
 This is an analytic illustration, not measured model attention. Small positional
 rotation does not imply that setting a learned content phase to zero is harmless.
 The constructed approximation examples intentionally retain their B=10,000
-setting; the new illustration uses the actual model's B=1,000,000.
+setting. The optional archived slow-frequency illustration uses the actual model's B=1,000,000 and is no longer displayed in the article.
 
 The detailed L23 H4 translation experiment is presented in
-`appendix-translation.html`, linked from the main narrative's inconclusive-evidence
-summary. Both pages share root-relative-in-repository asset paths, so all figures,
+`appendix-translation.html`, now serving as Part 2 of the series. The three pages share root-relative-in-repository asset paths, so all figures,
 data, and reproduction-code links continue to resolve.
 
 ## Attention and positional encodings series
 
 - `index.html`: Part 1, ROPE exploration; geometry, Fourier connection, coordinated
   phase demo, and semantic-versus-positional matching.
-- `rope-in-practice.html`: Part 2, Deep dive in ROPE pair data; all empirical coordinate
+- `rope-in-practice.html`: Part 3, Deep dive in ROPE pair data; all empirical coordinate
   plots, observations, bias analysis, quantization, and runtime results.
-- `appendix-translation.html`: detailed coordinated-phase investigation.
+- `appendix-translation.html`: Part 2, phase/amplitude investigation and adapter comparisons (legacy URL retained).
 
-`code/speed_results.py` updates the speed tables in Part 2. The shared
+`code/speed_results.py` updates the speed tables in Part 3. The shared
 `explorers.js` initializes only the controls present on each page. Part 1 loads
 `series-navigation.js` to preserve earlier observation/quantization hash links.
 All figures retain the same posted data and reproduction scripts.
@@ -263,3 +262,19 @@ in Part 1, including its SVG, plotted arrays, and parameter/peak summary. It use
 pairs 27 and 28 from the B=10,000, d=128 schedule; phases stay fixed while
 nonnegative amplitudes change. The score peak moves and the shape changes.
 This is not a model measurement or a claim of rigid translation.
+
+## Adapter comparisons (Part 2)
+
+Run `python code/adapter_results.py` to regenerate the new tables and figures from
+recorded results in `data/adapters`. `provenance.json` records source hashes.
+`peak-captures.npz` preserves loss arrays and all original winning-position
+indices, losslessly stored as uint8. The original detailed phase experiment
+is retained in a disclosure at the start of Part 2.
+
+`run_adapter_comparison.py` reruns one selected training configuration on the
+posted token IDs. It supports phase, amplitude, combined, query-only LoRA,
+WQ-only training, full-model continued training, and an untrained baseline.
+It does not rerun the original LR searches or the full attention-probability
+intervention experiment. The original scripts are archived for inspection.
+These are continued-training experiments on a pretrained checkpoint; training
+from scratch is future work.

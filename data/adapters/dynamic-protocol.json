@@ -1,0 +1,66 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "original_weights_frozen": true,
+  "dtype": "float32",
+  "seeds": [
+    1101,
+    1102
+  ],
+  "no_additional_pilot_seed": true,
+  "steps": 64,
+  "batch_size": 2,
+  "training_tokens": 16384,
+  "splits": {
+    "train": 128,
+    "validation": 48,
+    "test": 80
+  },
+  "lr_grid": {
+    "head_magnitude": [
+      3e-05,
+      0.0001,
+      0.0003
+    ],
+    "pair_magnitude": [
+      0.0003,
+      0.001,
+      0.003
+    ],
+    "coordinated_head_magnitude": [
+      3e-05,
+      0.0001,
+      0.0003
+    ],
+    "coordinated_pair_magnitude": [
+      0.0003,
+      0.001,
+      0.003
+    ],
+    "permuted_pair_magnitude": [
+      0.0003,
+      0.001,
+      0.003
+    ],
+    "coordinated_pair_magnitude_qk": [
+      0.0003,
+      0.001,
+      0.003
+    ],
+    "q_lora12": [
+      0.0003,
+      0.001,
+      0.003
+    ]
+  },
+  "selection": "Every LR configuration uses exactly the same TWO seeds. Select by mean step64 validation NLL across these two seeds. Test only after all fits/choices. Retain phase LR3e-4 from preceding validation search; no joint phase/magnitude LR retuning.",
+  "head_magnitude": "One bias-free row/head predicts s=2*tanh((a@normalized_hidden)/2); multiply all64Qpairs by exp(s).516096parameters.",
+  "pair_magnitude": "Rank8 predictor s=2*tanh((BA@normalized_hidden)/2), A8x1536,B768x8 per layer; reshape to12headsx64pairs.516096parameters, same as rank6 Q-LoRA.",
+  "phase": "One zero-initialized displacement row/head, delta=2*tanh((w@normalized_hidden)/2); extra Q rotation -delta*omega (or permutedomega).516096additionalparameters.",
+  "qk": "Shared pair predictor: Q at token m scaled by exp(s_m,h,j/2); GQA K at token n scaled by exp(mean_over_6_sharing_heads(s_n,h,j)/2). Tied Q/K gates, not independently learned key gates. Same parameter budget as Q-only combined. Unlike static gains this changes key-content selection.",
+  "q_lora12": "Standard rank12Q-onlyLoRA, alpha/r1, A uniform\u00b11/sqrt1536, Bzero;1032192parameters, exactly matches phase+magnitude.",
+  "initialization": "Head rows and phase rows zero; lowrank predictor/LoRA A random,Bzero. Every variant starts as original model. Gains bounded exp(-2)..exp(2); QK factors use half log gains.",
+  "optimizer": "Adamdefaults, no weightdecay; global gradnormclip1 on selectedparams; model eval/dropoutoff.",
+  "controls": "Previous static gain and rank6QLoRA results restricted to the SAME TWO seeds are references, not new runs.",
+  "ablation": "Selected magnitude models: compute mean predicted log-gain per layer/head/pair on TRAIN with adapted model active, replace token-dependent predictions with these constants on TEST. No refitting; diagnostic only.",
+  "limitations": "Two seeds only, shared fixed classic-prose corpus and reused test set. Exploratory extension. Pair predictor is lowrank, QK is tied, amplitude ranges bounded; no unrestricted Q/K magnitude fine-tuning."
+}

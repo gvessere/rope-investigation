@@ -1,0 +1,21 @@
+{
+  "seed": 1101,
+  "checkpoint": "/Users/geryvessere/Documents/ChatGPT/research/outputs/banded_query_amplitude/fits/pair_all_0_63_lr0.001.pt",
+  "training": "No new training or model seeds.",
+  "dataset": "Existing 80 held-out windows, 128 next-token predictions each. Reused exploratory test.",
+  "reference": "Native and full-adapter peaks from separate unmodified forward passes; local ungated peaks use identical incoming hidden states/keys to gated attention.",
+  "modes": [
+    "native",
+    "full",
+    "full_native_peak",
+    "full_local_peak",
+    "native_full_peak",
+    "full_random_peak",
+    "drop_shift_gains",
+    "drop_stay_gains",
+    "drop_random_gains"
+  ],
+  "swap": "Swap probabilities of current maximum and requested target. Preserves full probability multiset and entropy exactly (up to floating point). Changes relative value routing.",
+  "masks": "Gain-removal masks fixed from native/full reference peak differences, not recomputed under intervention. Random masks shuffle sequences within each layer/head/query-position; same row count, but batch-limited randomization.",
+  "caveats": "Intervention effects interact across layers; necessity/sufficiency probes, not an additive mediation decomposition. Peak relocation does not test continuous fixed-content RoPE waveform displacement."
+}

@@ -1,0 +1,1 @@
+Original research scripts, retained verbatim for protocol inspection. They refer to the original research directory and MPS environment. Use ../run_adapter_comparison.py for a portable rerun on the posted token IDs, and ../adapter_results.py to regenerate the article from recorded outputs.

@@ -1,0 +1,63 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "original_weights_frozen": true,
+  "dtype": "float32",
+  "attention": "sdpa",
+  "main_seeds": [
+    1101,
+    1102,
+    1103,
+    1104,
+    1105
+  ],
+  "pilot_seed": 9101,
+  "steps": 64,
+  "batch_size": 2,
+  "predictions_per_sequence": 128,
+  "training_tokens_per_run": 16384,
+  "splits": {
+    "train": 128,
+    "validation": 48,
+    "test": 80
+  },
+  "train_set": "Same 128 windows as original pilot; held-out validation/test are new nonoverlapping windows from the same disjoint book regions, excluding all original pilot windows.",
+  "seed_variation": "Paired training-order shuffle; LoRA A initialization and permuted-frequency control use seed-derived random draws. Training data, validation and test are fixed across seeds.",
+  "primary_parameter_counts": {
+    "coordinated": 516096,
+    "permuted": 516096,
+    "q_lora": 516096
+  },
+  "constant_parameters": 336,
+  "coordinated": "One zero-initialized bias-free row per head: delta=2*tanh((w@input_layernorm_hidden)/2); rotate q pair j by -delta*omega_j before standard RoPE.",
+  "permuted": "Same as coordinated with one seed-specific fixed permutation of omega; not a true token displacement.",
+  "q_lora": "Q projection update BAx; rank6 full-layer LoRA, A shape6x1536 Kaiming uniform, B shape1536x6 zero; alpha/r=1; no learned additional biases. Original Q bias remains frozen.",
+  "exact_budget": "28*12*1536 = 28*6*(1536+1536) = 516096. Extra predictor biases removed for exact equality; original pilot had336additionalbiases.",
+  "optimizer": "Adam defaults, no weight decay; clip selected parameter global grad norm at1; model eval/dropout off.",
+  "learning_rate_grid": {
+    "coordinated": [
+      1e-05,
+      3e-05,
+      0.0001,
+      0.0003,
+      0.001
+    ],
+    "permuted": [
+      1e-05,
+      3e-05,
+      0.0001,
+      0.0003,
+      0.001
+    ],
+    "q_lora": [
+      0.0001,
+      0.0003,
+      0.001,
+      0.003,
+      0.01
+    ]
+  },
+  "lr_selection": "Separate pilot training-order/init seed, 64steps per LR, same five-trial validation effort per primary arm; select final validation NLL, then lock LR for all five main seeds.",
+  "constant_lr": 0.01,
+  "main_evaluation": "Validation curves at steps0,8,16,32,64; final step64 test only, no early checkpoint selection. Test opened after all main training finishes.",
+  "limitations": "Five optimization seeds on fixed small classic-prose dataset; 128-token contexts and one frozen checkpoint. Equal parameter counts/updates do not imply equal function families or FLOPs. Constant baseline intentionally has fewer parameters."
+}

@@ -1,19 +1,23 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Appendix: coordinated phase shifts · ROPE exploration</title>
-  <meta name="description" content="Detailed experiment on L23 H4 coordinated phase changes, with original results, figures, data, and limitations.">
-  <link rel="stylesheet" href="style.css?v=2026-11-10-observations">
-</head>
-<body>
-  <header><a href="index.html#looking-in-models" class="name">← Back to ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Looking for attention displacement mechanisms · Attention and positional encodings, Part 2</title>
+  <meta name="description" content="Searching for coordinated phase shifts and amplitude reweighting, using captured attention and matched-budget query-adapter experiments.">
+  <link rel="stylesheet" href="style.css?v=series-split-1">
+</head><body>
+  <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
   <main>
-    <h1>Appendix: looking for coordinated phase shifts</h1>
-    <p class="lead">The evidence from this investigation remains inconclusive. This experiment found a partial translation-like phase component in one head, with no first-token accuracy gain under the tested intervention.</p>
-    <h2 id="translation-experiment">The closest case I found: one head, sixteen pairs</h2>
-    <p>The closest evidence I found was in <strong>layer 23, head 4 of Qwen2.5-1.5B-Instruct, using pairs 16–31</strong> (zero-based indices). This was a narrower result than the demonstration above: a translation-like component in one band of a head, rather than a whole attention pattern sliding intact.</p>
+    <p class="series-label">Attention and positional encodings · Part 2</p>
+    <nav class="series-nav" aria-label="Series pages"><a href="index.html">← 1. ROPE exploration</a><a href="appendix-translation.html" aria-current="page">2. Attention displacement</a><a href="rope-in-practice.html">3. ROPE pair data →</a></nav>
+    <h1>Looking for attention displacement mechanisms</h1>
+    <p class="lead">The previous page showed two ways to move a preference: coordinate phases, or rebalance amplitudes. I wanted to find out whether trained models use either route—and whether making one easier to learn would help.</p>
+    <h2 id="translation-experiment">First attempt: finding coordinated phase changes</h2>
+    <p>I began with the original model, before adding any adapters. In a four-item matching task, I moved the item list by 20 or 40 tokens while keeping the question’s position fixed. If query phases followed the items through a coordinated RoPE shift, their changes should line up with the pairs’ frequencies.</p>
+    <p>The closest case was <strong>Qwen2.5-1.5B-Instruct, layer 23, head 4, pairs 16–31</strong>. On 32 fresh tables, the observed phase-updated score profiles were closer to a translated source profile than an unchanged one: correlations of 0.890 versus 0.755. The fitted displacement scale was 0.885, where 1 would be an exact translation.</p>
+    <p>That was suggestive, but the intervention did not improve first-token accuracy: all four conditions scored 230/256. I took it as a partial translation-like component in one band, with inconclusive evidence for a general displacement mechanism.</p>
+    <details><summary>The first experiment: prompts, figures, confirmation results, and controls</summary>
+
+    <p>The closest evidence I found was in <strong>layer 23, head 4 of Qwen2.5-1.5B-Instruct, using pairs 16–31</strong> (zero-based indices). This was a narrower result than the demonstration in Part 1: a translation-like component in one band of a head, rather than a whole attention pattern sliding intact.</p>
     <p>I gave the model four items, each with a color, a shape, and a letter label, and asked a question such as “Return the label for red round.” Then I moved the same item list forward by 20 or 40 tokens, moving neutral background sentences to keep the question and final query token at exactly the same positions. The correct answer stayed the same. Could the query phases adjust to follow the relevant item, even though the query itself had not moved?</p>
     <details><summary>See one actual prompt and what moved</summary>
       <pre><code>Items:
@@ -26,7 +30,7 @@ Question:
 Return the label for red round.</code></pre>
       <p>The expected answer is S. Eight copies of “The weather remains calm.” were split before and after the item list: 0/8, 4/4, or 8/0. This moved the label tokens by exactly 0, 20, or 40 tokens while keeping the final assistant-prefix query at token 104 in this example. The system instruction, chat formatting, full prompts, positions, and original answers are in the <a href="data/translation/prompts.json">saved experiment records</a>.</p>
     </details>
-    <p>With fixed query position and unchanged key content, following a key moved forward by Δp predicts a query-phase change of approximately <strong>Δarg q<sub>j</sub> = λω<sub>j</sub>Δp</strong>. A rigid compensation would have λ = 1. Here the positive sign compensates a key moving forward in the sequence; the demo above instead defines a positive shift as moving a preference farther into the past.</p>
+    <p>With fixed query position and unchanged key content, following a key moved forward by Δp predicts a query-phase change of approximately <strong>Δarg q<sub>j</sub> = λω<sub>j</sub>Δp</strong>. A rigid compensation would have λ = 1. Here the positive sign compensates a key moving forward in the sequence; the Part 1 demo instead defines a positive shift as moving a preference farther into the past.</p>
     <p>I compared the query phases the model actually produced with that prediction. To isolate their contribution, I kept the original query magnitudes and original key vectors fixed, substituting only the moved-context query phases in pairs 16–31. The curves below measure this band’s score for the target label minus its mean score for the three other labels, as the frozen keys are synthetically shifted. <strong>They are diagnostic score curves, not the model’s full attention probabilities.</strong></p>
     <figure>
       <img id="translation-profiles" src="figures/analysis/translation-profiles.png" width="1390" height="1110" loading="lazy" alt="Two diagnostic score profiles for the first confirmation example, with the list moved 20 or 40 tokens. Actual moved-context query phases partially follow the ideally translated curve but depart from it.">
@@ -45,8 +49,59 @@ Return the label for red round.</code></pre>
     </details>
     <p>So this is the closest case I found, and I regard it as evidence for a <em>partial translation-like phase component</em> in this particular head and task. It does not prove that the model coordinates a general mechanism for sliding attention patterns by a few tokens. In particular, this experiment used 20- and 40-token relocations, a unique matching item, and a single sixteen-pair band.</p>
     <p>The <a href="code/translation.py">analysis and figure code</a> recomputes the band metrics from the <a href="data/translation/L23-H4-captures.npz">original captured queries, keys, and scores</a>, checks them against the saved results, and regenerates every figure in this section. The <a href="data/translation/output-interventions.json">recorded full-model output interventions</a> are included too. This reproduces the analysis of the original run; it does not claim a fresh model evaluation.</p>
-    <p><a href="index.html#looking-in-models">← Return to the main exploration</a></p>
-  </main>
-  <footer>Gery Vessere · ROPE exploration · Experiment appendix</footer>
-</body>
-</html>
+    </details>
+    <h2 id="experimental-setup">Experimental setup: make the mechanisms easy to learn</h2>
+    <p>Next I gave the pretrained model an explicit control for each mechanism. The question changed from “can I recognize a shift?” to “does a direct way to make one help adaptation?” Every adapter acts on queries <strong>before ordinary positional RoPE</strong>; the base model’s weights stay frozen.</p>
+    <ul>
+      <li><strong>Unchanged model controls:</strong> evaluate the original checkpoint without training, and continue training its existing WQ matrices or all original weights without adding a mechanism. The latter controls use larger budgets, shown separately below.</li>
+      <li><strong>Ordinary query adaptation:</strong> Q-only LoRA learns an additive low-rank update, q′ = q + BA h. Rank 6 uses 516,096 trainable weights across all 28 layers. Here “Q” means the query projection; these runs use float32 weights, not quantized-base QLoRA.</li>
+      <li><strong>Coordinated phase control:</strong> one predicted displacement per token and head rotates pair j by −ω<sub>j</sub>δ(h). A single scalar now coordinates all 64 pair phases. The displacement predictor also uses 516,096 weights.</li>
+      <li><strong>Amplitude control:</strong> a rank-8 predictor outputs a positive gain for each query pair, q′<sub>j</sub> = g<sub>j</sub>(h)q<sub>j</sub>. It changes both coordinates equally, preserving the pair’s local phase. This also uses 516,096 weights.</li>
+      <li><strong>Phase and amplitude together:</strong> combine the two controls, giving 1,032,192 weights. Rank-12 Q-only LoRA matches this larger budget.</li>
+    </ul>
+    <p>The phase displacement is bounded to ±2 tokens; gains range from e<sup>−2</sup> to e<sup>2</sup>. All adapters start as the unchanged model. A permuted-frequency phase control uses the same scalar predictor but scrambles its extra rotation multipliers, removing its interpretation as a coherent token displacement.</p>
+    <p>Each training run used 64 Adam updates, batches of two, and 16,384 training tokens. Training, validation, and test windows came from separate regions of the same four books. Each window supplies 128 next-token predictions; the 80 test windows give 10,240 predictions per seed. This is a small prose-adaptation experiment, not a general task benchmark.</p>
+    <details><summary>Learning-rate selection and unchanged-architecture controls</summary>
+      <p>The phase-only comparison used a separate pilot seed to select rates, then five optimization seeds. The amplitude extension used seeds 1101 and 1102 for every candidate rate, selecting by mean validation loss. Its table restricts the earlier phase and rank-6 LoRA references to those same two seeds. Phase rates were retained for the combined models, rather than jointly retuned. The posted protocols contain the full grids.</p>
+      <p>I also continued training the original architecture, first with only WQ matrices unfrozen and then with all original weights unfrozen. These used the same data and 64 updates, but much larger parameter budgets. The original model with no training is the baseline for every reduction below.</p>
+      <!-- CONTROL TABLE START -->
+<div class="table-scroll"><table><caption>Unchanged-architecture controls · two seeds · parameter budgets differ</caption><thead><tr><th>Method</th><th>Trainable weights</th><th>Loss change (nats/token)</th><th>Perplexity reduction</th></tr></thead><tbody><tr><td>Original model, no training</td><td>0</td><td>+0.00000</td><td>0.00%</td></tr><tr><td>Original WQ matrices trained</td><td>66,060,288</td><td>-0.06586</td><td>6.37%</td></tr><tr><td>All original weights trained</td><td>1,543,714,304</td><td>-0.15876</td><td>14.68%</td></tr></tbody></table></div>
+<!-- CONTROL TABLE END -->
+    </details>
+    <p><strong>The pretrained starting point matters.</strong> Its weights may already lie in a local basin that favors one mechanism. Freezing them makes this a test of adapting that checkpoint, not a replacement for training an architecture from scratch. A full training run comparing the mechanisms remains future work.</p>
+    <h2 id="phase-adaptation">1. Looking for coordinated phase modulation</h2>
+    <p>If coordinating many phases were the main obstacle, the scalar-displacement adapter should remove it. It did help, but ordinary query adaptation helped much more. The scrambled-frequency control also did better than true coordinated displacement in all five seeds.</p>
+    <!-- PHASE TABLE START -->
+<div class="table-scroll"><table><caption>Phase-only adaptation · five seeds · same parameter budget</caption><thead><tr><th>Method</th><th>Trainable weights</th><th>Loss change (nats/token)</th><th>Perplexity reduction</th></tr></thead><tbody><tr><td>Coordinated phase</td><td>516,096</td><td>-0.01816</td><td>1.80%</td></tr><tr><td>Permuted-frequency phase</td><td>516,096</td><td>-0.02709</td><td>2.67%</td></tr><tr><td>Q-only LoRA, rank 6</td><td>516,096</td><td>-0.06423</td><td>6.22%</td></tr></tbody></table></div>
+<!-- PHASE TABLE END -->
+    <figure><img src="figures/adapters/phase-comparison.svg" width="820" height="410" loading="lazy" alt="Five-seed matched-budget comparison: coordinated phase adaptation reduces perplexity about 1.8 percent, permuted phase about 2.7 percent, and Q-only LoRA about 6.2 percent."><figcaption>Dots show individual optimization seeds; orange diamonds show reductions computed from mean log-loss. The ranges are seed ranges, not confidence intervals. Each method has 516,096 trainable weights.</figcaption></figure>
+    <p>This did not reveal a special adaptation advantage from the exact displacement geometry. It also did not show that coordinated phase changes are absent: their usefulness could depend on the task, shift range, or freedom to change the pretrained representations.</p>
+    <h2 id="amplitude-adaptation">2. Looking for amplitude modulation</h2>
+    <p>Allowing the query-pair amplitudes to change produced a larger gain. In the two-seed comparison, amplitude-only adaptation reduced perplexity by <strong>5.15%</strong>, versus <strong>6.19%</strong> for the matched rank-6 LoRA baseline. In loss terms, that recovered about <strong>83% of LoRA’s improvement</strong>, without directly changing the local query phases.</p>
+    <!-- AMPLITUDE TABLE START -->
+<div class="table-scroll"><table><caption>Same two seeds · 64 updates · 10,240 test predictions per seed</caption><thead><tr><th>Method</th><th>Trainable weights</th><th>Loss change (nats/token)</th><th>Perplexity reduction</th></tr></thead><tbody><tr><td>Coordinated phase</td><td>516,096</td><td>-0.01816</td><td>1.80%</td></tr><tr><td>Q-only LoRA, rank 6</td><td>516,096</td><td>-0.06395</td><td>6.19%</td></tr><tr><td>Pair amplitudes</td><td>516,096</td><td>-0.05289</td><td>5.15%</td></tr><tr><td>Phase + pair amplitudes</td><td>1,032,192</td><td>-0.05499</td><td>5.35%</td></tr><tr><td>Q-only LoRA, rank 12</td><td>1,032,192</td><td>-0.06642</td><td>6.43%</td></tr></tbody></table></div>
+<!-- AMPLITUDE TABLE END -->
+    <figure><img src="figures/adapters/amplitude-comparison.svg" width="820" height="410" loading="lazy" alt="Two-seed comparison: amplitude-only gains recover most of rank-6 query LoRA improvement; adding coordinated phase gives a small further benefit, while rank-12 query LoRA remains better at the larger budget."><figcaption>The same two seeds are used throughout. Phase, amplitudes, and rank-6 LoRA each use 516,096 weights; phase plus amplitudes and rank-12 LoRA each use 1,032,192. Compare within those budgets.</figcaption></figure>
+    <p>Adding phase control to the amplitude adapter moved the reduction from 5.15% to 5.35%: a further 0.00210 nats/token of loss improvement, despite doubling the trainable budget. Rank-12 LoRA reached 6.43%. Amplitudes expressed most of the useful adjustment here; coordinated phase supplied a smaller addition.</p>
+    <h3 id="attention-peaks">Did the amplitude gains actually move attention?</h3>
+    <p>I then inspected the existing seed-1101 amplitude adapter, without retraining. Its winning attention position changed in <strong>8.17%</strong> of layer/head/query rows. Comparing gated and ungated queries with identical incoming hidden states isolated a direct gain effect in <strong>5.83%</strong> of rows.</p>
+    <p>To ask whether those movements explained the improvement, I swapped attention probabilities between positions. This preserves each row’s probability values and entropy while changing its winner. Restoring the original winning positions still retained about <strong>77%</strong> of the loss gain. Moving only the original winners to the adapted positions recovered about <strong>19%</strong>.</p>
+    <p>So amplitude modulation did move attention peaks, but peak relocation explained only part of its benefit. Much of the improvement survived through broader reweighting of attention. Only about 13% of changed winners moved by three tokens or fewer; this was often a switch between candidates, rather than a small smooth translation. These one-seed interventions interact across layers and are not an additive breakdown of the gain.</p>
+    <p><a href="data/adapters/peak-protocol.json">Peak-intervention protocol</a> · <a href="data/adapters/peak-captures.npz">Saved loss arrays and winning positions</a> · <a href="data/adapters/recomputed-summary.json">Recomputed results</a>.</p>
+    <h2 id="conclusion">What I take from these experiments</h2>
+    <p>Amplitude reweighting emerged as the more useful route for adapting this pretrained model. It captured most of the matched LoRA loss gain, changed attention winners, and left relatively little extra benefit for coordinated phase control. This fits my expectation that reshaping a preference through amplitudes may be easier to exploit than producing an exact translation.</p>
+    <p>These adaptation gains do not measure how often each mechanism occurs in the original model. Its existing weights may favor amplitude reweighting, and the peak test points to more than displacement alone. The next architectural test would train models from scratch with and without coordinated phase control, to see whether its more precise translation capability becomes useful when representations can develop around it.</p>
+    <p>In <a href="rope-in-practice.html">Part 3</a>, I look directly at the query and key pair clouds, and follow their structure toward an opportunity to compress attention keys.</p>
+    <h2 id="reproduce">Reproduce the analysis</h2>
+    <p><a href="code/adapter_results.py">adapter_results.py</a> recomputes these tables, figures, and peak statistics from the original recorded losses and captures. <a href="data/adapters/provenance.json">Source hashes</a>, <a href="data/adapters/phase-protocol.json">phase protocol</a>, <a href="data/adapters/dynamic-protocol.json">amplitude protocol</a>, and <a href="code/adapter_originals/README.md">original research scripts</a> are included. No fresh training is claimed by this reanalysis.</p>
+    <pre><code>python -m pip install -r requirements.txt
+python code/translation.py
+python code/adapter_results.py</code></pre>
+    <p>The portable <a href="code/run_adapter_comparison.py">training runner</a> and <a href="code/query_adapters.py">adapter implementation</a> use the posted token IDs and pinned checkpoint. The runner repeats one chosen configuration; the original learning-rate searches are documented in the records. Model and library differences can change numerical results.</p>
+    <pre><code>python -m pip install -r requirements-model.txt
+python code/run_adapter_comparison.py --arm amplitude --device mps --seed 1101
+# Other arms: phase, permuted, combined, q_lora6, q_lora12, wq, full, baseline
+# Add --allow-download if the pinned model is not cached.</code></pre>
+    <nav class="series-nav" aria-label="Previous and next pages"><a href="index.html">← Part 1: ROPE exploration</a><a href="rope-in-practice.html">Part 3: ROPE pair data →</a></nav>
+  </main><footer>Gery Vessere · Attention and positional encodings · Part 2</footer>
+</body></html>

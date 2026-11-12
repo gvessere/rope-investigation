@@ -1,0 +1,228 @@
+{
+  "phase_five_seed": [
+    [
+      "Coordinated phase",
+      {
+        "parameters": 516096,
+        "seeds": [
+          1101,
+          1102,
+          1103,
+          1104,
+          1105
+        ],
+        "delta_nll": -0.018157178163528444,
+        "perplexity_reduction_percent": 1.7993329777558253,
+        "per_seed_perplexity_reduction_percent": [
+          1.7505987200875033,
+          1.84926693971543,
+          1.9138741408650393,
+          1.7322398235868852,
+          1.7505586056527744
+        ]
+      }
+    ],
+    [
+      "Permuted-frequency phase",
+      {
+        "parameters": 516096,
+        "seeds": [
+          1101,
+          1102,
+          1103,
+          1104,
+          1105
+        ],
+        "delta_nll": -0.02709231197834015,
+        "perplexity_reduction_percent": 2.672860723038599,
+        "per_seed_perplexity_reduction_percent": [
+          2.633242876705784,
+          2.638077661655389,
+          2.2454629800357266,
+          3.1686106853466964,
+          2.676692480929943
+        ]
+      }
+    ],
+    [
+      "Q-only LoRA, rank 6",
+      {
+        "parameters": 516096,
+        "seeds": [
+          1101,
+          1102,
+          1103,
+          1104,
+          1105
+        ],
+        "delta_nll": -0.06422650545835495,
+        "perplexity_reduction_percent": 6.22074396614019,
+        "per_seed_perplexity_reduction_percent": [
+          6.041950345518368,
+          6.347680617823011,
+          6.306246592550166,
+          5.728624396469043,
+          6.676524752845878
+        ]
+      }
+    ]
+  ],
+  "dynamic_two_seed": [
+    [
+      "Coordinated phase",
+      {
+        "parameters": 516096,
+        "seeds": [
+          1101,
+          1102
+        ],
+        "delta_nll": -0.018163561820983887,
+        "perplexity_reduction_percent": 1.7999598551751035,
+        "per_seed_perplexity_reduction_percent": [
+          1.7506133603880691,
+          1.8492815653132864
+        ]
+      }
+    ],
+    [
+      "Q-only LoRA, rank 6",
+      {
+        "parameters": 516096,
+        "seeds": [
+          1101,
+          1102
+        ],
+        "delta_nll": -0.06395153626799584,
+        "perplexity_reduction_percent": 6.19495401447751,
+        "per_seed_perplexity_reduction_percent": [
+          6.041964346357758,
+          6.347694573105043
+        ]
+      }
+    ],
+    [
+      "Pair amplitudes",
+      {
+        "parameters": 516096,
+        "seeds": [
+          1101,
+          1102
+        ],
+        "delta_nll": -0.052888020128011706,
+        "perplexity_reduction_percent": 5.151378209898418,
+        "per_seed_perplexity_reduction_percent": [
+          5.116378153870317,
+          5.186365355332486
+        ]
+      }
+    ],
+    [
+      "Phase + pair amplitudes",
+      {
+        "parameters": 1032192,
+        "seeds": [
+          1101,
+          1102
+        ],
+        "delta_nll": -0.054988638311624524,
+        "perplexity_reduction_percent": 5.350409831612291,
+        "per_seed_perplexity_reduction_percent": [
+          5.378825393275888,
+          5.321985736508395
+        ]
+      }
+    ],
+    [
+      "Q-only LoRA, rank 12",
+      {
+        "parameters": 1032192,
+        "seeds": [
+          1101,
+          1102
+        ],
+        "delta_nll": -0.06642146110534668,
+        "perplexity_reduction_percent": 6.42635953266623,
+        "per_seed_perplexity_reduction_percent": [
+          6.384065855996264,
+          6.468634101957707
+        ]
+      }
+    ]
+  ],
+  "controls_two_seed": [
+    [
+      "Original model, no training",
+      {
+        "parameters": 0,
+        "delta_nll": 0,
+        "perplexity_reduction_percent": 0
+      }
+    ],
+    [
+      "Original WQ matrices trained",
+      {
+        "parameters": 66060288,
+        "seeds": [
+          1101,
+          1102
+        ],
+        "delta_nll": -0.06585959196090699,
+        "perplexity_reduction_percent": 6.373768618132231,
+        "per_seed_perplexity_reduction_percent": [
+          6.388182927511969,
+          6.359352089243017
+        ]
+      }
+    ],
+    [
+      "All original weights trained",
+      {
+        "parameters": 1543714304,
+        "seeds": [
+          1101,
+          1102
+        ],
+        "delta_nll": -0.15875790268182755,
+        "perplexity_reduction_percent": 14.679710790040145,
+        "per_seed_perplexity_reduction_percent": [
+          14.507895258485625,
+          14.851181019803667
+        ]
+      }
+    ]
+  ],
+  "amplitude_share_of_lora_loss_gain": 0.8270015579669382,
+  "peak_interventions": {
+    "native": {
+      "delta_nll": 0.0,
+      "perplexity_reduction_percent": -0.0,
+      "loss_gain_retained": 0.0
+    },
+    "full": {
+      "delta_nll": -0.05251909426713821,
+      "perplexity_reduction_percent": 5.116379644910942,
+      "loss_gain_retained": 1.0
+    },
+    "full_native_peak": {
+      "delta_nll": -0.0405285286027278,
+      "perplexity_reduction_percent": 3.9718231376452153,
+      "loss_gain_retained": 0.7716913090042941
+    },
+    "full_local_peak": {
+      "delta_nll": -0.040035329980698364,
+      "perplexity_reduction_percent": 3.9244504920391985,
+      "loss_gain_retained": 0.7623004649901002
+    },
+    "native_full_peak": {
+      "delta_nll": -0.009805182037167182,
+      "perplexity_reduction_percent": 0.9757267969702986,
+      "loss_gain_retained": 0.18669747020565802
+    }
+  },
+  "peak_statistics": {
+    "rows": 3413760,
+    "changed_fraction": 0.08171048931383577,
+    "direct_changed_fraction": 0.058314292744656916,
+    "changed_peaks_within_three_tokens": 0.1295045529504553
+  }
+}
