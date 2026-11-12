@@ -17,3 +17,7 @@ python code/adapter_results.py
 
 The adapter generator updates only the archived draft; it cannot restore the
 removed page to the active series.
+
+[Polar-scoring implementation timings](polar-scoring-timings-2026-11-12.html)
+were removed from the active article on 2026-11-12. `python code/speed_results.py`
+recomputes their recorded tables in this archive only.

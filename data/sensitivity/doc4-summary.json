@@ -1,0 +1,473 @@
+{
+  "protocol": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "passage_id": 4,
+    "passage": "\u201cYou were yourself struck by the nature of the injury as recorded by the surgeon at the inquest. The blow was struck from immediately behind, and yet was upon the left side. Now, how can that be unless it were by a left-handed man? He had stood behind that tree during the interview between the father and son. He had even smoked there. I found the ash of a cigar, which my special knowledge of tobacco ashes enables me to pronounce as an Indian cigar. I have, as you know, devoted some attention to this, and written a little monograph on the ashes of 140 different varieties of pipe, cigar, and cigarette tobacco. Having found the ash, I then looked round and discovered the stump among the moss where he had tossed it. It was an Indian cigar, of the variety which are rolled in Rotterdam.\u201d",
+    "position": 99,
+    "source_token": " tobacco",
+    "next_token": " ashes",
+    "target_tokens": [
+      "\u0120ashes",
+      "\u0120enables",
+      "\u0120me",
+      "\u0120to",
+      "\u0120pronounce",
+      "\u0120as",
+      "\u0120an",
+      "\u0120Indian",
+      "\u0120cigar",
+      ".",
+      "\u0120I",
+      "\u0120have",
+      ",",
+      "\u0120as",
+      "\u0120you",
+      "\u0120know"
+    ],
+    "selection": "Exact same layer/head/pair indices as the source experiment. No reselection by current radius or loss. New source token is the midpoint body token, using the original position-selection rule.",
+    "intervention": "One token \u00d7one layer \u00d7one head \u00d7one split-halfpair(j,j+64), after projection BEFORE RoPE. Move phase by\u00b1pi/4 and radius over0..2times native. Other projection outputs unchanged at hook; all downstream layers recomputed. Q and K never edited together. V not directly edited.",
+    "measurement": "\u0394NLL for immediate next token, plus mean\u0394NLL over next16tokens. Teacher-forced fixed continuation. Native batch-matched baselines; center point uses original Cartesian coordinates exactly.",
+    "grid": {
+      "phase_offsets": [
+        -0.7853981633974483,
+        -0.7199483164476609,
+        -0.6544984694978736,
+        -0.5890486225480862,
+        -0.5235987755982989,
+        -0.45814892864851153,
+        -0.39269908169872414,
+        -0.3272492347489368,
+        -0.26179938779914946,
+        -0.19634954084936207,
+        -0.1308996938995748,
+        -0.0654498469497874,
+        0.0,
+        0.06544984694978728,
+        0.13089969389957468,
+        0.19634954084936196,
+        0.26179938779914935,
+        0.32724923474893663,
+        0.39269908169872414,
+        0.4581489286485114,
+        0.5235987755982987,
+        0.5890486225480862,
+        0.6544984694978735,
+        0.7199483164476608,
+        0.7853981633974483
+      ],
+      "radius_multipliers": [
+        0.0,
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4,
+        0.5,
+        0.6000000000000001,
+        0.7000000000000001,
+        0.8,
+        0.9,
+        1.0,
+        1.1,
+        1.2000000000000002,
+        1.3,
+        1.4000000000000001,
+        1.5,
+        1.6,
+        1.7000000000000002,
+        1.8,
+        1.9000000000000001,
+        2.0
+      ],
+      "shape": [
+        21,
+        25
+      ]
+    },
+    "points": [
+      {
+        "id": "Q_low1",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 40,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": -0.5067455172538757,
+        "y": -1.8776051998138428,
+        "radius": 1.9447859279686488,
+        "phase": -1.8344049623088714,
+        "original_radius": 0.9981011811395686,
+        "original_radius_bin": [
+          0.5,
+          1.25
+        ]
+      },
+      {
+        "id": "Q_low2",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 48,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": -0.39313000440597534,
+        "y": 0.6646661162376404,
+        "radius": 0.7722255152730132,
+        "phase": 2.1049200884011485,
+        "original_radius": 1.8910263117394783,
+        "original_radius_bin": [
+          1.25,
+          2.5
+        ]
+      },
+      {
+        "id": "Q_high1",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 47,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": 1.7409484386444092,
+        "y": 0.34947317838668823,
+        "radius": 1.7756781714122918,
+        "phase": 0.19810434045107012,
+        "original_radius": 2.885857751407045,
+        "original_radius_bin": [
+          2.5,
+          5.0
+        ]
+      },
+      {
+        "id": "Q_high2",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 63,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": 1.8405702114105225,
+        "y": 2.777656316757202,
+        "radius": 3.3321274461150137,
+        "phase": 0.9855905940450087,
+        "original_radius": 5.9281777514068335,
+        "original_radius_bin": [
+          5.0,
+          50.0
+        ]
+      },
+      {
+        "id": "K_low1",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 5,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": -1.2672494649887085,
+        "y": -0.935829758644104,
+        "radius": 1.575340770651877,
+        "phase": -2.5055096091739055,
+        "original_radius": 1.0028900837886854,
+        "original_radius_bin": [
+          0.5,
+          1.25
+        ]
+      },
+      {
+        "id": "K_low2",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 15,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": -1.0577082633972168,
+        "y": -0.3131493926048279,
+        "radius": 1.1030907997746735,
+        "phase": -2.853750722258662,
+        "original_radius": 1.9680133943501108,
+        "original_radius_bin": [
+          1.25,
+          2.5
+        ]
+      },
+      {
+        "id": "K_high1",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 36,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": -1.826238989830017,
+        "y": 1.9581347703933716,
+        "radius": 2.6775811149242266,
+        "phase": 2.32135585568547,
+        "original_radius": 3.630643677232154,
+        "original_radius_bin": [
+          2.5,
+          5.0
+        ]
+      },
+      {
+        "id": "K_high2",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 55,
+        "token_pos": 99,
+        "token": " tobacco",
+        "x": 7.39255952835083,
+        "y": -3.2481131553649902,
+        "radius": 8.074662559529392,
+        "phase": -0.4139839570792387,
+        "original_radius": 9.365151200859165,
+        "original_radius_bin": [
+          5.0,
+          50.0
+        ]
+      }
+    ],
+    "title": "The Adventures of Sherlock Holmes",
+    "fixed_points_source": "/Users/geryvessere/Documents/ChatGPT/research/outputs/single_pair_loss_landscapes/protocol.json"
+  },
+  "checks": {
+    "batch16_native_vs_single_max_token_nll_difference": 9.059906005859375e-06,
+    "batch13_native_vs_single_max_token_nll_difference": 9.059906005859375e-06
+  },
+  "points": {
+    "Q_low1": {
+      "id": "Q_low1",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 40,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": -0.5067455172538757,
+      "y": -1.8776051998138428,
+      "radius": 1.9447859279686488,
+      "phase": -1.8344049623088714,
+      "original_radius": 0.9981011811395686,
+      "original_radius_bin": [
+        0.5,
+        1.25
+      ],
+      "center_max_abs_delta": 1.049041748046875e-05,
+      "next_token_range": [
+        -0.000377655029296875,
+        0.0005402565002441406
+      ],
+      "next16_mean_range": [
+        -3.3725082175806165e-05,
+        2.105577732436359e-05
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    },
+    "Q_low2": {
+      "id": "Q_low2",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 48,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": -0.39313000440597534,
+      "y": 0.6646661162376404,
+      "radius": 0.7722255152730132,
+      "phase": 2.1049200884011485,
+      "original_radius": 1.8910263117394783,
+      "original_radius_bin": [
+        1.25,
+        2.5
+      ],
+      "center_max_abs_delta": 1.71661376953125e-05,
+      "next_token_range": [
+        -0.002982616424560547,
+        0.004234790802001953
+      ],
+      "next16_mean_range": [
+        -0.00018748408183455467,
+        0.0002619767910800874
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    },
+    "Q_high1": {
+      "id": "Q_high1",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 47,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": 1.7409484386444092,
+      "y": 0.34947317838668823,
+      "radius": 1.7756781714122918,
+      "phase": 0.19810434045107012,
+      "original_radius": 2.885857751407045,
+      "original_radius_bin": [
+        2.5,
+        5.0
+      ],
+      "center_max_abs_delta": 1.6450881958007812e-05,
+      "next_token_range": [
+        -0.0025000572204589844,
+        0.0016179084777832031
+      ],
+      "next16_mean_range": [
+        -0.00013237629900686443,
+        8.521167910657823e-05
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    },
+    "Q_high2": {
+      "id": "Q_high2",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 63,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": 1.8405702114105225,
+      "y": 2.777656316757202,
+      "radius": 3.3321274461150137,
+      "phase": 0.9855905940450087,
+      "original_radius": 5.9281777514068335,
+      "original_radius_bin": [
+        5.0,
+        50.0
+      ],
+      "center_max_abs_delta": 1.2159347534179688e-05,
+      "next_token_range": [
+        -0.020980358123779297,
+        0.010536670684814453
+      ],
+      "next16_mean_range": [
+        -0.001443003537133336,
+        0.0007004531798884273
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    },
+    "K_low1": {
+      "id": "K_low1",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 5,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": -1.2672494649887085,
+      "y": -0.935829758644104,
+      "radius": 1.575340770651877,
+      "phase": -2.5055096091739055,
+      "original_radius": 1.0028900837886854,
+      "original_radius_bin": [
+        0.5,
+        1.25
+      ],
+      "center_max_abs_delta": 8.344650268554688e-06,
+      "next_token_range": [
+        -0.006073474884033203,
+        0.007205009460449219
+      ],
+      "next16_mean_range": [
+        -0.0009463950991630554,
+        0.0006393116200342774
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    },
+    "K_low2": {
+      "id": "K_low2",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 15,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": -1.0577082633972168,
+      "y": -0.3131493926048279,
+      "radius": 1.1030907997746735,
+      "phase": -2.853750722258662,
+      "original_radius": 1.9680133943501108,
+      "original_radius_bin": [
+        1.25,
+        2.5
+      ],
+      "center_max_abs_delta": 1.239776611328125e-05,
+      "next_token_range": [
+        -0.0023956298828125,
+        0.0033745765686035156
+      ],
+      "next16_mean_range": [
+        -0.00024511836818419397,
+        0.0002488697355147451
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    },
+    "K_high1": {
+      "id": "K_high1",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 36,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": -1.826238989830017,
+      "y": 1.9581347703933716,
+      "radius": 2.6775811149242266,
+      "phase": 2.32135585568547,
+      "original_radius": 3.630643677232154,
+      "original_radius_bin": [
+        2.5,
+        5.0
+      ],
+      "center_max_abs_delta": 1.3589859008789062e-05,
+      "next_token_range": [
+        -0.002994537353515625,
+        0.05056953430175781
+      ],
+      "next16_mean_range": [
+        -0.0024182561319321394,
+        0.002022466156631708
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    },
+    "K_high2": {
+      "id": "K_high2",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 55,
+      "token_pos": 99,
+      "token": " tobacco",
+      "x": 7.39255952835083,
+      "y": -3.2481131553649902,
+      "radius": 8.074662559529392,
+      "phase": -0.4139839570792387,
+      "original_radius": 9.365151200859165,
+      "original_radius_bin": [
+        5.0,
+        50.0
+      ],
+      "center_max_abs_delta": 1.7642974853515625e-05,
+      "next_token_range": [
+        -0.011851787567138672,
+        1.0232553482055664
+      ],
+      "next16_mean_range": [
+        -0.008356750011444092,
+        0.1809118390083313
+      ],
+      "next_token_native_nll": 5.487639904022217,
+      "next16_native_mean_nll": 2.7814173698425293
+    }
+  }
+}

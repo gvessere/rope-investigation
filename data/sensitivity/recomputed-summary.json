@@ -1,0 +1,101 @@
+{
+  "Q_high2": {
+    "kind": "Q",
+    "layer": 10,
+    "head": 0,
+    "pair": 63,
+    "native_radii": [
+      5.9281777514068335,
+      3.3321274461150137
+    ],
+    "grid_points": 525,
+    "opposite_sign_grid_points": 517,
+    "range_by_prompt": [
+      [
+        -0.0034086722298525274,
+        0.008980990169249026
+      ],
+      [
+        -0.0014430035662371665,
+        0.0007004531798884273
+      ]
+    ],
+    "maximum_absolute_mean_delta": 0.003775337703714854,
+    "illustrative_cancellation": {
+      "phase_offset": 0.7199483164476608,
+      "radius_multiplier": 2.0,
+      "prompt_deltas": [
+        0.0008306249364977702,
+        -0.0005033638153690845
+      ],
+      "mean_delta": 0.00016363056056434289,
+      "selection": "Post-hoc example: smallest relative two-prompt mean among opposite-sign effects each exceeding 1e-4 nats/token."
+    }
+  },
+  "K_low1": {
+    "kind": "K",
+    "layer": 10,
+    "head": 0,
+    "pair": 5,
+    "native_radii": [
+      1.0028900837886854,
+      1.575340770651877
+    ],
+    "grid_points": 525,
+    "opposite_sign_grid_points": 228,
+    "range_by_prompt": [
+      [
+        -0.0008455162751488388,
+        0.0007390406099148095
+      ],
+      [
+        -0.0009463950991630554,
+        0.0006393116491381079
+      ]
+    ],
+    "maximum_absolute_mean_delta": 0.0005122114380355924,
+    "illustrative_cancellation": {
+      "phase_offset": -0.3272492347489368,
+      "radius_multiplier": 1.0,
+      "prompt_deltas": [
+        -0.00015992048429325223,
+        0.00016018305905163288
+      ],
+      "mean_delta": 1.3128737919032574e-07,
+      "selection": "Post-hoc example: smallest relative two-prompt mean among opposite-sign effects each exceeding 1e-4 nats/token."
+    }
+  },
+  "K_high1": {
+    "kind": "K",
+    "layer": 10,
+    "head": 0,
+    "pair": 36,
+    "native_radii": [
+      3.630643677232154,
+      2.6775811149242266
+    ],
+    "grid_points": 525,
+    "opposite_sign_grid_points": 516,
+    "range_by_prompt": [
+      [
+        -0.00826885261628263,
+        0.05468079325508768
+      ],
+      [
+        -0.00241825616103597,
+        0.002022466011112556
+      ]
+    ],
+    "maximum_absolute_mean_delta": 0.026167190997504974,
+    "illustrative_cancellation": {
+      "phase_offset": -0.3272492347489368,
+      "radius_multiplier": 1.6,
+      "prompt_deltas": [
+        -0.0003095839638262987,
+        0.00017714110435917974
+      ],
+      "mean_delta": -6.622142973355949e-05,
+      "selection": "Post-hoc example: smallest relative two-prompt mean among opposite-sign effects each exceeding 1e-4 nats/token."
+    }
+  }
+}

@@ -1,0 +1,455 @@
+{
+  "protocol": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "passage_id": 0,
+    "passage": "For a minute or two she stood looking at the house, and wondering what to do next, when suddenly a footman in livery came running out of the wood\u2014(she considered him to be a footman because he was in livery: otherwise, judging by his face only, she would have called him a fish)\u2014and rapped loudly at the door with his knuckles. It was opened by another footman in livery, with a round face, and large eyes like a frog; and both footmen, Alice noticed, had powdered hair that curled all over their heads. She felt very curious to know what it was all about, and crept a little way out of the wood to listen.",
+    "position": 86,
+    "source_token": " door",
+    "next_token": " with",
+    "target_tokens": [
+      "\u0120with",
+      "\u0120his",
+      "\u0120kn",
+      "uckles",
+      ".",
+      "\u0120It",
+      "\u0120was",
+      "\u0120opened",
+      "\u0120by",
+      "\u0120another",
+      "\u0120foot",
+      "man",
+      "\u0120in",
+      "\u0120l",
+      "ivery",
+      ","
+    ],
+    "selection": "Eight pairs:Q/K \u00d7two low-radius bins andtwo radius>2.5bins. Same fixed token,head0; prefer layer10,then4,20,then ascending layers. Closest radius to1,2,3.5,8within bins. No sensitivity-based selection.",
+    "intervention": "One token \u00d7one layer \u00d7one head \u00d7one split-halfpair(j,j+64), after projection BEFORE RoPE. Move phase by\u00b1pi/4 and radius over0..2times native. Other projection outputs unchanged at hook; all downstream layers recomputed. Q and K never edited together. V not directly edited.",
+    "measurement": "\u0394NLL for immediate next token, plus mean\u0394NLL over next16tokens. Teacher-forced fixed continuation. Native batch-matched baselines; center point uses original Cartesian coordinates exactly.",
+    "grid": {
+      "phase_offsets": [
+        -0.7853981633974483,
+        -0.7199483164476609,
+        -0.6544984694978736,
+        -0.5890486225480862,
+        -0.5235987755982989,
+        -0.45814892864851153,
+        -0.39269908169872414,
+        -0.3272492347489368,
+        -0.26179938779914946,
+        -0.19634954084936207,
+        -0.1308996938995748,
+        -0.0654498469497874,
+        0.0,
+        0.06544984694978728,
+        0.13089969389957468,
+        0.19634954084936196,
+        0.26179938779914935,
+        0.32724923474893663,
+        0.39269908169872414,
+        0.4581489286485114,
+        0.5235987755982987,
+        0.5890486225480862,
+        0.6544984694978735,
+        0.7199483164476608,
+        0.7853981633974483
+      ],
+      "radius_multipliers": [
+        0.0,
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4,
+        0.5,
+        0.6000000000000001,
+        0.7000000000000001,
+        0.8,
+        0.9,
+        1.0,
+        1.1,
+        1.2000000000000002,
+        1.3,
+        1.4000000000000001,
+        1.5,
+        1.6,
+        1.7000000000000002,
+        1.8,
+        1.9000000000000001,
+        2.0
+      ],
+      "shape": [
+        21,
+        25
+      ]
+    },
+    "points": [
+      {
+        "id": "Q_low1",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 40,
+        "token_pos": 86,
+        "token": " door",
+        "x": -0.08453540503978729,
+        "y": -0.9945148229598999,
+        "radius": 0.9981011811395686,
+        "phase": -1.6555941436138468,
+        "radius_bin": [
+          0.5,
+          1.25
+        ]
+      },
+      {
+        "id": "Q_low2",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 48,
+        "token_pos": 86,
+        "token": " door",
+        "x": -1.1893914937973022,
+        "y": 1.4701457023620605,
+        "radius": 1.8910263117394783,
+        "phase": 2.251018965452045,
+        "radius_bin": [
+          1.25,
+          2.5
+        ]
+      },
+      {
+        "id": "Q_high1",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 47,
+        "token_pos": 86,
+        "token": " door",
+        "x": 2.8482723236083984,
+        "y": -0.46424102783203125,
+        "radius": 2.885857751407045,
+        "phase": -0.16156964495207682,
+        "radius_bin": [
+          2.5,
+          5.0
+        ]
+      },
+      {
+        "id": "Q_high2",
+        "kind": "Q",
+        "layer": 10,
+        "head": 0,
+        "pair": 63,
+        "token_pos": 86,
+        "token": " door",
+        "x": 5.836052894592285,
+        "y": 1.0410466194152832,
+        "radius": 5.9281777514068335,
+        "phase": 0.17652524736695005,
+        "radius_bin": [
+          5.0,
+          50.0
+        ]
+      },
+      {
+        "id": "K_low1",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 5,
+        "token_pos": 86,
+        "token": " door",
+        "x": -0.5833001136779785,
+        "y": -0.8158121705055237,
+        "radius": 1.0028900837886854,
+        "phase": -2.1915140932847588,
+        "radius_bin": [
+          0.5,
+          1.25
+        ]
+      },
+      {
+        "id": "K_low2",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 15,
+        "token_pos": 86,
+        "token": " door",
+        "x": -1.6270301342010498,
+        "y": 1.1071809530258179,
+        "radius": 1.9680133943501108,
+        "phase": 2.544079654766333,
+        "radius_bin": [
+          1.25,
+          2.5
+        ]
+      },
+      {
+        "id": "K_high1",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 36,
+        "token_pos": 86,
+        "token": " door",
+        "x": -2.556820869445801,
+        "y": 2.5776424407958984,
+        "radius": 3.630643677232154,
+        "phase": 2.3521392548239306,
+        "radius_bin": [
+          2.5,
+          5.0
+        ]
+      },
+      {
+        "id": "K_high2",
+        "kind": "K",
+        "layer": 10,
+        "head": 0,
+        "pair": 55,
+        "token_pos": 86,
+        "token": " door",
+        "x": 8.917767524719238,
+        "y": -2.8599789142608643,
+        "radius": 9.365151200859165,
+        "phase": -0.31034296595960087,
+        "radius_bin": [
+          5.0,
+          50.0
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "batch16_native_vs_single_max_token_nll_difference": 2.9802322387695312e-05,
+    "batch13_native_vs_single_max_token_nll_difference": 2.9802322387695312e-05
+  },
+  "points": {
+    "Q_low1": {
+      "id": "Q_low1",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 40,
+      "token_pos": 86,
+      "token": " door",
+      "x": -0.08453540503978729,
+      "y": -0.9945148229598999,
+      "radius": 0.9981011811395686,
+      "phase": -1.6555941436138468,
+      "radius_bin": [
+        0.5,
+        1.25
+      ],
+      "center_max_abs_delta": 1.8596649169921875e-05,
+      "next_token_range": [
+        -0.0004296302795410156,
+        0.0007112026214599609
+      ],
+      "next16_mean_range": [
+        -0.0005120442947372794,
+        0.00038916076300665736
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    },
+    "Q_low2": {
+      "id": "Q_low2",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 48,
+      "token_pos": 86,
+      "token": " door",
+      "x": -1.1893914937973022,
+      "y": 1.4701457023620605,
+      "radius": 1.8910263117394783,
+      "phase": 2.251018965452045,
+      "radius_bin": [
+        1.25,
+        2.5
+      ],
+      "center_max_abs_delta": 1.621246337890625e-05,
+      "next_token_range": [
+        -0.006445169448852539,
+        0.004762411117553711
+      ],
+      "next16_mean_range": [
+        -0.00172122148796916,
+        0.0021692286245524883
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    },
+    "Q_high1": {
+      "id": "Q_high1",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 47,
+      "token_pos": 86,
+      "token": " door",
+      "x": 2.8482723236083984,
+      "y": -0.46424102783203125,
+      "radius": 2.885857751407045,
+      "phase": -0.16156964495207682,
+      "radius_bin": [
+        2.5,
+        5.0
+      ],
+      "center_max_abs_delta": 2.7418136596679688e-05,
+      "next_token_range": [
+        -0.0063343048095703125,
+        0.0034940242767333984
+      ],
+      "next16_mean_range": [
+        -0.002209320431575179,
+        0.0036705622915178537
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    },
+    "Q_high2": {
+      "id": "Q_high2",
+      "kind": "Q",
+      "layer": 10,
+      "head": 0,
+      "pair": 63,
+      "token_pos": 86,
+      "token": " door",
+      "x": 5.836052894592285,
+      "y": 1.0410466194152832,
+      "radius": 5.9281777514068335,
+      "phase": 0.17652524736695005,
+      "radius_bin": [
+        5.0,
+        50.0
+      ],
+      "center_max_abs_delta": 2.0742416381835938e-05,
+      "next_token_range": [
+        -0.0279160737991333,
+        0.009574651718139648
+      ],
+      "next16_mean_range": [
+        -0.0034086722880601883,
+        0.008980990387499332
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    },
+    "K_low1": {
+      "id": "K_low1",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 5,
+      "token_pos": 86,
+      "token": " door",
+      "x": -0.5833001136779785,
+      "y": -0.8158121705055237,
+      "radius": 1.0028900837886854,
+      "phase": -2.1915140932847588,
+      "radius_bin": [
+        0.5,
+        1.25
+      ],
+      "center_max_abs_delta": 1.4543533325195312e-05,
+      "next_token_range": [
+        -0.0006844997406005859,
+        0.0005824565887451172
+      ],
+      "next16_mean_range": [
+        -0.0008455162751488388,
+        0.0007390406099148095
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    },
+    "K_low2": {
+      "id": "K_low2",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 15,
+      "token_pos": 86,
+      "token": " door",
+      "x": -1.6270301342010498,
+      "y": 1.1071809530258179,
+      "radius": 1.9680133943501108,
+      "phase": 2.544079654766333,
+      "radius_bin": [
+        1.25,
+        2.5
+      ],
+      "center_max_abs_delta": 2.0503997802734375e-05,
+      "next_token_range": [
+        -0.002209901809692383,
+        0.002367258071899414
+      ],
+      "next16_mean_range": [
+        -0.0013846977381035686,
+        0.0013267520116642118
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    },
+    "K_high1": {
+      "id": "K_high1",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 36,
+      "token_pos": 86,
+      "token": " door",
+      "x": -2.556820869445801,
+      "y": 2.5776424407958984,
+      "radius": 3.630643677232154,
+      "phase": 2.3521392548239306,
+      "radius_bin": [
+        2.5,
+        5.0
+      ],
+      "center_max_abs_delta": 2.7179718017578125e-05,
+      "next_token_range": [
+        -0.0018274784088134766,
+        0.01805853843688965
+      ],
+      "next16_mean_range": [
+        -0.008268852718174458,
+        0.05468079447746277
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    },
+    "K_high2": {
+      "id": "K_high2",
+      "kind": "K",
+      "layer": 10,
+      "head": 0,
+      "pair": 55,
+      "token_pos": 86,
+      "token": " door",
+      "x": 8.917767524719238,
+      "y": -2.8599789142608643,
+      "radius": 9.365151200859165,
+      "phase": -0.31034296595960087,
+      "radius_bin": [
+        5.0,
+        50.0
+      ],
+      "center_max_abs_delta": 2.6226043701171875e-05,
+      "next_token_range": [
+        -0.03630876541137695,
+        0.04662203788757324
+      ],
+      "next16_mean_range": [
+        -0.0143136503174901,
+        0.17031244933605194
+      ],
+      "next_token_native_nll": 2.0147175788879395,
+      "next16_native_mean_nll": 1.6068599224090576
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "doc0-summary.json": {
+    "source": "outputs/single_pair_loss_landscapes/summary.json",
+    "sha256": "f84b424c3dc7daa895d52d96f8fe9d9da45138159bfc54daae5c97ee12ee39c8"
+  },
+  "doc0-Q_high2.npz": {
+    "source": "outputs/single_pair_loss_landscapes/Q_high2.npz",
+    "sha256": "87541f4f1e2bd61a8dd2d03d0256784250ae9db157389edaafca9b2825554750"
+  },
+  "doc0-K_low1.npz": {
+    "source": "outputs/single_pair_loss_landscapes/K_low1.npz",
+    "sha256": "f9350dbf132aba245a69c496e6ef4384ff71c8af79dba6350397fe904a2be86b"
+  },
+  "doc0-K_high1.npz": {
+    "source": "outputs/single_pair_loss_landscapes/K_high1.npz",
+    "sha256": "3a2d860d16a1812170f1bcffad53ad4adba8fac64ec1de9101102f1160b2d352"
+  },
+  "doc4-summary.json": {
+    "source": "outputs/single_pair_loss_landscapes_passage4/summary.json",
+    "sha256": "bfd552d42e20cc497cc615a96eeddc4b68f7341e9f1b063c440afa48e015e82a"
+  },
+  "doc4-Q_high2.npz": {
+    "source": "outputs/single_pair_loss_landscapes_passage4/Q_high2.npz",
+    "sha256": "c810d25152e5d91ee348a5250a44fd2cb6f8dca6ffb172c0923b4ea1c0738813"
+  },
+  "doc4-K_low1.npz": {
+    "source": "outputs/single_pair_loss_landscapes_passage4/K_low1.npz",
+    "sha256": "6d15ba311b6a99d1566d9e185c962862afa794f2b2d5ee57358a531418296fd3"
+  },
+  "doc4-K_high1.npz": {
+    "source": "outputs/single_pair_loss_landscapes_passage4/K_high1.npz",
+    "sha256": "1e263f40ba0f36bdad4e80f68f19d7cad9d906149909b4240e88a55fe98d235c"
+  }
+}

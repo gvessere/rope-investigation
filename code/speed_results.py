@@ -68,7 +68,7 @@ if __name__=='__main__':
     result=compute()
     (DATA/'recomputed-summary.json').write_text(json.dumps(result,indent=2)+'\n')
     start,end='<!-- SPEED TABLES START -->','<!-- SPEED TABLES END -->'
-    p=ROOT/'rope-in-practice.html';s=p.read_text();assert s.count(start)==s.count(end)==1
+    p=ROOT/'archive/polar-scoring-timings-2026-11-12.html';s=p.read_text();assert s.count(start)==s.count(end)==1
     before,rest=s.split(start);_,after=rest.split(end)
     p.write_text(before+start+'\n'+tables(result)+'\n'+end+after)
-    print('Recomputed attention/decode ratios, trial medians, and quality deltas; article tables updated.')
+    print('Recomputed attention/decode ratios, trial medians, and quality deltas; archived tables updated.')

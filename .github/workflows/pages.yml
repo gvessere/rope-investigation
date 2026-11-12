@@ -53,7 +53,9 @@ jobs:
         run: python code/translation.py
       - name: Reproduce archived adapter comparisons
         run: python code/adapter_results.py
-      - name: Recompute recorded speed comparison tables
+      - name: Regenerate prompt-specific phase sensitivity
+        run: python code/phase_sensitivity.py
+      - name: Recompute archived speed comparison tables
         run: python code/speed_results.py
       - name: Quantify slow frequencies and regenerate explanatory figure
         run: python code/slow_frequencies.py

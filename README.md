@@ -232,10 +232,10 @@ data, and reproduction-code links continue to resolve.
 - `index.html`: Part 1, ROPE exploration; geometry, Fourier connection, coordinated
   phase demo, and semantic-versus-positional matching.
 - `rope-in-practice.html`: Part 2, Deep dive in ROPE pair data; all empirical coordinate
-  plots, observations, bias analysis, quantization, and runtime results.
+  plots, observations, bias analysis, quantization, prompt-specific sensitivity, and compression opportunities.
 - `archive/attention-displacement-2026-11-12.html`: archived phase/amplitude investigation, removed from the active series. The legacy `appendix-translation.html` URL displays an archive notice.
 
-`code/speed_results.py` updates the speed tables in Part 2. The shared
+`code/speed_results.py` updates only the archived speed tables. The shared
 `explorers.js` initializes only the controls present on each page. Part 1 loads
 `series-navigation.js` to preserve earlier observation/quantization hash links.
 All figures retain the same posted data and reproduction scripts.
@@ -311,3 +311,18 @@ one group. No clipping or sampling is introduced. The default is layer 14,
 pairs 48–63. `python code/head_pair_atlas.py --layer 14 --start 48` regenerates
 the fallback sheet. `node code/test_head_pair.mjs` checks shared scales against
 NumPy fixtures from layers 0 and 14.
+
+## Prompt-specific phase/radius sensitivity
+
+`python code/phase_sensitivity.py` regenerates three two-prompt contour comparisons
+from original single-pair activation sweeps in `data/sensitivity`. Every plotted
+loss is rederived from the saved 16-token delta arrays and checked against the
+recorded next-16 means. Both prompts use identical relative phase/radius grids,
+but their native vectors and content differ. Hashes and original protocols are
+included. No new model evaluation is performed.
+
+The polar-scoring implementation/timing section was removed from the active
+article on 2026-11-12. Its snapshot is
+`archive/polar-scoring-timings-2026-11-12.html`; raw hardware measurements and
+recomputation code are retained. Running the speed script updates this archive
+only, without restoring timing claims to the article.
