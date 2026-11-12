@@ -1,0 +1,30 @@
+{
+  "queries": {
+    "bias_pairs": 5040,
+    "inclusive_pair_indices": [
+      49,
+      63
+    ],
+    "maximum_radius": 28.957960504194702,
+    "pi_over_2": {
+      "within_five_degrees_fraction": 0.17003968253968255
+    },
+    "pi_over_4": {
+      "within_five_degrees_fraction": 0.2716269841269841
+    }
+  },
+  "keys": {
+    "bias_pairs": 840,
+    "inclusive_pair_indices": [
+      49,
+      63
+    ],
+    "maximum_radius": 407.94607486774527,
+    "pi_over_2": {
+      "within_five_degrees_fraction": 0.12261904761904761
+    },
+    "pi_over_4": {
+      "within_five_degrees_fraction": 0.22142857142857142
+    }
+  }
+}

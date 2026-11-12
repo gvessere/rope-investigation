@@ -282,3 +282,8 @@ from scratch is future work.
 The former Part 2 was archived at the author’s request on 2026-11-12.
 The active series now runs directly from the RoPE overview to the pair-data
 and compression article. Archive details are in `archive/README.md`.
+
+`python code/slow_bias_phases.py` regenerates the original slow-pair bias-phase
+view in Part 2 from `projection-biases.npz`. It shows unmodified learned bias
+pairs 49–63, full radius ranges, and guides at multiples of pi/2 and pi/4.
+No phase snapping is applied to the plotted points.
