@@ -1,4 +1,4 @@
-"""Reanalyse recorded adapter runs and regenerate Part 2 tables and figures.
+"""Reanalyse recorded adapter runs and regenerate archived tables and figures.
 No model evaluation or training is performed. Source arrays and hashes are posted.
 """
 from pathlib import Path
@@ -60,7 +60,7 @@ def main():
     (D/'recomputed-summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     plot(phase_rows,'phase-comparison.svg','Same 516,096 weights · five optimization seeds')
     plot(dynamic_rows,'amplitude-comparison.svg','Two shared seeds · compare parameter budgets in table')
-    p=ROOT/'appendix-translation.html';s=p.read_text()
+    p=ROOT/'archive/attention-displacement-2026-11-12.html';s=p.read_text()
     for tag,html in [('PHASE',table(phase_rows,'Phase-only adaptation · five seeds · same parameter budget')),('AMPLITUDE',table(dynamic_rows,'Same two seeds · 64 updates · 10,240 test predictions per seed')),('CONTROL',table(control_rows,'Unchanged-architecture controls · two seeds · parameter budgets differ'))]:
         a,b='<!-- '+tag+' TABLE START -->','<!-- '+tag+' TABLE END -->'
         before,rest=s.split(a);_,after=rest.split(b);s=before+a+'\n'+html+'\n'+b+after

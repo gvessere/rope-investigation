@@ -41,9 +41,9 @@ jobs:
         run: python code/recompute_phase_results.py
       - name: Regenerate observations figures
         run: python code/observations.py
-      - name: Reanalyse translation confirmation and regenerate figures
+      - name: Reproduce archived translation figures
         run: python code/translation.py
-      - name: Reanalyse adapter comparisons and regenerate Part 2
+      - name: Reproduce archived adapter comparisons
         run: python code/adapter_results.py
       - name: Recompute recorded speed comparison tables
         run: python code/speed_results.py
