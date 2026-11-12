@@ -135,12 +135,6 @@
     <p>The next question is what these pairs actually look like in a trained model. In <a href="rope-in-practice.html">Part 2</a>, I explore the query and key clouds in Qwen, the patterns that suggested rounding their phases, and the effects of that quantization on predictions and runtime.</p>
     <nav class="series-nav" aria-label="Next page"><a href="rope-in-practice.html">Continue to Part 2: Deep dive in ROPE pair data →</a></nav>
 
-    <h2>Reproduce the figures</h2>
-    <p>The constructed DFT and RoPE examples come from <a href="code/figures.py">this Python script</a>. It defines the target functions, fits the coefficients, and saves the figures together with <a href="figures/results.json">the numerical errors</a> and <a href="figures/examples.npz">all plotted samples and coefficients</a>. No model downloads or external data are needed for these constructed examples.</p>
-    <pre><code>python -m pip install -r requirements.txt
-python code/figures.py
-python code/amplitude_modulation.py
-python -m unittest discover -s code -p 'test_*.py'</code></pre>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source and editing on GitHub</a> · References: <a href="https://arxiv.org/abs/2104.09864">RoFormer</a>; <a href="https://proceedings.mlr.press/v267/hua25b.html">Fourier Position Embedding</a> (<a href="https://arxiv.org/html/2412.17739v4#S2.SS2">§2.2</a>); <a href="https://numpy.org/doc/stable/reference/routines.fft.html">NumPy DFT conventions</a>.</p>
   </main>
   <footer>Gery Vessere · ROPE exploration</footer>
