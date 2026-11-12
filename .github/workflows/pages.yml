@@ -35,6 +35,8 @@ jobs:
         run: python code/reproduce_observations.py --verify
       - name: Regenerate constructed examples
         run: python code/figures.py
+      - name: Regenerate fixed-phase amplitude example
+        run: python code/amplitude_modulation.py
       - name: Recompute all-position phase and small-bias results
         run: python code/recompute_phase_results.py
       - name: Regenerate observations figures

@@ -255,3 +255,11 @@ phases. Its runnable experiment is `python code/run_small_bias_removal.py --devi
 use `--allow-download` if the pinned checkpoint is not cached.
 The speed tables include only dense and compact/all-values paths, with every key
 participating. Original hardware records are retained unchanged for provenance.
+
+## Fixed-phase amplitude modulation
+
+`python code/amplitude_modulation.py` regenerates the constructed two-pair example
+in Part 1, including its SVG, plotted arrays, and parameter/peak summary. It uses
+pairs 27 and 28 from the B=10,000, d=128 schedule; phases stay fixed while
+nonnegative amplitudes change. The score peak moves and the shape changes.
+This is not a model measurement or a claim of rigid translation.

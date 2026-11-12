@@ -108,6 +108,13 @@
       <p class="caption">Gray dashed arrows show the original phases; green arrows show the shifted phases. Arrow lengths are normalized so the angle is visible. These are phases of the fitted pair-score coefficients, not measured query or key activations. Hover over a dial for its frequency, coefficient amplitude, and phase change.</p>
     </div>
 
+    <h2 id="amplitude-modulation">Moving the peak by changing amplitudes</h2>
+    <p>That said, coordinated phase changes are not the only way to move a positional preference. We can also change the amplitudes. Each pair’s contribution is weighted by the product of its query and key lengths, so changing those lengths changes which waves dominate the sum.</p>
+    <p>For a simple example, take two RoPE pairs with fixed phases: one peaks 40 tokens into the past, the other 100 tokens into the past. Increase the second pair’s amplitude while reducing the first’s, and the combined score peak moves toward the second location:</p>
+    <div class="equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>s</mi><mi>g</mi></msub><mo>(</mo><mi>Δ</mi><mo>)</mo><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>g</mi><mo>)</mo><mi>cos</mi><mo>(</mo><msub><mi>ω</mi><mn>27</mn></msub><mo>(</mo><mi>Δ</mi><mo>−</mo><mn>40</mn><mo>)</mo><mo>)</mo><mo>+</mo><mi>g</mi><mi>cos</mi><mo>(</mo><msub><mi>ω</mi><mn>28</mn></msub><mo>(</mo><mi>Δ</mi><mo>−</mo><mn>100</mn><mo>)</mo><mo>)</mo></mrow></math></div>
+    <figure><img src="figures/amplitude-modulation.svg" width="820" height="540" loading="lazy" alt="Three score curves with fixed pair phases: changing amplitudes moves the combined peak from 40 through an intermediate position to 100 tokens into the past. Bars show the two pair amplitudes."><figcaption>A constructed example using pairs 27 and 28 from the same 128-dimensional, B = 10,000 RoPE schedule. Only the amplitudes change; the phases stay fixed. All other pair contributions are zero. <a href="code/amplitude_modulation.py">Code</a> · <a href="figures/amplitude-modulation.npz">Plotted data</a>.</figcaption></figure>
+    <p>Softmax preserves the location of the highest score, so its attention peak moves too. Here the pattern changes shape as the waves are reweighted; it is not the rigid translation produced by the coordinated phase rule. A model could change amplitudes, phases, or both. This example shows another mathematical possibility, rather than evidence that a particular model uses it.</p>
+
     <h2 id="looking-in-models">Looking for this mechanism in a model</h2>
     <p id="translation-experiment">I went digging for evidence that trained models coordinate these phase shifts to move a positional preference. <strong>The evidence from my investigation remains inconclusive.</strong> The closest case was a partial translation-like component in one head. The <a href="appendix-translation.html">experiment, results, and limitations are in the appendix</a>.</p>
 
@@ -139,6 +146,7 @@
     <p>The constructed DFT and RoPE examples come from <a href="code/figures.py">this Python script</a>. It defines the target functions, fits the coefficients, and saves the figures together with <a href="figures/results.json">the numerical errors</a> and <a href="figures/examples.npz">all plotted samples and coefficients</a>. No model downloads or external data are needed for these constructed examples.</p>
     <pre><code>python -m pip install -r requirements.txt
 python code/figures.py
+python code/amplitude_modulation.py
 python -m unittest discover -s code -p 'test_*.py'</code></pre>
     <p>The slow-frequency illustration uses the model’s posted configuration and <a href="code/slow_frequencies.py">slow_frequencies.py</a>.</p>
     <pre><code>python code/slow_frequencies.py</code></pre>

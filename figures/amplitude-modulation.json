@@ -1,0 +1,27 @@
+{
+  "description": "Constructed fixed-phase two-pair score example, not measured model behavior",
+  "base": 10000,
+  "head_dimension": 128,
+  "pairs": [
+    27,
+    28
+  ],
+  "omega": [
+    0.02053525026457146,
+    0.01778279410038923
+  ],
+  "fixed_phase": [
+    -0.8214100105828583,
+    -1.778279410038923
+  ],
+  "gains": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "peak_displacements": [
+    40.0,
+    65.4375,
+    100.0
+  ]
+}
