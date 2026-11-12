@@ -8,7 +8,36 @@ import numpy as np
 import matplotlib.pyplot as plt
 from figures import frequencies, PAPER, GREEN, ORANGE
 ROOT=Path(__file__).resolve().parents[1]
+def pair_wave_plot():
+    """Show unit-amplitude pair waves; chosen phases are illustrative, not learned."""
+    delta=np.linspace(0,128,4097)
+    pairs=np.array([12,16,20,24,27,28]);omega=frequencies()[pairs]
+    centers=np.array([12.,24.,36.,64.,40.,100.])
+    phase=-omega*centers
+    waves=np.cos(delta[:,None]*omega+phase)
+    fig,axes=plt.subplots(len(pairs),1,figsize=(8.2,7.2),sharex=True,layout='constrained')
+    for i,(ax,j,w,center) in enumerate(zip(axes,pairs,omega,centers)):
+        color=ORANGE if j==27 else GREEN if j==28 else '#7586a0'
+        ax.plot(delta,waves[:,i],color=color,lw=1.7)
+        period=2*np.pi/w
+        maxima=center+period*np.arange(-10,11)
+        maxima=maxima[(maxima>=0)&(maxima<=128)]
+        ax.scatter(maxima,np.ones(len(maxima)),color=color,s=22,zorder=3,clip_on=False)
+        ax.axvline(center,color=color,ls=':',lw=1,alpha=.8)
+        ax.text(center+2,1.06,f'{center:g} tokens',fontsize=9,color=color,va='bottom')
+        ax.axhline(0,color='.75',lw=.6)
+        ax.set(ylim=(-1.12,1.65),yticks=[-1,0,1],ylabel=f'Pair {j}\nω={w:.4f}')
+        ax.tick_params(axis='y',labelsize=8);ax.spines['left'].set_visible(False)
+        ax.set_xlim(0,128)
+        np.testing.assert_allclose(np.cos(w*center+phase[i]),1.,atol=1e-12)
+    axes[0].set_title('Individual RoPE waves can favor different past positions',loc='left',pad=16)
+    axes[-1].set_xlabel('Displacement Δ (tokens into the past)')
+    fig.savefig(ROOT/'figures/pair-waves.svg',metadata={'Date':None});plt.close(fig)
+    np.savez_compressed(ROOT/'figures/pair-waves.npz',delta=delta,pairs=pairs,omega=omega,phase=phase,waves=waves,highlighted_peaks=centers)
+    (ROOT/'figures/pair-waves.json').write_text(json.dumps(dict(base=10000,head_dimension=128,pairs=pairs.tolist(),omega=omega.tolist(),fixed_phase=phase.tolist(),highlighted_peaks=centers.tolist(),description='Constructed unit-amplitude score waves with chosen fixed phases; no model measurements.'),indent=2)+'\n')
+
 def main():
+    pair_wave_plot()
     delta=np.linspace(0,128,2049)
     pairs=np.array([27,28]);omega=frequencies()[pairs]
     centers=np.array([40.,100.]);phase=-omega*centers
