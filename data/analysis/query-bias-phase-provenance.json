@@ -1,0 +1,18 @@
+{
+  "query-bias-large-results.json": {
+    "source": "outputs/snap_low_query_bias_gt2p5/prediction_results.json",
+    "sha256": "38991ea3205024f427e1a0115973225fd3bd6512d87ecf237d8ddccc3ecca690"
+  },
+  "query-bias-large-protocol.json": {
+    "source": "outputs/snap_low_query_bias_gt2p5/prediction_summary.json",
+    "sha256": "20d70728ecf6252440e9108ca17eeda6c2a08640563f179711c0c0c242343cb7"
+  },
+  "query-bias-small-results.json": {
+    "source": "outputs/snap_low_query_bias_le2p5/prediction_results.json",
+    "sha256": "83a9f9607c939e58471932e89f8a516ff3e56e602c0ab8f180e56eb8662f6b6e"
+  },
+  "query-bias-small-protocol.json": {
+    "source": "outputs/snap_low_query_bias_le2p5/prediction_summary.json",
+    "sha256": "f960d40cbb6550ff6b394b9b938dcc5a568e4d80c3f9eafafd5ddab7abcfcee7"
+  }
+}

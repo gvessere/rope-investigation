@@ -287,3 +287,16 @@ and compression article. Archive details are in `archive/README.md`.
 view in Part 2 from `projection-biases.npz`. It shows unmodified learned bias
 pairs 49–63, full radius ranges, and guides at multiples of pi/2 and pi/4.
 No phase snapping is applied to the plotted points.
+
+## Bias rounding before full-key rounding
+
+`python code/bias_phase_results.py` recomputes the query-bias comparison from
+original per-token outputs. The large condition selects bias radius >2.5;
+the small condition selects <=2.5. Both round slow pairs 49–63 to nearest pi/2,
+preserving bias radius and leaving keys unchanged. Protocols and source hashes
+are in `data/analysis/query-bias-*-protocol.json` and
+`query-bias-phase-provenance.json`.
+
+Optional fresh inference: `python code/run_bias_phase_quantization.py --condition small --device mps`.
+Use `--condition large` for the complementary subset. This is separate from
+rounding each token’s actual key activation in `run_phase_quantization.py`.

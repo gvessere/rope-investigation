@@ -1,0 +1,65 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "intervention": "Learned QUERY projection bias pairs 49..63 only, and only where bias amplitude >2.5: preserve each bias amplitude, snap its pre-RoPE angle to nearest multiple of pi/2. All layers. Parameter edit applies at all input positions including prefix. Q/K activations otherwise recomputed naturally.",
+  "unchanged": "All keys, query bias pairs with amplitude <=2.5, all projection weights, all other bias pairs, V projection, and RoPE schedule unchanged.",
+  "passages": 16,
+  "scored_tokens": 2251,
+  "max_relative_bias_norm_error": 5.240714927148771e-08,
+  "model_parameters_restored": true,
+  "conditions": {
+    "baseline": {
+      "mean_nll": 2.875887652811926,
+      "perplexity": 17.741165129266992,
+      "top1_accuracy": 0.4055975122167925,
+      "loss_increase": 0.0,
+      "loss_increase_ci95": [
+        0.0,
+        0.0
+      ],
+      "accuracy_change_pp": 0.0,
+      "accuracy_change_pp_ci95": [
+        0.0,
+        0.0
+      ],
+      "changed_top1_fraction": 0.0,
+      "paragraphs_loss_worse": 0
+    },
+    "q": {
+      "mean_nll": 3.1970404972769537,
+      "perplexity": 24.46003343728136,
+      "top1_accuracy": 0.3607285650821857,
+      "loss_increase": 0.3211528444650278,
+      "loss_increase_ci95": [
+        0.25557279953291606,
+        0.3937845309004707
+      ],
+      "accuracy_change_pp": -4.486894713460684,
+      "accuracy_change_pp_ci95": [
+        -5.930400270924139,
+        -3.133443899375425
+      ],
+      "changed_top1_fraction": 0.3163038649489116,
+      "paragraphs_loss_worse": 16
+    }
+  },
+  "selected_query_bias_pairs": 922,
+  "eligible_low_frequency_query_bias_pairs": 5040,
+  "bias_amplitude_threshold": 2.5,
+  "comparison_all_low_query_biases": {
+    "mean_nll": 3.2078969248767852,
+    "perplexity": 24.727028704397824,
+    "top1_accuracy": 0.3607285650821857,
+    "loss_increase": 0.33200927206485975,
+    "loss_increase_ci95": [
+      0.2626517340403032,
+      0.40943098308986586
+    ],
+    "accuracy_change_pp": -4.486894713460685,
+    "accuracy_change_pp_ci95": [
+      -6.011884799079103,
+      -2.9539343344053006
+    ],
+    "changed_top1_fraction": 0.32874278098622833,
+    "paragraphs_loss_worse": 16
+  }
+}
