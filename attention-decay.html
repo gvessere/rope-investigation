@@ -43,12 +43,7 @@
     </figure>
     <p>These plots show the <em>total share of attention in each interval</em>. Farther intervals contain more keys, so a strong band on the left need not mean that each distant key outweighs each nearby key. That distinction is the link to the 1/n observation above: attention per token and attention per distance scale tell different stories.</p>
     <p>The smoothness is an observation about these averages. Averaging queries and grouping distances can hide sharp, token-specific peaks. I would like to understand which pair contributions create these broad profiles, and how they change when we inspect one query at a time.</p>
-    <details>
-      <summary>Where these earlier plots came from</summary>
-      <p>Qwen2.5-1.5B-Instruct, four passages of 2,062 tokens each, averaged over all query positions including the chat prefix and the query itself. This was the earlier whole-model run retaining the keys carrying at least 99% of each query/head’s attention at every layer. Colors and curves use the selected weights before their final renormalization. Earlier layers were also modified in that run; these are not the unmodified held-out measurements in Figure 1.</p>
-      <p>The positive-distance intervals are 1, 2, 3–4, 5–8, and so on, ending at 1,025–2,061. The totals have no correction for how many queries can reach a given distance; far-history peaks can also reflect attention to prefix tokens. The displayed heads illustrate contrasting profiles, rather than a representative sample of all heads.</p>
-      <p><a href="data/decay/retained-distance-bins.csv">Saved values for all 336 heads</a> · <a href="data/decay/retained-distance-provenance.json">Source and protocol</a> · <a href="code/distance_heatmaps.py">Regenerate both figures</a>. The plotting script also accepts a layer number to inspect the other layers.</p>
-    </details>
+
 
     <h2>What I want to understand next</h2>
     <p>The next question is which learned contributions produce these average profiles. Their query and key vectors change with the text, and their phases need not start aligned. Averaging attention also differs from applying softmax to an averaged score. The averages alone do not establish what causes the pattern.</p>
