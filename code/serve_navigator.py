@@ -43,6 +43,8 @@ class Handler(BaseHTTPRequestHandler):
     p=parse_qs(u.query);d=int(p['doc'][0]);l=int(p['layer'][0]);h=int(p['head'][0]);assert d in [x['id'] for x in docs] and 0<=l<28 and 0<=h<12
     data=payload(d,l,h);typ='application/json';z=True
    elif u.path in ['/','/explorer.html']:data=UI.read_bytes();typ='text/html';z=False
+   elif u.path in ['/navigator-sandbox.mjs','/navigator-contributions.mjs']:
+    data=(UI.parent/u.path.lstrip('/')).read_bytes();typ='text/javascript';z=False
    else:self.send_error(404);return
    self.send_response(200);self.send_header('Content-Type',typ);self.send_header('Content-Length',str(len(data)));self.send_header('Cache-Control','no-cache')
    if z:self.send_header('Content-Encoding','gzip')
