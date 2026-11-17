@@ -1,0 +1,9 @@
+{
+  "source": "Original rope_decay_mechanisms/analysis_N2048 output; no new model inference",
+  "files": {
+    "summary_arrays.npz": "bbcf3ebe90b614a74b04baf8aea9ac8e16be2d73a4c8de718b3780c24a4fb25f",
+    "summary.json": "64af0e30dc0da0854e890fa07b376d5ebe94130d88e8e74aa34b395cccaae830"
+  },
+  "capture_script_sha256": "bff4d9dc56cd64394cc334a864064564a387a361f80d0f1996f18280424bb1f8",
+  "analysis_script_sha256": "7d8cc149050d6b47622b9c22b52ce4f3ae51130cfc0934c58cede537ca15a2e5"
+}

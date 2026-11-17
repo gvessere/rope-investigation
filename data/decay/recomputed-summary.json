@@ -1,0 +1,31 @@
+{
+  "discovery": {
+    "eligible_heads": 333,
+    "near_inverse_distance_heads": 108
+  },
+  "heldout": {
+    "eligible_heads": 333,
+    "near_inverse_distance_heads": 102
+  },
+  "replicated_heads": 96,
+  "plotted_heads": [
+    {
+      "layer": 2,
+      "head": 5,
+      "heldout_exponent": 1.1078259576340208,
+      "heldout_r_squared": 0.9986900052466176
+    },
+    {
+      "layer": 7,
+      "head": 6,
+      "heldout_exponent": 1.1276333587921517,
+      "heldout_r_squared": 0.9942058351922758
+    },
+    {
+      "layer": 15,
+      "head": 6,
+      "heldout_exponent": 0.9042818064002065,
+      "heldout_r_squared": 0.9557231619158426
+    }
+  ]
+}

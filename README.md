@@ -6,7 +6,7 @@ A personal exploration of RoPE through its connection to Fourier transforms.
 
 ## Edit and preview
 
-Edit `index.html` for Part 1 and `rope-in-practice.html` for Part 2; `style.css` controls presentation.
+Edit `index.html` for Part 1, `rope-in-practice.html` for Part 2, and `attention-decay.html` for the short Part 3; `style.css` controls presentation.
 Equations use native MathML, with their LaTeX source in each annotation. The site uses local JavaScript files for the plot viewer and phase-shift example; it has no remote scripts, fonts, or rendering dependencies.
 
 Run `python3 -m http.server 8771` from this directory to preview locally.
@@ -326,3 +326,7 @@ article on 2026-11-12. Its snapshot is
 `archive/polar-scoring-timings-2026-11-12.html`; raw hardware measurements and
 recomputation code are retained. Running the speed script updates this archive
 only, without restoring timing claims to the article.
+
+## Part 3: inverse-distance attention
+
+`python code/attention_decay.py` verifies the original binned decay fits and regenerates `figures/analysis/attention-decay.png` from the posted `data/decay/summary_arrays.npz`. These are recorded measurements from the discovery/held-out 2K study, not a fresh model evaluation. Each split contains 20 source documents. The script checks all 336 head fits and reproduces the 108 discovery / 102 held-out qualifying-head counts and 96-head overlap. The article separates this averaged empirical pattern from the conditional geometric-frequency explanation.

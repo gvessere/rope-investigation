@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Why attention can decay like 1/n · Attention and positional encodings, Part 3</title>
+  <meta name="description" content="A short exploration of inverse-distance attention, equal mass per distance octave, and what geometric RoPE frequencies can explain.">
+  <link rel="stylesheet" href="style.css?v=head-pair-atlas-1">
+</head>
+<body>
+  <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
+  <main>
+    <p class="series-label">Attention and positional encodings · Part 3</p>
+    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html">2. Deep dive in ROPE pair data</a><a href="attention-decay.html" aria-current="page">3. Attention decay</a></nav>
+    <h1>Why attention can decay like 1/n</h1>
+    <p class="lead">Another pattern caught my attention: in some heads, average attention falls roughly in inverse proportion to distance. Looking twice as far into the past gives each token about half the weight. Why might that happen?</p>
+
+    <h2>Less weight per token, similar weight per scale</h2>
+    <p>Let n be a key’s distance into the past. The pattern is often described by a power law, A(n) ∝ n<sup>−λ</sup>, with λ near 1. Here A(n) means the attention weight per key, averaged over queries and text—not the total weight assigned to a whole distance interval.</p>
+    <p>That distinction changes the picture. Between 32 and 63 tokens ago there are 32 keys; between 64 and 127 there are 64. Under a 1/n profile, each farther key gets less weight, but the two intervals receive approximately the same total mass:</p>
+    <div class="equation">∫<sub>n</sub><sup>2n</sup> C/x dx = C ln 2</div>
+    <p>So inverse-distance attention spreads its budget roughly equally across doubling distance scales. It favors nearby tokens without assigning everything to the immediate neighborhood.</p>
+    <figure>
+      <img src="figures/analysis/attention-decay.png" width="1600" height="640" alt="Three held-out Qwen head profiles: per-key weight is close to inverse distance, while attention mass varies less across doubling distance intervals.">
+      <figcaption><strong>Figure 1.</strong> Qwen2.5-1.5B-Instruct, three heads selected from the earlier discovery analysis and plotted on 20 held-out documents (ten prose, ten code), using 2K body-token contexts. Left: mean attention mass in each interval divided by its number of keys. Right: mass per interval. For display, each head is normalized within distances 8–1,023; the native attention used the full causal softmax denominator. Dashed lines are references, not fitted curves. <a href="code/attention_decay.py">Plot and verification code</a> · <a href="data/decay/summary_arrays.npz">Recorded measurements</a> · <a href="data/decay/recomputed-summary.json">Recomputed fits</a>.</figcaption>
+    </figure>
+    <p>This was a recurring pattern, not a universal one. On the held-out documents, 102 of 333 eligible heads met the descriptive criterion 0.8 ≤ λ ≤ 1.2 and R² ≥ 0.8 across seven distance intervals. Eligibility required at least 1% of a head’s attention mass in that range and positive mass in every interval. Of 108 qualifying heads in discovery, 96 also qualified on the new documents. An averaged curve still does not mean that every individual query follows it.</p>
+
+    <h2>How RoPE can support this shape</h2>
+    <p>The geometric frequency schedule gives a possible explanation. Each doubling of distance brings roughly the same number of RoPE pairs from “barely rotating” into “rotating appreciably.” If those pairs have comparable, positively aligned cosine contributions, smoothing their oscillations can produce a score envelope that loses about the same amount with every distance doubling: a logarithmic decline.</p>
+    <div class="equation">s(n) ≈ C − λ ln n &nbsp; ⇒ &nbsp; exp(s(n)) ∝ n<sup>−λ</sup></div>
+    <p>For a fixed query, softmax divides those exponentials by one shared normalization, preserving that relative distance dependence. In the idealized equal-coefficient construction, with K pairs, base B, and cosine coefficient a per pair, the smoothed slope is approximately λ ≈ aK/ln B over an intermediate distance range. <strong>The schedule supplies logarithmic scales; the learned coefficients set the strength.</strong> Nothing here singles out λ = 1.</p>
+    <p>This is a conditional explanation, not a proof that RoPE forces attention to decay. Real query–key coefficients change with content; a finite wave sum oscillates, and averaging after softmax is not equivalent to applying softmax to an average score. <a href="https://arxiv.org/abs/2104.09864">RoFormer</a> discusses distance decay, while <a href="https://arxiv.org/html/2410.06205v3#S3">Barbero and colleagues</a> examine why decay alone is an incomplete account of RoPE’s role.</p>
+
+    <h2>What I take from it</h2>
+    <p>The useful observation is a balance across scales: some heads give each distant token less weight while retaining appreciable mass over broad regions of the past. RoPE’s geometric ladder can support that behavior, but its exponent and its use depend on the learned model. The next question is which learned pair contributions produce the envelope—and how much the average conceals about individual retrieval decisions.</p>
+    <nav class="series-nav" aria-label="Previous page"><a href="rope-in-practice.html">← Part 2: Deep dive in ROPE pair data</a></nav>
+    <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="data/decay/provenance.json">Data provenance</a></p>
+  </main>
+  <footer>Gery Vessere · Attention and positional encodings · Part 3</footer>
+</body>
+</html>
