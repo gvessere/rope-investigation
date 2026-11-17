@@ -21,19 +21,15 @@ def main():
   np.testing.assert_allclose(-slope,z[split+'_alpha'],atol=1e-10);np.testing.assert_array_equal(near,z[split+'_near1d'])
   out[split]={'eligible_heads':int(eligible.sum()),'near_inverse_distance_heads':int(near.sum())}
  out['replicated_heads']=int((z['discovery_near1d']&z['heldout_near1d']).sum())
- fig,axes=plt.subplots(1,2,figsize=(10,4),layout='constrained');colors=['#126552','#c26632','#7788a6'];selected=[]
+ fig,ax=plt.subplots(figsize=(7,4.5),layout='constrained');colors=['#126552','#c26632','#7788a6'];selected=[]
  for (layer,head),color in zip([(2,5),(7,6),(15,6)],colors):
   i=layer*12+head;mass=z['heldout_mass'][i];conditional=mass/mass.sum();alpha=float(z['heldout_alpha'][i]);label=f'L{layer} H{head} · λ={alpha:.2f}'
-  axes[0].loglog(age,conditional/width,'o-',color=color,label=label)
-  axes[1].plot(np.arange(7),conditional,'o-',color=color,label=label)
+  ax.loglog(age,conditional/width,'o-',color=color,label=label)
   selected.append({'layer':layer,'head':head,'heldout_exponent':alpha,'heldout_r_squared':float(z['heldout_r2'][i])})
  ref=(1/age);ref*=np.exp(np.log((z['heldout_mass'][29]/z['heldout_mass'][29].sum()/width)/ref).mean())
- axes[0].loglog(age,ref,'--',color='#555555',label='1/n reference')
- axes[0].set(xlabel='Distance n (tokens into the past)',ylabel='Mean weight per key (conditional)',title='Mean weight per key')
- axes[1].axhline(1/7,color='#555555',ls='--',label='Equal mass per octave')
- axes[1].set(xticks=np.arange(7),xticklabels=['8–15','16–31','32–63','64–127','128–255','256–511','512–1023'],xlabel='Distance interval (tokens)',ylabel='Fraction of mass within ages 8–1023',title='Mass per distance octave')
- axes[1].tick_params(axis='x',rotation=40,labelsize=8)
- for ax in axes:ax.grid(alpha=.15);ax.legend(fontsize=8)
+ ax.loglog(age,ref,'--',color='#555555',label='1/n reference')
+ ax.set(xlabel='Distance n (tokens into the past)',ylabel='Mean weight per key (conditional)',title='Mean weight per key')
+ ax.grid(alpha=.15);ax.legend(fontsize=8)
  dest=ROOT/'figures/analysis/attention-decay.png';fig.savefig(dest,dpi=160);plt.close(fig)
  out['plotted_heads']=selected;(D/'recomputed-summary.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out,indent=2))
 if __name__=='__main__':main()
