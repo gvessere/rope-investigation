@@ -29,6 +29,27 @@
       <p>Eligibility required at least 1% of a head’s attention mass in that range and positive mass in every interval. For display, each head is normalized within that range; the recorded attention used the full causal softmax denominator. <a href="data/decay/recomputed-summary.json">Recomputed fits</a> · <a href="data/decay/provenance.json">Measurement provenance</a>.</p>
     </details>
 
+
+    <h2 id="distance-heatmaps">The smooth patterns I first saw</h2>
+    <p>Before fitting a decay curve, I had been looking at these heatmaps. They put very different kinds of heads next to one another: some give much of their attention to older history, others stay close to the query, and some have a broad preference in between.</p>
+    <figure>
+      <img src="figures/analysis/distance-heatmap-L14.png" width="1600" height="768" alt="Layer 14 attention-distance heatmap: heads 0–6 emphasize older intervals, while head 8 emphasizes recent intervals and heads 10–11 have a middle-distance band." loading="lazy">
+      <figcaption><strong>Figure 2.</strong> The earlier layer-14 heatmap, redrawn from its saved values. Older history is on the left, recent history on the right. Each row is a query head; brighter colors mean more attention in that distance interval. The separate column shows attention to the query’s own position.</figcaption>
+    </figure>
+    <p>What struck me was how gradually the average changes as we move across the plot. Each step along this logarithmic axis covers a much wider stretch of text: a handful of tokens becomes tens, then hundreds, then thousands. Yet several heads show a broad, continuous-looking preference rather than an abrupt switch between those scales.</p>
+    <figure>
+      <img src="figures/analysis/distance-curves-L14.png" width="1600" height="960" alt="Six curves from the same layer-14 heatmap: three favor older intervals, one recent intervals, and two show a middle-distance hump." loading="lazy">
+      <figcaption><strong>Figure 3.</strong> Six rows of the same heatmap as line plots, with a shared vertical scale. The dots are recorded interval totals; straight lines connect them. No smoothing or curve fitting is applied. The value above each panel reports self-attention, which cannot sit at distance zero on a logarithmic axis.</figcaption>
+    </figure>
+    <p>These plots show the <em>total share of attention in each interval</em>. Farther intervals contain more keys, so a strong band on the left need not mean that each distant key outweighs each nearby key. That distinction is the link to the 1/n observation above: attention per token and attention per distance scale tell different stories.</p>
+    <p>The smoothness is an observation about these averages. Averaging queries and grouping distances can hide sharp, token-specific peaks. I would like to understand which pair contributions create these broad profiles, and how they change when we inspect one query at a time.</p>
+    <details>
+      <summary>Where these earlier plots came from</summary>
+      <p>Qwen2.5-1.5B-Instruct, four passages of 2,062 tokens each, averaged over all query positions including the chat prefix and the query itself. This was the earlier whole-model run retaining the keys carrying at least 99% of each query/head’s attention at every layer. Colors and curves use the selected weights before their final renormalization. Earlier layers were also modified in that run; these are not the unmodified held-out measurements in Figure 1.</p>
+      <p>The positive-distance intervals are 1, 2, 3–4, 5–8, and so on, ending at 1,025–2,061. The totals have no correction for how many queries can reach a given distance; far-history peaks can also reflect attention to prefix tokens. The displayed heads illustrate contrasting profiles, rather than a representative sample of all heads.</p>
+      <p><a href="data/decay/retained-distance-bins.csv">Saved values for all 336 heads</a> · <a href="data/decay/retained-distance-provenance.json">Source and protocol</a> · <a href="code/distance_heatmaps.py">Regenerate both figures</a>. The plotting script also accepts a layer number to inspect the other layers.</p>
+    </details>
+
     <h2>RoPE gives each pair a different reach</h2>
     <p>The connection starts with the waves we explored in Part 1. A fast pair turns through its angles over a short stretch of text. A slower pair takes longer, so its contribution changes more gradually with distance.</p>
     <p>Suppose, for a moment, that the query and key content stay fixed and a pair starts in a high-scoring direction. It remains near that direction over a stretch of positions. A slower pair stretches that favorable region over more tokens. RoPE spaces its wavelengths geometrically: each pair’s wavelength is the previous one multiplied by the same factor.</p>

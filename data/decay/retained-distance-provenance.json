@@ -1,0 +1,23 @@
+{
+  "source": "retained_mass99_head_locations/log_distance_mass/mass_by_head_and_distance_bin.csv",
+  "source_sha256": "a5c273140b92f164e19a2acc4046439573099ff9188c304597969e556d0028db",
+  "export_sha256": "981e671eda76253732c855c59a5ede42d6197abc90dcd1752c3f7c1d69f34fb4",
+  "export": "Unchanged self and logbins rows; fixed32 alternate view omitted.",
+  "protocol": {
+    "model": "Qwen2.5-1.5B-Instruct,28layers,12queryheads",
+    "data": "Same four ~2k-token separate excerpts used in adaptive-head-cutoff validation. Uniform99% whole-model pruned run, not head-specific cutoff schedule. 2062 query positions per text, including prefix/warmup/self; all336 heads.",
+    "selection": "For each query/head, keep smallest descending-score prefix reaching99% attention mass, including crossing key, then renormalize. All earlier layers also trimmed; actual intervened Q/K/V propagated.",
+    "fraction": "Pooled per-head fraction=sum retained keys / sum available causal keys across queries and texts. Mean overheads reproduces33.668255% aggregate. Per-query distributions show K/(query_position+1); these can differ from the pooled fraction.",
+    "relative_time": "Age=query_position-key_position; self0, previous1. Plots use negative age, oldest left and query right. Full-range linear32-token bins; recent linear4-token bins. Selection probability at a distance divides by opportunities for that distance. Location share divides by all retained keys in that head. Attention mass uses pre-renormalization selected weights, averaged perquery; sums to at least99%.",
+    "validation": "All four rerun next-token argmax sequences exactly match previous uniform99 runs; loss matches within1e-5, per-head count sums match relative-time histograms, weights sum to query count, aggregate retained fraction matches previous float32 tally within1e-6.",
+    "limits": "Counts describe query-dependent selections; not permanent deletable history. Averaged over texts and queries; relative-time peaks can combine distinct patterns, including variable-distance prefix attention. These plots alone do not prove learned fixed-distance kernels."
+  },
+  "distance_view": {
+    "source": "Same four ~2k-token uniform99% whole-model pruning runs as original retained-key report. All causal query positions, including prefix/warmup/self.",
+    "x_axis": "True log2 scale on positive distance=query_position-key_position. Older past on left, recent on right. Self distance0 shown separately with same color scale.",
+    "main_view": "Preserve existing32-token bins, except split original ages0\u201331 into self0 and ages1\u201331. Other intervals unchanged. Axis change alone does not resolve within-bin detail.",
+    "alternative_view": "Mass reaggregated in integer-age bins1,2,3\u20134,5\u20138,9\u201316,etc. Widths grow with distance; last bin1025\u20132061. Color encodes total mass per bin, not per-token density; variable-width bins contain different numbers of token positions.",
+    "mass": "Native selected weights before final restricted-softmax renormalization; averaged over all query positions/texts. Same0\u2013100% linear color scale for both views and self.",
+    "checks": "For all336 heads, nonself bins partition ages1..2061 exactly; sum of distance-bin mass and self agrees with original total retained mass within1e-10 percentage points."
+  }
+}
