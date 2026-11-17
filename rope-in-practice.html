@@ -11,7 +11,7 @@
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
   <main>
     <p class="series-label">Attention and positional encodings · Part 2</p>
-    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html" aria-current="page">2. Deep dive in ROPE pair data</a><a href="attention-decay.html">3. Attention decay</a></nav>
+    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html" aria-current="page">2. Deep dive in ROPE pair data</a><a href="attention-decay.html">3. Attention decay</a><a href="rope-navigator.html">4. RoPE navigator</a></nav>
     <h1>Deep dive in ROPE pair data</h1>
     <p class="lead">After exploring what RoPE can express, I wanted to see what its coordinate pairs actually look like in a trained transformer. Could I characterize their structure—and would that structure suggest a way to compress attention keys or make attention faster?</p>
     <p>The plots revealed plenty of structure: many small-radius pairs, recurring angular patterns, distinct clouds associated with projection biases, and similarities among query heads sharing a KV head. Those observations led me to experiments with coarser phase representations. Some small biases and selected key activations tolerated these changes well; the visibly aligned large biases were surprisingly sensitive.</p>

@@ -330,3 +330,18 @@ only, without restoring timing claims to the article.
 ## Part 3: inverse-distance attention
 
 `python code/attention_decay.py` verifies the original binned decay fits and regenerates `figures/analysis/attention-decay.png` from the posted `data/decay/summary_arrays.npz`. These are recorded measurements from the discovery/held-out 2K study, not a fresh model evaluation. Each split contains 20 source documents. The script checks all 336 head fits and reproduces the 108 discovery / 102 held-out qualifying-head counts and 96-head overlap. The article separates this averaged empirical pattern from the conditional geometric-frequency explanation.
+
+## Part 4: RoPE navigator
+
+`rope-navigator.html` is the static online version of the navigator originally served at localhost:8770. It retains the original token/pair linking, pre/post rankings, individual-key attention profile, contribution bars, context, and audit. It publishes four representative head selections across all 20 held-out documents, with no quantization or token/pair subsampling within those captures. Selection is explicit in the page and `data/navigator/manifest.json`.
+
+`python code/verify_navigator.py` checks every exported payload. `python code/export_navigator.py --source http://127.0.0.1:8770` regenerates these static payloads from the running original API. Gzip files are decoded in the browser; no Python server or model runs on the public site.
+
+The full original 28-layer / 12-query-head local navigator is preserved in `navigator-local.html` and `code/serve_navigator.py`. To run it with the original capture directory and a local Qwen tokenizer:
+
+```sh
+python -m pip install -r requirements-navigator.txt
+python code/serve_navigator.py --captures /path/to/rope_decay_mechanisms --tokenizer /path/to/tokenizer.json --port 8770
+```
+
+Those full original captures are needed for the local server; the public selection itself is self-contained. The server preserves the distinction between native recent scores/top probabilities and reconstructed older scores, exactly as the original navigator did.

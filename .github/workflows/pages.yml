@@ -31,6 +31,8 @@ jobs:
         run: node code/test_viewer.mjs
       - name: Check shared query-pair scales
         run: node code/test_head_pair.mjs
+      - name: Verify online navigator captures
+        run: python code/verify_navigator.py
       - name: Check the math
         run: python -m unittest discover -s code -p 'test_*.py'
       - name: Verify saved model-plot data

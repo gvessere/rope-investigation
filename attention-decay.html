@@ -11,7 +11,7 @@
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
   <main>
     <p class="series-label">Attention and positional encodings · Part 3</p>
-    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html">2. Deep dive in ROPE pair data</a><a href="attention-decay.html" aria-current="page">3. Attention decay</a></nav>
+    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html">2. Deep dive in ROPE pair data</a><a href="attention-decay.html" aria-current="page">3. Attention decay</a><a href="rope-navigator.html">4. RoPE navigator</a></nav>
     <h1>Why attention can decay like 1/n</h1>
     <p class="lead">Another pattern caught my attention: in some heads, average attention falls roughly in inverse proportion to distance. Looking twice as far into the past gives each token about half the weight. Why might that happen?</p>
 
@@ -34,7 +34,7 @@
 
     <h2>What I take from it</h2>
     <p>The useful observation is a balance across scales: some heads give each distant token less weight while retaining appreciable mass over broad regions of the past. RoPE’s geometric ladder can support that behavior, but its exponent and its use depend on the learned model. The next question is which learned pair contributions produce the envelope—and how much the average conceals about individual retrieval decisions.</p>
-    <nav class="series-nav" aria-label="Previous page"><a href="rope-in-practice.html">← Part 2: Deep dive in ROPE pair data</a></nav>
+    <nav class="series-nav" aria-label="Adjacent pages"><a href="rope-in-practice.html">← Part 2: Deep dive in ROPE pair data</a><a href="rope-navigator.html">Part 4: RoPE navigator →</a></nav>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="data/decay/provenance.json">Data provenance</a></p>
   </main>
   <footer>Gery Vessere · Attention and positional encodings · Part 3</footer>
