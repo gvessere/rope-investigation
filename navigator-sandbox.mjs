@@ -43,8 +43,8 @@ function refresh(){
  showBars();showProfile();
 }
 function setGain(value){if(!ensure()||!Number.isFinite(value))return;gains[pair]=Math.max(-5,Math.min(5,value));revision++;pinned=true;render()}
-el('editPair').onchange=()=>{pair=+el('editPair').value;el('pair').value=pair;pinned=true;render()};
+el('editPair').onchange=()=>{if(!ensure())return;pair=+el('editPair').value;el('pair').value=pair;pinned=true;render()};
 el('pairGain').oninput=()=>setGain(+el('pairGain').value);el('pairGainNumber').oninput=()=>{if(el('pairGainNumber').value!=='')setGain(+el('pairGainNumber').value)};
-el('mutePair').onclick=()=>setGain(0);el('restorePair').onclick=()=>setGain(1);el('resetPairs').onclick=()=>{gains.fill(1);revision++;pinned=true;render()};
+el('mutePair').onclick=()=>setGain(0);el('restorePair').onclick=()=>setGain(1);el('resetPairs').onclick=()=>{if(!ensure())return;gains.fill(1);revision++;pinned=true;render()};
 el('editedProfile').onclick=e=>{const g=el('editedProfile').geom;if(!g||!ensure())return;const x=e.clientX-el('editedProfile').getBoundingClientRect().left,n=Math.round(Math.expm1(Math.max(0,Math.min(1,(x-g.left)/(g.right-g.left)))*g.lx));pick(Math.max(0,g.age-n))};
-const previousRender=render;render=function(){previousRender();refresh()};if(D)render();
+const previousRender=render;render=function(){previousRender();refresh()};if(D)render();else refresh();
