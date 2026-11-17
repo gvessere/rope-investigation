@@ -33,6 +33,8 @@ jobs:
         run: node code/test_head_pair.mjs
       - name: Verify online navigator captures
         run: python code/verify_navigator.py
+      - name: Check interactive pair edits
+        run: node code/test_contributions.mjs
       - name: Check the math
         run: python -m unittest discover -s code -p 'test_*.py'
       - name: Verify saved model-plot data

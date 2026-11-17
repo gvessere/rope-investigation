@@ -345,3 +345,9 @@ python code/serve_navigator.py --captures /path/to/rope_decay_mechanisms --token
 ```
 
 Those full original captures are needed for the local server; the public selection itself is self-contained. The server preserves the distinction between native recent scores/top probabilities and reconstructed older scores, exactly as the original navigator did.
+
+### Interactive pair edits
+
+The contribution plot is now above the scatter plots. `navigator-sandbox.mjs` provides per-pair signed gains, original/edited bars, score and attention comparisons, key ranks, an individual-key profile, and an edited top-key table. A gain scales both query coordinates in one pair and therefore changes its contributions against every causal key. Multiple edits accumulate within a query; switching queries/captures resets them. Original captures remain immutable. The score intervention adds the reconstructed pair-score difference to the recorded score, preserving its small floating-point residual. This is a frozen-vector score/softmax counterfactual, not fresh inference or a generated-answer intervention.
+
+`node code/test_contributions.mjs` checks `navigator-contributions.mjs` against explicitly rotated modified query vectors, including captured data, exact reset, zero gains, sign reversal, stable softmax and input immutability.
