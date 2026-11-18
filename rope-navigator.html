@@ -128,4 +128,9 @@ $('attentionProfile').onmousemove=e=>{let k=keyAt(e);if(k===null)return;let a=ac
 $('attentionProfile').onclick=e=>{let k=keyAt(e);if(k!==null)pickKey(k)};
 if(D)render();
 })();
-</script><script type="module" src="navigator-sandbox.mjs?v=1"></script><footer><a href="attention-decay.html">← Part 3: Attention decay</a> · <a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="code/export_navigator.py">Export the online captures</a></footer>
+</script><script type="module" src="navigator-sandbox.mjs?v=1"></script><section id="summary" class="navigator-intro" style="margin-top:45px">
+<h2 style="font:400 30px/1.2 Georgia,serif">Summary of findings</h2>
+<p>A query–key score combines contributions from many coordinate pairs. Their relative phases determine alignment, while their amplitudes determine the strength of each contribution. The navigator exposes those components for individual saved tokens, alongside their scores, attention weights, and rankings.</p>
+<p>The before-and-after comparison isolates the effect of the final RoPE rotation on those vectors. It does not remove positional information already present in earlier layers. Changing a pair’s gain shows how reweighting its contribution changes the selected query’s scores across all causal keys and, through softmax, their attention weights.</p>
+<p>Characterizing the distributional differences between queries and keys remains work in progress. The online selection contains four heads across 20 held-out passages, so these examples do not establish a model-wide pattern. The pair edits are frozen-vector comparisons; they do not rerun later layers or measure changes to generated answers.</p>
+</section><footer><a href="attention-decay.html">← Part 3: Attention decay</a> · <a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="code/export_navigator.py">Export the online captures</a></footer>
