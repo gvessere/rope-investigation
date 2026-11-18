@@ -87,7 +87,7 @@
 
     <h2 id="all-heads">Explore every head</h2>
     <p>The examples above are only a few of the model’s 336 heads. Here you can browse all 28 layers, compare the twelve heads in each layer, or select a single head for a closer look.</p>
-    <p>Both views use the same native measurements from 20 held-out passages and include the <strong>entire available history</strong>: self-attention, each of the previous seven tokens, and wider intervals out to 2,060 tokens. In the <em>mass per interval</em> view, the points total 100% for every head, without renormalization. The <em>mean weight per available key</em> view divides by the actual number of query–key comparisons in each interval. Its values do not sum to 100%, because the intervals contain different numbers of keys.</p>
+    <p>Both views use the same native measurements from 20 held-out passages and include the <strong>entire available history</strong>: self-attention, each of the previous seven tokens, and wider intervals out to 2,060 tokens. In the <em>mass per interval</em> view, the points total 100% for every head, without renormalization. The <em>mean weight per available key</em> view divides by the actual number of query–key comparisons in each interval.</p>
     <section id="all-head-distance-explorer" class="interactive-block" aria-label="All-head attention distance explorer">
       <div class="controls">
         <label>View <select data-mode disabled><option value="mean">Mean weight per key</option><option value="paired">Mass per interval — full attention</option></select></label>
