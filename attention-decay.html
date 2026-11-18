@@ -59,6 +59,12 @@
 
     <h2 id="not-a-fixed-law">A pattern, not a rule imposed on every head</h2>
     <p>If RoPE forced attention to follow a 1/d law, we should see that same decline in every head using it. We do not. In the same held-out measurements, L6 H7 has a roughly flat average weight per key across much of the 8–511-token range. L6 H9 even gives more average weight per key to the 512–1,023-token interval than to the 8–15-token interval. These are averages per key, so the difference is not simply that the farther interval contains more tokens.</p>
+
+    <figure>
+      <img src="figures/analysis/attention-nondecay.png" width="1440" height="640" alt="L6 H7 stays broadly flat and L6 H9 ends above its initial level, while a 1/d reference drops steeply in both panels." loading="lazy">
+      <figcaption><strong>Figure 5.</strong> Two counterexamples from the same 20 held-out passages used in Figure 1. Each plot shows average attention per key, divided by its value in the first interval (8–15 tokens) to compare shapes. The dashed 1/d reference starts at the same point. Lines connect measured interval averages, without smoothing; probabilities were not renormalized within intervals. Both panels use the same axes. <a href="code/attention_decay.py">Plot code</a>.</figcaption>
+    </figure>
+
     <p>Those heads use the same RoPE frequency schedule as the heads with approximately inverse-distance decay. That contrast is evidence that <strong>1/d is a behavior the model can express, rather than a rule RoPE imposes on every head</strong>. It does not rule out a tendency encouraged by the frequency schedule. The learned query and key projections, and the text being processed, still determine which patterns a head actually produces.</p>
 
     <h2>What I want to understand next</h2>

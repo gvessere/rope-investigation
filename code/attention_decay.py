@@ -31,5 +31,25 @@ def main():
  ax.set(xlabel='Distance n (tokens into the past)',ylabel='Mean weight per key (conditional)',title='Mean weight per key')
  ax.grid(alpha=.15);ax.legend(fontsize=8)
  dest=ROOT/'figures/analysis/attention-decay.png';fig.savefig(dest,dpi=160);plt.close(fig)
+
+ # Counterexamples use the same held-out per-key means, without fitting a decay law.
+ fig,axes=plt.subplots(1,2,figsize=(9,4),sharex=True,sharey=True,layout='constrained')
+ counterexamples=[]
+ for ax,(layer,head),color,title in zip(axes,[(6,7),(6,9)],['#126552','#c26632'],['Broadly flat across most of the range','Higher at the far end than the near end']):
+  i=layer*12+head
+  per_key=z['heldout_mass'][i]/width
+  relative=per_key/per_key[0]
+  reference=age[0]/age
+  ax.loglog(age,relative,'o-',color=color,lw=2,label='Measured per-key average')
+  ax.loglog(age,reference,'--',color='#666666',label='1/d reference')
+  ax.set(title=f'L{layer} H{head}\n{title}',xlim=(8,1024),ylim=(.01,4),xlabel='Look-back distance d (tokens)')
+  ax.set_xticks([8,32,128,512],[str(v) for v in [8,32,128,512]])
+  ax.set_yticks([.01,.1,1],[str(v) for v in [.01,.1,1]])
+  ax.grid(alpha=.15);ax.legend(fontsize=8,loc='lower left')
+  counterexamples.append({'layer':layer,'head':head,'mean_weight_per_key':per_key.tolist(),'relative_to_first_bin':relative.tolist(),'far_to_near_ratio':float(relative[-1])})
+ axes[0].set_ylabel('Relative mean weight per key\n(first distance interval = 1)')
+ fig.savefig(ROOT/'figures/analysis/attention-nondecay.png',dpi=160);plt.close(fig)
+ out['counterexample_heads']=counterexamples
+
  out['plotted_heads']=selected;(D/'recomputed-summary.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out,indent=2))
 if __name__=='__main__':main()
