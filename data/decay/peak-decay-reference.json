@@ -1,0 +1,96 @@
+{
+  "head": "L7 H6",
+  "bins_inclusive": [
+    [
+      16,
+      31
+    ],
+    [
+      32,
+      63
+    ],
+    [
+      64,
+      127
+    ],
+    [
+      128,
+      255
+    ],
+    [
+      256,
+      511
+    ],
+    [
+      512,
+      1022
+    ]
+  ],
+  "distance_centers": [
+    23.036029968651288,
+    46.57943577895722,
+    93.66757327864717,
+    187.8444967749802,
+    376.19866444089917,
+    752.4556198642786
+  ],
+  "peak_density": [
+    0.3048828125,
+    0.307373046875,
+    0.31126708984375,
+    0.3094207763671875,
+    0.3160797119140625,
+    0.3143988502935421
+  ],
+  "mean_peak_height": [
+    0.01739287897668231,
+    0.00507998377217607,
+    0.0029432784325831712,
+    0.0014414003172956331,
+    0.0005637539058699101,
+    0.0002658729098109662
+  ],
+  "peak_token_contribution": [
+    0.005302789859883025,
+    0.0015614500901293146,
+    0.0009161457123100377,
+    0.0004459992052335252,
+    0.0001781911721577887,
+    8.359013716876638e-05
+  ],
+  "mean_attention_all_tokens": [
+    0.009592498720240927,
+    0.002962160563744035,
+    0.0017168714870618995,
+    0.0008474407922015976,
+    0.00033053992174495724,
+    0.0001489736343817247
+  ],
+  "fraction_of_mass_at_peak_apexes": [
+    0.5528058970384557,
+    0.527132157939377,
+    0.5336134470249999,
+    0.5262895170231864,
+    0.5390912275198032,
+    0.5611069201317732
+  ],
+  "far_to_near_peak_density_ratio": 1.0312121162735013,
+  "near_to_far_mean_peak_height_ratio": 65.41801866556666,
+  "near_to_far_all_token_mean_ratio": 64.39057998451896,
+  "bootstrap_95CI": {
+    "density_ratio": [
+      1.0114153259146363,
+      1.050581419481
+    ],
+    "height_drop_factor": [
+      54.124164321021354,
+      78.94130237165264
+    ],
+    "all_token_mean_drop_factor": [
+      54.22967781329686,
+      76.37774024345532
+    ]
+  },
+  "definition": "All local maxima, no height/rank selection: p[d]>p[d-1] and p[d]>=p[d+1]. Peak density is peak count/(queries*bin width). Mean height is sum of weights at peak apex tokens/peak count. Their product is the mean contribution at peak tokens. Alltoken mean includes peak flanks and troughs too. Native full-softmax probabilities; same20heldoutdocs,128latequeries/doc. Bins16..1022; age1023 used as neighbour. Each plotted series divided by its own value in the16..31reference bin only, to compare proportional changes. Original attention is never locally renormalized.",
+  "interpretation": "For all local maxima, peak density is nearly constant across near/far bins; mean peak height drops similarly to total mean attention. Peak apex mass share near55.3%,far56.1%, so this is a substantial, not exhaustive, mass accounting. This does not contradict rarity of top8 or >=1% peaks, which is a different selection; no causalRoPEmechanism proven."
+}

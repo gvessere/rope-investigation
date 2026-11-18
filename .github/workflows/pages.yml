@@ -63,6 +63,8 @@ jobs:
         run: python code/attention_decay.py
       - name: Regenerate recorded logarithmic-distance heatmap and curves
         run: python code/distance_heatmaps.py
+      - name: Recompute local peak frequency and height
+        run: python code/peak_decay.py
       - name: Recompute archived speed comparison tables
         run: python code/speed_results.py
       - name: Quantify slow frequencies and regenerate explanatory figure

@@ -1,0 +1,8 @@
+{
+  "source": "attention_small_peaks_vs_floor/captured_profiles.npz",
+  "source_sha256": "51765ecefd5dabac1b470efcf1c53353aeb8f1b98129f8e8f30544fee60e99dc",
+  "published_summary_sha256": "7113b4bc7905561e3346697934bd4f90ceb56f1508d766f6253029ffed1ef740",
+  "head": "L7 H6",
+  "export": "Exact per-query counts of all local maxima, sums of their native attention weights and sums of all native weights per interval. No probability renormalization.",
+  "definition": "All local maxima, no height/rank selection: p[d]>p[d-1] and p[d]>=p[d+1]. Peak density is peak count/(queries*bin width). Mean height is sum of weights at peak apex tokens/peak count. Their product is the mean contribution at peak tokens. Alltoken mean includes peak flanks and troughs too. Native full-softmax probabilities; same20heldoutdocs,128latequeries/doc. Bins16..1022; age1023 used as neighbour. Each plotted series divided by its own value in the16..31reference bin only, to compare proportional changes. Original attention is never locally renormalized."
+}
