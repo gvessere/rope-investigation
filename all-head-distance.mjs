@@ -4,9 +4,9 @@ export function profileValues(record, mode) {
   throw new Error('Unknown distance view');
 }
 
-export function chartSvg(data, record, mode) {
-  const mean = mode === 'mean', W = 440, H = 305;
-  const left = 62, right = 425, top = 16, bottom = 247;
+export function chartSvg(data, record, mode, compact = false) {
+  const mean = mode === 'mean', W = 440, H = compact ? 235 : 305;
+  const left = 62, right = 425, top = 16, bottom = H - 58;
   const x = v => left + Math.log2(v / 8) / 7 * (right - left);
   const y = v => mean
     ? bottom - (Math.log10(Math.max(v, 1e-300)) + 12) / (Math.log10(.2) + 12) * (bottom - top)
@@ -45,7 +45,7 @@ export function initExplorer(root, data) {
     panels.classList.toggle('distance-single', heads.length === 1);
     panels.innerHTML = heads.map(h => {
       const record = data.heads[l * 12 + h];
-      return `<figure class="distance-panel"><h3>L${l} H${h}</h3>${chartSvg(data, record, m)}<figcaption>Distances 8–1,023 hold <strong>${(record.range_mass * 100).toPrecision(3)}%</strong> of this head’s full attention.</figcaption></figure>`;
+      return `<figure class="distance-panel"><h3>L${l} H${h}</h3>${chartSvg(data, record, m, heads.length > 1)}<figcaption><strong>${(record.range_mass * 100).toPrecision(3)}%</strong> of full attention in 8–1,023.</figcaption></figure>`;
     }).join('');
     status.textContent = `Layer ${l} · ${heads.length === 1 ? 'head ' + heads[0] : 'all 12 heads'} · ${m === 'mean' ? 'mean weight per key (logarithmic y-axis); dashed gray = 1/d reference' : 'mass per interval (% of full attention); no range rescaling'}. Axes stay fixed across all heads and layers.`;
     previous.disabled = l === 0; next.disabled = l === 27;

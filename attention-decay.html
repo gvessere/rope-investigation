@@ -7,14 +7,21 @@
   <meta name="description" content="A short exploration of inverse-distance attention, equal mass per distance octave, and what geometric RoPE frequencies can explain.">
   <link rel="stylesheet" href="style.css?v=head-pair-atlas-1">
   <style>
-#all-head-distance-explorer > .controls{position:sticky;top:0;z-index:10;background:var(--paper);padding:12px 0;border-bottom:1px solid var(--line);box-shadow:0 5px 7px -7px #172e2b}
-.distance-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px;margin:24px 0}
-.distance-panels.distance-single{grid-template-columns:1fr}
-.distance-panel{margin:0;min-width:0}.distance-panel h3{font:400 24px Georgia,serif;margin:0 0 8px}
-.distance-panel svg{width:100%;height:auto;display:block;margin:0}
-.distance-panel svg text{font:12px system-ui;fill:#172e2b}
-.distance-panel figcaption{font-size:13px;margin-top:4px}
-@media(max-width:600px){.distance-panels{grid-template-columns:1fr}}
+#all-head-distance-explorer{width:min(1560px,calc(100vw - 32px));margin-left:50%;transform:translateX(-50%);padding:14px;scroll-margin-top:8px}
+#all-head-distance-explorer > .controls{position:sticky;top:0;z-index:10;background:var(--paper);padding:8px 0;border-bottom:1px solid var(--line);box-shadow:0 5px 7px -7px #172e2b;gap:10px}
+#all-head-distance-explorer .controls label{gap:3px}
+#all-head-distance-explorer .controls select,#all-head-distance-explorer .controls button{font-size:13px;padding:6px 8px}
+#all-head-distance-explorer .viewer-status{margin:8px 0;font-size:12px}
+.distance-panels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:12px 0}
+.distance-panel{margin:0;min-width:0}.distance-panel h3{font:400 18px Georgia,serif;margin:0 0 2px}
+.distance-panel svg{width:100%;height:clamp(90px,calc((100svh - 360px)/3),160px);display:block;margin:0}
+.distance-panel svg text{font:17px system-ui;fill:#172e2b}
+.distance-panel figcaption{font-size:11px;line-height:1.35;margin-top:2px}
+.distance-panels.distance-single{grid-template-columns:1fr;max-width:850px;margin:18px auto}
+.distance-single .distance-panel svg{height:auto}.distance-single .distance-panel svg text{font-size:12px}
+.distance-single .distance-panel h3{font-size:24px}.distance-single .distance-panel figcaption{font-size:13px}
+@media(max-width:759px){.distance-panels{grid-template-columns:repeat(3,minmax(0,1fr))}.distance-panel svg{height:auto}}
+@media(max-width:540px){.distance-panels{grid-template-columns:repeat(2,minmax(0,1fr))}#all-head-distance-explorer .controls{gap:6px}.distance-panel svg text{font-size:19px}}
   </style>
 </head>
 <body>
@@ -105,6 +112,6 @@
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="data/decay/provenance.json">Data provenance</a></p>
   </main>
   <footer>Gery Vessere · Attention and positional encodings · Part 3</footer>
-  <script type="module" src="all-head-distance.mjs?v=full-mass-1"></script>
+  <script type="module" src="all-head-distance.mjs?v=compact-heads-1"></script>
 </body>
 </html>
