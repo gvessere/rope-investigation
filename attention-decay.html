@@ -7,6 +7,7 @@
   <meta name="description" content="A short exploration of inverse-distance attention, equal mass per distance octave, and what geometric RoPE frequencies can explain.">
   <link rel="stylesheet" href="style.css?v=head-pair-atlas-1">
   <style>
+#all-head-distance-explorer > .controls{position:sticky;top:0;z-index:10;background:var(--paper);padding:12px 0;border-bottom:1px solid var(--line);box-shadow:0 5px 7px -7px #172e2b}
 .distance-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px;margin:24px 0}
 .distance-panels.distance-single{grid-template-columns:1fr}
 .distance-panel{margin:0;min-width:0}.distance-panel h3{font:400 24px Georgia,serif;margin:0 0 8px}
@@ -79,10 +80,10 @@
 
     <h2 id="all-heads">Explore every head</h2>
     <p>The examples above are only a few of the model’s 336 heads. Here you can browse all 28 layers, compare the twelve heads in each layer, or select a single head for a closer look.</p>
-    <p>Both views use the same native measurements from 20 held-out passages. They show the distribution within distances 8–1,023: <em>mean weight per key</em> divides by the number of keys in each interval, while <em>mass per interval</em> shows the interval’s total share. The share of full attention covered by that range is shown under every head, so a tiny distant tail does not look like the head’s main behavior.</p>
+    <p>Both views use the same native measurements from 20 held-out passages. The values retain the full causal attention denominator, without rescaling the displayed range to 100%. For distances 8–1,023: <em>mean weight per key</em> divides by the number of keys in each interval, while <em>mass per interval</em> shows the interval’s share of full attention. The share of full attention covered by that range is shown under every head, so a tiny distant tail does not look like the head’s main behavior.</p>
     <section id="all-head-distance-explorer" class="interactive-block" aria-label="All-head attention distance explorer">
       <div class="controls">
-        <label>View <select data-mode disabled><option value="mean">Mean weight per key</option><option value="paired">Mass per interval — same data</option></select></label>
+        <label>View <select data-mode disabled><option value="mean">Mean weight per key</option><option value="paired">Mass per interval — full attention</option></select></label>
         <label>Layer <select data-layer disabled></select></label>
         <label>Head <select data-head disabled><option value="all">All 12 heads</option></select></label>
         <button type="button" data-previous disabled>← Previous layer</button>
@@ -90,7 +91,7 @@
       </div>
       <p data-status class="viewer-status" aria-live="polite">Loading saved head profiles…</p>
       <div data-panels class="distance-panels"></div>
-      <p class="caption"><strong>Figure 6.</strong> The same two-view explorer as the investigation gallery, using the native data behind Figure 1. The plotted range is rescaled to total 100% before either view is computed; this compares its shape, not its absolute share of attention. Closest distances 0–7 and distances beyond 1,023 are outside this view. Points are measured interval averages joined by straight lines.</p>
+      <p class="caption"><strong>Figure 6.</strong> The same two-view explorer as the investigation gallery, using the native data behind Figure 1. Both views preserve absolute attention mass. The displayed intervals sum to the share printed beneath each head, rather than to 100%. Closest distances 0–7 and distances beyond 1,023 are outside this view. Points are measured interval averages joined by straight lines.</p>
       <noscript><p>Enable JavaScript to use the head explorer.</p></noscript>
     </section>
 
@@ -104,6 +105,6 @@
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="data/decay/provenance.json">Data provenance</a></p>
   </main>
   <footer>Gery Vessere · Attention and positional encodings · Part 3</footer>
-  <script type="module" src="all-head-distance.mjs"></script>
+  <script type="module" src="all-head-distance.mjs?v=full-mass-1"></script>
 </body>
 </html>
