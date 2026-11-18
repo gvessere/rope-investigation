@@ -11,7 +11,7 @@
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
   <main>
     <p class="series-label">Attention and positional encodings · Part 2</p>
-    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html" aria-current="page">2. Deep dive in ROPE pair data</a><a href="attention-decay.html">3. Attention decay</a><a href="rope-navigator.html">4. RoPE navigator</a></nav>
+    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html" aria-current="page">2. Deep dive in ROPE pair data</a><a href="attention-decay.html">3. Attention mass distribution</a><a href="rope-navigator.html">4. RoPE navigator</a></nav>
     <h1>Deep dive in ROPE pair data</h1>
     <p class="lead">After exploring what RoPE can express, I wanted to see what its coordinate pairs actually look like in a trained transformer. Could I characterize their structure—and would that structure suggest a way to compress attention keys or make attention faster?</p>
     <p>The plots revealed plenty of structure: many small-radius pairs, recurring angular patterns, distinct clouds associated with projection biases, and similarities among query heads sharing a KV head. Those observations led me to experiments with coarser phase representations. Some small biases and selected key activations tolerated these changes well; the visibly aligned large biases were surprisingly sensitive.</p>
@@ -153,7 +153,7 @@
     <p>The sensitivity maps show that phase and amplitude need to be considered together. A phase change can sometimes be compensated by a radius adjustment, and the same edit can help one prompt while hurting another. An average loss change can conceal those differences.</p>
     <p>These findings suggest an opportunity for polar KV-cache compression, as explored in PolarQuant. They do not establish general quality preservation or a complete compression system. Combining the representation with quantization-aware training remains a proposed next experiment.</p>
 
-    <nav class="series-nav" aria-label="Adjacent pages"><a href="index.html">← Part 1: ROPE exploration</a><a href="attention-decay.html">Part 3: Attention decay →</a></nav>
+    <nav class="series-nav" aria-label="Adjacent pages"><a href="index.html">← Part 1: ROPE exploration</a><a href="attention-decay.html">Part 3: Attention mass distribution →</a></nav>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source and editing on GitHub</a> · References: <a href="https://arxiv.org/abs/2104.09864">RoFormer</a>; <a href="https://proceedings.mlr.press/v267/hua25b.html">Fourier Position Embedding</a> (<a href="https://arxiv.org/html/2412.17739v4#S2.SS2">§2.2</a>); <a href="https://numpy.org/doc/stable/reference/routines.fft.html">NumPy DFT conventions</a>.</p>
   </main>
   <footer>Gery Vessere · Attention and positional encodings · Part 2</footer>

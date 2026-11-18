@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Why attention can decay like 1/n · Attention and positional encodings, Part 3</title>
+  <title>How is attention mass distributed · Attention and positional encodings, Part 3</title>
   <meta name="description" content="A short exploration of inverse-distance attention, equal mass per distance octave, and what geometric RoPE frequencies can explain.">
   <link rel="stylesheet" href="style.css?v=head-pair-atlas-1">
   <style>
@@ -28,8 +28,8 @@
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
   <main>
     <p class="series-label">Attention and positional encodings · Part 3</p>
-    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html">2. Deep dive in ROPE pair data</a><a href="attention-decay.html" aria-current="page">3. Attention decay</a><a href="rope-navigator.html">4. RoPE navigator</a></nav>
-    <h1>Why attention can decay like 1/n</h1>
+    <nav class="series-nav" aria-label="Series pages"><a href="index.html">1. ROPE exploration</a><a href="rope-in-practice.html">2. Deep dive in ROPE pair data</a><a href="attention-decay.html" aria-current="page">3. Attention mass distribution</a><a href="rope-navigator.html">4. RoPE navigator</a></nav>
+    <h1>How is attention mass distributed</h1>
     <p class="lead">When I looked at attention over longer distances, a simple pattern kept appearing in some heads: a token twice as far into the past received roughly half as much attention. Nearby tokens mattered more, but the distant past still had a share. I wanted to understand whether RoPE’s collection of waves could help explain that balance.</p>
 
     <h2>A little less for each token, a similar share for each scale</h2>
