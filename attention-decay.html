@@ -48,7 +48,7 @@
 
     <h2 id="behind-the-average">Behind the average: rarer peaks, or weaker ones?</h2>
     <p>A smooth average does not mean that each query spreads its attention smoothly over the past. Individual queries have peaks at particular tokens. Those peaks fall in different places from one query to the next; averaging them produces the much smoother distance profile.</p>
-    <p>To look beneath that average, I separated two questions: how often does a token form a peak, and how much attention does it receive when it does? Looking only at each query’s <a href="data/decay/strongest-peaks-L7H6.json">eight strongest local peaks</a>, the distant ones were both rarer per token and weaker in L7 H6. But that leaves out the many smaller peaks.</p>
+    <p>To look beneath that average, I separated two questions: how often does a token form a peak, and how much attention does it receive when it does? Looking only at each query’s eight strongest local peaks, the distant ones were both rarer per token and weaker in L7 H6. But that leaves out the many smaller peaks.</p>
     <p>Counting <em>every</em> local peak in that same head gave a clearer result: the peaks remained about as frequent, but became much weaker. Between 16–31 and 512–1,022 tokens into the past, about 30–31% of tokens were local peaks in both regions. Their average height fell about <strong>65-fold</strong>, closely tracking the <strong>64-fold</strong> fall in average attention per token.</p>
     <figure>
       <img src="figures/analysis/peak-decay-L7H6.png" alt="In L7 H6, local peak density remains near its starting level while average peak height and average attention per token fall together." loading="lazy">
