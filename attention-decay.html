@@ -87,10 +87,11 @@
 
     <h2 id="all-heads">Explore every head</h2>
     <p>The examples above are only a few of the model’s 336 heads. Here you can browse all 28 layers, compare the twelve heads in each layer, or select a single head for a closer look.</p>
-    <p>Both views use the same native measurements from 20 held-out passages. The values retain the full causal attention denominator, without rescaling the displayed range to 100%. For distances 8–1,023: <em>mean weight per key</em> divides by the number of keys in each interval, while <em>mass per interval</em> shows the interval’s share of full attention. The share of full attention covered by that range is shown under every head, so a tiny distant tail does not look like the head’s main behavior.</p>
+    <p>Both views use the same native measurements from 20 held-out passages and include the <strong>entire available history</strong>: self-attention, each of the previous seven tokens, and wider intervals out to 2,060 tokens. In the <em>mass per interval</em> view, the points total 100% for every head, without renormalization. The <em>mean weight per available key</em> view divides by the actual number of query–key comparisons in each interval. Its values do not sum to 100%, because the intervals contain different numbers of keys.</p>
     <section id="all-head-distance-explorer" class="interactive-block" aria-label="All-head attention distance explorer">
       <div class="controls">
         <label>View <select data-mode disabled><option value="mean">Mean weight per key</option><option value="paired">Mass per interval — full attention</option></select></label>
+        <label>Y axis <select data-scale disabled><option value="auto">Log · fit each head</option><option value="shared">Log · shared across view</option><option value="linear">Linear · 0–100%</option></select></label>
         <label>Layer <select data-layer disabled></select></label>
         <label>Head <select data-head disabled><option value="all">All 12 heads</option></select></label>
         <button type="button" data-previous disabled>← Previous layer</button>
@@ -98,7 +99,7 @@
       </div>
       <p data-status class="viewer-status" aria-live="polite">Loading saved head profiles…</p>
       <div data-panels class="distance-panels"></div>
-      <p class="caption"><strong>Figure 6.</strong> The same two-view explorer as the investigation gallery, using the native data behind Figure 1. Both views preserve absolute attention mass. The displayed intervals sum to the share printed beneath each head, rather than to 100%. Closest distances 0–7 and distances beyond 1,023 are outside this view. Points are measured interval averages joined by straight lines.</p>
+      <p class="caption"><strong>Figure 6.</strong> All 336 heads, with every available causal key included. Self is orange; distances 1–7 are separate points. Farther intervals double in width, with a partial final interval at 2,048–2,060. The default log scale fits each head’s values without hiding any points; select a shared scale to compare magnitudes across heads. Dashed lines show a 1/d guide matched to each head at 16–31 tokens; self has no guide. Older keys include the initial chat prefix. Lines connect recorded interval averages, without smoothing. <a href="data/decay/full-history-provenance.json">Measurement audit</a>.</p>
       <noscript><p>Enable JavaScript to use the head explorer.</p></noscript>
     </section>
 
@@ -106,12 +107,12 @@
     <p>Some measured heads show average attention per key falling roughly as 1/d over the examined distances. That gives each distant token less weight while preserving a roughly similar total share across doubling distance intervals. Per-key weight and interval mass describe different aspects of the same distribution.</p>
     <p>The smooth averages conceal uneven, token-specific attention. In L7 H6, counting every local peak showed that peaks remained about as frequent per token while their average height fell about 65-fold, close to the 64-fold fall in average attention. Restricting the analysis to the strongest few peaks also showed declining frequency; that result does not apply to all local peaks.</p>
     <p>The same RoPE schedule supports other profiles. L6 H7 is broadly flat across much of the measured range, and L6 H9 gives more weight per key to the farthest interval than to the nearest one shown. These counterexamples rule out a universal 1/d requirement for every head, while leaving open whether the frequency schedule encourages decay in some settings.</p>
-    <p>The measurements describe how the average is assembled; they do not establish the mechanism that causes it. The plotted distance range can also contain only a small part of a head’s full attention, which is why the explorer reports that share for every head. Individual queries, the head’s full distribution, and the average profile all matter when interpreting the result.</p>
+    <p>The measurements describe how the average is assembled; they do not establish the mechanism that causes it. The full-history explorer includes self-attention and the nearest tokens as well as the older intervals, so it accounts for all of each head’s attention. Individual queries, the head’s full distribution, and the average profile all matter when interpreting the result.</p>
     <p>The <a href="https://arxiv.org/abs/2104.09864">RoFormer paper</a> discusses distance decay, and <a href="https://arxiv.org/html/2410.06205v3#S3">Barbero and colleagues</a> examine why it is not a general consequence of RoPE. <a href="rope-navigator.html">Part 4</a> provides a navigator for inspecting individual query–key comparisons.</p>
     <nav class="series-nav" aria-label="Adjacent pages"><a href="rope-in-practice.html">← Part 2: Deep dive in ROPE pair data</a><a href="rope-navigator.html">Part 4: RoPE navigator →</a></nav>
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="data/decay/provenance.json">Data provenance</a></p>
   </main>
   <footer>Gery Vessere · Attention and positional encodings · Part 3</footer>
-  <script type="module" src="all-head-distance.mjs?v=compact-heads-1"></script>
+  <script type="module" src="all-head-distance.mjs?v=full-history-1"></script>
 </body>
 </html>

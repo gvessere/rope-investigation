@@ -1,0 +1,128 @@
+{
+  "bins_inclusive": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      6,
+      6
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      8,
+      15
+    ],
+    [
+      16,
+      31
+    ],
+    [
+      32,
+      63
+    ],
+    [
+      64,
+      127
+    ],
+    [
+      128,
+      255
+    ],
+    [
+      256,
+      511
+    ],
+    [
+      512,
+      1023
+    ],
+    [
+      1024,
+      2047
+    ],
+    [
+      2048,
+      2060
+    ]
+  ],
+  "opportunities": [
+    2560,
+    2560,
+    2560,
+    2560,
+    2560,
+    2560,
+    2560,
+    2560,
+    20480,
+    40960,
+    81920,
+    163840,
+    327680,
+    655360,
+    1310720,
+    2490340,
+    1820
+  ],
+  "query_count": 2560,
+  "documents": 20,
+  "minimum_query_position": 1933,
+  "maximum_query_position": 2060,
+  "audit": {
+    "max_native_recent_score_error": 0.0,
+    "max_native_logZ_error": 0.0,
+    "max_probability_row_sum_error": 1.8185453143360064e-12,
+    "max_mean_binned_mass_sum_error": 1.865174681370263e-14,
+    "original8_1023_bin_masses_reproduced": true
+  },
+  "protocol": "Same20nativeheldouttexts,128latequerypositions/document; all336heads. Full causal score rows reconstructed with identical nativeFP32MPSRoPE and products from savedQK, validated against all recent native scores and full logZ. Native probabilities only; no pruning, no range/head/query renormalization. Mass per interval averages sum of original weights across all2560queries; unavailable older ages contribute zero. Self=0 and distances1..7 individually resolved. Remaining ages use doublingbins, including partial final2048..maxage. Mean weight per available key divides total attention in bin by actual available query-key opportunities. Thus oldest partial bins have smaller opportunity counts; no missing keys counted as zeros for perkey density. Each head intervalmass sums100%.",
+  "caveat": "Full range of these saved approximately2Kinputs, not the model maximum context length. Distant end includes the initial14chatprefix tokens; prefix mass saved separately. Mean profiles can combine content and prefix/sink behavior. These are same late queries as earlier native curves, not all query positions in each passage.",
+  "source_summary_sha256": "9af5674a0eccb82c4c8a2efdd7b7aed965365206823434a3a1280162611e5819",
+  "posted_summary_sha256": "77f5688cf80d9e2bce9e02355f83f4719719421e3cad5a28331ffc3528cb7068",
+  "source_document_sha256": {
+    "document_10.npz": "d362630d640f6d941d40d07623fe3a9d70cd8c2c12e9e75aa71c648385cb04c5",
+    "document_11.npz": "c8be9afd22cde2cbcb6343eb294ef38b98ab318794d7ed0ce770d88db761b294",
+    "document_12.npz": "1452ea2ee8109e4ddb3f8e66936af0446c7acd95ed81624e676898e8e64f49b8",
+    "document_13.npz": "de5eae9d609f6b6a4aefc23fca72d36ee661dcda38c5e38e7892bda3cd974a2a",
+    "document_14.npz": "cc8cef41609397e2d3536f4cf76a5564313fc82fdac6f0b2b5761762681926d6",
+    "document_15.npz": "5958f5a8999ca1cc00d6981e9b7d7d7a6ac381e228b21c38bfd64ffff71cf92c",
+    "document_16.npz": "9bbf0beac7ced6e776f0894f752c137e1c36424f0019ab77323e5c7b7bd4c5cb",
+    "document_17.npz": "4af41f5ee400a5c1018528faee841732c0e90d3e7b12bb8bf7a4c267f4f16e78",
+    "document_18.npz": "0e8cf89619d6b76a5caba9f1ab6a6bbe6dbdc7aeb42545787522e1848f36883e",
+    "document_19.npz": "773860425ff0676e16811043fdd8e3354e556a2434e7eb907c2cece16708c6ba",
+    "document_21.npz": "8793d0886b91e4b9eea11217a5ca001d497eeb3ad2d924ace0c3b215473f3e3a",
+    "document_23.npz": "ed56bdfdee40a8f27ffd230f40c1b2dd1b6460c7e91b8300932122b0db00aa96",
+    "document_25.npz": "4da6df55a5e39fa97ed7f03e0f9b140c11a079acc6668218be1da413c1a41ea8",
+    "document_27.npz": "be90f31672d58a83db1e6457ec724c8b44b4f32748d3d521c72a313489aaed65",
+    "document_29.npz": "20fe358f7fc86056215458cfb0c7fbcde77e8489c3ddb130eccd65de9b7c6942",
+    "document_31.npz": "ac7c9edab0378ed84a90be875155e0b248f5919e7c8aa2d06fac4e634e63c159",
+    "document_33.npz": "633e86db1b59ac27732a5a40d63ce2920c9708ed1182504eea298048579645cd",
+    "document_35.npz": "912c81262f32420df5a0da5f2bcfbb19814616becd49cc3a2030c2d26c3cac58",
+    "document_37.npz": "68827935650c81d0048a222aa4ab1045c82b8cb3337239eb6a8810c99c3d5efb",
+    "document_39.npz": "139774bfbe8bb668489bdf80ebe81d86b3955c9b8b1eceabe9f5c855434d01b4"
+  }
+}

@@ -1,29 +1,33 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {profileValues, chartSvg} from '../all-head-distance.mjs';
-const data = JSON.parse(fs.readFileSync(new URL('../data/decay/all-head-distance.json', import.meta.url)));
-assert.equal(data.heads.length, 336);
-for (const [i, record] of data.heads.entries()) {
-  assert.equal(record.layer, Math.floor(i/12)); assert.equal(record.head, i%12);
-  assert.equal(record.per_key.length, 7);
-  assert.ok(record.range_mass > 0 && record.range_mass <= 1);
-  const mass = profileValues(record, 'paired');
-  assert.ok(Math.abs(mass.reduce((a,b) => a+b,0)-record.range_mass*100) < 1e-10);
-  profileValues(record, 'mean').forEach((value, j) => {
-    assert.ok(Math.abs(value*data.widths[j]*100-mass[j]) < 1e-10);
-  });
-  for (const mode of ['mean','paired']) {
-    const svg = chartSvg(data, record, mode);
-    assert.ok(!svg.includes('NaN') && !svg.includes('Infinity'));
-    assert.equal((svg.match(/<circle /g)||[]).length, 7);
-    assert.equal(svg.includes('stroke-dasharray'), mode === 'mean');
+import {profileValues, axisBounds, chartSvg} from '../all-head-distance.mjs';
+const data=JSON.parse(fs.readFileSync(new URL('../data/decay/all-head-distance.json',import.meta.url)));
+assert.equal(data.heads.length,336);
+assert.deepEqual(data.bins.slice(0,8),Array.from({length:8},(_,i)=>[i,i]));
+assert.deepEqual(data.bins.at(-1),[2048,2060]);
+assert.equal(data.query_count,2560);
+for(const [i,record] of data.heads.entries()) {
+  assert.equal(record.layer,Math.floor(i/12));assert.equal(record.head,i%12);
+  assert.equal(record.per_key.length,17);
+  const mass=profileValues(record,'paired');
+  assert.ok(Math.abs(mass.reduce((a,b)=>a+b,0)-100)<1e-8);
+  profileValues(record,'mean').forEach((v,j)=>assert.ok(Math.abs(v*data.effective_widths[j]-mass[j])<1e-10));
+  for(const mode of ['mean','paired'])for(const scale of ['auto','shared','linear']) {
+    const values=profileValues(record,mode),[lo,hi]=axisBounds(values,scale);
+    assert.ok(values.every(v=>v>=lo&&v<=hi),'Autoscale must show every native point');
+    const svg=chartSvg(data,record,mode,true,scale);
+    assert.ok(!svg.includes('NaN')&&!svg.includes('Infinity'));
+    assert.equal((svg.match(/<circle /g)||[]).length,17);
+    assert.ok(svg.includes('stroke-dasharray'));
+    assert.equal(record.reference_mass[0],null);
   }
 }
-// A tiny tail must remain visibly labelled as a tiny part of full attention.
-assert.ok(data.heads[13*12+4].range_mass < .005);
-assert.ok(profileValues(data.heads[13*12+4], 'paired').reduce((a,b)=>a+b,0) < .5);
-// Check absolute mass against the saved native softmax values, not a rescaled shape.
-assert.ok(Math.abs(data.heads[6*12+7].per_key[0] - 0.0004551336610241955) < 1e-10);
-assert.ok(data.heads[6*12+9].per_key.at(-1) > data.heads[6*12+9].per_key[0]);
-assert.throws(() => profileValues(data.heads[0], 'historical'));
-console.log('All 336 profiles: full attention units, finite plots and tiny-tail scope verified.');
+// The prior distant-tail normalization hid a dominant near-token peak here.
+const peak=data.heads[13*12+4];
+assert.ok(Math.abs(peak.mass[1]-.7466246704856285)<1e-12);
+assert.ok(peak.mass.slice(8,15).reduce((a,b)=>a+b,0)<.005);
+// Last-layer trends should no longer be flattened by an unrelated 1e-12 global floor.
+const last=profileValues(data.heads[27*12],'mean'), bounds=axisBounds(last);
+assert.ok(bounds[1]/bounds[0]<1e5);
+assert.throws(()=>profileValues(data.heads[0],'historical'));
+console.log('All 336 heads: 100% mass, self/recent/far coverage, per-key opportunity accounting and unclipped autoscale verified.');
