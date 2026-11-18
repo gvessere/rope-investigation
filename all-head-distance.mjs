@@ -54,7 +54,7 @@ export function initExplorer(root, data) {
     const records=heads.map(h=>data.heads[l*12+h]);
     const shared=s==='shared'?axisBounds(records.flatMap(r=>profileValues(r,m))):null;
     panels.classList.toggle('distance-single',heads.length===1);
-    panels.innerHTML=records.map(record=>`<figure class="distance-panel"><h3>L${l} H${record.head}</h3>${chartSvg(data,record,m,heads.length>1,s,shared)}<figcaption><strong>100% accounted for</strong> · self ${(record.mass[0]*100).toPrecision(3)}% · ages 1–7 ${(record.mass.slice(1,8).reduce((a,b)=>a+b,0)*100).toPrecision(3)}%</figcaption></figure>`).join('');
+    panels.innerHTML=records.map(record=>`<figure class="distance-panel"><h3>L${l} H${record.head}</h3>${chartSvg(data,record,m,heads.length>1,s,shared)}<figcaption>Self ${(record.mass[0]*100).toPrecision(3)}% · ages 1–7 ${(record.mass.slice(1,8).reduce((a,b)=>a+b,0)*100).toPrecision(3)}%</figcaption></figure>`).join('');
     status.textContent=`Layer ${l} · ${heads.length===1?'head '+heads[0]:'all 12 heads'} · ${m==='mean'?'mean weight per available key (%)':'mass per interval (%)'} · ${s==='auto'?'log y-axis fits each head; axis ranges differ':s==='shared'?'shared log y-axis for the displayed heads':'shared linear y-axis, 0–100%'}. All distances included; no attention renormalization. Orange = self; dashed gray = 1/d guide anchored at 16–31.`;
     previous.disabled=l===0;next.disabled=l===27;
     if(updateHash) history.replaceState(null,'',`#all-heads-${m}-L${l}${head.value==='all'?'':'-H'+head.value}-${s}`);
