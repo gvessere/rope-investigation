@@ -59,6 +59,10 @@ jobs:
         run: python code/adapter_results.py
       - name: Regenerate prompt-specific phase sensitivity
         run: python code/phase_sensitivity.py
+      - name: Export and check all-head distance profiles
+        run: |
+          python code/all_head_distance.py
+          node code/test_all_head_distance.mjs
       - name: Recompute attention decay fits and figure
         run: python code/attention_decay.py
       - name: Regenerate recorded logarithmic-distance heatmap and curves

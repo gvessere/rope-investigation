@@ -6,6 +6,15 @@
   <title>Why attention can decay like 1/n · Attention and positional encodings, Part 3</title>
   <meta name="description" content="A short exploration of inverse-distance attention, equal mass per distance octave, and what geometric RoPE frequencies can explain.">
   <link rel="stylesheet" href="style.css?v=head-pair-atlas-1">
+  <style>
+.distance-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px;margin:24px 0}
+.distance-panels.distance-single{grid-template-columns:1fr}
+.distance-panel{margin:0;min-width:0}.distance-panel h3{font:400 24px Georgia,serif;margin:0 0 8px}
+.distance-panel svg{width:100%;height:auto;display:block;margin:0}
+.distance-panel svg text{font:12px system-ui;fill:#172e2b}
+.distance-panel figcaption{font-size:13px;margin-top:4px}
+@media(max-width:600px){.distance-panels{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
   <header><a href="index.html" class="name">ROPE exploration</a><a href="https://gvessere.github.io/">Gery Vessere</a></header>
@@ -67,6 +76,24 @@
 
     <p>Those heads use the same RoPE frequency schedule as the heads with approximately inverse-distance decay. That contrast is evidence that <strong>1/d is a behavior the model can express, rather than a rule RoPE imposes on every head</strong>. It does not rule out a tendency encouraged by the frequency schedule. The learned query and key projections, and the text being processed, still determine which patterns a head actually produces.</p>
 
+
+    <h2 id="all-heads">Explore every head</h2>
+    <p>The examples above are only a few of the model’s 336 heads. Here you can browse all 28 layers, compare the twelve heads in each layer, or select a single head for a closer look.</p>
+    <p>Both views use the same native measurements from 20 held-out passages. They show the distribution within distances 8–1,023: <em>mean weight per key</em> divides by the number of keys in each interval, while <em>mass per interval</em> shows the interval’s total share. The share of full attention covered by that range is shown under every head, so a tiny distant tail does not look like the head’s main behavior.</p>
+    <section id="all-head-distance-explorer" class="interactive-block" aria-label="All-head attention distance explorer">
+      <div class="controls">
+        <label>View <select data-mode disabled><option value="mean">Mean weight per key</option><option value="paired">Mass per interval — same data</option></select></label>
+        <label>Layer <select data-layer disabled></select></label>
+        <label>Head <select data-head disabled><option value="all">All 12 heads</option></select></label>
+        <button type="button" data-previous disabled>← Previous layer</button>
+        <button type="button" data-next disabled>Next layer →</button>
+      </div>
+      <p data-status class="viewer-status" aria-live="polite">Loading saved head profiles…</p>
+      <div data-panels class="distance-panels"></div>
+      <p class="caption"><strong>Figure 6.</strong> The same two-view explorer as the investigation gallery, using the native data behind Figure 1. The plotted range is rescaled to total 100% before either view is computed; this compares its shape, not its absolute share of attention. Closest distances 0–7 and distances beyond 1,023 are outside this view. Points are measured interval averages joined by straight lines.</p>
+      <noscript><p>Enable JavaScript to use the head explorer.</p></noscript>
+    </section>
+
     <h2>What I want to understand next</h2>
     <p>The next question is which learned contributions produce these average profiles. Their query and key vectors change with the text, and their phases need not start aligned. Averaging attention also differs from applying softmax to an averaged score. The averages alone do not establish what causes the pattern.</p>
     <p>The original <a href="https://arxiv.org/abs/2104.09864">RoFormer paper</a> discusses distance decay. <a href="https://arxiv.org/html/2410.06205v3#S3">Barbero and colleagues’ <em>Round and Round We Go!</em></a> shows why decay is not a general consequence of RoPE. For me, the interesting next step is to use the <a href="rope-navigator.html">navigator</a> to connect the average curves back to the individual pairs and queries that created them.</p>
@@ -74,5 +101,6 @@
     <p class="source"><a href="https://github.com/gvessere/rope-investigation">Source on GitHub</a> · <a href="data/decay/provenance.json">Data provenance</a></p>
   </main>
   <footer>Gery Vessere · Attention and positional encodings · Part 3</footer>
+  <script type="module" src="all-head-distance.mjs"></script>
 </body>
 </html>
